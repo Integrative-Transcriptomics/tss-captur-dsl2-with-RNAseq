@@ -1,0 +1,13 @@
+Codingtests
+TestForsORF
+LearningNextflow
+test_nextflow
+QRNA
+ViennaRNA
+TSSPred
+RNAz-2.1
+**/work
+**/output
+**/input
+**/.nextflow
+**/.vscode
