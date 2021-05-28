@@ -1,0 +1,5 @@
+SuperPos	SuperStrand	mapCount	detCount	Genome	detected	enriched	stepHeight	stepFactor	enrichmentFactor	classCount	Pos	Strand	Locus_tag	sRNA/asRNA	Product	UTRlength	GeneLength	Primary	Secondary	Internal	Antisense	Automated	Manual	Putative sRNA	Putative asRNA	Comment	Sequence -50 nt upstream + TSS (51nt)	contigPos	contigID
+19164	-	4	4	NC_002163	1	1	250.21	3.67	2.73	1	17425	-	orphan		orphan	COD	NA	1	0	0	0	1	0	Cj0012c	0	non-haem iron protein	ATAAAAATTATTAATTGACAAAAATATTTTTTTATAATACAATACTTTTTG	17425	ref|NC_002163.1
+36134	+	4	4	NC_002163	1	1	13.67	38	3.93	2	34360	+	orphan		orphan	COD	NA	1	0	0	0	1	0	Cj0027	0	CTP synthetase	TTACTTAAAATTCTAATGAAATAAAAAGTTTTATCAAGCTATAATTAGATA	34360	ref|NC_002163.1
+41763	-	1	1	NC_002163	1	1	234.32	5.4	4.76	2	38730	-	orphan		orphan	RNA	NA	1	0	0	0	1	0	CjNC9	0	CjNC9	AATGGGGGCTATATTTTAATGATAATAAAAAATACAAGATATAATATACTA	38730	ref|NC_002163.1
+44112	+	4	4	NC_002163	1	1	3051.18	7.34	19.47	2	40629	+	orphan		orphan	RNA	NA	1	0	0	0	1	0	Cjp01	0	tRNA-Ala	GTAGATCAGCCATGCTACGGTGAATACGTTCCCGGGTCTTGTACTCACCGC	40629	ref|NC_002163.1
