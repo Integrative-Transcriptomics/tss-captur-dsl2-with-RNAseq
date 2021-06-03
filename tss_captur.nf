@@ -122,7 +122,7 @@ process runCNIT{
     path "${query.baseName}.index" into cnit_results
 
     """
-    python2 $cnit -f $query -o ${query.baseName} -m "ve"
+    python2 $cnit -f $query -o ${query.baseName} -m "pl"
     mv ${query.baseName}/${query.baseName}.index .
     """
 }
@@ -445,6 +445,9 @@ process createReport {
     val staticfiles from staticfiles
     val all_figures from all_figures
     val motif_done from resultingMotifs
+	
+	output:
+	path "*.tsv" 
 
 
     """
