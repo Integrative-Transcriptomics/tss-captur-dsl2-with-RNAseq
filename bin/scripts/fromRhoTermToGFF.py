@@ -1,3 +1,13 @@
+"""Transformation of RhoTermPredict output to GFF
+
+This script modifies the output of RhoTermPredict to a GFF format. 
+This script expects the .tsv-file of RhoTermPredict and the Genome's NCBI Identifier as an input.
+
+This script requires that `pandas` and `numpy` be installed within the Python
+environment you are running this script in.
+
+"""
+
 import re
 import pandas as pd
 import numpy as np

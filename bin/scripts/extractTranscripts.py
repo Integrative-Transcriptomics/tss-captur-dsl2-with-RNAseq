@@ -1,3 +1,14 @@
+"""Extraction of transcripts classified as RNAs
+
+This script extracts all transcripts classified as RNA with the newly
+computed coordinates. It accepts an .tsv file and produces a FASTA file.
+This FASTA file can be then used as an input for RNAFold
+
+This script requires `pandas` and `biopython` be installed within the Python
+environment you are running this script in.
+
+"""
+
 from Bio import SeqIO, SeqRecord
 import argparse
 import re
@@ -12,7 +23,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     genome_name = re.split(
         "/", re.split("_allocated_terminators", args.rnas)[0])[-1]
-    # genome_path = os.path.join(args.genome_path, genome_name+".fa")
 
     filelist = os.listdir(args.genome_path)
     fasta_ext = "(fa|fna|fasta|faa|frn|ffn)"

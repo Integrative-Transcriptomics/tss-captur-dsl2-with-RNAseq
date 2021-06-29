@@ -1,3 +1,22 @@
+"""Comparison and decision of the final classification
+
+This scripts compares the results predicted by CNIT and QRNA to make 
+the final call on the classifcation of each transcript. 
+
+It expects as an input the output of each prediction tool. If a multi-strain
+analysis was done, it expects all inputs. This prevents the comparison of results
+that do not belong to the same genome. 
+
+This script requires that `pandas` and `numpy` are installed.
+
+This file contains the following functions:
+
+    * table_to_gff - converts the DataFrames into a GFF table (for usage in genome browsers)
+    * table_to_crd - converts the DataFrames into a CRD file (for terminator prediction)
+    * normalize_score - computes z-score normalization to make predictions comparable
+    * classification_helper - decides what class to use for each transcript.
+"""
+
 import re
 import pandas as pd
 import numpy as np
@@ -5,6 +24,20 @@ import argparse
 
 
 def table_to_gff(df, genome_name):
+    """Converts the DataFrame into a GFF
+
+    Parameters
+    ----------
+    df : DataFrame
+        Contains the final information on the classification
+    genome_name : str
+        The NCBI Identifier of the genome in question 
+
+    Returns
+    -------
+    gff_concat DataFram
+        A DataFrame that resembles the structure of a GFF file. 
+    """
     gff = df.reset_index().drop("score", axis=1).rename(
         columns={"z_score": "score", "winner": "feature", "transcript_id": "attributes"})
     gff["seqname"] = genome_name

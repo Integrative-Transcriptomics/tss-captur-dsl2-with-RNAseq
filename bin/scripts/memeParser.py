@@ -1,3 +1,14 @@
+"""Parsing of MEME's output
+
+This script returns a tsv-file with the results computed by MEME on 
+the promoter regions of the TSS sites.
+
+This tool expects the XML-output of MEME and the Genome's name as an input. 
+
+BioPython is required for this script. 
+"""
+
+
 from Bio.motifs import meme
 import argparse
 import re

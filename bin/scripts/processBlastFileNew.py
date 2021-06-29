@@ -1,3 +1,14 @@
+"""BLAST result evaluation
+
+This script evaluates the BLAST-hits and returns the best pairwise alignment
+for each transcript. 
+
+For the choice of the functions, please refer to the original thesis. 
+
+This script requires ´pandas´, ´numpy´ and ´scipy´ to be installed. 
+
+"""
+
 import pandas as pd
 import numpy as np
 import argparse
@@ -35,6 +46,12 @@ if __name__ == "__main__":
 
     max_norm_pdf = norm.pdf(0, 0, 8)
 
+    # This commented code was the first attempt to run the 
+    # label via similarity. 
+    # Due to time restrictions, this was not included in TSS-captur
+    # It works as a reminder of this function
+    #
+    #
     # df_high_similarity = df_queries[(df_queries.pident >=
     #                                  99) & (df_queries.qcovhsp >= 99)]
 

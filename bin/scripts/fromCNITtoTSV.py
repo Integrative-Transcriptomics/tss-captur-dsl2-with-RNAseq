@@ -1,4 +1,10 @@
-# Converts an input of CNIT into a tsv File with a similar structure of a GFF.
+"""CNIT converter to a GFF
+
+This script modifies the output of CNIT to be similar to a GFF file. 
+For this, it requires the CNIT-output. 
+
+This script requires `pandas` and `numpy` to be installed. 
+"""
 
 
 import re

@@ -1,3 +1,27 @@
+"""Allocation of terminators for each transcript
+
+This script allocates for each transcript a predicted terminators by 
+TransTermHP and RhoTermPredict. 
+
+It recieves the results of both mentioned tools, a CRD file with the 
+predicted coordinates for each transcript and a list of all TSS analyzed. 
+The goal of the latter file is to avoid the allocating terminators that are
+within another transcript. 
+
+This script requires that `pandas`. 
+
+The following functions are found in this script:
+
+    * evaluate_terminator - scores a terminator wrt to the given transcript
+    * find_terminators: allocates all terminators that could be allocated
+    for each transcript.
+    * bin_column: bins the values of the column of RhoTermPredict
+    * separate_ids: adapts the identifier for a better parsing
+    * get_distances: parses the file containing the maximal extraction length 
+    per transcript
+    
+"""
+
 import re
 import pandas as pd
 import numpy as np
@@ -5,6 +29,26 @@ import argparse
 
 
 def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
+    """Evaluates each terminator wrt. the transcript
+
+    Parameters
+    ----------
+    row : df_row
+        A row of the dataframe that contains the information of the possible
+        terminators for this transcript
+    start, end: int
+        Start and end of the transcript
+    length_transcript: int
+        The length of transcript
+    l_searchspace: int
+        The length of the allowed extraction region
+
+    Returns
+    -------
+    score: float
+        The score for the analyzed terminator wrt. to the current transcript
+    """
+
 
     if row["strand"] == "+":
         transcript_start = start
@@ -27,6 +71,22 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
 
 
 def find_terminators(row_transcript, df, max_distance):
+    """Finds the best terminator for each transcript
+
+    Parameters
+    ----------
+    row_transcript : df_row
+        A row of the dataframe that contains the information of all transcripts
+    df: df
+        A DataFrame containing all terminators found by TransTermHP and RhoTermPredict
+    max_distance: dict
+        Dictionary containing the maximal distance used for extraction for each transcript
+    
+    Returns
+    -------
+    row_final: df_row
+        A modified row_transcript version including the information of the allocated terminator
+    """
     row_id, start, end, strand, typeTranscript, utr_end = row_transcript.values
     start, end = int(start), int(end)
     # Depending of the strand, the end or the start of the terminator is taken into account
@@ -76,11 +136,38 @@ def find_terminators(row_transcript, df, max_distance):
 
 
 def bin_column(column):
+    """ Bins the column of RhoTermPredict to have the same 
+    values as of TransTermHP
+
+    Parameter
+    ---------
+    column: df_column
+        Column containing all confidence values of RhoTermPredict
+
+    Returns
+    -------
+
+    binned_column
+    
+    """
     return pd.cut(
         column, bins=11, labels=np.arange(0, 1.1, 0.1))
 
 
 def separate_ids(row):
+    """Adapts the row identifier
+
+    Parameters
+    ----------
+    row : df_row
+        A row of the dataframe that contains the information of the transcripts
+
+
+    Returns
+    -------
+    row: df_row
+        A modified row with the adapted identifiers
+    """
     string = row[0]
     row["genome"] = re.findall(
         "(\w*_\w*)\S*\|", string)[0]
@@ -90,6 +177,21 @@ def separate_ids(row):
 
 
 def get_distances(table):
+    """Parses the table containing the maximal extraction length for each transcript 
+
+    Parameters
+    ----------
+    table: str
+        path for the .tsv-file containing the maximal length for each transcript
+
+    Returns
+    -------
+    df_dict: dict
+        dictionary indexed by the genome's ID. Within each key a further dictionary is found. 
+        The dictionary contains for each transcript the maximal length 
+        that was used for the extraction. 
+        
+    """
     df_distances = pd.read_csv(table, delimiter="\t", header=None)
     df_distances = df_distances.apply(separate_ids, axis=1)
     df_dict = {k: f.groupby('transcript_id')[1].apply(lambda x: list(

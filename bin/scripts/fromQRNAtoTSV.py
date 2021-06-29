@@ -1,3 +1,12 @@
+"""QRNA Parser
+
+This script parses the output of QRNA and transforms the output
+to a parsable TSV-file. 
+
+This script requires `pandas` and `numpy` to be installed.
+
+"""
+
 from classes.qrnaParser import QRNAparser
 
 import re
@@ -5,11 +14,13 @@ import pandas as pd
 import numpy as np
 import argparse
 
-
-def correct_gaps(df, seqs):
-    merged = df.merge(seqs, on=["position", "strand"])
-
-    def correct_helper(row):
+def correct_helper(row):
+    """ 
+    Helper function defnined only for correct_gaps. 
+    It computes the number of gaps until the needed coordinates
+    to correct the respective positions of the transcritps.  
+    
+    """ 
         prediction_start, prediction_end = row["PredictionStart"], row["PredictionEnd"]
         q = row["aligned_query"]
         correct_start, correct_end = q.count(
@@ -29,13 +40,25 @@ def correct_gaps(df, seqs):
         new_order = [17, 0, 2, 18, 19, 3, 4, 5,
                      6, 20, 21, 7, 1] + list(range(8, 17))
         return row[new_order]
+
+def correct_gaps(df, seqs):
+    """ 
+    The coordinates of each transcript include the gaps of the alignment.
+    Hence, a correction needs to be done in order to extract the correct ORF 
+    region. 
+    """
+    merged = df.merge(seqs, on=["position", "strand"])
     merged = merged.apply(correct_helper, axis=1)
     return merged
 
 
 def process_blast_results(df):
+    """ Processing of the blast results into an adequate dataframe
+    """
 
     def create_columns(row):
+        """ Helper function for apply
+        """
         row_id_all = row[0]
         row["transcript_id"] = re.findall(
             "\|((?:orphan_|antisense_)\d+)\|", row_id_all)[0]
@@ -58,7 +81,6 @@ if __name__ == "__main__":
     genomes = np.unique(
         [re.split("/", re.split("_antisense|_orphan", x)[0])[-1]for x in args.qrna_list])
     for g in genomes:
-        # Per genome, return one file for nocornac
         qrna_joint_genome = pd.DataFrame()
         filt_genome = filter(lambda x: g in x, args.qrna_list)
         filt_blast_results = filter(lambda x: g in x, args.filteredBlast_list)

@@ -1,3 +1,14 @@
+"""Get Annotation File for the Genome
+
+*This script is not yet included in TSS-Captur*
+
+This script allows the user download the annotation file for the
+given genome. This could be used for the annotation via similarity 
+process mentioned in the outlook of TSS-Captur. 
+
+This script requires `Entrez` to be installed.
+"""
+
 #!/usr/bin/env python3
 from Bio import Entrez
 from os import remove
