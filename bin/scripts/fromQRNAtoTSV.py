@@ -21,25 +21,25 @@ def correct_helper(row):
     to correct the respective positions of the transcritps.  
     
     """ 
-        prediction_start, prediction_end = row["PredictionStart"], row["PredictionEnd"]
-        q = row["aligned_query"]
-        correct_start, correct_end = q.count(
-            "-", 0, prediction_start), q.count("-", 0, prediction_end)
-        strand = row["strand"]
-        if row["strand"] == "-":
-            row["PredictionStartCorrected"] = row["GenomeEnd"] - \
-                prediction_end + correct_end
-            row["PredictionEndCorrected"] = row["GenomeEnd"] - \
-                prediction_start + correct_start
-        else:
-            row["PredictionStartCorrected"] = row["GenomeStart"] + \
-                prediction_start - correct_start
-            row["PredictionEndCorrected"] = row["GenomeStart"] + \
-                prediction_end - correct_end
-        row = row.drop(["aligned_query", "start", "end"])
-        new_order = [17, 0, 2, 18, 19, 3, 4, 5,
-                     6, 20, 21, 7, 1] + list(range(8, 17))
-        return row[new_order]
+    prediction_start, prediction_end = row["PredictionStart"], row["PredictionEnd"]
+    q = row["aligned_query"]
+    correct_start, correct_end = q.count(
+        "-", 0, prediction_start), q.count("-", 0, prediction_end)
+    strand = row["strand"]
+    if row["strand"] == "-":
+        row["PredictionStartCorrected"] = row["GenomeEnd"] - \
+            prediction_end + correct_end
+        row["PredictionEndCorrected"] = row["GenomeEnd"] - \
+            prediction_start + correct_start
+    else:
+        row["PredictionStartCorrected"] = row["GenomeStart"] + \
+            prediction_start - correct_start
+        row["PredictionEndCorrected"] = row["GenomeStart"] + \
+            prediction_end - correct_end
+    row = row.drop(["aligned_query", "start", "end"])
+    new_order = [17, 0, 2, 18, 19, 3, 4, 5,
+                    6, 20, 21, 7, 1] + list(range(8, 17))
+    return row[new_order]
 
 def correct_gaps(df, seqs):
     """ 
