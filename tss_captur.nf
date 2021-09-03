@@ -190,8 +190,8 @@ process getIDofLCA {
     """
 }
 
-
-common_species_id.readLines().map{it[0]}.set{cut_common_species_id}
+// Adding the RegEx avoids problem when the Taxa Id is downloaded for the first time. 
+common_species_id.readLines().map{it[0].findAll(/\d{1,10}/)[0]}.set{cut_common_species_id}
 
 /**
     Creates a TaxIDlist for blast with all corresponding species under the extracted LCA
