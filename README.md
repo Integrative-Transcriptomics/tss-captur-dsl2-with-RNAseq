@@ -11,3 +11,9 @@ To enable the characterization of transcripts in an explorative manner, we have 
 
 It combines the advantages of comparative genomics and _ab initio_ methods to account for many characteristics in the prediction. Furthermore, it uses the approach of transcriptional-signal based tools to combine TSS signals with a possible terminator. Moreover, it enables the user to explore the thermodynamic characteristics of possible identified ncRNA transcripts and visualize the secondary structure. Lastly, it facilitates the analysis of motifs within the promoter regions before each TSS signal to identify possible binding sites or other regulatory elements. All these results are combined within an interactive interface. This interface does not only provide an overview of the predicted results, but offers the possibility of getting the detailed information for each transcript and hence being able to reconstruct the predictions done by TSS-Captur.
 
+------
+How to run: 
+``` bash
+./nextflow run tss_captur.nf --inputTable [PATH_TO_MASTER_TABLE] --inputGenomes [PATH_TO_GENOMES_DIR] --inputGFFs [PATH_TO_GFF_DIR] --outputDir [PATH_TO_OUTPUT] --blastdb [PATH_TO_NT_DB]  -with-docker mwittep/tsscaptur 
+
+```
