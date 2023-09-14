@@ -204,7 +204,7 @@ process getBlastIDs {
     path "taxidlist.taxid" into taxidlist_file
 
     """
-        get_species_taxids -t $taxidlist > taxidlist.taxid
+        get_species_taxids.sh -t $taxidlist > taxidlist.taxid
     """
 }
 
@@ -458,4 +458,3 @@ process createReport {
 
 }
 //    awk '/^>/ {printf("%s%s\t",(N>0?"\n":""), $0);N++;next;} {match($0, /(.*)\s\((.*)\)/, ary); if (length(ary)>0) {printf("%s\t%s",ary[1],ary[2]);} else { printf("%s\t", $0)}} END {printf("\n");}' rnaFold.out >tabbedRNAfold.out
-
