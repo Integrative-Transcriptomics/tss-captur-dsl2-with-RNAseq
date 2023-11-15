@@ -42,6 +42,17 @@ pyRhoTermPredict = Paths.get(nameProjDir, "/bin/RhoTermPredict.py")
 rnafold = Paths.get(nameProjDir, "/bin/RNAfold")
 blastDB = "/tmp"
 
+// TODO: Help message
+log.info 
+"""\
+            TSS-CAPTUR
+ ===================================
+ MasterTable : ${table_ch}
+ Genomes path: ${genomes_path}
+ GFFs path   : ${gff_path}
+ Output path : ${output_path}
+ """
+
 include { DATAPREPARATION } from './subworkflows/dataprep'
 include { MEME } from './modules/meme'
 include { CLASSIFICATION } from './subworkflows/classification'
