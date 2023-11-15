@@ -12,7 +12,7 @@ workflow CLASSIFICATION {
         EVALCNIT(CNIT.out.cnit_results.collect(), output_path)
         QRNA(filtered_queries, eqrnaLib, output_path)
         EVALQRNA(QRNA.out.qrna_normal.collect(),filtered_queries, output_path)
-        COMPARECNITQRNA(evaluateQRNA.qrna_eval.collect(), evaluateCNIT.out.cnit_eval.collect(), output_path)
+        COMPARECNITQRNA(EVALQRNA.out.qrna_eval.collect(), EVALCNIT.out.cnit_eval.collect(), output_path)
 
     emit:
         crd_files = COMPARECNITQRNA.out.crd_files
