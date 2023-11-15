@@ -38,7 +38,7 @@ process GETGENOMESLCA {
     val ids
 
     output: 
-    stdout, emit: tax_id
+    stdout emit: tax_id
 
     shell:
     """

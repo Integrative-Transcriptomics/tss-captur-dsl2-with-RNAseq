@@ -17,7 +17,7 @@ process RNAFOLD {
     path "*.jpg" 
     path "*.tsv" 
     path "*.fasta"
-    stdout, emit: output_figures
+    stdout emit: output_figures
 
     """
     python3 $pyExtractRNATranscripts --rnas $terminator --genome_path $genomes
