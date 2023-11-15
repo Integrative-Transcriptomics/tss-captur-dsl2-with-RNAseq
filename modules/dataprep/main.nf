@@ -89,7 +89,7 @@ process BLASTFASTA {
     label "TranscriptExtraction"
 
 	input:
-    each val(query)
+    each query
     path taxidlist
     env BLASTDB
     val output_path

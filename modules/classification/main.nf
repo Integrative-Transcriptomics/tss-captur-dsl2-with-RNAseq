@@ -5,7 +5,7 @@ process CNIT {
     label "Classification"
 
     input: 
-    each val(query)
+    each query
 
     output:
     path "${query.baseName}.index", emit: cnit_results
