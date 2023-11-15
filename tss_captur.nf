@@ -42,8 +42,23 @@ pyRhoTermPredict = Paths.get(nameProjDir, "/bin/RhoTermPredict.py")
 rnafold = Paths.get(nameProjDir, "/bin/RNAfold")
 blastDB = "/tmp"
 
-// TODO: Imports
+include { DATAPREPARATION } from './subworkflows/dataprep'
+include { MEME } from './modules/meme'
+include { CLASSIFICATION } from './subworkflows/classification'
+include { TERMINATORPREDICTION } from './subworkflows/terminatorpred'
+include { RNAFOLD } from './modules/rnafold'
+include { CREATEREPORT } from './modules/report'
 
 workflow {
-    // TODO: Pipeline logic
+    DATAPREPARATION(table_ch, genomes_path, gff_path, blastDB, output_path)
+    MEME(DATAPREPARATION.out.promoters, output_path)
+    CLASSIFICATION(DATAPREPARATION.out.queries, DATAPREPARATION.out.filtered_queries, eqrnaLib, output_path)
+    TERMINATORPREDICTION(genomes_ext, 
+                        nocornacConfig, 
+                        projectDir, 
+                        CLASSIFICATION.out.crd_files, 
+                        DATAPREPARATION.out.summary_transcripts, 
+                        output_path)
+    RNAFOLD(TERMINATORPREDICTION.out.allocation, genomes_path, output_path)
+    CREATEREPORT(templates, staticfiles, RNAFOLD.out.output_figures.collect(), MEME.out.motifResult.collect(), output_path)
 }
