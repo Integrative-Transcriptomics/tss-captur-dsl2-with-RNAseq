@@ -3,7 +3,7 @@
     Returns queries for classification, promoter regions, a .txt file with genome names, and a .tsv file with ignored and analyzed positions
 */
 process MASTERTOFASTA {
-    label "TranscriptExtraction"
+    label "DataPreparation"
     publishDir "$output_path/queries", pattern: "*.tsv", mode: 'copy'
     publishDir "$output_path/queries", pattern: "*.fasta" , mode: 'copy'
     publishDir "$output_path", pattern: "genomes_text.txt" , mode: 'copy'
@@ -31,7 +31,7 @@ process MASTERTOFASTA {
     Extracts the corresponding TaxIDs from the Taxonomy tree of NCBI using the NCBI-IDs of the given genomes (as a single call)
 */
 process GETGENOMESLCA {
-    label "TranscriptExtraction"
+    label "DataPreparation"
     tag "$ids"
 
     input: 
@@ -50,7 +50,7 @@ process GETGENOMESLCA {
     Extracts the LCA from the species in question using the given TaxIDs
 */
 process GETLCAID {
-    label "TranscriptExtraction"
+    label "DataPreparation"
 
     input: 
     val ids
@@ -68,7 +68,7 @@ process GETLCAID {
     Creates a TaxIDlist for BLAST with all corresponding species under the extracted LCA
 */
 process GETBLASTID {
-    label "TranscriptExtraction"
+    label "DataPreparation"
 
     input: 
     val taxidlist
@@ -86,7 +86,7 @@ process GETBLASTID {
     Runs BLAST against the nt-database using the extracted queries and the restricted TaxIDs
 */
 process BLASTFASTA {
-    label "TranscriptExtraction"
+    label "DataPreparation"
 
 	input:
     each query
@@ -107,7 +107,7 @@ process BLASTFASTA {
     Evaluates the BLAST-hits and extracts the corresponding hits for the pairwise alignment (for QRNA)
 */
 process EVALBLAST {
-    label "TranscriptExtraction"
+    label "DataPreparation"
     publishDir "$output_path/filtered_blast", mode: 'copy'
 
     input: 
