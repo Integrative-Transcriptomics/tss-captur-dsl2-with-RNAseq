@@ -1,4 +1,4 @@
-include { CNIT, EVALCNIT, QRNA, EVALQRNA, COMPARECNITQRNA } from '../modules/classification'
+include { CNIT; EVALCNIT; QRNA; EVALQRNA; COMPARECNITQRNA } from '../modules/classification'
 
 workflow CLASSIFICATION {
     take:

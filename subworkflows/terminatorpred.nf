@@ -1,4 +1,4 @@
-include { RHOTERMPREDICT, NOCORNAC, FINDTERMINATORS } from '../modules/terminatorpred'
+include { RHOTERMPREDICT; NOCORNAC; FINDTERMINATORS } from '../modules/terminatorpred'
 
 workflow TERMINATORPREDICTION {
     take:
