@@ -23,7 +23,7 @@ process MASTERTOFASTA {
 
     script:
     """
-        python3 $pythonScriptTableToQuery $table $genomes $gffs
+        python3 $params.pyScriptTableToQuery $table $genomes $gffs
     """
 }
 
@@ -60,7 +60,7 @@ process GETLCAID {
 
     script: 
     """
-        python3 $pyScriptCommonSpecies $ids > common_species_id.txt
+        python3 $params.pyScriptCommonSpecies $ids > common_species_id.txt
     """
 }
 
@@ -99,7 +99,7 @@ process BLASTFASTA {
 
     script: 
     """
-    blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn  -outfmt "6 qseqid qstart qend qseq sseqid sstart send  sseq evalue bitscore pident frames qcovhsp" -task dc-megablast  -taxidlist $taxidlist
+        blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn -outfmt "6 qseqid qstart qend qseq sseqid sstart send sseq evalue bitscore pident frames qcovhsp" -task dc-megablast -taxidlist $taxidlist
     """
 }
 
@@ -121,6 +121,6 @@ process EVALBLAST {
     // TODO: Still add the evaluation table, since there might be transcripts without any hit. 
     script:
     """
-        python3 $pyEvaluateBlast $blasted_files -t 10
+        python3 $params.pyEvaluateBlast $blasted_files -t 10
     """
 }

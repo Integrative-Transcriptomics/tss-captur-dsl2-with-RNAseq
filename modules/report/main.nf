@@ -7,8 +7,6 @@ process CREATEREPORT {
     publishDir "$output_path/", pattern: "*.tsv", mode: 'copy'
 
     input:
-    val templates
-    val staticfiles
     val all_figures
     val motif_done
     val output_path
@@ -18,8 +16,8 @@ process CREATEREPORT {
 
     script:
     """
-    cp -r $staticfiles static
-    cp -r $templates templates
-    python3 $pyCreateReport --path $output_path
+        cp -r $params.staticfiles static
+        cp -r $params.templates templates
+        python3 $params.pyCreateReport --path $output_path
     """
 }

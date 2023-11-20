@@ -5,7 +5,6 @@ workflow DATAPREPARATION {
         table_ch
         genomes_path
         gff_path
-        blastDB
         output_path
 
     main:
@@ -13,7 +12,7 @@ workflow DATAPREPARATION {
         GETGENOMESLCA(MASTERTOFASTA.out.file_text.map{ it.getText().split("\n") }.flatten().collect().map{ it.join(",") })
         GETLCAID(GETGENOMESLCA.out.tax_id.map{ it.split("\n").join(" ") })
         GETBLASTID(GETLCAID.out.common_species_id.readLines().map{ it[0].findAll(/\d{1,10}/)[0] })
-        BLASTFASTA(MASTERTOFASTA.out.queries, GETBLASTID.out.taxidlist_file, blastDB, output_path)
+        BLASTFASTA(MASTERTOFASTA.out.queries, GETBLASTID.out.taxidlist_file, params.blastDB, output_path)
         EVALBLAST(BLASTFASTA.out.blasted_files, output_path)
 
     emit:

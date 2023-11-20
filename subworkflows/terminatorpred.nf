@@ -3,7 +3,6 @@ include { RHOTERMPREDICT; NOCORNAC; FINDTERMINATORS } from '../modules/terminato
 workflow TERMINATORPREDICTION {
     take:
         genomes_ext
-        nocornacConfig
         projectDir
         crd_files
         summary_transcripts 
@@ -11,7 +10,7 @@ workflow TERMINATORPREDICTION {
     
     main:
         RHOTERMPREDICT(genomes_ext, output_path)
-        NOCORNAC(nocornacConfig, projectDir, genomes_ext, output_path)
+        NOCORNAC(params.nocornacConfig, projectDir, genomes_ext, output_path)
         FINDTERMINATORS(NOCORNAC.out.nocornac_gffs.collect(), 
                         RHOTERMPREDICT.out.rhoterm_gffs.collect(), 
                         crd_files.collect(), 

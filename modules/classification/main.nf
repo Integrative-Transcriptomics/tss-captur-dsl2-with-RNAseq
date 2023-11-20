@@ -12,8 +12,8 @@ process CNIT {
 
     script:
     """
-    python2 $cnit -f $query -o ${query.baseName} -m "pl"
-    mv ${query.baseName}/${query.baseName}.index .
+        python2 $params.cnit -f $query -o ${query.baseName} -m "pl"
+        mv ${query.baseName}/${query.baseName}.index .
     """
 }
 
@@ -33,7 +33,7 @@ process EVALCNIT {
 
     script:
     """
-    python3 $pyFromCNITtoTSV --cnit_list $cnit_index
+        python3 $params.pyFromCNITtoTSV --cnit_list $cnit_index
     """
 }
 
@@ -55,8 +55,8 @@ process QRNA {
 
     script:
     """
-    gawk 'BEGIN { OFS = "\\n"} {print ">" \$1 "|" \$2 "-" \$3 "|" \$9"," \$10"," \$11 ", Frames:" \$12", Score:" \$17, \$4, ">" \$5 "|" \$6 "-" \$7, \$8 "\\n"}' $blasted_file > ${blasted_file.baseName}.fa
-    $eqrna --ones ${blasted_file.baseName}.fa > ${blasted_file.baseName}.qrna
+        gawk 'BEGIN { OFS = "\\n"} {print ">" \$1 "|" \$2 "-" \$3 "|" \$9"," \$10"," \$11 ", Frames:" \$12", Score:" \$17, \$4, ">" \$5 "|" \$6 "-" \$7, \$8 "\\n"}' $blasted_file > ${blasted_file.baseName}.fa
+        $params.eqrna --ones ${blasted_file.baseName}.fa > ${blasted_file.baseName}.qrna
     """
 }
 
@@ -74,10 +74,10 @@ process EVALQRNA{
 
     output:
     path "*.tsv", emit: qrna_eval
-
+    
     script:
     """
-        python3 $pyFromQRNAtoTSV --qrna_list $path_qrna_files --filteredBlast_list $path_filtered_blast_files
+        python3 $params.pyFromQRNAtoTSV --qrna_list $path_qrna_files --filteredBlast_list $path_filtered_blast_files
     """
 }
 
@@ -100,6 +100,6 @@ process COMPARECNITQRNA {
 
     script:     
     """
-        python3 $pyDecideClass --qrna $qrna_eval_file --cnit $cnit_eval_file
+        python3 $params.pyDecideClass --qrna $qrna_eval_file --cnit $cnit_eval_file
     """
 }
