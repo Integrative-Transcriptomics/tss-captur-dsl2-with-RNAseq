@@ -16,6 +16,7 @@ process CREATEREPORT {
 	output:
 	path "*.tsv" 
 
+    script:
     """
     cp -r $staticfiles static
     cp -r $templates templates

@@ -12,7 +12,7 @@ process RHOTERMPREDICT {
     output:
     path "*.gff", emit: rhoterm_gffs
     
-    shell:
+    script:
     """
         python3 $pyRhoTermPredict $genome --output ${genome.baseName}_rhoterm
         python3 $pyTransformRhoTermToGFF --rhoterm *${genome.baseName}_rhoterm.tsv --genome ${genome.baseName}
@@ -35,6 +35,7 @@ process NOCORNAC {
     output: 
     path "*.gff", emit: nocornac_gffs
 
+    script:
     """
     sed 's@dataPath = data@dataPath =  $proj_dir/nocornac/data@g' $config_file > config_temp.conf
     sed 's@transtermPath = progs/@transtermPath =  $proj_dir/bin/progs/@g' config_temp.conf > config.conf
@@ -59,6 +60,7 @@ process FINDTERMINATORS {
     output:
     path "*.tsv", emit: terminators_allocation 
 
+    script:
     """
     python3 $pyAllocateTerminators --nocornac $nocornac --rhoterm $rhoterm --crd $crd --tssAnalyzed $tsv
     """

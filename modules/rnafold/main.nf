@@ -19,6 +19,7 @@ process RNAFOLD {
     path "*.fasta"
     stdout emit: output_figures
 
+    script:
     """
     python3 $pyExtractRNATranscripts --rnas $terminator --genome_path $genomes
     $rnafold --noLP -i *.fasta > rnaFold.out

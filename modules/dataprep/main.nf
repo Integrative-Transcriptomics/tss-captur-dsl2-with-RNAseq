@@ -21,7 +21,7 @@ process MASTERTOFASTA {
     path "tss_analyzed.tsv", emit: summary_transcripts
     path "*.tsv", emit: analyzed_tss
 
-    shell:
+    script:
     """
         python3 $pythonScriptTableToQuery $table $genomes $gffs
     """
@@ -40,7 +40,7 @@ process GETGENOMESLCA {
     output: 
     stdout emit: tax_id
 
-    shell:
+    script:
     """
         efetch -db nuccore -id $ids -format docsum | xtract -pattern DocumentSummary -element TaxId 
     """
@@ -58,7 +58,7 @@ process GETLCAID {
     output: 
     path "common_species_id.txt", emit: common_species_id
 
-    shell: 
+    script: 
     """
         python3 $pyScriptCommonSpecies $ids > common_species_id.txt
     """
@@ -76,7 +76,7 @@ process GETBLASTID {
     output: 
     path "taxidlist.taxid", emit: taxidlist_file
 
-    shell:
+    script:
     """
         get_species_taxids.sh -t $taxidlist > taxidlist.taxid
     """
@@ -97,7 +97,7 @@ process BLASTFASTA {
     output:
     path "*.blastn", emit: blasted_files
 
-    shell: 
+    script: 
     """
     blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn  -outfmt "6 qseqid qstart qend qseq sseqid sstart send  sseq evalue bitscore pident frames qcovhsp" -task dc-megablast  -taxidlist $taxidlist
     """
@@ -119,6 +119,7 @@ process EVALBLAST {
 
     // path "evaluation*" into evaluation_ch
     // TODO: Still add the evaluation table, since there might be transcripts without any hit. 
+    script:
     """
         python3 $pyEvaluateBlast $blasted_files -t 10
     """

@@ -13,7 +13,7 @@ process MEME {
     output:
     path "*", emit: motifResult
 
-    shell:
+    script:
     """
     meme $promoter -dna -nmotifs $params.motifNumber -minw 5 -maxw 20 
     python3 $pyMemeParser --meme meme_out/meme.xml --genome ${promoter.baseName - "_promoter_regions"}
