@@ -13,3 +13,4 @@ RNAz-2.1
 **/.vscode
 **/bin/scripts/classes/__pycache__/
 **/bin/scripts/classes/*.pyc
+.nextflow.log*
