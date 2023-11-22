@@ -32,7 +32,8 @@ if __name__ == "__main__":
     with open(file_path, "r") as handle:
         record = list(SeqIO.parse(handle, "fasta"))[0]
     terminator_df = pd.read_csv(args.rnas, index_col=None, sep="\t")
-    terminator_df = terminator_df.loc[terminator_df['type'] == "RNA"]
+    # terminator_df = terminator_df.loc[terminator_df['type'] == "RNA"]
+    terminator_df = terminator_df.loc[terminator_df['type'].isin(["RNA", "COD"])]
 
     terminator_df.iloc[:, 12:] = terminator_df.iloc[:, 12:].astype(int)
     transcript_list = []

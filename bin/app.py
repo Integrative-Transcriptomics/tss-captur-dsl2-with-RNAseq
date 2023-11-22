@@ -50,7 +50,7 @@ def update_dict(d, type_tss, class_tss):
 
 
 def createOverviewData(pathToData, genome):
-    dir_tss_analyzed = os.path.join(pathToData, "queries", "tss_analyzed.tsv")
+    dir_tss_analyzed = os.path.join(pathToData, "Queries", "tss_analyzed.tsv")
     dir_final_class = os.path.join(
         pathToData, "Classification", "%s_final_classification.tsv" % genome)
     dir_terminators = os.path.join(
@@ -92,7 +92,7 @@ def createOverviewData(pathToData, genome):
     all_dfs["GeneLengthWithUTR"] = temp_max - temp_min+1
     all_dfs["mfe"] = all_dfs.mfe.astype("float")
     all_dfs["url_for_image"] = np.where(
-        all_dfs.winner == "RNA", all_dfs.index.astype("str") + "_ss.jpg", "")
+        (all_dfs.winner == "RNA") | (all_dfs.winner == "COD"), all_dfs.index.astype("str") + "_ss.jpg", "")
     all_dfs = all_dfs.drop(
         ["start_with_terminator", "end_with_terminator", "PredictionEnd", "PredictionStart"], axis=1).reset_index().fillna(toFillNA)
     all_dfs.to_csv("%s_overview.tsv" % genome, sep="\t", index=False)
@@ -143,7 +143,7 @@ def terminators():
 
 def getAvoidedTSS(outputPath, genome):
     dir_avoided = os.path.join(
-        outputPath, "queries", "tss_avoided_in_%s.tsv" % genome)
+        outputPath, "Queries", "tss_avoided_in_%s.tsv" % genome)
     try:
         df_avoided = pd.read_csv(dir_avoided, sep="\t", header=None)
         avoided = df_avoided.values.tolist()
