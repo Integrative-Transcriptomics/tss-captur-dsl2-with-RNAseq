@@ -5,16 +5,14 @@ for each transcript.
 
 For the choice of the functions, please refer to the original thesis. 
 
-This script requires ´pandas´, ´numpy´ and ´scipy´ to be installed. 
+This script requires ´pandas´ and ´scipy´ to be installed. 
 
 """
 
 import pandas as pd
-import numpy as np
 import argparse
 import os
-import re
-import time
+
 from scipy.stats import norm
 
 pd.options.mode.chained_assignment = None  # default='warn'

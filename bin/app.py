@@ -3,7 +3,6 @@ import argparse
 import os
 import re
 import pandas as pd
-import base64
 import numpy as np
 from flask_frozen import Freezer
 from functools import reduce

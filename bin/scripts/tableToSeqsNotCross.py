@@ -3,7 +3,6 @@ from classes.tableParserNotCrossOtherTSS import GenomeWrapper
 import pandas as pd
 import argparse
 import os
-import sys
 
 
 def parse_table(separator, args):
