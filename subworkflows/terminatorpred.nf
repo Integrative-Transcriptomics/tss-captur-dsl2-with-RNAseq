@@ -2,21 +2,21 @@ include { RHOTERMPREDICT; NOCORNAC; FINDTERMINATORS } from '../modules/terminato
 
 workflow TERMINATORPREDICTION {
     take:
-        genomes_ext
+        genomesExt
         projectDir
-        crd_files
-        summary_transcripts 
-        output_path
+        crdFiles
+        summaryTranscripts 
+        outputPath
     
     main:
-        RHOTERMPREDICT(genomes_ext, output_path)
-        NOCORNAC(params.nocornacConfig, projectDir, genomes_ext, output_path)
-        FINDTERMINATORS(NOCORNAC.out.nocornac_gffs.collect(), 
-                        RHOTERMPREDICT.out.rhoterm_gffs.collect(), 
-                        crd_files.collect(), 
-                        summary_transcripts, 
-                        output_path)
+        RHOTERMPREDICT(genomesExt, outputPath)
+        NOCORNAC(params.nocornacConfig, projectDir, genomesExt, outputPath)
+        FINDTERMINATORS(NOCORNAC.out.gffNocornac.collect(), 
+                        RHOTERMPREDICT.out.gffRhoterm.collect(), 
+                        crdFiles.collect(), 
+                        summaryTranscripts, 
+                        outputPath)
     
     emit:
-        allocation = FINDTERMINATORS.out.terminators_allocation
+        allocation = FINDTERMINATORS.out.terminatorsAllocation
 }

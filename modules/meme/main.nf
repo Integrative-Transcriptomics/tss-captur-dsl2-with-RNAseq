@@ -3,12 +3,12 @@
     Returns the output of MEME and a .tsv file for data parsing
 */
 process MEME {
-    label "MotifAnalysis"
-    publishDir "$output_path/MotifAnalysis/${promoter.baseName - "_promoter_regions"}", mode: 'copy'
+    label params.memeLabel
+    publishDir "$outputPath/MotifAnalysis/${promoter.baseName - "_promoter_regions"}", mode: params.pubDirMode
 
     input: 
     each file(promoter)
-    val output_path
+    val outputPath
 
     output:
     path "*", emit: motifResult

@@ -3,21 +3,20 @@
     Returns a .jpg file to visualize the secondary structure of the transcripts
 */
 process RNAFOLD {
-    label "SecondaryStruct"
-    publishDir "$output_path/SecondaryStructure/${terminator.baseName - "_allocated_terminators"}/Visualizations", pattern: "*.jpg", mode: 'copy'
-    publishDir "$output_path/SecondaryStructure/${terminator.baseName - "_allocated_terminators"}/", pattern: "*.tsv", mode: 'copy'
-    // TODO: publishDir "$output_path/SecondaryStructure/${terminator.baseName - "_allocated_terminators"}/Transcripts", pattern: "*.fasta", mode: 'copy'
+    label params.rnaFoldLabel
+    publishDir "$outputPath/SecondaryStructure/${terminator.baseName - "_allocated_terminators"}/Visualizations", pattern: "*.jpg", mode: params.pubDirMode
+    publishDir "$outputPath/SecondaryStructure/${terminator.baseName - "_allocated_terminators"}/", pattern: "*.tsv", mode: params.pubDirMode
 
     input:
     each terminator
     val genomes
-    val output_path
+    val outputPath
 
     output:
     path "*.jpg" 
     path "*.tsv" 
     path "*.fasta"
-    stdout emit: output_figures
+    stdout emit: outputFigures
 
     script:
     """

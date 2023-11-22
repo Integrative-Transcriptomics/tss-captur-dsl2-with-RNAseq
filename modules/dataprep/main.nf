@@ -3,27 +3,27 @@
     Returns queries for classification, promoter regions, a .txt file with genome names, and a .tsv file with ignored and analyzed positions
 */
 process MASTERTOFASTA {
-    label "DataPreparation"
-    publishDir "$output_path/queries", pattern: "*.tsv", mode: 'copy'
-    publishDir "$output_path/queries", pattern: "*.fasta" , mode: 'copy'
-    publishDir "$output_path", pattern: "genomes_text.txt" , mode: 'copy'
+    label params.dataPrepLabel
+    publishDir "$outputPath/Queries", pattern: "*.tsv", mode: params.pubDirMode
+    publishDir "$outputPath/Queries", pattern: "*.fasta" , mode: params.pubDirMode
+    publishDir "$outputPath", pattern: "genomes_text.txt" , mode: params.pubDirMode
 
     input: 
-    val table
-    val genomes
-    val gffs
-    val output_path
+    val masterTable
+    val genomePath
+    val gffPath
+    val outputPath
 
     output: 
-    path "genomes_text.txt", emit: file_text 
+    path "genomes_text.txt", emit: fileText 
     path "*_queries.fasta", emit: queries
     path "*_promoter_regions.fasta", emit: promoters
-    path "tss_analyzed.tsv", emit: summary_transcripts
-    path "*.tsv", emit: analyzed_tss
+    path "tss_analyzed.tsv", emit: summaryTranscripts
+    path "*.tsv", emit: analyzedTSS
 
     script:
     """
-        python3 $params.pyScriptTableToQuery $table $genomes $gffs
+        python3 $params.pyScriptTableToQuery $masterTable $genomePath $gffPath
     """
 }
 
@@ -31,14 +31,14 @@ process MASTERTOFASTA {
     Extracts the corresponding TaxIDs from the Taxonomy tree of NCBI using the NCBI-IDs of the given genomes (as a single call)
 */
 process GETGENOMESLCA {
-    label "DataPreparation"
+    label params.dataPrepLabel
     tag "$ids"
-
+    
     input: 
     val ids
 
     output: 
-    stdout emit: tax_id
+    stdout emit: taxID
 
     script:
     """
@@ -50,13 +50,13 @@ process GETGENOMESLCA {
     Extracts the LCA from the species in question using the given TaxIDs
 */
 process GETLCAID {
-    label "DataPreparation"
+    label params.dataPrepLabel
 
     input: 
     val ids
 
     output: 
-    path "common_species_id.txt", emit: common_species_id
+    path "common_species_id.txt", emit: commonSpeciesID
 
     script: 
     """
@@ -68,17 +68,17 @@ process GETLCAID {
     Creates a TaxIDlist for BLAST with all corresponding species under the extracted LCA
 */
 process GETBLASTID {
-    label "DataPreparation"
+    label params.dataPrepLabel
 
     input: 
-    val taxidlist
+    val taxIDList
 
     output: 
-    path "taxidlist.taxid", emit: taxidlist_file
+    path "taxidlist.taxid", emit: taxIDListFile
 
     script:
     """
-        get_species_taxids.sh -t $taxidlist > taxidlist.taxid
+        get_species_taxids.sh -t $taxIDList > taxidlist.taxid
     """
 }
 
@@ -86,20 +86,20 @@ process GETBLASTID {
     Runs BLAST against the nt-database using the extracted queries and the restricted TaxIDs
 */
 process BLASTFASTA {
-    label "DataPreparation"
+    label params.dataPrepLabel
 
-	input:
+    input:
     each query
-    path taxidlist
+    path taxIDList
     env BLASTDB
-    val output_path
+    val outputPath
 
     output:
-    path "*.blastn", emit: blasted_files
+    path "*.blastn", emit: blastFiles
 
     script: 
     """
-        blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn -outfmt "6 qseqid qstart qend qseq sseqid sstart send sseq evalue bitscore pident frames qcovhsp" -task dc-megablast -taxidlist $taxidlist
+        blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn -outfmt "6 qseqid qstart qend qseq sseqid sstart send sseq evalue bitscore pident frames qcovhsp" -task dc-megablast -taxidlist $taxIDList
     """
 }
 
@@ -107,20 +107,20 @@ process BLASTFASTA {
     Evaluates the BLAST-hits and extracts the corresponding hits for the pairwise alignment (for QRNA)
 */
 process EVALBLAST {
-    label "DataPreparation"
-    publishDir "$output_path/filtered_blast", mode: 'copy'
+    label params.dataPrepLabel
+    publishDir "$outputPath/BlastFiltered", mode: params.pubDirMode
 
     input: 
-    path blasted_files
-    val output_path
+    path blastFiles
+    val outputPath
 
     output:
-    path "*.tsv", emit: filtered_queries_ch
+    path "*.tsv", emit: blastFiltered
 
     // path "evaluation*" into evaluation_ch
     // TODO: Still add the evaluation table, since there might be transcripts without any hit. 
     script:
     """
-        python3 $params.pyEvaluateBlast $blasted_files -t 10
+        python3 $params.pyEvaluateBlast $blastFiles -t 10
     """
 }

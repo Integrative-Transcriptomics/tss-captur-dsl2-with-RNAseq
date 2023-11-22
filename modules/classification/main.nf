@@ -2,13 +2,13 @@
     Runs CNIT for the classification
 */
 process CNIT {
-    label "Classification"
+    label params.classificationLabel
 
     input: 
     each query
 
     output:
-    path "${query.baseName}.index", emit: cnit_results
+    path "${query.baseName}.index", emit: cnitResults
 
     script:
     """
@@ -21,19 +21,19 @@ process CNIT {
     Evaluates output of CNIT and converts it to a .tsv file 
 */
 process EVALCNIT {
-    label "Classification"
-    publishDir "$output_path/Classification/CNIT/Evaluation"
+    label params.classificationLabel
+    publishDir "$outputPath/Classification/CNIT/Evaluation"
 
     input: 
-    path cnit_index
-    val output_path
+    path cnitIndex
+    val outputPath
 
     output:
-    path "*.tsv", emit: cnit_eval
+    path "*.tsv", emit: cnitEval
 
     script:
     """
-        python3 $params.pyFromCNITtoTSV --cnit_list $cnit_index
+        python3 $params.pyFromCNITtoTSV --cnit_list $cnitIndex
     """
 }
 
@@ -41,22 +41,21 @@ process EVALCNIT {
     Runs QRNA for the classification
 */
 process QRNA {
-    label "Classification"
+    label params.classificationLabel
     cache "lenient"
-    // TODO: publishDir "$output_path/Classification/QRNA/Results", mode: 'copy' // Put in one folder QRNA/result
 
     input: 
-    each blasted_file
+    each blastFilteredFile
     env QRNADB
-    val output_path
+    val outputPath
 
     output:
-    path "${blasted_file.baseName}.qrna", emit: qrna_normal
+    path "${blastFilteredFile.baseName}.qrna", emit: qrnaNormal
 
     script:
     """
-        gawk 'BEGIN { OFS = "\\n"} {print ">" \$1 "|" \$2 "-" \$3 "|" \$9"," \$10"," \$11 ", Frames:" \$12", Score:" \$17, \$4, ">" \$5 "|" \$6 "-" \$7, \$8 "\\n"}' $blasted_file > ${blasted_file.baseName}.fa
-        $params.eqrna --ones ${blasted_file.baseName}.fa > ${blasted_file.baseName}.qrna
+        gawk 'BEGIN { OFS = "\\n"} {print ">" \$1 "|" \$2 "-" \$3 "|" \$9"," \$10"," \$11 ", Frames:" \$12", Score:" \$17, \$4, ">" \$5 "|" \$6 "-" \$7, \$8 "\\n"}' $blastFilteredFile > ${blastFilteredFile.baseName}.fa
+        $params.eqrna --ones ${blastFilteredFile.baseName}.fa > ${blastFilteredFile.baseName}.qrna
     """
 }
 
@@ -64,20 +63,20 @@ process QRNA {
     Transcribes the output of QRNA to a .tsv file and corrects the position of each UTR region using the BLAST files
 */
 process EVALQRNA{
-    label "Classification"
-    publishDir "$output_path/Classification/QRNA/Evaluation", pattern: "*.tsv", mode: 'copy'
+    label params.classificationLabel
+    publishDir "$outputPath/Classification/QRNA/Evaluation", pattern: "*.tsv", mode: params.pubDirMode
 
     input:
-    path path_qrna_files
-    path path_filtered_blast_files
-    val output_path
+    path qrnaFiles
+    path blastFiltered
+    val outputPath
 
     output:
-    path "*.tsv", emit: qrna_eval
+    path "*.tsv", emit: qrnaEval
     
     script:
     """
-        python3 $params.pyFromQRNAtoTSV --qrna_list $path_qrna_files --filteredBlast_list $path_filtered_blast_files
+        python3 $params.pyFromQRNAtoTSV --qrna_list $qrnaFiles --filteredBlast_list $blastFiltered
     """
 }
 
@@ -85,21 +84,21 @@ process EVALQRNA{
     Compares the output of CNIT and QRNA to call the final classification on each transcript
 */
 process COMPARECNITQRNA {
-    label "Classification"
-    publishDir "$output_path/Classification",  mode: 'copy'
+    label params.classificationLabel
+    publishDir "$outputPath/Classification",  mode: params.pubDirMode
 
     input:
-    path qrna_eval_file
-    path cnit_eval_file
-    val output_path
+    path qrnaEvalFile
+    path cnitEvalFile
+    val outputPath
 
     output:
-    path "*final_classification.tsv", emit: final_eval_classification
-    path "*.crd", emit: crd_files
+    path "*final_classification.tsv", emit: finalEvalClassification
+    path "*.crd", emit: crdFiles
     path "*.gff"
 
     script:     
     """
-        python3 $params.pyDecideClass --qrna $qrna_eval_file --cnit $cnit_eval_file
+        python3 $params.pyDecideClass --qrna $qrnaEvalFile --cnit $cnitEvalFile
     """
 }

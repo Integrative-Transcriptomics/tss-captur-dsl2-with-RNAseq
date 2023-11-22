@@ -1,25 +1,15 @@
 #!/usr/bin/env nextflow
-import java.nio.file.Paths
 
-// Input Manager
-table_ch =      Channel.value("${projectDir}/${params.inputTable}")
-genomes_path =  Channel.value("${projectDir}/${params.inputGenomes}")
-genomes_ext =   Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.inputGenomes}*.${it}" })
-gff_path =      Channel.value("${projectDir}/${params.inputGFFs}")
-output_path =   Channel.value("${projectDir}/${params.outputDir}")
+// Info message
+log.info """\
 
-/*
-// TODO: Help message
-log.info 
-"""\
             TSS-CAPTUR
  ===================================
- MasterTable : ${table_ch}
- Genomes path: ${genomes_path}
- GFFs path   : ${gff_path}
- Output path : ${output_path}
+ MasterTable : ${params.masterTable}
+ Genomes path: ${params.genomesPath}
+ GFFs path   : ${params.gffPath}
+ Output path : ${params.outputPath}
  """
- */
 
 include { DATAPREPARATION } from './subworkflows/dataprep'
 include { MEME } from './modules/meme'
@@ -29,14 +19,16 @@ include { RNAFOLD } from './modules/rnafold'
 include { CREATEREPORT } from './modules/report'
 
 workflow {
-    DATAPREPARATION(table_ch, genomes_path, gff_path, output_path)
-    MEME(DATAPREPARATION.out.promoters, output_path)
-    CLASSIFICATION(DATAPREPARATION.out.queries, DATAPREPARATION.out.filtered_queries.collect(), output_path)
-    TERMINATORPREDICTION(genomes_ext,
+    genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.inputGenomes}*.${it}" })
+
+    DATAPREPARATION(params.masterTable, params.genomesPath, params.gffPath, params.outputPath)
+    MEME(DATAPREPARATION.out.promoters, params.outputPath)
+    CLASSIFICATION(DATAPREPARATION.out.queries, DATAPREPARATION.out.blastFiltered.collect(), params.outputPath)
+    TERMINATORPREDICTION(genomesExt,
                         projectDir, 
-                        CLASSIFICATION.out.crd_files, 
-                        DATAPREPARATION.out.summary_transcripts, 
-                        output_path)
-    RNAFOLD(TERMINATORPREDICTION.out.allocation, genomes_path, output_path)
-    CREATEREPORT(RNAFOLD.out.output_figures.collect(), MEME.out.motifResult.collect(), output_path)
+                        CLASSIFICATION.out.crdFiles, 
+                        DATAPREPARATION.out.summaryTranscripts, 
+                        params.outputPath)
+    RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
+    CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath)
 }

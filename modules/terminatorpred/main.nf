@@ -2,15 +2,15 @@
     Identifies possible Rho-Dependent terminators for the found genomes
 */
 process RHOTERMPREDICT {
-    label "TerminatorPrediciton"
-    publishDir "$output_path/Terminators/RhoTermPredict",  mode: 'copy'
+    label params.terminatorPredLabel
+    publishDir "$outputPath/Terminators/RhoTermPredict",  mode: params.pubDirMode
 
     input:
     path genome
-    val output_path
+    val outputPath
 
     output:
-    path "*.gff", emit: rhoterm_gffs
+    path "*.gff", emit: gffRhoterm
     
     script:
     """
@@ -23,22 +23,22 @@ process RHOTERMPREDICT {
     Identifies Rho-Independent terminators for the found genomes
 */
 process NOCORNAC {
-    label "TerminatorPrediciton"
-    publishDir "$output_path/Terminators/nocoRNAc",  mode: 'copy'
+    label params.terminatorPredLabel
+    publishDir "$outputPath/Terminators/nocoRNAc",  mode: params.pubDirMode
 
     input:
-    val config_file
-    val proj_dir
+    val config
+    val projDir
     path genome
-    val output_path
+    val outputPath
 
     output: 
-    path "*.gff", emit: nocornac_gffs
+    path "*.gff", emit: gffNocornac
 
     script:
     """
-        sed 's@dataPath = data@dataPath = $proj_dir/nocornac/data@g' $config_file > config_temp.conf
-        sed 's@transtermPath = progs/@transtermPath = $proj_dir/bin/progs/@g' config_temp.conf > config.conf
+        sed 's@dataPath = data@dataPath = $projDir/nocornac/data@g' $config > config_temp.conf
+        sed 's@transtermPath = progs/@transtermPath = $projDir/bin/progs/@g' config_temp.conf > config.conf
         java -Xmx1G -jar $params.nocornac -genomeFastaFile $genome -gffOutFile ${genome.baseName}_nocornac.gff -terminators
     """
 }
@@ -47,18 +47,18 @@ process NOCORNAC {
     Finds the possible terminators for each transcript
 */
 process FINDTERMINATORS {
-    label "TerminatorPrediciton"
-    publishDir "$output_path/Terminators",   mode: 'copy'
+    label params.terminatorPredLabel
+    publishDir "$outputPath/Terminators",   mode: params.pubDirMode
 
     input:
     path nocornac
     path rhoterm
     path crd
     path tsv
-    val output_path
+    val outputPath
 
     output:
-    path "*.tsv", emit: terminators_allocation 
+    path "*.tsv", emit: terminatorsAllocation 
 
     script:
     """

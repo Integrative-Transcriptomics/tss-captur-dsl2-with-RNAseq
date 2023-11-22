@@ -2,22 +2,22 @@ include { MASTERTOFASTA; GETGENOMESLCA; GETLCAID; GETBLASTID; BLASTFASTA; EVALBL
 
 workflow DATAPREPARATION { 
     take:
-        table_ch
-        genomes_path
-        gff_path
-        output_path
+        masterTable
+        genomesPath
+        gffPath
+        outputPath
 
     main:
-        MASTERTOFASTA(table_ch, genomes_path, gff_path, output_path)
-        GETGENOMESLCA(MASTERTOFASTA.out.file_text.map{ it.getText().split("\n") }.flatten().collect().map{ it.join(",") })
-        GETLCAID(GETGENOMESLCA.out.tax_id.map{ it.split("\n").join(" ") })
-        GETBLASTID(GETLCAID.out.common_species_id.readLines().map{ it[0].findAll(/\d{1,10}/)[0] })
-        BLASTFASTA(MASTERTOFASTA.out.queries, GETBLASTID.out.taxidlist_file, params.blastDB, output_path)
-        EVALBLAST(BLASTFASTA.out.blasted_files, output_path)
+        MASTERTOFASTA(masterTable, genomesPath, gffPath, outputPath)
+        GETGENOMESLCA(MASTERTOFASTA.out.fileText.map{ it.getText().split("\n") }.flatten().collect().map{ it.join(",") })
+        GETLCAID(GETGENOMESLCA.out.taxID.map{ it.split("\n").join(" ") })
+        GETBLASTID(GETLCAID.out.commonSpeciesID.readLines().map{ it[0].findAll(/\d{1,10}/)[0] })
+        BLASTFASTA(MASTERTOFASTA.out.queries, GETBLASTID.out.taxIDListFile, params.blastDB, outputPath)
+        EVALBLAST(BLASTFASTA.out.blastFiles, outputPath)
 
     emit:
         queries = MASTERTOFASTA.out.queries
         promoters = MASTERTOFASTA.out.promoters
-        summary_transcripts = MASTERTOFASTA.out.summary_transcripts
-        filtered_queries = EVALBLAST.out.filtered_queries_ch
+        summaryTranscripts = MASTERTOFASTA.out.summaryTranscripts
+        blastFiltered = EVALBLAST.out.blastFiltered
 }

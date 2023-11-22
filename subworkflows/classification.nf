@@ -3,16 +3,16 @@ include { CNIT; EVALCNIT; QRNA; EVALQRNA; COMPARECNITQRNA } from '../modules/cla
 workflow CLASSIFICATION {
     take:
         queries
-        filtered_queries
-        output_path
+        blastFiltered
+        outputPath
 
     main:
         CNIT(queries)
-        EVALCNIT(CNIT.out.cnit_results.collect(), output_path)
-        QRNA(filtered_queries, params.eqrnaLib, output_path)
-        EVALQRNA(QRNA.out.qrna_normal.collect(),filtered_queries, output_path)
-        COMPARECNITQRNA(EVALQRNA.out.qrna_eval.collect(), EVALCNIT.out.cnit_eval.collect(), output_path)
+        EVALCNIT(CNIT.out.cnitResults.collect(), outputPath)
+        QRNA(blastFiltered, params.eqrnaLib, outputPath)
+        EVALQRNA(QRNA.out.qrnaNormal.collect(), blastFiltered, outputPath)
+        COMPARECNITQRNA(EVALQRNA.out.qrnaEval.collect(), EVALCNIT.out.cnitEval.collect(), outputPath)
 
     emit:
-        crd_files = COMPARECNITQRNA.out.crd_files
+        crdFiles = COMPARECNITQRNA.out.crdFiles
 }
