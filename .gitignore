@@ -9,8 +9,12 @@ RNAz-2.1
 **/work
 **/output
 **/input
+**/nocornac/data
 **/.nextflow
 **/.vscode
 **/bin/scripts/classes/__pycache__/
 **/bin/scripts/classes/*.pyc
 .nextflow.log*
+/compare
+**/node_modules
+**/.next
