@@ -1,0 +1,8 @@
+{
+    "inputTable": "input/CampySubset/MasterTableSubset.tsv",
+    "inputGenomes": "input/CampySubset/fasta/",
+    "inputGFFs": "input/CampySubset/gff/",
+    "motifNumber": 5,
+    "outputDir": "output/InterfaceTesting/",
+    "BLASTDB": "/ceph/ibmi/it/references/library/nt_new/"
+}
