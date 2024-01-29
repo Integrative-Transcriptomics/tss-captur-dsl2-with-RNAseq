@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import crypto from 'crypto';
 
 export default function UploadPage() {
   // State to keep track of the motifNumber
@@ -7,6 +8,14 @@ export default function UploadPage() {
   // State to keep track of the max file size and total file size
   const [maxFileSize, setMaxFileSize] = useState(null);
   const [maxTotalFileSize, setMaxTotalFileSize] = useState(null);
+  // State to keep track of the upload status
+  const [isUploading, setIsUploading] = useState(false);
+  // State to keep track of the upload progress
+  const [uploadProgress, setUploadProgress] = useState(0);
+  // State to keep track of the jobHash
+  const [jobHash, setJobHash] = useState(null);
+  // State to keep track of the report URL
+  const [reportUrl, setReportUrl] = useState(null);
 
   useEffect(() => {
     // Fetch the file size limits from the API when the component mounts
@@ -42,7 +51,70 @@ export default function UploadPage() {
     }
     return true;
   };
+
+  // Helper function to append files to FormData and generate SHA-256 hash for each file
+  const appendFilesAndHashes = async (fileInputs, formData) => {
+    const fileHashes = {};
+
+    for (let input of fileInputs) {
+      for (let file of input.files) {
+        formData.append(input.name, file);
+        const hash = crypto.createHash('sha256');
+        const buffer = await file.arrayBuffer();
+        hash.update(new Uint8Array(buffer));
+        const hashFile = hash.digest('hex');
+        fileHashes[file.name] = hashFile;
+      };
+    };
+    formData.append('fileHashes', JSON.stringify(fileHashes));
+  };
+
+  // Helper function to handle the upload process
+  const uploadFiles = async (formData) => {
+    const options = {
+      headers: { "Content-Type": "multipart/form-data" },
+      onUploadProgress: (progressEvent) => {
+        const percentage = (progressEvent.loaded * 100) / progressEvent.total;
+        setUploadProgress(+percentage.toFixed(2));
+      },
+    };
+
+    try {
+      const response = await axios.post('/api/upload', formData, options);
+      if (response.status === 200) {
+        console.log('Files uploaded successfully');
+        const data = response.data;
+        setIsUploading(false);
+        setJobHash(data.jobHash);
+      } else {
+        console.error('Error uploading files');
+        setIsUploading(false);
+      }
+    } catch (error) {
+      console.error('Error uploading files:', error);
+      setIsUploading(false);
+    }
+  };
+
   const handleUpload = async (event) => {
+    try {
+      event.preventDefault();
+      setIsUploading(true);
+      const formData = new FormData();
+      const fileInputs = document.querySelectorAll('input[type="file"]');
+
+      if (!validateFileSizes(fileInputs)) {
+        setIsUploading(false);
+        return;
+      }
+
+      await appendFilesAndHashes(fileInputs, formData);
+      await uploadFiles(formData);
+    } catch (error) {
+      console.error('Error during the upload process:', error);
+      alert('An unexpected error occurred during the upload process.');
+      setIsUploading(false);
+    }
   };
 
   return (
@@ -50,6 +122,7 @@ export default function UploadPage() {
       <h1>Upload Files for TSS-CAPTUR</h1>
       <p>Maximum size per file: {maxFileSize / 1024 / 1024} MB</p>
       <p>Maximum total file size: {maxTotalFileSize / 1024 / 1024} MB</p>
+      <p>Upload progress: {uploadProgress}%</p>
       <form onSubmit={handleUpload} encType="multipart/form-data">
         <div>
           <label htmlFor="masterTable">MasterTable.tsv:</label>
@@ -68,7 +141,9 @@ export default function UploadPage() {
           <br />
           <input type="range" id="motifNumber" name="motifNumber" min="1" max="99" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
         </div>
+        <button type="submit" disabled={isUploading}>Start</button>
       </form>
+      {reportUrl && <div>Report will be available at: {reportUrl}</div>}
     </div>
   );
 }
