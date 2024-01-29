@@ -18,3 +18,5 @@ RNAz-2.1
 /compare
 **/node_modules
 **/.next
+**/.yarn
+**/.pnp.*
