@@ -33,6 +33,13 @@ export default function UploadPage() {
     fetchConfig();
   }, []);
 
+  useEffect(() => {
+    // Start the analysis when jobHash changes and is not null
+    if (jobHash) {
+      handleAnalysisStart();
+    }
+  }, [jobHash]);
+
   // Helper function to validate file sizes
   const validateFileSizes = (fileInputs) => {
     let totalFileSize = 0;
@@ -96,6 +103,7 @@ export default function UploadPage() {
     }
   };
 
+  // Helper function to start upload
   const handleUpload = async (event) => {
     try {
       event.preventDefault();
@@ -114,6 +122,24 @@ export default function UploadPage() {
       console.error('Error during the upload process:', error);
       alert('An unexpected error occurred during the upload process.');
       setIsUploading(false);
+    }
+  };
+
+  // Helper function to start the analysis after a successful upload
+  const handleAnalysisStart = async () => {
+    try {
+      const runResponse = await axios.post('/api/run', { jobHash: jobHash });
+      if (runResponse.status === 200) {
+        const data = runResponse.data;
+        setReportUrl(data.reportUrl);
+        console.log('Run API called successfully');
+      } else {
+        console.error('Error calling Run API');
+        alert('Analysis could not be started. Please try again.');
+      }
+    } catch (error) {
+      console.error('Error calling Run API:', error);
+      alert('An error occurred while starting the analysis.');
     }
   };
 
