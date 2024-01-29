@@ -1,6 +1,8 @@
 // Define upload configuration
 const MAX_FILE_SIZE = (200) * 1024 * 1024; // 200MB
 const MAX_TOTAL_FILE_SIZE = (500) * 1024 * 1024; // 500MB
+const AVG_UPLOAD_SPEED = (1) / 8; // 0.125MB/s 
+const UPLOAD_BUFFER_TIME = 60 // in s
 
 export default function configHandler(req, res) {
   try {
@@ -14,3 +16,7 @@ export default function configHandler(req, res) {
   }
 }
 
+// Calculate the upload timeout based on the max total file size
+export function calculateUploadTimeout() {
+  return ((MAX_TOTAL_FILE_SIZE / (1024 * 1024) / AVG_UPLOAD_SPEED) + UPLOAD_BUFFER_TIME) * 1000; // in ms
+}
