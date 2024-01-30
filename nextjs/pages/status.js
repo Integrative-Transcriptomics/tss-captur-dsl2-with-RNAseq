@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import Layout from '../components/Layout'; // Adjust the import path as necessary
+import Layout from '../components/Layout';
 import { useRouter } from 'next/router';
 import axios from 'axios';
 
 const statusPage = () => {
   const router = useRouter();
+  // Retrieve the jobHash from the URL query parameters
   const { jobHash } = router.query;
+  // State to track whether the report is ready
   const [reportReady, setReportReady] = useState(false);
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const statusPage = () => {
       }
   
       try {
+        // Make an API call to check the job status using the jobHash
         const response = await axios.get(`/api/${jobHash}`);
         const data = response.data;
 
