@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import crypto from 'crypto';
+import Layout from '../components/Layout';
 
 export default function UploadPage() {
   // State to keep track of the motifNumber
@@ -144,32 +145,41 @@ export default function UploadPage() {
   };
 
   return (
-    <div>
-      <h1>Upload Files for TSS-CAPTUR</h1>
-      <p>Maximum size per file: {maxFileSize / 1024 / 1024} MB</p>
-      <p>Maximum total file size: {maxTotalFileSize / 1024 / 1024} MB</p>
-      <p>Upload progress: {uploadProgress}%</p>
-      <form onSubmit={handleUpload} encType="multipart/form-data">
-        <div>
-          <label htmlFor="masterTable">MasterTable.tsv:</label>
-          <input type="file" id="masterTable" name="masterTable" accept=".tsv" required />
+    <Layout>
+      <div>
+        <h1 className="h3 mb-3 text-gray-800">Upload Files for TSS-CAPTUR</h1>
+        <div className="d-flex flex-column mb-4" style={{ width: '300px' }}>
+          <p>Maximum size per file: {maxFileSize ? (maxFileSize / 1024 / 1024).toFixed(2) : 'Loading...'} MB</p>
+          <p>Maximum total file size: {maxTotalFileSize ? (maxTotalFileSize / 1024 / 1024).toFixed(2) : 'Loading...'} MB</p>
         </div>
-        <div>
-          <label htmlFor="genomeFolder">Genome Files:</label>
-          <input type="file" id="genomeFolder" name="genome" accept=".fa,.fna,.fasta,.frn,.faa,.ffn" multiple required />
-        </div>
-        <div>
-          <label htmlFor="gffFolder">GFF Files:</label>
-          <input type="file" id="gffFolder" name="gff" accept=".gff" multiple required />
-        </div>
-        <div>
-          <label htmlFor="motifNumber">Motif Number: {motifNumber}</label>
-          <br />
-          <input type="range" id="motifNumber" name="motifNumber" min="1" max="99" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
-        </div>
-        <button type="submit" disabled={isUploading}>Start</button>
-      </form>
-      {reportUrl && <div>Report will be available at: {reportUrl}</div>}
-    </div>
+        <form onSubmit={handleUpload} encType="multipart/form-data">
+          <div className="form-group">
+            <div className="d-flex flex-column">
+              <label htmlFor="masterTable">MasterTable.tsv:</label>
+              <input type="file" id="masterTable" name="masterTable" accept=".tsv" required />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="d-flex flex-column">
+              <label htmlFor="genomeFolder">Genome Files:</label>
+              <input type="file" id="genomeFolder" name="genome" accept=".fa,.fna,.fasta,.frn,.faa,.ffn" multiple required />
+            </div>
+          </div>
+          <div className="form-group">
+            <div className="d-flex flex-column">
+              <label htmlFor="gffFolder">GFF Files:</label>
+              <input type="file" id="gffFolder" name="gff" accept=".gff" multiple required />
+            </div>
+          </div>
+          <div className="form-group d-flex flex-column" style={{ width: '300px' }}>
+            <label htmlFor="motifNumber" className="mb-0 mr-2">Max motif numbers: {motifNumber}</label>
+            <input type="range" id="motifNumber" name="motifNumber" min="1" max="99" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
+          </div>
+          <button type="submit" className="btn btn-primary" disabled={isUploading}>Start Upload</button>
+        </form>
+        {isUploading && <p className="mb-4">Upload progress: {uploadProgress}%</p>}
+        {reportUrl && <div>Report will be available at: <a href={reportUrl}>{reportUrl}</a></div>}
+      </div>
+    </Layout>
   );
 }

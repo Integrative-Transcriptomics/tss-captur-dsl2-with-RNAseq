@@ -10,8 +10,8 @@ export const config = {
   },
 };
 
-const UPLOAD_DIR = path.resolve('../uploads');
-const JOB_DIR = path.resolve('../jobs');
+const UPLOAD_DIR = path.resolve('./uploads');
+const JOB_DIR = path.resolve('./public/jobs');
 
 // Data structure to store pending uploads
 const pendingUploads = {};
