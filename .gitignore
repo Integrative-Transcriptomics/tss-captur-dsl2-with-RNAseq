@@ -20,5 +20,5 @@ RNAz-2.1
 **/.next
 **/.yarn
 **/.pnp.*
-**/uploads/
-**/jobs/**
+**/uploads/**
+**/reports/**

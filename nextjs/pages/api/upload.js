@@ -10,8 +10,7 @@ export const config = {
   },
 };
 
-const UPLOAD_DIR = path.resolve('./uploads');
-const JOB_DIR = path.resolve('./public/jobs');
+const UPLOADS_DIR = path.resolve('./uploads');
 
 // Data structure to store pending uploads
 const pendingUploads = {};
@@ -27,7 +26,7 @@ export default async function uploadHandler(req, res) {
     let jobUploadDir;
     do {
       jobHash = crypto.randomBytes(8).toString('hex');
-      jobUploadDir = path.join(UPLOAD_DIR, jobHash);
+      jobUploadDir = path.join(UPLOADS_DIR, jobHash);
     } while (fs.existsSync(jobUploadDir));
 
     // Add job to pending uploads
@@ -118,32 +117,24 @@ export default async function uploadHandler(req, res) {
       throw uploadError;
     }
 
-    // Create jobDir after successful upload
-    const jobDir = path.join(JOB_DIR, jobHash);
-    try {
-      await fs.promises.mkdir(jobDir, { recursive: true });
-    } catch (err) {
-      console.error('Error during job directory creation:', err);
-      throw err;
-    }
-
     // Create params.json after successful upload
+    const jobDir = path.join('./public/reports', jobHash);
+    const tableDir = path.join(jobUploadDir, masterTableFile);
     const params = {
-      inputTable: path.join(jobUploadDir, masterTableFile),
+      inputTable: tableDir,
       inputGenomes: genomeDir,
       inputGFFs: gffDir,
       motifNumber: motifNumber,
       outputDir: jobDir,
     };
     try {
-      await fs.promises.writeFile(path.join(jobDir, 'params.json'), JSON.stringify(params));
+      await fs.promises.writeFile(path.join(jobUploadDir, 'params.json'), JSON.stringify(params));
     } catch (err) {
       console.error('Error during params.json file creation:', err);
       throw err;
     }
 
     // Respond with jobHash after successful upload
-    console.log(jobHash);
     res.status(200).send({ message: 'Files uploaded successfully.', jobHash: jobHash });
 
   } catch (err) {

@@ -14,17 +14,25 @@ export default async function runHandler(req, res) {
       return res.status(400).end('Missing jobHash');
     }
 
-    const jobDir = path.join('./public/jobs', jobHash);
-    const reportDir = path.join(jobDir, 'interface');
-    const paramsDir = path.join(jobDir, 'params.json');
+    const uploadDir = path.join('./uploads', jobHash);
+    const jobDir = path.join('./public/reports', jobHash);
+    const paramsDir = path.join(uploadDir, jobHash, 'params.json');
     const scriptDir = path.join('../nf', 'tss_captur.sh');
-    const placeholderDir = path.join('./static', 'placeholder.html');
-    const targetDir = path.join(reportDir, 'overview.html');
 
-    // Create placeholder page after successful run start
+    // Create jobDir after successful upload
     try {
-      await fs.promises.mkdir(reportDir, { recursive: true });
-      await fs.promises.copyFile(placeholderDir, targetDir);
+      await fs.promises.mkdir(jobDir, { recursive: true });
+    } catch (err) {
+      console.error('Error during job directory creation:', err);
+      throw err;
+    }
+
+    // TODO: Remove debug report
+    try {
+      const interfaceDir = path.join(jobDir, "interface");
+      await fs.promises.mkdir(interfaceDir, { recursive: true });
+      const overviewDir = path.join(interfaceDir, "overview.html");
+      await fs.promises.copyFile("./static/overview.html", overviewDir);
     } catch (err) {
       console.error('Error during report directory creation:', err);
       throw err;
@@ -52,8 +60,7 @@ export default async function runHandler(req, res) {
     }); */
 
     // Return an immediate response with the report URL
-    const reportUrl = `http://localhost:3000/jobs/${jobHash}/interface/overview.html`;
-    res.status(200).send({ message: 'Analysis started successfully', reportUrl: reportUrl });
+    res.status(200).send({ message: 'Analysis started successfully', reportUrl: `/status?jobHash=${jobHash}` });
   } catch (err) {
     console.error(`Unhandled Error: ${err.message}`);
     return res.status(500).send('Unhandled Error');

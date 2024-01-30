@@ -132,7 +132,10 @@ export default function UploadPage() {
       const runResponse = await axios.post('/api/run', { jobHash: jobHash });
       if (runResponse.status === 200) {
         const data = runResponse.data;
-        setReportUrl(data.reportUrl);
+        const baseUrl = window.location.origin;
+        const fullReportUrl = baseUrl + data.reportUrl;
+        setReportUrl(fullReportUrl);
+
         console.log('Run API called successfully');
       } else {
         console.error('Error calling Run API');
@@ -178,7 +181,7 @@ export default function UploadPage() {
           <button type="submit" className="btn btn-primary" disabled={isUploading}>Start Upload</button>
         </form>
         {isUploading && <p className="mb-4">Upload progress: {uploadProgress}%</p>}
-        {reportUrl && <div>Report will be available at: <a href={reportUrl}>{reportUrl}</a></div>}
+        {reportUrl && <div>Check the status of the report at: <a href={reportUrl}>{reportUrl}</a></div>}
       </div>
     </Layout>
   );
