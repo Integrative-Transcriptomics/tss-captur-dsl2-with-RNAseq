@@ -17,6 +17,7 @@ include { CLASSIFICATION } from './subworkflows/classification'
 include { TERMINATORPREDICTION } from './subworkflows/terminatorpred'
 include { RNAFOLD } from './modules/rnafold'
 include { CREATEREPORT } from './modules/report'
+include { CLEANWORKDIR } from './modules/cleaner'
 
 workflow {
     genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.inputGenomes}*.${it}" })
@@ -30,5 +31,13 @@ workflow {
                         DATAPREPARATION.out.summaryTranscripts, 
                         params.outputPath)
     RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
-    CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath)
+    CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
+}
+
+workflow.onComplete = {
+    
+}
+
+workflow.onError = {
+    println "Error: something when wrong"
 }
