@@ -13,14 +13,15 @@ export const config = {
 const UPLOADS_DIR = path.resolve('./uploads');
 
 export default async function uploadHandler(req, res) {
+  let jobHash;
+  let jobUploadDir;
+  
   try {
     if (req.method !== 'POST') {
       return res.status(405).end('Method Not Allowed');
     }
 
     // Generate a unique hash for the job
-    let jobHash;
-    let jobUploadDir;
     do {
       jobHash = crypto.randomBytes(8).toString('hex');
       jobUploadDir = path.join(UPLOADS_DIR, jobHash);
