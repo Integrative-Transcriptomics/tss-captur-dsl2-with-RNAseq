@@ -7,8 +7,9 @@ const statusPage = () => {
   const router = useRouter();
   // Retrieve the jobHash from the URL query parameters
   const { jobHash } = router.query;
-  // State to track whether the report is ready
-  const [reportReady, setReportReady] = useState(false);
+
+  const [isLoading, setIsLoading] = useState(false);
+
 
   useEffect(() => {
     const checkReportStatus = async () => {
@@ -16,21 +17,23 @@ const statusPage = () => {
       if (!jobHash) {
         return;
       }
-  
-      try {
-        // Make an API call to check the job status using the jobHash
-        const response = await axios.get(`/api/${jobHash}`);
-        const data = response.data;
 
-        if (data.status === 'completed') {
-          setReportReady(true);
-          // Redirect to the report
-          window.location.href = `/reports/${jobHash}/interface/overview.html`;
-        }
-      } catch (error) {
-        console.error('Error checking report status:', error);
+    try {
+      // Make an API call to check the job status using the jobHash 
+      setIsLoading(true);
+      const response = await axios.get(`/api/${jobHash}`);
+      const data = response.data;
+      setIsLoading(false);
+
+      // Redirect to the report
+      if (data.status === 'completed') {
+        window.location.href = `/reports/${jobHash}/interface/overview.html`;
       }
-    };
+    } catch (error) {
+      console.error('Error checking report status:', error);
+      setIsLoading(false);
+    }
+  };
   
     // Only set up the interval if jobHash is defined
     if (jobHash) {
@@ -44,7 +47,9 @@ const statusPage = () => {
 
   return (
     <Layout>
-      <h1 className="h3 mb-3 text-gray-800">The report is being generated. Please wait...</h1>
+      <h1 className="h3 mb-3 text-gray-800">  
+      {isLoading ? "Fetching data..." : "The report is being generated. Please wait..."}
+      </h1>
     </Layout>
   );
 };
