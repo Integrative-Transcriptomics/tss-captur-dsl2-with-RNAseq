@@ -12,9 +12,6 @@ export const config = {
 
 const UPLOADS_DIR = path.resolve('./uploads');
 
-// Data structure to store pending uploads
-const pendingUploads = {};
-
 export default async function uploadHandler(req, res) {
   try {
     if (req.method !== 'POST') {
@@ -29,22 +26,15 @@ export default async function uploadHandler(req, res) {
       jobUploadDir = path.join(UPLOADS_DIR, jobHash);
     } while (fs.existsSync(jobUploadDir));
 
-    // Add job to pending uploads
-    pendingUploads[jobHash] = true;
-
     // Create job specific directories
     const genomeDir = path.join(jobUploadDir, 'genome');
     const gffDir = path.join(jobUploadDir, 'gff');
 
-    try {
-      await fs.promises.mkdir(jobUploadDir, { recursive: true });
-      await fs.promises.mkdir(genomeDir, { recursive: true });
-      await fs.promises.mkdir(gffDir, { recursive: true });
-    } catch (err) {
-      console.error('Error during directory creation:', err);
-      throw err;
-    }
+    await fs.promises.mkdir(jobUploadDir, { recursive: true });
+    await fs.promises.mkdir(genomeDir, { recursive: true });
+    await fs.promises.mkdir(gffDir, { recursive: true });
 
+    // Form options
     const form = new IncomingForm({ hashAlgorithm: 'sha256' });
     form.uploadDir = jobUploadDir;
     form.keepExtensions = true;
@@ -55,67 +45,44 @@ export default async function uploadHandler(req, res) {
     let masterTableFile;
     let motifNumber;
     let clientHashes;
-    let uploadError;
 
-    const uploadTimeout = calculateUploadTimeout(); // in milliseconds
+    const uploadTimeout = calculateUploadTimeout();
 
-    const formPromise = new Promise((resolve, reject) => {
-      const timer = setTimeout(() => {
-        uploadError = new Error('Upload timeout exceeded');
-        form.emit('abort');
-        reject(uploadError);
-      }, uploadTimeout);
+    await new Promise((resolve, reject) => {
+      const timer = setTimeout(() => reject(new Error('Upload timeout exceeded')), uploadTimeout);
 
-    // Rename & move files to appropriate destinations
-    form.on('fileBegin', async function(field, file) {
-      let newPath;
-      if (field === 'masterTable') {
-        newPath = path.join(jobUploadDir, file.originalFilename);
-        masterTableFile = file.originalFilename;
-      } else {
-        newPath = path.join(jobUploadDir, field, file.originalFilename);
-      }
-      file.filepath = newPath;
-    });
+      form.on('error', reject);
 
-      form.parse(req, (err, fields, files) => {
-        clearTimeout(timer); // Clear the timeout if the form parsing finishes in time
-        if (err) {
-          reject(err);
-        } else if (uploadError) {
-          reject(uploadError);
+      // Rename & move files to appropriate destinations
+      form.on('fileBegin', async function(field, file) {
+        let newPath;
+        if (field === 'masterTable') {
+          newPath = path.join(jobUploadDir, file.originalFilename);
+          masterTableFile = file.originalFilename;
         } else {
-          motifNumber = fields.motifNumber;
-          clientHashes = JSON.parse(fields.fileHashes);
-          // Compare the hashes
-          for (let field in files) {
-            for (let file of files[field]) {
-              const formHash = file.hash;
-              const clientHash = clientHashes[file.originalFilename];
-                if (formHash !== clientHash) {
-                  uploadError = new Error('Hash mismatch detected');
-                  reject(uploadError);
-                  return;
-                }
-            }
-          }
-          resolve({ fields, files });
+          newPath = path.join(jobUploadDir, field, file.originalFilename);
         }
+        file.filepath = newPath;
+      });
+
+      // Resolves after getting motifNumber and comparing hashes
+      form.parse(req, (err, fields, files) => {
+        clearTimeout(timer);
+        if (err) return reject(err);
+
+        motifNumber = fields.motifNumber;
+        clientHashes = JSON.parse(fields.fileHashes);
+        // Compare the hashes
+        for (let field in files) {
+          for (let file of files[field]) {
+            const formHash = file.hash;
+            const clientHash = clientHashes[file.originalFilename];
+            if (formHash !== clientHash) return reject(new Error('Hash mismatch detected'));
+          }
+        }
+        resolve();
       });
     });
-
-    try {
-      await formPromise;
-    } catch (err) {
-      console.error('Error during form parsing:', err);
-      throw err;
-    }
-
-    if (uploadError) {
-      // Remove job from pending uploads
-      delete pendingUploads[jobHash];
-      throw uploadError;
-    }
 
     // Create params.json after successful upload
     const jobDir = path.join('./public/reports', jobHash);
@@ -127,20 +94,18 @@ export default async function uploadHandler(req, res) {
       motifNumber: motifNumber,
       outputDir: jobDir,
     };
-    try {
-      await fs.promises.writeFile(path.join(jobUploadDir, 'params.json'), JSON.stringify(params));
-    } catch (err) {
-      console.error('Error during params.json file creation:', err);
-      throw err;
-    }
+    await fs.promises.writeFile(path.join(jobUploadDir, 'params.json'), JSON.stringify(params));
 
     // Respond with jobHash after successful upload
-    res.status(200).send({ message: 'Files uploaded successfully.', jobHash: jobHash });
-
+    res.status(200).send({ message: 'Files uploaded successfully.', jobHash });
   } catch (err) {
-    // Remove job from pending uploads
-    delete pendingUploads[jobHash];
     console.error('Error during file upload:', err);
+    // Remove erroneous job from uploads
+    if (jobHash) {
+      if (fs.existsSync(jobUploadDir)) {
+        fs.rmSync(jobUploadDir, { recursive: true });
+      }
+    }
     res.status(500).send('Internal Server Error');
   }
 }
