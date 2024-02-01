@@ -10,7 +10,7 @@ export default function UploadPage() {
   const [maxFileSize, setMaxFileSize] = useState(null);
   const [maxTotalFileSize, setMaxTotalFileSize] = useState(null);
   // State to keep track of the upload status
-  const [isUploading, setIsUploading] = useState(false);
+  const [startedUpload, setStartedUpload] = useState(false);
   // State to keep track of the upload progress
   const [uploadProgress, setUploadProgress] = useState(0);
   // State to keep track of the jobHash
@@ -88,19 +88,21 @@ export default function UploadPage() {
     };
 
     try {
-      const response = await axios.post('/api/upload', formData, options);
-      if (response.status === 200) {
-        console.log('Files uploaded successfully');
-        const data = response.data;
-        setIsUploading(false);
-        setJobHash(data.jobHash);
-      } else {
-        console.error('Error uploading files');
-        setIsUploading(false);
+      if (!startedUpload) {
+        setStartedUpload(true);
+        const response = await axios.post('/api/upload', formData, options);
+        if (response.status === 200) {
+          console.log('Files uploaded successfully');
+          const data = response.data;
+          setJobHash(data.jobHash);
+        } else {
+          console.error('Error uploading files');
+          setStartedUpload(false);
+        }
       }
     } catch (error) {
       console.error('Error uploading files:', error);
-      setIsUploading(false);
+      setStartedUpload(false);
     }
   };
 
@@ -108,21 +110,17 @@ export default function UploadPage() {
   const handleUpload = async (event) => {
     try {
       event.preventDefault();
-      setIsUploading(true);
       const formData = new FormData();
       const fileInputs = document.querySelectorAll('input[type="file"]');
 
-      if (!validateFileSizes(fileInputs)) {
-        setIsUploading(false);
-        return;
+      if (validateFileSizes(fileInputs)) {
+        await appendFilesAndHashes(fileInputs, formData);
+        await uploadFiles(formData);
       }
-
-      await appendFilesAndHashes(fileInputs, formData);
-      await uploadFiles(formData);
     } catch (error) {
       console.error('Error during the upload process:', error);
       alert('An unexpected error occurred during the upload process.');
-      setIsUploading(false);
+      setStartedUpload(false);
     }
   };
 
@@ -178,9 +176,9 @@ export default function UploadPage() {
             <label htmlFor="motifNumber" className="mb-0 mr-2">Max motif numbers: {motifNumber}</label>
             <input type="range" id="motifNumber" name="motifNumber" min="1" max="99" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
           </div>
-          <button type="submit" className="btn btn-primary" disabled={isUploading}>Start Upload</button>
+          <button type="submit" className="btn btn-primary" disabled={startedUpload}>Start Upload</button>
         </form>
-        {isUploading && <p className="mb-4">Upload progress: {uploadProgress}%</p>}
+        {startedUpload && <p className="mb-4">Upload progress: {uploadProgress}%</p>}
         {reportUrl && <div>Check the status of the report at: <a href={reportUrl}>{reportUrl}</a></div>}
       </div>
     </Layout>
