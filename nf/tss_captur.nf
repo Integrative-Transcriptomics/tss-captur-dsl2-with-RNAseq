@@ -38,6 +38,7 @@ workflow.onComplete = {
     
 }
 
+// Writes the error message to the output path
 workflow.onError = {
-    println "Error: something when wrong"
+    new File(params.errorLogPath).text = ${workflow.errorMessage}
 }
