@@ -1,13 +1,12 @@
 /*
-    Deletes all files in the Nextflow work directory
+    Deletes all files in the Nextflow work directory older than x days
 */
 process CLEANWORKDIR {
     input:
-    val report
+    val _
 
     script:
     """
-    cd ../../..
-    rm -rf work/*
+    find ../../ -type d -mtime +${params.cleanOlder} -exec rm -rf {} \;
     """
 }

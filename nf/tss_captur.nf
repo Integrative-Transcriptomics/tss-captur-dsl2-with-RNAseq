@@ -40,5 +40,5 @@ workflow.onComplete = {
 
 // Writes the error message to the output path
 workflow.onError = {
-    new File(params.errorLogPath).text = ${workflow.errorMessage}
+    new File(params.errorPath).text = workflow.errorReport
 }
