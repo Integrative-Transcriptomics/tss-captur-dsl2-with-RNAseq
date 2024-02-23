@@ -14,10 +14,9 @@ export default async function runHandler(req, res) {
       return res.status(400).end('Missing jobHash');
     }
 
-    const uploadDir = path.join('./uploads', jobHash);
+    const uploadDir = path.resolve('../nextjs/uploads', jobHash);
     const jobDir = path.join('./public/reports', jobHash);
-    const paramsDir = path.join(uploadDir, jobHash, 'params.json');
-    const scriptDir = path.join('../nf', 'tss_captur.sh');
+    const paramsDir = path.join(uploadDir, 'params.json');
 
     // Create jobDir after successful upload
     try {
@@ -25,23 +24,12 @@ export default async function runHandler(req, res) {
     } catch (err) {
       console.error('Error during job directory creation:', err);
       throw err;
-    }
-
-    // TODO: Remove debug report
-    try {
-      const interfaceDir = path.join(jobDir, "interface");
-      await fs.promises.mkdir(interfaceDir, { recursive: true });
-      const overviewDir = path.join(interfaceDir, "overview.html");
-      await fs.promises.copyFile("./static/overview.html", overviewDir);
-    } catch (err) {
-      console.error('Error during report directory creation:', err);
-      throw err;
-    }
-
-    /*     
+    }  
 
     // Start the Nextflow script asynchronously
-    const script = spawn('bash', [scriptDir, '-params-file', paramsDir]);
+    console.log('trying to run');
+    const command = `../nf/nextflow run ../nf/tss_captur.nf -params-file ${paramsDir}`;
+    const script = spawn('bash', ['-c', command]);
 
     script.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
@@ -57,7 +45,7 @@ export default async function runHandler(req, res) {
 
     script.on('close', (code) => {
       console.log(`child process exited with code ${code}`);
-    }); */
+    }); 
 
     // Return an immediate response with the report URL
     res.status(200).send({ message: 'Analysis started successfully', reportUrl: `/status?jobHash=${jobHash}` });

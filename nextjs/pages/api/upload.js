@@ -11,6 +11,7 @@ export const config = {
 };
 
 const UPLOADS_DIR = path.resolve('./uploads');
+const REPORT_DIR = path.resolve('./public/reports')
 
 export default async function uploadHandler(req, res) {
   let jobHash;
@@ -27,6 +28,7 @@ export default async function uploadHandler(req, res) {
       jobUploadDir = path.join(UPLOADS_DIR, jobHash);
     } while (fs.existsSync(jobUploadDir));
 
+    console.log(jobHash);
     // Create job specific directories
     const genomeDir = path.join(jobUploadDir, 'genome');
     const gffDir = path.join(jobUploadDir, 'gff');
@@ -84,16 +86,16 @@ export default async function uploadHandler(req, res) {
         resolve();
       });
     });
-
+    console.log('Creating params');
     // Create params.json after successful upload
-    const jobDir = path.join('./public/reports', jobHash);
+    const jobReportDir = path.join(REPORT_DIR, jobHash);
     const tableDir = path.join(jobUploadDir, masterTableFile);
     const params = {
       inputTable: tableDir,
       inputGenomes: genomeDir,
       inputGFFs: gffDir,
       motifNumber: motifNumber,
-      outputDir: jobDir,
+      outputDir: jobReportDir,
     };
     await fs.promises.writeFile(path.join(jobUploadDir, 'params.json'), JSON.stringify(params));
 
