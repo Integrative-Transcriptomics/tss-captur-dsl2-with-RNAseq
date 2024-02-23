@@ -37,6 +37,7 @@ export default function UploadPage() {
   useEffect(() => {
     // Start the analysis when jobHash changes and is not null
     if (jobHash) {
+      console.log(jobHash);
       handleAnalysisStart();
     }
   }, [jobHash]);
@@ -75,6 +76,7 @@ export default function UploadPage() {
       };
     };
     formData.append('fileHashes', JSON.stringify(fileHashes));
+    formData.append('motifNumber', motifNumber);
   };
 
   // Helper function to handle the upload process
@@ -174,7 +176,7 @@ export default function UploadPage() {
           </div>
           <div className="form-group d-flex flex-column" style={{ width: '300px' }}>
             <label htmlFor="motifNumber" className="mb-0 mr-2">Max motif numbers: {motifNumber}</label>
-            <input type="range" id="motifNumber" name="motifNumber" min="1" max="99" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
+            <input type="range" id="motifNumber" name="motifNumber" min="1" max="20" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
           </div>
           <button type="submit" className="btn btn-primary" disabled={startedUpload}>Start Upload</button>
         </form>

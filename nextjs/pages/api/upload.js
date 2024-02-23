@@ -71,7 +71,7 @@ export default async function uploadHandler(req, res) {
         clearTimeout(timer);
         if (err) return reject(err);
 
-        motifNumber = fields.motifNumber;
+        motifNumber = parseInt(fields.motifNumber, 10);
         clientHashes = JSON.parse(fields.fileHashes);
         // Compare the hashes
         for (let field in files) {
