@@ -37,9 +37,10 @@ process NOCORNAC {
 
     script:
     """
-        sed 's@dataPath = data@dataPath = $projDir/nocornac/data@g' $config > config_temp.conf
-        sed 's@transtermPath = progs/@transtermPath = $projDir/bin/progs/@g' config_temp.conf > config.conf
-        java -Xmx1G -jar $params.nocornac -genomeFastaFile $genome -gffOutFile ${genome.baseName}_nocornac.gff -terminators
+    mkdir temp
+    sed 's@dataPath = data@dataPath = temp@g' $config > config_temp.conf
+    sed 's@transtermPath = progs/@transtermPath =  $projDir/bin/progs/@g' config_temp.conf > config.conf
+    java -Xmx1G -jar $params.nocornac  -genomeFastaFile $genome -gffOutFile ${genome.baseName}_nocornac.gff -terminators
     """
 }
 
