@@ -28,8 +28,8 @@ export default async function runHandler(req, res) {
 
     // Start the Nextflow script asynchronously
     console.log('trying to run');
-    const command = `../nf/nextflow run ../nf/tss_captur.nf -params-file ${paramsDir}`;
-    const script = spawn('bash', ['-c', command]);
+    const command = `./nextflow run ./tss_captur.nf -params-file ${paramsDir}`;
+    const script = spawn('bash', ['-c', command], { cwd: '../nf' });
 
     script.stdout.on('data', (data) => {
       console.log(`stdout: ${data}`);
