@@ -16,13 +16,13 @@ export default function About() {
         </p>
         <p>
           References:
-          <br /><a href="https://doi.org/10.1093/nar/gkz400">CNIT <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1186/1471-2105-2-8">QRNA <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1016/S0022-2836(05)80360-2">BLAST <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1186/s12859-019-2704-x">RhoTermPredict <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1186%2Fgb-2007-8-2-r22">TransTermHP <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1093%2Fnar%2Fgkn188">RNAfold <i class="fas fa-external-link-alt"></i></a>
-          <br /><a href="https://doi.org/10.1093%2Fnar%2Fgkv416">MEME <i class="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1093/nar/gkz400">CNIT <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1186/1471-2105-2-8">QRNA <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1016/S0022-2836(05)80360-2">BLAST <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1186/s12859-019-2704-x">RhoTermPredict <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1186%2Fgb-2007-8-2-r22">TransTermHP <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1093%2Fnar%2Fgkn188">RNAfold <i className="fas fa-external-link-alt"></i></a>
+          <br /><a href="https://doi.org/10.1093%2Fnar%2Fgkv416">MEME <i className="fas fa-external-link-alt"></i></a>
         </p>
       </div>
     </Layout>
