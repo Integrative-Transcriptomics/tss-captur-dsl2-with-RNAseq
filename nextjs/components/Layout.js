@@ -36,8 +36,8 @@ const Layout = ({ children }) => {
         {/* Content Wrapper */}
         <div id="content-wrapper" className="d-flex flex-column">
           {/* Main Content */}
-          <div id="content">
-            <div className="container-fluid">
+          <div id="content" style={{maxWidth: '75%', marginTop: '20px' }}>
+            <div className="container-fluid d-flex flex-column">
               {children}
             </div>
           </div>
