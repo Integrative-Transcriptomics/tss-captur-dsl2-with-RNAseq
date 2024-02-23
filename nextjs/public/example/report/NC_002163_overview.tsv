@@ -1,0 +1,776 @@
+transcript_id	position	strand	transcript_length	winner	feature	term_start	term_end	mfe	summary	GeneStart	GeneEnd	GeneLength	GeneLengthWithUTR	url_for_image
+orphan_0	38882	+	367	RNA	NA	NA	NA	-58.9	[['motif_0', 29, 0.00206]]	38886.0	39248.0	363.0	367.0	orphan_0_ss.jpg
+orphan_1	41200	+	368	RNA	Intrinsic	41216.0	41238.0	-6.0	NA	41207.0	41238.0	32.0	39.0	orphan_1_ss.jpg
+orphan_3	205718	+	345	COD	Intrinsic	205823.0	205837.0	NA	[['motif_0', 28, 1.16e-06]]	205766.0	205837.0	72.0	120.0	
+orphan_5	393758	+	372	RNA	NA	NA	NA	-60.4	NA	393758.0	394129.0	372.0	372.0	orphan_5_ss.jpg
+orphan_7	396081	+	368	RNA	Intrinsic	396097.0	396119.0	-6.0	NA	396088.0	396119.0	32.0	39.0	orphan_7_ss.jpg
+orphan_9	696052	+	372	RNA	NA	NA	NA	-60.4	NA	696052.0	696423.0	372.0	372.0	orphan_9_ss.jpg
+orphan_11	698375	+	368	RNA	Intrinsic	698391.0	698413.0	-6.0	NA	698382.0	698413.0	32.0	39.0	orphan_11_ss.jpg
+orphan_14	1554542	+	910	RNA	RhoDep	1555360.0	1555438.0	-157.8	NA	1554542.0	1555588.0	1047.0	1047.0	orphan_14_ss.jpg
+orphan_15	1580247	+	535	RNA	NA	NA	NA	-66.1	[['motif_0', 30, 0.00085]]	1580247.0	1580781.0	535.0	535.0	orphan_15_ss.jpg
+orphan_4	205880	-	527	RNA	NA	NA	NA	-14.4	[['motif_0', 29, 3.89e-07]]	205791.0	205835.0	45.0	90.0	orphan_4_ss.jpg
+orphan_13	1393825	-	910	RNA	RhoDep	1393295.0	1393373.0	-155.3	NA	1393145.0	1393583.0	439.0	681.0	orphan_13_ss.jpg
+orphan_16	1580686	-	665	RNA	NA	NA	NA	-103.5	[['motif_0', 2, 0.0045]]	1580022.0	1580686.0	665.0	665.0	orphan_16_ss.jpg
+antisense_10	15907	+	660	RNA	Intrinsic	16436.0	16449.0	-110.6	[['motif_0', 29, 0.000755]]	16305.0	16449.0	145.0	543.0	antisense_10_ss.jpg
+antisense_11	16567	+	164	COD	NA	NA	NA	NA	[['motif_0', 9, 0.00134]]	16582.0	16689.0	108.0	123.0	
+antisense_12	16731	+	398	RNA	NA	NA	NA	-10.3	NA	16788.0	16823.0	36.0	93.0	antisense_12_ss.jpg
+antisense_13	17129	+	434	COD	RhoDep	17142.0	17220.0	NA	[['motif_0', 29, 0.00229], ['motif_1', 7, 8e-06]]	17129.0	17370.0	242.0	242.0	
+antisense_14	19493	+	808	RNA	RhoDep	19941.0	20019.0	-100.64	[['motif_0', 30, 0.000669]]	19502.0	20169.0	668.0	677.0	antisense_14_ss.jpg
+antisense_15	20301	+	834	RNA	RhoDep	20875.0	20953.0	-145.1	NA	20460.0	21103.0	644.0	803.0	antisense_15_ss.jpg
+antisense_16	24811	+	910	RNA	RhoDep	25435.0	25513.0	-149.8	NA	24811.0	25663.0	853.0	853.0	antisense_16_ss.jpg
+antisense_17	26217	+	910	RNA	NA	NA	NA	-202.6	[['motif_0', 28, 0.000154]]	26217.0	27126.0	910.0	910.0	antisense_17_ss.jpg
+antisense_18	27243	+	910	RNA	NA	NA	NA	-131.1	[['motif_0', 30, 0.00229]]	27243.0	27927.0	685.0	685.0	antisense_18_ss.jpg
+antisense_28	55646	+	910	COD	RhoDep	56265.0	56343.0	NA	[['motif_0', 20, 0.00134]]	55755.0	56493.0	739.0	848.0	
+antisense_29	57012	+	910	COD	RhoDep	57837.0	57915.0	NA	NA	57030.0	58065.0	1036.0	1054.0	
+antisense_33	63946	+	643	RNA	NA	NA	NA	-106.54	[['motif_0', 29, 0.000311]]	63948.0	64581.0	634.0	636.0	antisense_33_ss.jpg
+antisense_34	64589	+	910	RNA	NA	NA	NA	-164.0	[['motif_0', 29, 5.15e-06]]	65451.0	65480.0	30.0	892.0	antisense_34_ss.jpg
+antisense_35	66049	+	35	RNA	NA	NA	NA	-1.2	[['motif_0', 29, 0.0015]]	66069.0	66083.0	15.0	35.0	antisense_35_ss.jpg
+antisense_36	66084	+	367	RNA	NA	NA	NA	-18.0	[['motif_0', 30, 0.000115]]	66209.0	66220.0	12.0	137.0	antisense_36_ss.jpg
+antisense_38	69587	+	910	RNA	NA	NA	NA	-39.4	NA	69760.0	69837.0	78.0	251.0	antisense_38_ss.jpg
+antisense_39	71035	+	900	RNA	RhoDep	71387.0	71465.0	-87.6	[['motif_0', 14, 0.00107]]	71275.0	71615.0	341.0	581.0	antisense_39_ss.jpg
+antisense_40	73983	+	910	RNA	RhoDep	74095.0	74173.0	-67.4	[['motif_0', 32, 9.85e-05]]	74001.0	74323.0	323.0	341.0	antisense_40_ss.jpg
+antisense_41	78261	+	430	RNA	NA	NA	NA	-71.3	[['motif_0', 29, 0.0028]]	78516.0	78554.0	39.0	294.0	antisense_41_ss.jpg
+antisense_42	78691	+	43	RNA	NA	NA	NA	0.0	[['motif_0', 29, 0.000355]]	78700.0	78711.0	12.0	21.0	antisense_42_ss.jpg
+antisense_43	78734	+	910	RNA	RhoDep	79631.0	79709.0	-222.05	[['motif_0', 28, 2.49e-05]]	78734.0	79859.0	1126.0	1126.0	antisense_43_ss.jpg
+antisense_46	83093	+	678	RNA	NA	NA	NA	-64.4	[['motif_0', 29, 0.00229]]	83471.0	83521.0	51.0	429.0	antisense_46_ss.jpg
+antisense_47	83771	+	910	RNA	Intrinsic	84414.0	84435.0	-131.4	[['motif_0', 29, 6.1e-05]]	83772.0	84435.0	664.0	665.0	antisense_47_ss.jpg
+antisense_48	88785	+	607	RNA	RhoDep	89321.0	89399.0	-143.8	NA	88785.0	89549.0	765.0	765.0	antisense_48_ss.jpg
+antisense_49	89392	+	157	RNA	NA	NA	NA	-4.8	[['motif_0', 30, 0.00046]]	89393.0	89428.0	36.0	37.0	antisense_49_ss.jpg
+antisense_50	89549	+	910	COD	NA	NA	NA	NA	NA	89982.0	90203.0	222.0	655.0	
+antisense_54	95342	+	674	RNA	NA	NA	NA	-113.3	NA	95342.0	96012.0	671.0	671.0	antisense_54_ss.jpg
+antisense_62	126428	+	152	RNA	NA	NA	NA	-9.2	[['motif_0', 30, 2.04e-05]]	126470.0	126490.0	21.0	63.0	antisense_62_ss.jpg
+antisense_63	126580	+	332	RNA	NA	NA	NA	-21.2	[['motif_0', 19, 0.00374]]	126699.0	126731.0	33.0	152.0	antisense_63_ss.jpg
+antisense_64	126912	+	910	RNA	Intrinsic	127737.0	127753.0	-171.0	[['motif_0', 31, 0.00134]]	126912.0	127753.0	842.0	842.0	antisense_64_ss.jpg
+antisense_65	129646	+	838	RNA	NA	NA	NA	-163.2	NA	130348.0	130440.0	93.0	795.0	antisense_65_ss.jpg
+antisense_66	130484	+	910	RNA	RhoDep	131367.0	131445.0	-190.3	[['motif_0', 29, 0.0045]]	130747.0	131595.0	849.0	1112.0	antisense_66_ss.jpg
+antisense_74	155751	+	910	RNA	NA	NA	NA	-11.8	NA	155809.0	155841.0	33.0	91.0	antisense_74_ss.jpg
+antisense_75	158457	+	910	RNA	RhoDep	159102.0	159180.0	-148.3	[['motif_0', 29, 0.00046]]	158457.0	159330.0	874.0	874.0	antisense_75_ss.jpg
+antisense_76	163459	+	656	RNA	RhoDep	163898.0	163976.0	-94.19	[['motif_0', 8, 6.1e-05]]	163896.0	164126.0	231.0	668.0	antisense_76_ss.jpg
+antisense_77	165893	+	452	RNA	NA	NA	NA	-91.5	[['motif_0', 29, 0.00253]]	165893.0	166344.0	452.0	452.0	antisense_77_ss.jpg
+antisense_79	169321	+	910	RNA	RhoDep	170037.0	170115.0	-145.8	[['motif_0', 29, 4.33e-05]]	169333.0	170265.0	933.0	945.0	antisense_79_ss.jpg
+antisense_80	170584	+	876	RNA	RhoDep	171266.0	171344.0	-117.0	[['motif_0', 9, 0.000669]]	170950.0	171494.0	545.0	911.0	antisense_80_ss.jpg
+antisense_81	171460	+	160	RNA	RhoDep	171589.0	171667.0	-54.6	[['motif_0', 29, 0.00309]]	171552.0	171817.0	266.0	358.0	antisense_81_ss.jpg
+antisense_82	171620	+	456	RNA	RhoDep	171975.0	172053.0	-91.2	NA	171936.0	172203.0	268.0	584.0	antisense_82_ss.jpg
+antisense_84	172076	+	840	RNA	NA	NA	NA	-138.3	[['motif_0', 28, 0.000154], ['motif_1', 1, 1.46e-06]]	172076.0	172915.0	840.0	840.0	antisense_84_ss.jpg
+antisense_88	182617	+	365	RNA	RhoDep	182968.0	183046.0	-81.0	NA	182834.0	183196.0	363.0	580.0	antisense_88_ss.jpg
+antisense_89	182982	+	910	COD	NA	NA	NA	NA	[['motif_0', 29, 2.49e-05]]	182998.0	183605.0	608.0	624.0	
+antisense_90	186580	+	910	COD	RhoDep	187271.0	187349.0	NA	[['motif_0', 29, 4.33e-05]]	186707.0	187499.0	793.0	920.0	
+antisense_91	187673	+	327	RNA	RhoDep	187786.0	187864.0	-69.2	[['motif_0', 29, 1.07e-05]]	187768.0	188014.0	247.0	342.0	antisense_91_ss.jpg
+antisense_92	188000	+	910	RNA	RhoDep	188268.0	188346.0	-63.8	[['motif_0', 29, 0.000154]]	188257.0	188496.0	240.0	497.0	antisense_92_ss.jpg
+antisense_94	195168	+	67	RNA	NA	NA	NA	-1.4	[['motif_0', 30, 0.00186]]	195199.0	195207.0	9.0	40.0	antisense_94_ss.jpg
+antisense_95	195235	+	703	RNA	NA	NA	NA	-105.7	[['motif_0', 29, 0.00107]]	195235.0	195937.0	703.0	703.0	antisense_95_ss.jpg
+antisense_96	195938	+	910	RNA	Intrinsic	196096.0	196122.0	-31.8	[['motif_0', 30, 0.00309]]	195938.0	196122.0	185.0	185.0	antisense_96_ss.jpg
+antisense_102	212827	+	713	RNA	RhoDep	212994.0	213072.0	-77.9	NA	212827.0	213222.0	396.0	396.0	antisense_102_ss.jpg
+antisense_103	214774	+	910	RNA	RhoDep	214860.0	214938.0	-61.0	[['motif_0', 30, 0.000404]]	214783.0	215088.0	306.0	315.0	antisense_103_ss.jpg
+antisense_104	216734	+	910	RNA	RhoDep	217040.0	217118.0	-85.14	[['motif_0', 29, 0.000133]]	216735.0	217268.0	534.0	535.0	antisense_104_ss.jpg
+antisense_105	218599	+	713	COD	RhoDep	218804.0	218882.0	NA	NA	218675.0	219032.0	358.0	434.0	
+antisense_107	222252	+	910	RNA	RhoDep	223039.0	223117.0	-190.1	[['motif_0', 29, 1.34e-05]]	223007.0	223267.0	261.0	1016.0	antisense_107_ss.jpg
+antisense_108	224445	+	316	RNA	NA	NA	NA	-32.4	[['motif_0', 2, 0.0034]]	224592.0	224624.0	33.0	180.0	antisense_108_ss.jpg
+antisense_109	224761	+	408	RNA	NA	NA	NA	-45.5	NA	225038.0	225055.0	18.0	295.0	antisense_109_ss.jpg
+antisense_110	225169	+	790	RNA	NA	NA	NA	-136.4	NA	225174.0	225958.0	785.0	790.0	antisense_110_ss.jpg
+antisense_112	228179	+	218	RNA	NA	NA	NA	-34.7	NA	228333.0	228392.0	60.0	214.0	antisense_112_ss.jpg
+antisense_113	228397	+	516	RNA	NA	NA	NA	-79.3	[['motif_0', 30, 0.00253]]	228397.0	228907.0	511.0	511.0	antisense_113_ss.jpg
+antisense_117	230435	+	280	RNA	RhoDep	230647.0	230725.0	-52.4	NA	230437.0	230875.0	439.0	441.0	antisense_117_ss.jpg
+antisense_118	230715	+	910	RNA	RhoDep	231584.0	231662.0	-165.27	[['motif_0', 28, 1.66e-05]]	230715.0	231812.0	1098.0	1098.0	antisense_118_ss.jpg
+antisense_122	245420	+	117	RNA	NA	NA	NA	-8.7	NA	245485.0	245499.0	15.0	80.0	antisense_122_ss.jpg
+antisense_123	245537	+	910	RNA	NA	NA	NA	-163.7	[['motif_0', 30, 0.000178]]	245542.0	246446.0	905.0	910.0	antisense_123_ss.jpg
+antisense_124	246758	+	910	RNA	NA	NA	NA	-187.2	[['motif_0', 29, 0.000669]]	247372.0	247657.0	286.0	900.0	antisense_124_ss.jpg
+antisense_130	259015	+	566	RNA	NA	NA	NA	-9.2	[['motif_0', 31, 0.000236]]	259020.0	259064.0	45.0	50.0	antisense_130_ss.jpg
+antisense_131	259581	+	910	RNA	RhoDep	260329.0	260407.0	-186.6	NA	259589.0	260557.0	969.0	977.0	antisense_131_ss.jpg
+antisense_132	263160	+	798	RNA	NA	NA	NA	-107.2	NA	263738.0	263809.0	72.0	650.0	antisense_132_ss.jpg
+antisense_133	263958	+	910	RNA	RhoDep	264826.0	264904.0	-199.5	[['motif_0', 28, 0.0015]]	263959.0	265054.0	1096.0	1097.0	antisense_133_ss.jpg
+antisense_134	264930	+	910	RNA	RhoDep	265219.0	265297.0	-99.1	[['motif_0', 30, 0.000115]]	264935.0	265447.0	513.0	518.0	antisense_134_ss.jpg
+antisense_135	266109	+	910	RNA	RhoDep	266740.0	266818.0	-172.6	[['motif_0', 29, 3.01e-05]]	266109.0	266968.0	860.0	860.0	antisense_135_ss.jpg
+antisense_136	267262	+	142	RNA	NA	NA	NA	-23.4	[['motif_0', 30, 0.000669]]	267358.0	267384.0	27.0	123.0	antisense_136_ss.jpg
+antisense_137	267404	+	117	RNA	NA	NA	NA	0.0	[['motif_0', 29, 0.000956]]	267406.0	267420.0	15.0	17.0	antisense_137_ss.jpg
+antisense_138	267521	+	802	RNA	RhoDep	268320.0	268398.0	-178.9	NA	268106.0	268548.0	443.0	1028.0	antisense_138_ss.jpg
+antisense_139	268323	+	684	RNA	RhoDep	268608.0	268686.0	-91.9	[['motif_0', 30, 9.85e-05]]	268326.0	268836.0	511.0	514.0	antisense_139_ss.jpg
+antisense_140	272293	+	175	RNA	NA	NA	NA	-1.9	[['motif_0', 29, 0.0015]]	272314.0	272340.0	27.0	48.0	antisense_140_ss.jpg
+antisense_141	272468	+	807	COD	RhoDep	272536.0	272614.0	NA	[['motif_0', 28, 0.00167]]	272476.0	272764.0	289.0	297.0	
+antisense_143	280937	+	126	RNA	NA	NA	NA	-18.6	[['motif_0', 24, 0.00374]]	281048.0	281059.0	12.0	123.0	antisense_143_ss.jpg
+antisense_144	281063	+	910	COD	RhoDep	281376.0	281454.0	NA	[['motif_0', 28, 0.000133]]	281105.0	281604.0	500.0	542.0	
+antisense_151	299160	+	910	COD	RhoDep	299941.0	300019.0	NA	[['motif_0', 31, 1.07e-05]]	299160.0	300169.0	1010.0	1010.0	
+antisense_152	300855	+	910	RNA	NA	NA	NA	-120.3	NA	301440.0	301580.0	141.0	726.0	antisense_152_ss.jpg
+antisense_153	304955	+	910	COD	RhoDep	305261.0	305339.0	NA	NA	305128.0	305489.0	362.0	535.0	
+antisense_154	314221	+	584	RNA	RhoDep	314475.0	314553.0	-60.31	NA	314379.0	314703.0	325.0	483.0	antisense_154_ss.jpg
+antisense_155	314805	+	272	RNA	Intrinsic	315043.0	315058.0	-43.9	NA	314865.0	315058.0	194.0	254.0	antisense_155_ss.jpg
+antisense_161	324120	+	910	RNA	Intrinsic	324139.0	324159.0	-10.1	[['motif_0', 29, 0.000956]]	324122.0	324159.0	38.0	40.0	antisense_161_ss.jpg
+antisense_162	325290	+	704	COD	RhoDep	325400.0	325478.0	NA	[['motif_0', 29, 0.0012]]	325343.0	325628.0	286.0	339.0	
+antisense_163	331538	+	910	RNA	RhoDep	331903.0	331981.0	-108.4	[['motif_0', 12, 8.42e-05]]	331540.0	332131.0	592.0	594.0	antisense_163_ss.jpg
+antisense_164	333525	+	910	COD	RhoDep	333771.0	333849.0	NA	NA	333533.0	333999.0	467.0	475.0	
+antisense_165	336150	+	910	RNA	RhoDep	336217.0	336295.0	-55.0	NA	336151.0	336445.0	295.0	296.0	antisense_165_ss.jpg
+antisense_166	337810	+	94	RNA	NA	NA	NA	-10.5	[['motif_0', 29, 0.000271]]	337893.0	337904.0	12.0	95.0	antisense_166_ss.jpg
+antisense_167	337904	+	508	COD	RhoDep	337978.0	338056.0	NA	NA	337917.0	338206.0	290.0	303.0	
+antisense_168	338412	+	622	RNA	NA	NA	NA	-47.2	NA	338785.0	338811.0	27.0	400.0	antisense_168_ss.jpg
+antisense_174	346114	+	910	RNA	RhoDep	346652.0	346730.0	-153.4	[['motif_0', 29, 0.00107]]	346116.0	346880.0	765.0	767.0	antisense_174_ss.jpg
+antisense_175	347169	+	910	RNA	Intrinsic	347221.0	347239.0	-11.2	NA	347172.0	347239.0	68.0	71.0	antisense_175_ss.jpg
+antisense_176	349019	+	910	COD	RhoDep	349754.0	349832.0	NA	[['motif_0', 3, 0.000669]]	349030.0	349982.0	953.0	964.0	
+antisense_179	358029	+	740	RNA	Intrinsic	358715.0	358747.0	-155.4	[['motif_0', 30, 0.0015]]	358325.0	358747.0	423.0	719.0	antisense_179_ss.jpg
+antisense_180	358769	+	806	COD	RhoDep	359226.0	359304.0	NA	NA	358967.0	359454.0	488.0	686.0	
+antisense_181	359575	+	910	RNA	RhoDep	360257.0	360335.0	-156.0	[['motif_0', 29, 3.96e-08]]	359576.0	360485.0	910.0	911.0	antisense_181_ss.jpg
+antisense_182	362288	+	499	RNA	Intrinsic	362560.0	362583.0	-48.4	NA	362421.0	362583.0	163.0	296.0	antisense_182_ss.jpg
+antisense_183	362787	+	575	RNA	NA	NA	NA	-96.6	NA	362917.0	363346.0	430.0	560.0	antisense_183_ss.jpg
+antisense_184	363362	+	880	RNA	NA	NA	NA	-149.7	[['motif_0', 28, 0.000311]]	363581.0	364213.0	633.0	852.0	antisense_184_ss.jpg
+antisense_191	385986	+	910	RNA	NA	NA	NA	-16.0	NA	386070.0	386096.0	27.0	111.0	antisense_191_ss.jpg
+antisense_197	409254	+	475	RNA	NA	NA	NA	-4.9	NA	409280.0	409300.0	21.0	47.0	antisense_197_ss.jpg
+antisense_202	416636	+	317	RNA	Intrinsic	416646.0	416665.0	-2.0	NA	416639.0	416665.0	27.0	30.0	antisense_202_ss.jpg
+antisense_204	421514	+	910	RNA	RhoDep	422334.0	422412.0	-201.9	[['motif_0', 30, 0.000311]]	422164.0	422562.0	399.0	1049.0	antisense_204_ss.jpg
+antisense_205	422673	+	910	RNA	NA	NA	NA	-157.5	[['motif_0', 29, 3.01e-05]]	423342.0	423410.0	69.0	738.0	antisense_205_ss.jpg
+antisense_212	447690	+	147	RNA	NA	NA	NA	-2.8	NA	447748.0	447759.0	12.0	70.0	antisense_212_ss.jpg
+antisense_213	447837	+	824	RNA	Intrinsic	448549.0	448562.0	-106.5	[['motif_0', 30, 0.000669]]	448123.0	448562.0	440.0	726.0	antisense_213_ss.jpg
+antisense_218	466918	+	169	RNA	NA	NA	NA	-10.9	[['motif_0', 29, 0.000355]]	467010.0	467027.0	18.0	110.0	antisense_218_ss.jpg
+antisense_219	467087	+	910	RNA	NA	NA	NA	-182.3	[['motif_0', 19, 0.000178]]	467089.0	467969.0	881.0	883.0	antisense_219_ss.jpg
+antisense_223	476292	+	910	RNA	RhoDep	476878.0	476956.0	-140.6	NA	476482.0	477106.0	625.0	815.0	antisense_223_ss.jpg
+antisense_226	487985	+	910	RNA	RhoDep	488258.0	488336.0	-83.8	[['motif_0', 1, 0.000755]]	488146.0	488486.0	341.0	502.0	antisense_226_ss.jpg
+antisense_227	488992	+	434	RNA	NA	NA	NA	-82.8	[['motif_0', 14, 0.00046]]	489283.0	489315.0	33.0	324.0	antisense_227_ss.jpg
+antisense_228	489426	+	535	COD	NA	NA	NA	NA	NA	489447.0	489950.0	504.0	525.0	
+antisense_229	489961	+	910	RNA	NA	NA	NA	-179.3	[['motif_0', 30, 0.00085]]	490128.0	490870.0	743.0	910.0	antisense_229_ss.jpg
+antisense_241	520887	+	655	RNA	NA	NA	NA	-116.1	[['motif_0', 29, 0.00186]]	520887.0	521521.0	635.0	635.0	antisense_241_ss.jpg
+antisense_244	524004	+	394	RNA	RhoDep	524274.0	524352.0	-80.0	NA	524213.0	524502.0	290.0	499.0	antisense_244_ss.jpg
+antisense_245	524398	+	691	RNA	NA	NA	NA	-108.8	[['motif_0', 30, 0.000236]]	524903.0	524950.0	48.0	553.0	antisense_245_ss.jpg
+antisense_255	538212	+	910	RNA	RhoDep	538393.0	538471.0	-75.5	[['motif_0', 30, 0.000311]]	538212.0	538621.0	410.0	410.0	antisense_255_ss.jpg
+antisense_256	550859	+	804	RNA	RhoDep	551399.0	551477.0	-135.5	[['motif_0', 30, 0.000956]]	550860.0	551627.0	768.0	769.0	antisense_256_ss.jpg
+antisense_257	551663	+	495	RNA	RhoDep	551696.0	551774.0	-40.0	NA	551663.0	551924.0	262.0	262.0	antisense_257_ss.jpg
+antisense_258	552158	+	910	RNA	NA	NA	NA	-120.4	[['motif_0', 30, 0.0015]]	552659.0	552721.0	63.0	564.0	antisense_258_ss.jpg
+antisense_259	559187	+	112	RNA	NA	NA	NA	0.0	[['motif_0', 29, 1.66e-05]]	559190.0	559207.0	18.0	21.0	antisense_259_ss.jpg
+antisense_260	559299	+	51	COD	NA	NA	NA	NA	NA	559302.0	559334.0	33.0	36.0	
+antisense_261	559350	+	799	COD	RhoDep	559659.0	559737.0	NA	[['motif_0', 7, 0.0041]]	559353.0	559887.0	535.0	538.0	
+antisense_262	560149	+	633	RNA	NA	NA	NA	-80.5	[['motif_0', 31, 0.0012]]	560557.0	560604.0	48.0	456.0	antisense_262_ss.jpg
+antisense_263	560782	+	910	RNA	RhoDep	561295.0	561373.0	-115.1	[['motif_0', 30, 0.000669]]	560782.0	561523.0	742.0	742.0	antisense_263_ss.jpg
+antisense_267	572472	+	240	RNA	RhoDep	572579.0	572657.0	-59.4	[['motif_0', 29, 0.0028]]	572512.0	572807.0	296.0	336.0	antisense_267_ss.jpg
+antisense_268	572712	+	487	RNA	RhoDep	572892.0	572970.0	-70.3	NA	572719.0	573120.0	402.0	409.0	antisense_268_ss.jpg
+antisense_281	591678	+	910	RNA	NA	NA	NA	-152.0	NA	591746.0	592456.0	711.0	779.0	antisense_281_ss.jpg
+antisense_283	599888	+	910	COD	RhoDep	600756.0	600834.0	NA	NA	600510.0	600984.0	475.0	1097.0	
+antisense_288	613207	+	910	RNA	RhoDep	613973.0	614051.0	-206.0	NA	613904.0	614201.0	298.0	995.0	antisense_288_ss.jpg
+antisense_289	617308	+	62	COD	NA	NA	NA	NA	[['motif_0', 29, 0.000755]]	617312.0	617362.0	51.0	55.0	
+antisense_290	617370	+	266	RNA	NA	NA	NA	-24.7	[['motif_0', 30, 8.42e-05]]	617549.0	617569.0	21.0	200.0	antisense_290_ss.jpg
+antisense_291	617636	+	53	RNA	NA	NA	NA	0.0	[['motif_0', 30, 0.000115]]	617638.0	617652.0	15.0	17.0	antisense_291_ss.jpg
+antisense_292	617689	+	910	RNA	RhoDep	618478.0	618556.0	-191.7	NA	617701.0	618706.0	1006.0	1018.0	antisense_292_ss.jpg
+antisense_293	621952	+	816	RNA	RhoDep	622423.0	622501.0	-137.2	[['motif_0', 30, 0.00134]]	622303.0	622651.0	349.0	700.0	antisense_293_ss.jpg
+antisense_302	635315	+	356	RNA	NA	NA	NA	-52.7	[['motif_0', 30, 0.00374]]	635548.0	635610.0	63.0	296.0	antisense_302_ss.jpg
+antisense_305	638501	+	103	RNA	NA	NA	NA	0.0	NA	638514.0	638525.0	12.0	25.0	antisense_305_ss.jpg
+antisense_306	638604	+	71	RNA	NA	NA	NA	-3.7	[['motif_0', 30, 0.000592]]	638629.0	638655.0	27.0	52.0	antisense_306_ss.jpg
+antisense_307	638675	+	709	RNA	NA	NA	NA	-7.9	NA	638740.0	638769.0	30.0	95.0	antisense_307_ss.jpg
+antisense_308	639384	+	588	RNA	NA	NA	NA	-34.5	NA	639523.0	639555.0	33.0	172.0	antisense_308_ss.jpg
+antisense_309	641346	+	106	RNA	NA	NA	NA	-7.4	[['motif_0', 28, 0.000154]]	641389.0	641406.0	18.0	61.0	antisense_309_ss.jpg
+antisense_310	641452	+	438	COD	RhoDep	641737.0	641815.0	NA	NA	641472.0	641965.0	494.0	514.0	
+antisense_313	644852	+	910	RNA	RhoDep	645150.0	645228.0	-81.6	NA	644852.0	645378.0	527.0	527.0	antisense_313_ss.jpg
+antisense_314	647891	+	375	RNA	NA	NA	NA	-8.6	[['motif_0', 30, 0.00309]]	647927.0	647959.0	33.0	69.0	antisense_314_ss.jpg
+antisense_315	649496	+	910	RNA	Intrinsic	649597.0	649618.0	-11.3	NA	649497.0	649618.0	122.0	123.0	antisense_315_ss.jpg
+antisense_322	677040	+	910	RNA	Intrinsic	677913.0	677925.0	-155.6	NA	677040.0	677925.0	886.0	886.0	antisense_322_ss.jpg
+antisense_323	678684	+	910	RNA	NA	NA	NA	-18.9	NA	678824.0	678850.0	27.0	167.0	antisense_323_ss.jpg
+antisense_340	712836	+	910	COD	RhoDep	713521.0	713599.0	NA	NA	712876.0	713749.0	874.0	914.0	
+antisense_341	715401	+	910	RNA	NA	NA	NA	-181.8	[['motif_0', 29, 0.000355]]	715402.0	716297.0	896.0	897.0	antisense_341_ss.jpg
+antisense_342	716915	+	910	RNA	RhoDep	717508.0	717586.0	-145.5	[['motif_0', 29, 7.18e-05]]	717376.0	717736.0	361.0	822.0	antisense_342_ss.jpg
+antisense_344	720829	+	910	RNA	NA	NA	NA	-174.5	[['motif_0', 29, 0.00167]]	720832.0	721718.0	887.0	890.0	antisense_344_ss.jpg
+antisense_345	723849	+	295	RNA	NA	NA	NA	-26.9	NA	723865.0	723948.0	84.0	100.0	antisense_345_ss.jpg
+antisense_346	724144	+	823	COD	Intrinsic	724848.0	724876.0	NA	[['motif_0', 28, 0.00186]]	724144.0	724876.0	733.0	733.0	
+antisense_347	724967	+	73	RNA	NA	NA	NA	-15.3	[['motif_0', 30, 0.000311]]	725006.0	725032.0	27.0	66.0	antisense_347_ss.jpg
+antisense_348	725040	+	566	RNA	RhoDep	725323.0	725401.0	-93.9	[['motif_0', 29, 0.00186]]	725129.0	725551.0	423.0	512.0	antisense_348_ss.jpg
+antisense_349	725606	+	600	RNA	NA	NA	NA	-64.77	[['motif_0', 30, 0.00085]]	725949.0	726008.0	60.0	403.0	antisense_349_ss.jpg
+antisense_350	726206	+	910	RNA	NA	NA	NA	-157.5	[['motif_0', 29, 2.49e-05]]	727066.0	727116.0	51.0	911.0	antisense_350_ss.jpg
+antisense_367	748151	+	719	RNA	RhoDep	748710.0	748788.0	-156.1	[['motif_0', 30, 6.64e-06]]	748182.0	748938.0	757.0	788.0	antisense_367_ss.jpg
+antisense_368	748870	+	452	RNA	NA	NA	NA	-25.0	[['motif_0', 30, 0.000355]]	749014.0	749043.0	30.0	174.0	antisense_368_ss.jpg
+antisense_369	749322	+	910	RNA	RhoDep	749480.0	749558.0	-69.4	NA	749396.0	749708.0	313.0	387.0	antisense_369_ss.jpg
+antisense_373	768512	+	364	RNA	NA	NA	NA	-52.1	[['motif_0', 29, 0.00229]]	768661.0	768738.0	78.0	227.0	antisense_373_ss.jpg
+antisense_378	775195	+	910	COD	RhoDep	775806.0	775884.0	NA	[['motif_0', 31, 0.000133]]	775213.0	776034.0	822.0	840.0	
+antisense_379	778232	+	419	RNA	RhoDep	778593.0	778671.0	-132.4	[['motif_0', 29, 0.00085]]	778232.0	778821.0	590.0	590.0	antisense_379_ss.jpg
+antisense_380	778651	+	910	COD	RhoDep	779282.0	779360.0	NA	NA	778654.0	779510.0	857.0	860.0	
+antisense_381	785784	+	893	RNA	RhoDep	785818.0	785896.0	-39.0	[['motif_0', 7, 0.00206]]	785784.0	786046.0	263.0	263.0	antisense_381_ss.jpg
+antisense_382	786677	+	207	RNA	NA	NA	NA	-16.5	[['motif_0', 29, 1.66e-05]]	786751.0	786780.0	30.0	104.0	antisense_382_ss.jpg
+antisense_383	786884	+	135	RNA	NA	NA	NA	-13.5	[['motif_0', 30, 0.0034]]	786963.0	787010.0	48.0	127.0	antisense_383_ss.jpg
+antisense_384	787019	+	910	RNA	NA	NA	NA	-57.0	[['motif_0', 28, 1.34e-05]]	787353.0	787382.0	30.0	364.0	antisense_384_ss.jpg
+antisense_385	792340	+	910	RNA	NA	NA	NA	-189.7	NA	793159.0	793221.0	63.0	882.0	antisense_385_ss.jpg
+antisense_387	795693	+	346	RNA	NA	NA	NA	-17.7	[['motif_0', 29, 7.18e-05]]	795825.0	795851.0	27.0	159.0	antisense_387_ss.jpg
+antisense_388	796039	+	447	RNA	RhoDep	796134.0	796212.0	-56.0	NA	796045.0	796362.0	318.0	324.0	antisense_388_ss.jpg
+antisense_389	796486	+	161	RNA	NA	NA	NA	-7.7	NA	796573.0	796596.0	24.0	111.0	antisense_389_ss.jpg
+antisense_390	796647	+	354	COD	NA	NA	NA	NA	[['motif_0', 31, 0.00085]]	796738.0	796983.0	246.0	337.0	
+antisense_391	797001	+	495	RNA	NA	NA	NA	-15.5	[['motif_0', 32, 0.00253]]	797076.0	797099.0	24.0	99.0	antisense_391_ss.jpg
+antisense_393	797496	+	910	COD	RhoDep	798370.0	798448.0	NA	[['motif_0', 29, 0.000669]]	798201.0	798598.0	398.0	1103.0	
+antisense_394	808609	+	65	COD	NA	NA	NA	NA	NA	808629.0	808670.0	42.0	62.0	
+antisense_395	808674	+	676	RNA	NA	NA	NA	-117.7	NA	808674.0	809348.0	675.0	675.0	antisense_395_ss.jpg
+antisense_396	809350	+	910	RNA	NA	NA	NA	-115.0	NA	809984.0	810019.0	36.0	670.0	antisense_396_ss.jpg
+antisense_399	819419	+	833	COD	NA	NA	NA	NA	[['motif_0', 28, 3.94e-06]]	819419.0	820142.0	724.0	724.0	
+antisense_400	822514	+	910	RNA	Intrinsic	822800.0	822815.0	-42.5	[['motif_0', 31, 4.33e-05]]	822514.0	822815.0	302.0	302.0	antisense_400_ss.jpg
+antisense_401	824242	+	287	COD	RhoDep	824337.0	824415.0	NA	[['motif_0', 31, 9.85e-05]]	824333.0	824565.0	233.0	324.0	
+antisense_402	824529	+	910	RNA	NA	NA	NA	-58.9	NA	824822.0	824893.0	72.0	365.0	antisense_402_ss.jpg
+antisense_403	826619	+	910	RNA	NA	NA	NA	-131.0	[['motif_0', 29, 0.00107]]	827415.0	827447.0	33.0	829.0	antisense_403_ss.jpg
+antisense_404	830780	+	441	RNA	RhoDep	831006.0	831084.0	-77.3	[['motif_0', 8, 0.0015]]	830788.0	831234.0	447.0	455.0	antisense_404_ss.jpg
+antisense_405	831221	+	910	RNA	RhoDep	831657.0	831735.0	-105.4	[['motif_0', 29, 3.01e-05]]	831221.0	831885.0	665.0	665.0	antisense_405_ss.jpg
+antisense_406	833001	+	910	RNA	RhoDep	833444.0	833522.0	-93.3	NA	833042.0	833672.0	631.0	672.0	antisense_406_ss.jpg
+antisense_407	835772	+	118	COD	RhoDep	835789.0	835867.0	NA	NA	835777.0	836017.0	241.0	246.0	
+antisense_408	835890	+	100	COD	NA	NA	NA	NA	[['motif_0', 29, 8.42e-05]]	835891.0	835908.0	18.0	19.0	
+antisense_409	835990	+	910	RNA	NA	NA	NA	-174.0	[['motif_0', 31, 0.00229]]	835990.0	836899.0	910.0	910.0	antisense_409_ss.jpg
+antisense_410	838445	+	910	RNA	RhoDep	839035.0	839113.0	-150.92	NA	838857.0	839263.0	407.0	819.0	antisense_410_ss.jpg
+antisense_413	843298	+	910	RNA	RhoDep	844085.0	844163.0	-154.4	[['motif_0', 29, 0.00167], ['motif_4', 17, 9.03e-08]]	843331.0	844313.0	983.0	1016.0	antisense_413_ss.jpg
+antisense_414	845369	+	910	COD	RhoDep	845853.0	845931.0	NA	NA	845427.0	846081.0	655.0	713.0	
+antisense_417	854761	+	551	RNA	NA	NA	NA	-41.8	[['motif_0', 28, 0.0034]]	855014.0	855073.0	60.0	313.0	antisense_417_ss.jpg
+antisense_418	855312	+	399	RNA	Intrinsic	855650.0	855669.0	-58.2	[['motif_0', 19, 0.000355]]	855473.0	855669.0	197.0	358.0	antisense_418_ss.jpg
+antisense_419	855711	+	873	RNA	NA	NA	NA	-121.6	[['motif_0', 30, 0.000206]]	856484.0	856534.0	51.0	824.0	antisense_419_ss.jpg
+antisense_420	856584	+	910	COD	RhoDep	857222.0	857300.0	NA	[['motif_0', 29, 5.15e-05]]	856639.0	857450.0	812.0	867.0	
+antisense_424	875249	+	910	RNA	RhoDep	876024.0	876102.0	-187.9	[['motif_0', 28, 0.000522]]	875257.0	876252.0	996.0	1004.0	antisense_424_ss.jpg
+antisense_425	876289	+	910	RNA	RhoDep	877128.0	877206.0	-167.44	[['motif_0', 29, 7.18e-05], ['motif_1', 8, 1.02e-05]]	876520.0	877356.0	837.0	1068.0	antisense_425_ss.jpg
+antisense_426	877376	+	910	RNA	RhoDep	878111.0	878189.0	-160.9	NA	877376.0	878339.0	964.0	964.0	antisense_426_ss.jpg
+antisense_427	879054	+	152	RNA	NA	NA	NA	-13.2	[['motif_0', 28, 2.04e-05]]	879108.0	879131.0	24.0	78.0	antisense_427_ss.jpg
+antisense_428	879206	+	910	RNA	RhoDep	879844.0	879922.0	-122.6	[['motif_0', 29, 0.000592]]	879695.0	880072.0	378.0	867.0	antisense_428_ss.jpg
+antisense_432	894112	+	503	COD	RhoDep	894494.0	894572.0	NA	[['motif_0', 28, 0.000669]]	894113.0	894722.0	610.0	611.0	
+antisense_433	894615	+	910	RNA	RhoDep	895024.0	895102.0	-92.9	[['motif_0', 18, 0.000755]]	894672.0	895252.0	581.0	638.0	antisense_433_ss.jpg
+antisense_434	896357	+	910	RNA	RhoDep	896706.0	896784.0	-99.8	[['motif_1', 6, 1.46e-06]]	896648.0	896934.0	287.0	578.0	antisense_434_ss.jpg
+antisense_435	897893	+	910	COD	RhoDep	898608.0	898686.0	NA	[['motif_0', 28, 0.000133]]	897899.0	898836.0	938.0	944.0	
+antisense_452	921399	+	910	RNA	RhoDep	922260.0	922338.0	-177.2	[['motif_0', 29, 0.0028]]	921414.0	922488.0	1075.0	1090.0	antisense_452_ss.jpg
+antisense_453	922494	+	910	RNA	RhoDep	922726.0	922804.0	-57.6	[['motif_0', 31, 0.000133]]	922494.0	922954.0	461.0	461.0	antisense_453_ss.jpg
+antisense_454	923796	+	910	RNA	RhoDep	923837.0	923915.0	-37.4	NA	923798.0	924065.0	268.0	270.0	antisense_454_ss.jpg
+antisense_456	928669	+	910	COD	RhoDep	929446.0	929524.0	NA	NA	928786.0	929674.0	889.0	1006.0	
+antisense_458	933351	+	850	RNA	RhoDep	933482.0	933560.0	-42.0	[['motif_0', 8, 0.0041]]	933358.0	933710.0	353.0	360.0	antisense_458_ss.jpg
+antisense_459	936229	+	883	RNA	RhoDep	936587.0	936665.0	-99.4	[['motif_0', 31, 7.18e-05]]	936514.0	936815.0	302.0	587.0	antisense_459_ss.jpg
+antisense_460	937112	+	890	RNA	RhoDep	937825.0	937903.0	-152.2	[['motif_0', 29, 7.18e-05]]	937416.0	938053.0	638.0	942.0	antisense_460_ss.jpg
+antisense_461	938002	+	910	RNA	NA	NA	NA	-106.3	NA	938697.0	938744.0	48.0	743.0	antisense_461_ss.jpg
+antisense_462	939574	+	810	RNA	NA	NA	NA	-120.0	[['motif_0', 17, 0.00186]]	939574.0	940377.0	804.0	804.0	antisense_462_ss.jpg
+antisense_463	940384	+	910	RNA	RhoDep	941292.0	941370.0	-180.0	[['motif_0', 29, 0.00085]]	941151.0	941520.0	370.0	1137.0	antisense_463_ss.jpg
+antisense_465	944723	+	910	RNA	RhoDep	945127.0	945205.0	-77.1	[['motif_0', 28, 0.000178]]	944726.0	945355.0	630.0	633.0	antisense_465_ss.jpg
+antisense_466	946841	+	910	RNA	RhoDep	947567.0	947645.0	-130.9	NA	946844.0	947795.0	952.0	955.0	antisense_466_ss.jpg
+antisense_467	948661	+	656	RNA	NA	NA	NA	-61.6	[['motif_0', 32, 0.0015], ['motif_1', 8, 1.2e-05]]	949109.0	949192.0	84.0	532.0	antisense_467_ss.jpg
+antisense_468	949317	+	910	COD	RhoDep	949962.0	950040.0	NA	[['motif_0', 29, 0.000755]]	949354.0	950190.0	837.0	874.0	
+antisense_469	956652	+	910	COD	RhoDep	957129.0	957207.0	NA	NA	956822.0	957357.0	536.0	706.0	
+antisense_470	960539	+	910	RNA	NA	NA	NA	-52.2	[['motif_0', 29, 1.34e-05]]	960798.0	960866.0	69.0	328.0	antisense_470_ss.jpg
+antisense_471	961987	+	910	RNA	NA	NA	NA	-150.92	NA	962739.0	962774.0	36.0	788.0	antisense_471_ss.jpg
+antisense_474	968549	+	910	RNA	RhoDep	969027.0	969105.0	-112.7	NA	968549.0	969255.0	707.0	707.0	antisense_474_ss.jpg
+antisense_475	981685	+	910	RNA	RhoDep	982194.0	982272.0	-99.3	NA	982122.0	982422.0	301.0	738.0	antisense_475_ss.jpg
+antisense_476	985223	+	105	COD	NA	NA	NA	NA	[['motif_0', 29, 0.000592]]	985251.0	985304.0	54.0	82.0	
+antisense_477	985328	+	910	RNA	RhoDep	985499.0	985577.0	-72.5	NA	985456.0	985727.0	272.0	400.0	antisense_477_ss.jpg
+antisense_478	986717	+	910	RNA	NA	NA	NA	-102.5	[['motif_0', 29, 0.000133]]	987159.0	987320.0	162.0	604.0	antisense_478_ss.jpg
+antisense_479	991386	+	86	RNA	NA	NA	NA	-6.1	[['motif_0', 29, 5.15e-06]]	991455.0	991466.0	12.0	81.0	antisense_479_ss.jpg
+antisense_480	991472	+	454	RNA	NA	NA	NA	-16.7	[['motif_0', 29, 0.00167]]	991557.0	991571.0	15.0	100.0	antisense_480_ss.jpg
+antisense_481	991926	+	910	RNA	NA	NA	NA	-127.02	[['motif_0', 29, 0.00167]]	991930.0	992781.0	852.0	856.0	antisense_481_ss.jpg
+antisense_482	996583	+	910	RNA	RhoDep	997135.0	997213.0	-122.2	NA	996584.0	997363.0	780.0	781.0	antisense_482_ss.jpg
+antisense_489	1006709	+	910	RNA	RhoDep	1007554.0	1007632.0	-158.8	NA	1007167.0	1007782.0	616.0	1074.0	antisense_489_ss.jpg
+antisense_490	1008660	+	885	RNA	RhoDep	1009268.0	1009346.0	-124.7	[['motif_0', 30, 0.00374]]	1009071.0	1009496.0	426.0	837.0	antisense_490_ss.jpg
+antisense_495	1014626	+	910	RNA	Intrinsic	1015491.0	1015507.0	-124.24	[['motif_0', 29, 0.00253]]	1014628.0	1015507.0	880.0	882.0	antisense_495_ss.jpg
+antisense_496	1024164	+	910	RNA	NA	NA	NA	-97.4	[['motif_0', 17, 0.0015]]	1024734.0	1024805.0	72.0	642.0	antisense_496_ss.jpg
+antisense_497	1025104	+	910	RNA	NA	NA	NA	-59.5	[['motif_0', 30, 0.00253]]	1025486.0	1025548.0	63.0	445.0	antisense_497_ss.jpg
+antisense_517	1043832	+	910	RNA	RhoDep	1044733.0	1044811.0	-165.0	NA	1044519.0	1044961.0	443.0	1130.0	antisense_517_ss.jpg
+antisense_520	1046688	+	416	RNA	Intrinsic	1046996.0	1047020.0	-52.5	[['motif_0', 18, 0.00186]]	1046885.0	1047020.0	136.0	333.0	antisense_520_ss.jpg
+antisense_521	1047104	+	910	RNA	NA	NA	NA	-4.9	[['motif_0', 5, 0.000755]]	1047109.0	1047156.0	48.0	53.0	antisense_521_ss.jpg
+antisense_523	1049488	+	271	RNA	NA	NA	NA	-4.0	NA	1049493.0	1049519.0	27.0	32.0	antisense_523_ss.jpg
+antisense_524	1049759	+	445	RNA	NA	NA	NA	-15.6	[['motif_0', 30, 0.00186]]	1049877.0	1049909.0	33.0	151.0	antisense_524_ss.jpg
+antisense_525	1050204	+	71	COD	NA	NA	NA	NA	[['motif_0', 28, 0.0041]]	1050224.0	1050256.0	33.0	53.0	
+antisense_526	1050275	+	910	RNA	RhoDep	1050731.0	1050809.0	-100.4	[['motif_4', 3, 4.84e-09]]	1050625.0	1050959.0	335.0	685.0	antisense_526_ss.jpg
+antisense_527	1051972	+	910	RNA	NA	NA	NA	-86.8	[['motif_0', 28, 0.000154]]	1052411.0	1052449.0	39.0	478.0	antisense_527_ss.jpg
+antisense_528	1056899	+	910	RNA	Intrinsic	1057399.0	1057429.0	-73.7	NA	1057201.0	1057429.0	229.0	531.0	antisense_528_ss.jpg
+antisense_529	1059165	+	910	RNA	RhoDep	1060006.0	1060084.0	-173.5	[['motif_0', 30, 6.1e-05]]	1059703.0	1060234.0	532.0	1070.0	antisense_529_ss.jpg
+antisense_539	1072053	+	408	RNA	NA	NA	NA	-23.1	NA	1072134.0	1072160.0	27.0	108.0	antisense_539_ss.jpg
+antisense_536	1073884	+	682	RNA	Intrinsic	1074282.0	1074306.0	-65.8	[['motif_0', 27, 0.00206]]	1074281.0	1074306.0	26.0	423.0	antisense_536_ss.jpg
+antisense_543	1087977	+	358	RNA	RhoDep	1088132.0	1088210.0	-51.3	[['motif_0', 29, 3.62e-05]]	1087991.0	1088360.0	370.0	384.0	antisense_543_ss.jpg
+antisense_548	1095088	+	142	RNA	NA	NA	NA	-23.1	NA	1095164.0	1095217.0	54.0	130.0	antisense_548_ss.jpg
+antisense_549	1095230	+	910	RNA	RhoDep	1095938.0	1096016.0	-136.9	[['motif_0', 28, 9.85e-05]]	1095240.0	1096166.0	927.0	937.0	antisense_549_ss.jpg
+antisense_550	1098962	+	910	RNA	RhoDep	1099784.0	1099862.0	-215.2	NA	1099382.0	1100012.0	631.0	1051.0	antisense_550_ss.jpg
+antisense_551	1106308	+	910	COD	RhoDep	1107010.0	1107088.0	NA	NA	1106441.0	1107238.0	798.0	931.0	
+antisense_552	1112753	+	910	RNA	RhoDep	1113310.0	1113388.0	-130.7	[['motif_0', 29, 0.000355]]	1112938.0	1113538.0	601.0	786.0	antisense_552_ss.jpg
+antisense_553	1113927	+	38	RNA	NA	NA	NA	0.0	NA	1113930.0	1113938.0	9.0	12.0	antisense_553_ss.jpg
+antisense_554	1113965	+	754	RNA	NA	NA	NA	-72.1	NA	1114571.0	1114633.0	63.0	669.0	antisense_554_ss.jpg
+antisense_555	1114719	+	147	RNA	NA	NA	NA	-8.5	NA	1114720.0	1114773.0	54.0	55.0	antisense_555_ss.jpg
+antisense_556	1114866	+	910	RNA	NA	NA	NA	-154.9	[['motif_0', 28, 0.00046]]	1114866.0	1115775.0	910.0	910.0	antisense_556_ss.jpg
+antisense_557	1119344	+	575	RNA	NA	NA	NA	-74.5	[['motif_0', 19, 0.000154]]	1119877.0	1119918.0	42.0	575.0	antisense_557_ss.jpg
+antisense_559	1121954	+	335	RNA	NA	NA	NA	-34.9	NA	1122075.0	1122128.0	54.0	175.0	antisense_559_ss.jpg
+antisense_561	1124397	+	910	RNA	RhoDep	1125117.0	1125195.0	-139.65	[['motif_0', 29, 0.00134]]	1124399.0	1125345.0	947.0	949.0	antisense_561_ss.jpg
+antisense_562	1134964	+	707	RNA	RhoDep	1135313.0	1135391.0	-79.1	[['motif_0', 28, 0.0015]]	1135152.0	1135541.0	390.0	578.0	antisense_562_ss.jpg
+antisense_563	1135671	+	910	RNA	RhoDep	1135889.0	1135967.0	-84.4	[['motif_0', 29, 0.000311]]	1135826.0	1136117.0	292.0	447.0	antisense_563_ss.jpg
+antisense_567	1145605	+	910	RNA	NA	NA	NA	-133.5	[['motif_0', 30, 0.000115]]	1145605.0	1146509.0	905.0	905.0	antisense_567_ss.jpg
+antisense_568	1148326	+	218	RNA	NA	NA	NA	0.0	[['motif_0', 15, 0.00253]]	1148335.0	1148352.0	18.0	27.0	antisense_568_ss.jpg
+antisense_569	1148544	+	601	RNA	RhoDep	1148842.0	1148920.0	-81.0	[['motif_0', 30, 0.000154]]	1148793.0	1149070.0	278.0	527.0	antisense_569_ss.jpg
+antisense_572	1154072	+	910	RNA	RhoDep	1154581.0	1154659.0	-98.8	NA	1154072.0	1154809.0	738.0	738.0	antisense_572_ss.jpg
+antisense_578	1173867	+	910	RNA	RhoDep	1174363.0	1174441.0	-101.7	[['motif_0', 29, 0.00134]]	1174154.0	1174591.0	438.0	725.0	antisense_578_ss.jpg
+antisense_579	1176107	+	359	COD	RhoDep	1176333.0	1176411.0	NA	[['motif_0', 30, 0.000522]]	1176170.0	1176561.0	392.0	455.0	
+antisense_587	1203005	+	910	RNA	RhoDepWithHP	1203524.0	1203711.0	-121.7	[['motif_0', 29, 0.000404]]	1203232.0	1203711.0	480.0	707.0	antisense_587_ss.jpg
+antisense_588	1204646	+	910	RNA	RhoDep	1205115.0	1205193.0	-109.7	NA	1204940.0	1205343.0	404.0	698.0	antisense_588_ss.jpg
+antisense_589	1213295	+	582	RNA	RhoDep	1213680.0	1213758.0	-97.9	[['motif_0', 29, 0.000311]]	1213390.0	1213908.0	519.0	614.0	antisense_589_ss.jpg
+antisense_590	1219672	+	910	RNA	RhoDep	1220057.0	1220135.0	-93.6	[['motif_0', 29, 0.00046], ['motif_4', 2, 3.38e-08]]	1219854.0	1220285.0	432.0	614.0	antisense_590_ss.jpg
+antisense_594	1234831	+	910	RNA	RhoDep	1235080.0	1235158.0	-71.2	[['motif_0', 24, 0.0015]]	1234876.0	1235308.0	433.0	478.0	antisense_594_ss.jpg
+antisense_597	1240553	+	394	RNA	NA	NA	NA	-34.1	NA	1240802.0	1240828.0	27.0	276.0	antisense_597_ss.jpg
+antisense_599	1244266	+	910	COD	RhoDep	1244769.0	1244847.0	NA	[['motif_0', 29, 0.000755]]	1244311.0	1244997.0	687.0	732.0	
+antisense_616	1268615	+	910	COD	Intrinsic	1269182.0	1269200.0	NA	NA	1268903.0	1269200.0	298.0	586.0	
+antisense_617	1274424	+	910	RNA	NA	NA	NA	-163.21	[['motif_0', 29, 0.000404]]	1274425.0	1275333.0	909.0	910.0	antisense_617_ss.jpg
+antisense_618	1277162	+	794	RNA	RhoDep	1277257.0	1277335.0	-70.2	[['motif_0', 29, 0.00167]]	1277166.0	1277485.0	320.0	324.0	antisense_618_ss.jpg
+antisense_619	1277956	+	910	RNA	RhoDep	1278711.0	1278789.0	-197.1	[['motif_0', 31, 0.000404]]	1277958.0	1278939.0	982.0	984.0	antisense_619_ss.jpg
+antisense_627	1299446	+	910	RNA	RhoDep	1300249.0	1300327.0	-185.88	[['motif_0', 28, 0.0012]]	1299446.0	1300477.0	1032.0	1032.0	antisense_627_ss.jpg
+antisense_628	1302322	+	910	RNA	RhoDep	1302721.0	1302799.0	-82.3	[['motif_0', 29, 0.000956]]	1302323.0	1302949.0	627.0	628.0	antisense_628_ss.jpg
+antisense_638	1322097	+	398	RNA	NA	NA	NA	-28.0	NA	1322268.0	1322294.0	27.0	198.0	antisense_638_ss.jpg
+antisense_642	1324692	+	580	RNA	RhoDep	1325028.0	1325106.0	-74.0	[['motif_0', 16, 0.000206]]	1324951.0	1325256.0	306.0	565.0	antisense_642_ss.jpg
+antisense_648	1342421	+	910	RNA	RhoDep	1342567.0	1342645.0	-59.0	NA	1342424.0	1342795.0	372.0	375.0	antisense_648_ss.jpg
+antisense_649	1344985	+	196	RNA	NA	NA	NA	-4.2	NA	1344990.0	1345010.0	21.0	26.0	antisense_649_ss.jpg
+antisense_650	1345181	+	493	COD	NA	NA	NA	NA	NA	1345268.0	1345624.0	357.0	444.0	
+antisense_651	1345674	+	910	RNA	NA	NA	NA	-2.6	NA	1345714.0	1345743.0	30.0	70.0	antisense_651_ss.jpg
+antisense_652	1352388	+	910	RNA	RhoDep	1352947.0	1353025.0	-129.5	NA	1352388.0	1353175.0	788.0	788.0	antisense_652_ss.jpg
+antisense_653	1355207	+	910	RNA	NA	NA	NA	-152.4	[['motif_0', 31, 0.00085]]	1355207.0	1356116.0	910.0	910.0	antisense_653_ss.jpg
+antisense_654	1358561	+	910	RNA	RhoDep	1359398.0	1359476.0	-182.5	[['motif_0', 29, 0.000133]]	1359099.0	1359626.0	528.0	1066.0	antisense_654_ss.jpg
+antisense_655	1363701	+	910	RNA	RhoDep	1364518.0	1364596.0	-147.1	NA	1364125.0	1364746.0	622.0	1046.0	antisense_655_ss.jpg
+antisense_656	1365872	+	910	RNA	NA	NA	NA	-102.3	NA	1366606.0	1366656.0	51.0	785.0	antisense_656_ss.jpg
+antisense_657	1367010	+	285	RNA	NA	NA	NA	-4.8	NA	1367107.0	1367127.0	21.0	118.0	antisense_657_ss.jpg
+antisense_658	1367295	+	647	RNA	RhoDep	1367819.0	1367897.0	-111.5	NA	1367578.0	1368047.0	470.0	753.0	antisense_658_ss.jpg
+antisense_659	1367942	+	504	RNA	NA	NA	NA	-37.1	NA	1368246.0	1368272.0	27.0	331.0	antisense_659_ss.jpg
+antisense_660	1368446	+	208	COD	NA	NA	NA	NA	NA	1368449.0	1368526.0	78.0	81.0	
+antisense_661	1368654	+	445	RNA	RhoDep	1368842.0	1368920.0	-63.9	[['motif_0', 29, 0.00046]]	1368668.0	1369070.0	403.0	417.0	antisense_661_ss.jpg
+antisense_662	1369099	+	910	RNA	RhoDep	1369300.0	1369378.0	-53.4	NA	1369102.0	1369528.0	427.0	430.0	antisense_662_ss.jpg
+antisense_663	1371930	+	131	RNA	NA	NA	NA	-9.9	NA	1372000.0	1372032.0	33.0	103.0	antisense_663_ss.jpg
+antisense_664	1372061	+	327	RNA	NA	NA	NA	-30.6	NA	1372367.0	1372381.0	15.0	321.0	antisense_664_ss.jpg
+antisense_665	1372388	+	910	RNA	NA	NA	NA	-21.9	NA	1372524.0	1372541.0	18.0	154.0	antisense_665_ss.jpg
+antisense_666	1374815	+	910	RNA	Intrinsic	1375491.0	1375501.0	-110.5	[['motif_0', 21, 0.00206]]	1374823.0	1375501.0	679.0	687.0	antisense_666_ss.jpg
+antisense_667	1376212	+	910	RNA	Intrinsic	1376829.0	1376852.0	-98.5	NA	1376212.0	1376852.0	641.0	641.0	antisense_667_ss.jpg
+antisense_668	1377263	+	264	RNA	NA	NA	NA	-19.2	NA	1377466.0	1377498.0	33.0	236.0	antisense_668_ss.jpg
+antisense_669	1377527	+	910	RNA	RhoDep	1378313.0	1378391.0	-138.8	NA	1378064.0	1378541.0	478.0	1015.0	antisense_669_ss.jpg
+antisense_670	1379301	+	615	RNA	NA	NA	NA	-58.3	NA	1379675.0	1379701.0	27.0	401.0	antisense_670_ss.jpg
+antisense_671	1379916	+	186	RNA	Intrinsic	1379994.0	1380006.0	-5.7	NA	1379947.0	1380006.0	60.0	91.0	antisense_671_ss.jpg
+antisense_672	1380102	+	910	RNA	NA	NA	NA	-72.7	NA	1380642.0	1380677.0	36.0	576.0	antisense_672_ss.jpg
+antisense_673	1387107	+	905	RNA	RhoDep	1387905.0	1387983.0	-155.3	NA	1387109.0	1388133.0	1025.0	1027.0	antisense_673_ss.jpg
+antisense_674	1392021	+	540	RNA	NA	NA	NA	-51.7	[['motif_0', 28, 0.000178]]	1392236.0	1392298.0	63.0	278.0	antisense_674_ss.jpg
+antisense_680	1404917	+	910	RNA	NA	NA	NA	-110.8	[['motif_0', 25, 0.00492]]	1405517.0	1405564.0	48.0	648.0	antisense_680_ss.jpg
+antisense_681	1408059	+	910	RNA	Intrinsic	1408918.0	1408931.0	-135.14	NA	1408910.0	1408931.0	22.0	873.0	antisense_681_ss.jpg
+antisense_682	1414120	+	910	RNA	RhoDep	1414692.0	1414770.0	-113.27	NA	1414120.0	1414920.0	801.0	801.0	antisense_682_ss.jpg
+antisense_683	1419229	+	910	RNA	RhoDep	1419693.0	1419771.0	-112.04	[['motif_0', 29, 0.000115]]	1419581.0	1419921.0	341.0	693.0	antisense_683_ss.jpg
+antisense_684	1420991	+	910	RNA	RhoDep	1421659.0	1421737.0	-152.7	[['motif_0', 28, 0.0034]]	1420998.0	1421887.0	890.0	897.0	antisense_684_ss.jpg
+antisense_685	1423674	+	910	COD	RhoDep	1424505.0	1424583.0	NA	[['motif_1', 4, 3.05e-07]]	1423800.0	1424733.0	934.0	1060.0	
+antisense_687	1434434	+	910	COD	RhoDep	1434853.0	1434931.0	NA	NA	1434471.0	1435081.0	611.0	648.0	
+antisense_688	1436192	+	910	COD	RhoDep	1437058.0	1437136.0	NA	[['motif_0', 30, 0.00085]]	1436192.0	1437286.0	1095.0	1095.0	
+antisense_689	1437361	+	246	RNA	RhoDep	1437404.0	1437482.0	-25.3	[['motif_0', 20, 2.58e-07]]	1437390.0	1437632.0	243.0	272.0	antisense_689_ss.jpg
+antisense_690	1437607	+	910	RNA	RhoDep	1438128.0	1438206.0	-120.3	[['motif_0', 29, 8.25e-07]]	1437818.0	1438356.0	539.0	750.0	antisense_690_ss.jpg
+antisense_691	1438750	+	910	RNA	RhoDep	1438804.0	1438882.0	-49.1	NA	1438751.0	1439032.0	282.0	283.0	antisense_691_ss.jpg
+antisense_692	1440817	+	688	COD	RhoDep	1441116.0	1441194.0	NA	NA	1441107.0	1441344.0	238.0	528.0	
+antisense_693	1441505	+	910	RNA	RhoDep	1441895.0	1441973.0	-81.4	[['motif_0', 28, 0.000755]]	1441505.0	1442123.0	619.0	619.0	antisense_693_ss.jpg
+antisense_694	1442709	+	910	RNA	RhoDep	1443391.0	1443469.0	-121.6	[['motif_0', 30, 0.0015]]	1442711.0	1443619.0	909.0	911.0	antisense_694_ss.jpg
+antisense_695	1448674	+	500	COD	RhoDep	1448812.0	1448890.0	NA	[['motif_0', 29, 0.0012]]	1448682.0	1449040.0	359.0	367.0	
+antisense_696	1449174	+	910	RNA	RhoDep	1449576.0	1449654.0	-106.1	NA	1449249.0	1449804.0	556.0	631.0	antisense_696_ss.jpg
+antisense_701	1465568	+	910	RNA	RhoDep	1466432.0	1466510.0	-214.6	[['motif_0', 31, 0.00229]]	1465569.0	1466660.0	1092.0	1093.0	antisense_701_ss.jpg
+antisense_702	1471521	+	380	COD	RhoDep	1471661.0	1471739.0	NA	NA	1471533.0	1471889.0	357.0	369.0	
+antisense_703	1471901	+	354	RNA	Intrinsic	1472226.0	1472251.0	-51.3	[['motif_0', 14, 0.000755]]	1471902.0	1472251.0	350.0	351.0	antisense_703_ss.jpg
+antisense_704	1475730	+	910	RNA	Intrinsic	1476030.0	1476052.0	-55.2	[['motif_0', 30, 0.000355]]	1475731.0	1476052.0	322.0	323.0	antisense_704_ss.jpg
+antisense_706	1478471	+	910	RNA	RhoDep	1478845.0	1478923.0	-136.8	[['motif_0', 29, 0.00107]]	1478556.0	1479073.0	518.0	603.0	antisense_706_ss.jpg
+antisense_707	1482795	+	910	RNA	NA	NA	NA	-24.6	[['motif_0', 28, 0.0015]]	1483033.0	1483062.0	30.0	268.0	antisense_707_ss.jpg
+antisense_708	1487782	+	910	RNA	NA	NA	NA	-201.6	[['motif_0', 29, 6.1e-05]]	1488638.0	1488691.0	54.0	910.0	antisense_708_ss.jpg
+antisense_711	1498130	+	348	RNA	NA	NA	NA	-10.0	[['motif_0', 29, 0.0015]]	1498150.0	1498239.0	90.0	110.0	antisense_711_ss.jpg
+antisense_712	1498478	+	910	RNA	RhoDep	1499263.0	1499341.0	-136.9	NA	1499198.0	1499491.0	294.0	1014.0	antisense_712_ss.jpg
+antisense_713	1502250	+	910	RNA	RhoDep	1502789.0	1502867.0	-110.48	[['motif_0', 30, 0.00309]]	1502309.0	1503017.0	709.0	768.0	antisense_713_ss.jpg
+antisense_714	1509939	+	428	RNA	NA	NA	NA	-71.5	NA	1510284.0	1510316.0	33.0	378.0	antisense_714_ss.jpg
+antisense_715	1510367	+	910	RNA	NA	NA	NA	-136.2	[['motif_0', 24, 0.00309]]	1510448.0	1511266.0	819.0	900.0	antisense_715_ss.jpg
+antisense_716	1512922	+	910	RNA	NA	NA	NA	-64.5	[['motif_1', 29, 2.34e-06]]	1513313.0	1513342.0	30.0	421.0	antisense_716_ss.jpg
+antisense_717	1514469	+	493	RNA	RhoDep	1514864.0	1514942.0	-101.8	[['motif_0', 29, 0.000271]]	1514691.0	1515092.0	402.0	624.0	antisense_717_ss.jpg
+antisense_718	1514962	+	910	RNA	RhoDep	1515224.0	1515302.0	-79.5	NA	1514966.0	1515452.0	487.0	491.0	antisense_718_ss.jpg
+antisense_719	1518707	+	437	RNA	NA	NA	NA	-57.4	[['motif_0', 32, 0.000669]]	1518983.0	1519072.0	90.0	366.0	antisense_719_ss.jpg
+antisense_720	1519144	+	910	RNA	RhoDep	1519909.0	1519987.0	-132.9	[['motif_0', 18, 0.000522]]	1519144.0	1520137.0	994.0	994.0	antisense_720_ss.jpg
+antisense_743	1557521	+	910	RNA	RhoDep	1557793.0	1557871.0	-78.5	[['motif_0', 30, 0.000592]]	1557779.0	1558021.0	243.0	501.0	antisense_743_ss.jpg
+antisense_746	1559908	+	910	COD	RhoDep	1560568.0	1560646.0	NA	[['motif_0', 30, 0.00167]]	1559961.0	1560796.0	836.0	889.0	
+antisense_747	1561033	+	910	COD	RhoDep	1561797.0	1561875.0	NA	[['motif_0', 28, 0.00492]]	1561046.0	1562025.0	980.0	993.0	
+antisense_752	1579795	+	452	RNA	RhoDep	1579834.0	1579912.0	-45.0	NA	1579800.0	1580062.0	263.0	268.0	antisense_752_ss.jpg
+antisense_756	1589585	+	910	RNA	RhoDep	1590291.0	1590369.0	-202.7	NA	1589585.0	1590519.0	935.0	935.0	antisense_756_ss.jpg
+antisense_758	1590526	+	910	RNA	RhoDep	1590919.0	1590997.0	-129.9	NA	1590528.0	1591147.0	620.0	622.0	antisense_758_ss.jpg
+antisense_759	1592137	+	143	RNA	NA	NA	NA	-5.5	[['motif_0', 28, 0.00229]]	1592157.0	1592180.0	24.0	44.0	antisense_759_ss.jpg
+antisense_760	1592280	+	910	COD	RhoDep	1593117.0	1593195.0	NA	[['motif_0', 6, 0.000522]]	1592576.0	1593345.0	770.0	1066.0	
+antisense_767	1602363	+	194	RNA	NA	NA	NA	-6.2	NA	1602410.0	1602439.0	30.0	77.0	antisense_767_ss.jpg
+antisense_768	1602557	+	910	RNA	RhoDep	1603358.0	1603436.0	-171.3	[['motif_0', 28, 8.48e-06], ['motif_1', 5, 1.61e-06]]	1602686.0	1603586.0	901.0	1030.0	antisense_768_ss.jpg
+antisense_769	1603727	+	910	RNA	NA	NA	NA	-161.5	[['motif_0', 29, 0.000271]]	1604493.0	1604576.0	84.0	850.0	antisense_769_ss.jpg
+antisense_772	1614288	+	910	COD	RhoDep	1615026.0	1615104.0	NA	NA	1614334.0	1615254.0	921.0	967.0	
+antisense_773	1621967	+	910	RNA	RhoDep	1622574.0	1622652.0	-182.6	[['motif_0', 28, 0.00085]]	1622328.0	1622802.0	475.0	836.0	antisense_773_ss.jpg
+antisense_775	1629002	+	910	COD	RhoDep	1629580.0	1629658.0	NA	[['motif_0', 10, 0.0028]]	1629026.0	1629808.0	783.0	807.0	
+antisense_776	1638630	+	910	RNA	Intrinsic	1639258.0	1639272.0	-129.3	NA	1638630.0	1639272.0	643.0	643.0	antisense_776_ss.jpg
+antisense_777	1640900	+	557	RNA	NA	NA	NA	-11.9	[['motif_0', 31, 0.00167]]	1640924.0	1640965.0	42.0	66.0	antisense_777_ss.jpg
+antisense_778	1641457	+	25	RNA	NA	NA	NA	0.0	[['motif_0', 29, 0.000236]]	1641460.0	1641468.0	9.0	12.0	antisense_778_ss.jpg
+antisense_0	1896	-	910	RNA	RhoDep	1122.0	1200.0	-161.5	[['motif_0', 29, 0.00186]]	972.0	1767.0	796.0	925.0	antisense_0_ss.jpg
+antisense_1	2199	-	303	RNA	NA	NA	NA	-39.4	[['motif_0', 29, 0.00107]]	1934.0	1954.0	21.0	266.0	antisense_1_ss.jpg
+antisense_2	2398	-	199	RNA	NA	NA	NA	-15.6	[['motif_0', 29, 0.00186]]	2271.0	2291.0	21.0	128.0	antisense_2_ss.jpg
+antisense_3	4463	-	794	COD	NA	NA	NA	NA	[['motif_0', 29, 0.00107]]	3670.0	4311.0	642.0	794.0	
+antisense_4	4842	-	379	RNA	RhoDep	4575.0	4653.0	-72.3	[['motif_2', 24, 4.37e-11]]	4425.0	4670.0	246.0	418.0	antisense_4_ss.jpg
+antisense_5	11812	-	910	COD	RhoDep	11150.0	11228.0	NA	[['motif_0', 29, 0.00046]]	11000.0	11499.0	500.0	813.0	
+antisense_6	12085	-	273	COD	NA	NA	NA	NA	[['motif_0', 29, 2.49e-05]]	11827.0	12042.0	216.0	259.0	
+antisense_7	13687	-	910	RNA	RhoDep	12717.0	12795.0	-167.1	[['motif_0', 29, 8.42e-05]]	12567.0	13601.0	1035.0	1121.0	antisense_7_ss.jpg
+antisense_8	14034	-	347	RNA	NA	NA	NA	-1.5	[['motif_0', 29, 0.00229]]	14010.0	14030.0	21.0	25.0	antisense_8_ss.jpg
+antisense_9	14696	-	662	RNA	NA	NA	NA	-70.7	NA	14195.0	14221.0	27.0	502.0	antisense_9_ss.jpg
+antisense_19	36420	-	910	RNA	RhoDepWithHP	35505.0	35673.0	-149.44	[['motif_0', 30, 0.000115]]	35505.0	35935.0	431.0	916.0	antisense_19_ss.jpg
+antisense_20	40330	-	910	RNA	RhoDep	39583.0	39661.0	-240.2	[['motif_1', 11, 2.39e-09], ['motif_2', 31, 2.65e-14]]	39433.0	39988.0	556.0	898.0	antisense_20_ss.jpg
+antisense_21	41491	-	910	RNA	NA	NA	NA	-138.9	[['motif_0', 29, 0.00206], ['motif_3', 4, 1.09e-12]]	40815.0	41491.0	677.0	677.0	antisense_21_ss.jpg
+antisense_22	45978	-	910	RNA	RhoDep	45492.0	45570.0	-70.6	[['motif_0', 29, 0.0015]]	45342.0	45870.0	529.0	637.0	antisense_22_ss.jpg
+antisense_23	46790	-	812	RNA	NA	NA	NA	-129.2	[['motif_0', 11, 0.000522]]	45981.0	46004.0	24.0	810.0	antisense_23_ss.jpg
+antisense_24	48168	-	910	RNA	Intrinsic	47404.0	47425.0	-144.7	NA	47404.0	47469.0	66.0	765.0	antisense_24_ss.jpg
+antisense_25	50251	-	910	RNA	NA	NA	NA	-21.4	[['motif_0', 29, 0.000522]]	50063.0	50107.0	45.0	189.0	antisense_25_ss.jpg
+antisense_26	50577	-	326	RNA	NA	NA	NA	-25.5	NA	50436.0	50453.0	18.0	142.0	antisense_26_ss.jpg
+antisense_27	51744	-	910	RNA	NA	NA	NA	-106.3	NA	50835.0	51744.0	910.0	910.0	antisense_27_ss.jpg
+antisense_30	60583	-	910	RNA	RhoDep	59699.0	59777.0	-180.8	[['motif_0', 28, 0.000522]]	59549.0	60114.0	566.0	1035.0	antisense_30_ss.jpg
+antisense_31	61811	-	910	RNA	NA	NA	NA	-101.4	[['motif_0', 29, 0.00107]]	61344.0	61481.0	138.0	468.0	antisense_31_ss.jpg
+antisense_32	62361	-	550	RNA	RhoDep	62124.0	62202.0	-74.6	NA	61974.0	62243.0	270.0	388.0	antisense_32_ss.jpg
+antisense_37	67215	-	723	RNA	RhoDep	66679.0	66757.0	-142.9	NA	66529.0	67215.0	687.0	687.0	antisense_37_ss.jpg
+antisense_44	80379	-	614	RNA	NA	NA	NA	-94.6	[['motif_0', 9, 0.000311]]	79836.0	79853.0	18.0	544.0	antisense_44_ss.jpg
+antisense_45	82079	-	910	RNA	RhoDepWithHP	81901.0	82077.0	-18.9	[['motif_1', 24, 2.82e-06]]	81901.0	82079.0	179.0	179.0	antisense_45_ss.jpg
+antisense_51	91716	-	616	RNA	Intrinsic	91376.0	91387.0	-60.4	[['motif_0', 29, 0.00374]]	91376.0	91471.0	96.0	341.0	antisense_51_ss.jpg
+antisense_52	92467	-	751	COD	RhoDep	92033.0	92111.0	NA	[['motif_1', 24, 2.34e-06]]	91883.0	92354.0	472.0	585.0	
+antisense_53	93292	-	825	RNA	NA	NA	NA	-97.0	NA	92713.0	92805.0	93.0	580.0	antisense_53_ss.jpg
+antisense_55	102439	-	910	RNA	NA	NA	NA	-93.2	NA	101880.0	101990.0	111.0	560.0	antisense_55_ss.jpg
+antisense_56	104083	-	910	RNA	RhoDep	103136.0	103214.0	-221.9	NA	102986.0	104083.0	1098.0	1098.0	antisense_56_ss.jpg
+antisense_57	104939	-	856	RNA	RhoDep	104255.0	104333.0	-156.0	[['motif_0', 29, 0.0034]]	104105.0	104912.0	808.0	835.0	antisense_57_ss.jpg
+antisense_58	109276	-	910	RNA	RhoDep	108343.0	108421.0	-180.77	[['motif_0', 29, 0.000271]]	108193.0	109276.0	1084.0	1084.0	antisense_58_ss.jpg
+antisense_59	112027	-	910	COD	Intrinsic	111331.0	111341.0	NA	[['motif_0', 29, 8.42e-05]]	111331.0	111966.0	636.0	697.0	
+antisense_60	113032	-	910	COD	NA	NA	NA	NA	NA	112165.0	112647.0	483.0	868.0	
+antisense_61	118033	-	910	RNA	RhoDep	117282.0	117360.0	-141.3	NA	117132.0	118027.0	896.0	902.0	antisense_61_ss.jpg
+antisense_67	132347	-	299	RNA	NA	NA	NA	-30.7	NA	132086.0	132112.0	27.0	262.0	antisense_67_ss.jpg
+antisense_68	132939	-	592	RNA	RhoDep	132458.0	132536.0	-99.9	NA	132308.0	132937.0	630.0	632.0	antisense_68_ss.jpg
+antisense_69	133257	-	318	RNA	NA	NA	NA	-18.6	NA	133099.0	133113.0	15.0	159.0	antisense_69_ss.jpg
+antisense_70	138084	-	910	RNA	NA	NA	NA	-118.5	NA	137235.0	137273.0	39.0	850.0	antisense_70_ss.jpg
+antisense_71	141245	-	910	RNA	Intrinsic	140841.0	140854.0	-39.7	[['motif_0', 29, 0.000154]]	140841.0	141245.0	405.0	405.0	antisense_71_ss.jpg
+antisense_72	142803	-	910	RNA	RhoDep	142029.0	142107.0	-146.5	NA	141879.0	142182.0	304.0	925.0	antisense_72_ss.jpg
+antisense_73	147683	-	910	RNA	RhoDep	146702.0	146780.0	-203.7	[['motif_0', 29, 0.000178]]	146552.0	147683.0	1132.0	1132.0	antisense_73_ss.jpg
+antisense_78	167074	-	910	RNA	NA	NA	NA	-117.8	NA	166373.0	166432.0	60.0	702.0	antisense_78_ss.jpg
+antisense_85	175364	-	910	RNA	NA	NA	NA	-169.2	[['motif_0', 30, 0.00206]]	174596.0	174694.0	99.0	769.0	antisense_85_ss.jpg
+antisense_86	175808	-	444	RNA	RhoDep	175482.0	175560.0	-108.8	[['motif_0', 31, 0.000592]]	175332.0	175808.0	477.0	477.0	antisense_86_ss.jpg
+antisense_87	176777	-	910	COD	RhoDep	176371.0	176449.0	NA	NA	176221.0	176691.0	471.0	557.0	
+antisense_93	191237	-	910	COD	RhoDep	190402.0	190480.0	NA	NA	190252.0	191237.0	986.0	986.0	
+antisense_97	198140	-	598	RNA	NA	NA	NA	-67.04	NA	197543.0	198140.0	598.0	598.0	antisense_97_ss.jpg
+antisense_98	198298	-	158	RNA	NA	NA	NA	-12.87	[['motif_0', 30, 0.000669]]	198167.0	198256.0	90.0	132.0	antisense_98_ss.jpg
+antisense_99	198963	-	665	COD	NA	NA	NA	NA	[['motif_0', 28, 0.00046]]	198342.0	198953.0	612.0	622.0	
+antisense_100	202032	-	910	RNA	NA	NA	NA	-52.4	[['motif_0', 1, 0.0034]]	201740.0	201874.0	135.0	293.0	antisense_100_ss.jpg
+antisense_101	205353	-	910	RNA	Intrinsic	204559.0	204584.0	-127.9	NA	204559.0	205349.0	791.0	795.0	antisense_101_ss.jpg
+antisense_106	221608	-	910	RNA	RhoDep	221030.0	221108.0	-108.1	NA	220880.0	221285.0	406.0	729.0	antisense_106_ss.jpg
+antisense_111	226673	-	689	RNA	RhoDep	226182.0	226260.0	-133.8	[['motif_0', 29, 7.18e-05], ['motif_1', 2, 8.27e-08]]	226032.0	226615.0	584.0	642.0	antisense_111_ss.jpg
+antisense_114	228846	-	403	RNA	NA	NA	NA	-51.5	[['motif_0', 28, 0.000271]]	228444.0	228846.0	403.0	403.0	antisense_114_ss.jpg
+antisense_115	228904	-	58	RNA	NA	NA	NA	0.0	NA	228879.0	228893.0	15.0	26.0	antisense_115_ss.jpg
+antisense_116	229873	-	910	RNA	RhoDep	228947.0	229025.0	-189.3	NA	228797.0	229259.0	463.0	1077.0	antisense_116_ss.jpg
+antisense_119	234803	-	289	RNA	NA	NA	NA	-2.3	NA	234737.0	234769.0	33.0	67.0	antisense_119_ss.jpg
+antisense_120	235315	-	512	RNA	NA	NA	NA	-37.7	[['motif_0', 28, 0.0028]]	235041.0	235103.0	63.0	275.0	antisense_120_ss.jpg
+antisense_121	237207	-	910	RNA	Intrinsic	236670.0	236690.0	-101.0	NA	236670.0	236854.0	185.0	538.0	antisense_121_ss.jpg
+antisense_125	250143	-	910	RNA	RhoDep	249646.0	249724.0	-89.8	[['motif_0', 25, 0.00229]]	249496.0	250080.0	585.0	648.0	antisense_125_ss.jpg
+antisense_126	251413	-	910	RNA	NA	NA	NA	-106.8	[['motif_0', 29, 3.94e-06]]	250730.0	250831.0	102.0	684.0	antisense_126_ss.jpg
+antisense_127	256132	-	910	COD	RhoDepWithHP	255329.0	255432.0	NA	[['motif_0', 29, 0.000669]]	255329.0	256113.0	785.0	804.0	
+antisense_128	258481	-	910	RNA	RhoDep	258018.0	258096.0	-103.7	[['motif_0', 30, 9.85e-05]]	257868.0	258430.0	563.0	614.0	antisense_128_ss.jpg
+antisense_129	258753	-	272	COD	Intrinsic	258701.0	258733.0	NA	NA	258701.0	258752.0	52.0	53.0	
+antisense_142	280412	-	910	RNA	RhoDep	280129.0	280207.0	-79.4	[['motif_0', 29, 0.000178]]	279979.0	280392.0	414.0	434.0	antisense_142_ss.jpg
+antisense_145	285009	-	910	RNA	RhoDep	284424.0	284502.0	-129.3	[['motif_0', 30, 0.000311]]	284274.0	285007.0	734.0	736.0	antisense_145_ss.jpg
+antisense_146	287492	-	910	RNA	RhoDep	286609.0	286687.0	-187.0	NA	286459.0	287492.0	1034.0	1034.0	antisense_146_ss.jpg
+antisense_147	291618	-	910	RNA	NA	NA	NA	-105.0	[['motif_0', 29, 6.1e-05]]	290902.0	290970.0	69.0	717.0	antisense_147_ss.jpg
+antisense_148	293826	-	910	RNA	RhoDep	293179.0	293257.0	-121.2	[['motif_0', 29, 0.000271]]	293029.0	293681.0	653.0	798.0	antisense_148_ss.jpg
+antisense_149	294599	-	773	RNA	Intrinsic	294353.0	294387.0	-40.0	NA	294353.0	294557.0	205.0	247.0	antisense_149_ss.jpg
+antisense_150	296859	-	910	RNA	RhoDep	296113.0	296191.0	-150.6	[['motif_0', 29, 4.33e-05]]	295963.0	296488.0	526.0	897.0	antisense_150_ss.jpg
+antisense_156	317304	-	910	RNA	NA	NA	NA	-96.9	[['motif_0', 8, 0.00046]]	316792.0	316821.0	30.0	513.0	antisense_156_ss.jpg
+antisense_157	317514	-	210	COD	RhoDep	317296.0	317374.0	NA	[['motif_0', 29, 6.64e-06]]	317146.0	317504.0	359.0	369.0	
+antisense_158	318966	-	910	RNA	RhoDep	318635.0	318713.0	-49.5	[['motif_0', 4, 0.00186]]	318485.0	318909.0	425.0	482.0	antisense_158_ss.jpg
+antisense_159	321808	-	910	RNA	RhoDep	321346.0	321424.0	-94.5	NA	321196.0	321435.0	240.0	613.0	antisense_159_ss.jpg
+antisense_160	321998	-	190	RNA	NA	NA	NA	-20.3	[['motif_0', 29, 0.00085]]	321862.0	321933.0	72.0	137.0	antisense_160_ss.jpg
+antisense_169	339638	-	692	RNA	Intrinsic	339134.0	339155.0	-90.9	[['motif_0', 28, 9.85e-05]]	339134.0	339495.0	362.0	505.0	antisense_169_ss.jpg
+antisense_170	342076	-	910	RNA	RhoDep	341297.0	341375.0	-134.5	NA	341147.0	342076.0	930.0	930.0	antisense_170_ss.jpg
+antisense_171	344072	-	910	RNA	RhoDep	343432.0	343510.0	-103.6	NA	343282.0	343813.0	532.0	791.0	antisense_171_ss.jpg
+antisense_172	344864	-	792	RNA	NA	NA	NA	-119.3	[['motif_0', 29, 0.000311]]	344088.0	344864.0	777.0	777.0	antisense_172_ss.jpg
+antisense_173	345461	-	597	RNA	Intrinsic	344931.0	344943.0	-73.5	[['motif_0', 29, 7.18e-05]]	344931.0	345051.0	121.0	531.0	antisense_173_ss.jpg
+antisense_177	357015	-	910	RNA	NA	NA	NA	-173.6	[['motif_0', 30, 0.00253]]	356106.0	357015.0	910.0	910.0	antisense_177_ss.jpg
+antisense_178	357213	-	198	RNA	NA	NA	NA	-13.1	[['motif_0', 29, 0.0041]]	357121.0	357153.0	33.0	93.0	antisense_178_ss.jpg
+antisense_185	364817	-	591	RNA	RhoDep	364384.0	364462.0	-71.9	NA	364234.0	364572.0	339.0	584.0	antisense_185_ss.jpg
+antisense_186	369358	-	910	RNA	NA	NA	NA	-80.8	[['motif_0', 29, 0.00374]]	368845.0	368928.0	84.0	514.0	antisense_186_ss.jpg
+antisense_187	376093	-	910	COD	RhoDep	375152.0	375230.0	NA	[['motif_0', 17, 0.0028]]	375002.0	375862.0	861.0	1092.0	
+antisense_188	376413	-	320	RNA	NA	NA	NA	-21.7	[['motif_0', 30, 9.85e-05]]	376245.0	376262.0	18.0	169.0	antisense_188_ss.jpg
+antisense_190	377771	-	910	RNA	RhoDep	377134.0	377212.0	-121.9	[['motif_0', 29, 0.00186]]	376984.0	377698.0	715.0	788.0	antisense_190_ss.jpg
+antisense_192	392152	-	552	RNA	NA	NA	NA	-11.0	NA	392036.0	392083.0	48.0	117.0	antisense_192_ss.jpg
+antisense_193	393055	-	903	RNA	RhoDep	392749.0	392827.0	-66.2	[['motif_0', 17, 0.000355]]	392599.0	393055.0	457.0	457.0	antisense_193_ss.jpg
+antisense_194	395211	-	910	RNA	RhoDep	394464.0	394542.0	-240.2	[['motif_1', 11, 2.39e-09], ['motif_2', 31, 2.65e-14]]	394314.0	394869.0	556.0	898.0	antisense_194_ss.jpg
+antisense_195	396372	-	910	RNA	NA	NA	NA	-138.9	[['motif_0', 29, 0.00206], ['motif_3', 4, 1.09e-12]]	395696.0	396372.0	677.0	677.0	antisense_195_ss.jpg
+antisense_196	405850	-	910	COD	Intrinsic	405021.0	405053.0	NA	[['motif_1', 1, 1.53e-07]]	405021.0	405832.0	812.0	830.0	
+antisense_198	411154	-	910	COD	RhoDep	410570.0	410648.0	NA	[['motif_0', 18, 0.00085]]	410420.0	411080.0	661.0	735.0	
+antisense_199	413019	-	910	RNA	RhoDep	412642.0	412720.0	-98.3	NA	412492.0	413019.0	528.0	528.0	antisense_199_ss.jpg
+antisense_200	413711	-	692	RNA	NA	NA	NA	-114.5	[['motif_0', 29, 0.00206]]	413022.0	413051.0	30.0	690.0	antisense_200_ss.jpg
+antisense_201	414331	-	620	RNA	NA	NA	NA	-28.5	[['motif_1', 17, 3.41e-07]]	414150.0	414212.0	63.0	182.0	antisense_201_ss.jpg
+antisense_203	418392	-	910	RNA	RhoDep	417827.0	417905.0	-90.7	NA	417677.0	418390.0	714.0	716.0	antisense_203_ss.jpg
+antisense_206	425033	-	903	RNA	NA	NA	NA	-121.4	NA	424156.0	424185.0	30.0	878.0	antisense_206_ss.jpg
+antisense_207	429913	-	910	RNA	RhoDep	429481.0	429559.0	-119.7	[['motif_0', 29, 0.000154]]	429331.0	429911.0	581.0	583.0	antisense_207_ss.jpg
+antisense_208	434908	-	910	RNA	RhoDep	433941.0	434019.0	-264.3	NA	433791.0	434616.0	826.0	1118.0	antisense_208_ss.jpg
+antisense_209	435699	-	791	COD	RhoDep	434942.0	435020.0	NA	[['motif_0', 29, 6.1e-05]]	434792.0	435609.0	818.0	908.0	
+antisense_210	440369	-	910	RNA	RhoDep	439946.0	440024.0	-84.2	NA	439796.0	440066.0	271.0	574.0	antisense_210_ss.jpg
+antisense_211	446900	-	910	RNA	Intrinsic	446826.0	446850.0	-16.7	[['motif_0', 29, 2.2e-06]]	446826.0	446855.0	30.0	75.0	antisense_211_ss.jpg
+antisense_214	451542	-	910	RNA	RhoDep	450894.0	450972.0	-114.29	[['motif_0', 30, 0.00107]]	450744.0	451399.0	656.0	799.0	antisense_214_ss.jpg
+antisense_215	453024	-	910	RNA	RhoDep	452753.0	452831.0	-86.0	[['motif_0', 14, 0.00167]]	452603.0	453023.0	421.0	422.0	antisense_215_ss.jpg
+antisense_216	460575	-	910	RNA	RhoDep	459781.0	459859.0	-176.9	[['motif_0', 29, 3.01e-05]]	459631.0	460575.0	945.0	945.0	antisense_216_ss.jpg
+antisense_217	464001	-	910	RNA	RhoDep	463048.0	463126.0	-178.2	[['motif_0', 29, 5.15e-05]]	462898.0	463787.0	890.0	1104.0	antisense_217_ss.jpg
+antisense_220	472457	-	910	RNA	RhoDep	471624.0	471702.0	-173.6	[['motif_0', 29, 0.00107]]	471474.0	472453.0	980.0	984.0	antisense_220_ss.jpg
+antisense_221	473572	-	910	COD	RhoDep	473069.0	473147.0	NA	[['motif_0', 29, 0.000404]]	472919.0	473541.0	623.0	654.0	
+antisense_222	474561	-	910	COD	RhoDep	473659.0	473737.0	NA	[['motif_0', 30, 8.48e-06]]	473509.0	474474.0	966.0	1053.0	
+antisense_224	482117	-	910	RNA	NA	NA	NA	-132.7	[['motif_0', 31, 0.00085]]	481246.0	482112.0	867.0	872.0	antisense_224_ss.jpg
+antisense_225	485766	-	910	RNA	RhoDepWithHP	484873.0	485091.0	-145.0	[['motif_0', 29, 0.000956]]	484873.0	485766.0	894.0	894.0	antisense_225_ss.jpg
+antisense_230	492078	-	362	RNA	Intrinsic	491825.0	491837.0	-37.9	[['motif_0', 29, 0.00229]]	491825.0	491945.0	121.0	254.0	antisense_230_ss.jpg
+antisense_231	493921	-	910	RNA	NA	NA	NA	-137.4	NA	493013.0	493921.0	909.0	909.0	antisense_231_ss.jpg
+antisense_232	502175	-	910	RNA	RhoDep	501326.0	501404.0	-189.5	[['motif_0', 28, 0.00167]]	501176.0	502175.0	1000.0	1000.0	antisense_232_ss.jpg
+antisense_233	504163	-	910	RNA	RhoDep	503215.0	503293.0	-156.1	[['motif_0', 29, 0.000178]]	503065.0	503529.0	465.0	1099.0	antisense_233_ss.jpg
+antisense_234	507096	-	910	RNA	NA	NA	NA	-61.7	[['motif_0', 28, 0.000522]]	506542.0	506577.0	36.0	555.0	antisense_234_ss.jpg
+antisense_235	509288	-	910	RNA	RhoDep	509013.0	509091.0	-68.9	[['motif_0', 29, 2.97e-06]]	508863.0	509288.0	426.0	426.0	antisense_235_ss.jpg
+antisense_236	509334	-	46	COD	NA	NA	NA	NA	NA	509294.0	509326.0	33.0	41.0	
+antisense_237	509445	-	111	COD	RhoDep	509328.0	509406.0	NA	NA	509178.0	509419.0	242.0	268.0	
+antisense_238	512357	-	910	RNA	NA	NA	NA	-132.3	NA	511537.0	511608.0	72.0	821.0	antisense_238_ss.jpg
+antisense_239	516926	-	910	RNA	RhoDep	516703.0	516781.0	-69.8	[['motif_0', 29, 0.000311]]	516553.0	516926.0	374.0	374.0	antisense_239_ss.jpg
+antisense_240	517362	-	436	RNA	NA	NA	NA	0.0	[['motif_0', 29, 2.04e-05]]	517324.0	517347.0	24.0	39.0	antisense_240_ss.jpg
+antisense_242	523158	-	910	RNA	RhoDep	522191.0	522269.0	-186.61	[['motif_0', 29, 0.000592]]	522041.0	522922.0	882.0	1118.0	antisense_242_ss.jpg
+antisense_243	523491	-	333	RNA	NA	NA	NA	-29.2	[['motif_1', 11, 2.13e-06]]	523223.0	523249.0	27.0	269.0	antisense_243_ss.jpg
+antisense_246	526653	-	910	RNA	RhoDep	525862.0	525940.0	-158.5	[['motif_0', 29, 0.00167]]	525712.0	526256.0	545.0	942.0	antisense_246_ss.jpg
+antisense_247	528350	-	910	RNA	NA	NA	NA	-166.4	[['motif_0', 29, 1.61e-06]]	527441.0	528350.0	910.0	910.0	antisense_247_ss.jpg
+antisense_248	528700	-	350	RNA	NA	NA	NA	-29.8	NA	528506.0	528553.0	48.0	195.0	antisense_248_ss.jpg
+antisense_249	530783	-	910	RNA	RhoDep	530513.0	530591.0	-70.7	[['motif_0', 31, 2.97e-06]]	530363.0	530609.0	247.0	421.0	antisense_249_ss.jpg
+antisense_251	531009	-	226	RNA	NA	NA	NA	-3.8	NA	530932.0	530958.0	27.0	78.0	antisense_251_ss.jpg
+antisense_252	531796	-	787	RNA	NA	NA	NA	-97.2	[['motif_0', 30, 0.00374]]	531227.0	531277.0	51.0	570.0	antisense_252_ss.jpg
+antisense_253	533951	-	653	RNA	RhoDep	533394.0	533472.0	-119.6	NA	533244.0	533632.0	389.0	708.0	antisense_253_ss.jpg
+antisense_254	537481	-	910	RNA	NA	NA	NA	-112.0	NA	536798.0	536839.0	42.0	684.0	antisense_254_ss.jpg
+antisense_264	562920	-	700	COD	Intrinsic	562840.0	562853.0	NA	[['motif_0', 29, 0.00206]]	562840.0	562872.0	33.0	81.0	
+antisense_265	568297	-	910	RNA	NA	NA	NA	-119.9	NA	567513.0	567563.0	51.0	785.0	antisense_265_ss.jpg
+antisense_266	568769	-	472	RNA	NA	NA	NA	-75.5	[['motif_0', 32, 0.00134]]	568298.0	568768.0	471.0	472.0	antisense_266_ss.jpg
+antisense_269	576173	-	910	COD	RhoDep	575543.0	575621.0	NA	[['motif_0', 30, 0.0012]]	575393.0	576170.0	778.0	781.0	
+antisense_270	576844	-	671	COD	NA	NA	NA	NA	[['motif_0', 30, 0.00206]]	576183.0	576793.0	611.0	662.0	
+antisense_271	577945	-	910	RNA	NA	NA	NA	-104.8	NA	577154.0	577171.0	18.0	792.0	antisense_271_ss.jpg
+antisense_272	581770	-	910	RNA	RhoDep	581329.0	581407.0	-84.6	NA	581179.0	581658.0	480.0	592.0	antisense_272_ss.jpg
+antisense_273	582234	-	464	RNA	RhoDep	581895.0	581973.0	-101.8	NA	581745.0	582045.0	301.0	490.0	antisense_273_ss.jpg
+antisense_274	582717	-	483	RNA	NA	NA	NA	-23.5	[['motif_0', 17, 0.00085]]	582578.0	582610.0	33.0	140.0	antisense_274_ss.jpg
+antisense_275	583452	-	735	RNA	NA	NA	NA	-97.2	[['motif_0', 20, 0.00186]]	582739.0	582768.0	30.0	714.0	antisense_275_ss.jpg
+antisense_276	583820	-	368	RNA	NA	NA	NA	-23.4	[['motif_0', 18, 1.07e-05]]	583600.0	583620.0	21.0	221.0	antisense_276_ss.jpg
+antisense_277	587535	-	910	RNA	RhoDep	587208.0	587286.0	-71.7	[['motif_0', 31, 0.000669]]	587058.0	587363.0	306.0	478.0	antisense_277_ss.jpg
+antisense_278	588673	-	910	RNA	NA	NA	NA	-171.6	NA	587764.0	588673.0	910.0	910.0	antisense_278_ss.jpg
+antisense_279	589379	-	706	RNA	RhoDep	589247.0	589325.0	-32.3	[['motif_1', 4, 2.13e-06], ['motif_4', 33, 1.15e-09]]	589097.0	589378.0	282.0	283.0	antisense_279_ss.jpg
+antisense_280	589626	-	247	RNA	NA	NA	NA	-35.6	[['motif_0', 4, 0.00253]]	589379.0	589525.0	147.0	248.0	antisense_280_ss.jpg
+antisense_282	598686	-	910	RNA	RhoDep	598418.0	598496.0	-71.9	NA	598268.0	598686.0	419.0	419.0	antisense_282_ss.jpg
+antisense_284	603168	-	900	RNA	RhoDep	602828.0	602906.0	-75.1	NA	602678.0	603168.0	491.0	491.0	antisense_284_ss.jpg
+antisense_285	603461	-	293	RNA	NA	NA	NA	-26.1	[['motif_0', 29, 0.000355]]	603226.0	603330.0	105.0	236.0	antisense_285_ss.jpg
+antisense_286	607689	-	910	RNA	NA	NA	NA	-110.0	NA	607100.0	607162.0	63.0	590.0	antisense_286_ss.jpg
+antisense_287	608476	-	787	RNA	RhoDep	608154.0	608232.0	-102.4	NA	608004.0	608465.0	462.0	473.0	antisense_287_ss.jpg
+antisense_294	623017	-	372	RNA	NA	NA	NA	-44.4	[['motif_0', 31, 1.16e-06]]	622681.0	622713.0	33.0	337.0	antisense_294_ss.jpg
+antisense_295	626508	-	910	COD	RhoDep	625725.0	625803.0	NA	NA	625575.0	626068.0	494.0	934.0	
+antisense_296	626800	-	292	COD	NA	NA	NA	NA	[['motif_0', 30, 3.01e-05]]	626532.0	626792.0	261.0	269.0	
+antisense_297	626859	-	59	RNA	RhoDep	626723.0	626801.0	-59.7	NA	626573.0	626828.0	256.0	287.0	antisense_297_ss.jpg
+antisense_298	627279	-	420	RNA	NA	NA	NA	-56.7	[['motif_0', 30, 0.00085]]	626860.0	627279.0	420.0	420.0	antisense_298_ss.jpg
+antisense_299	628334	-	910	RNA	RhoDep	627728.0	627806.0	-129.5	[['motif_1', 24, 4.41e-06]]	627578.0	627972.0	395.0	757.0	antisense_299_ss.jpg
+antisense_300	630879	-	910	COD	RhoDep	630494.0	630572.0	NA	[['motif_0', 29, 0.00085], ['motif_1', 5, 7.36e-06]]	630344.0	630622.0	279.0	536.0	
+antisense_301	632913	-	910	RNA	RhoDep	631986.0	632064.0	-203.3	[['motif_0', 31, 3.01e-05]]	631836.0	632911.0	1076.0	1078.0	antisense_301_ss.jpg
+antisense_304	637695	-	910	RNA	RhoDep	636814.0	636892.0	-180.8	NA	636664.0	637695.0	1032.0	1032.0	antisense_304_ss.jpg
+antisense_311	642460	-	501	COD	RhoDep	642178.0	642256.0	NA	[['motif_0', 18, 0.0015]]	642028.0	642422.0	395.0	433.0	
+antisense_312	643445	-	910	COD	Intrinsic	643255.0	643271.0	NA	NA	643255.0	643304.0	50.0	191.0	
+antisense_316	652353	-	910	RNA	NA	NA	NA	-106.4	[['motif_0', 27, 0.0028]]	651531.0	651593.0	63.0	823.0	antisense_316_ss.jpg
+antisense_317	660319	-	910	COD	RhoDep	659472.0	659550.0	NA	[['motif_0', 29, 0.000522]]	659322.0	660166.0	845.0	998.0	
+antisense_318	661794	-	910	RNA	RhoDep	661649.0	661727.0	-61.7	[['motif_0', 29, 0.00229]]	661499.0	661794.0	296.0	296.0	antisense_318_ss.jpg
+antisense_319	666498	-	910	RNA	RhoDep	665897.0	665975.0	-128.3	[['motif_0', 29, 5.15e-06], ['motif_1', 5, 2.82e-06]]	665747.0	666222.0	476.0	752.0	antisense_319_ss.jpg
+antisense_320	670711	-	910	COD	RhoDep	670115.0	670193.0	NA	[['motif_0', 24, 0.0012]]	669965.0	670709.0	745.0	747.0	
+antisense_321	673782	-	910	COD	RhoDep	673053.0	673131.0	NA	[['motif_0', 29, 0.000271]]	672903.0	673720.0	818.0	880.0	
+antisense_324	682095	-	723	RNA	RhoDep	681954.0	682032.0	-48.4	[['motif_0', 29, 4.33e-05]]	681804.0	682095.0	292.0	292.0	antisense_324_ss.jpg
+antisense_325	683539	-	910	RNA	RhoDep	683000.0	683078.0	-113.6	[['motif_0', 29, 0.00206]]	682850.0	683273.0	424.0	690.0	antisense_325_ss.jpg
+antisense_326	683806	-	267	RNA	NA	NA	NA	-28.9	[['motif_0', 29, 0.00107]]	683567.0	683632.0	66.0	240.0	antisense_326_ss.jpg
+antisense_327	686468	-	910	RNA	NA	NA	NA	-64.9	[['motif_0', 31, 0.000133]]	685962.0	686468.0	507.0	507.0	antisense_327_ss.jpg
+antisense_328	686882	-	414	COD	NA	NA	NA	NA	NA	686528.0	686842.0	315.0	355.0	
+antisense_329	689419	-	574	RNA	RhoDepWithHP	688901.0	689144.0	-83.0	[['motif_0', 28, 0.0028]]	688901.0	689419.0	519.0	519.0	antisense_329_ss.jpg
+antisense_330	690552	-	910	RNA	RhoDep	690079.0	690157.0	-100.2	NA	689929.0	690552.0	624.0	624.0	antisense_330_ss.jpg
+antisense_331	691329	-	777	RNA	NA	NA	NA	-135.4	NA	690553.0	691329.0	777.0	777.0	antisense_331_ss.jpg
+antisense_332	693910	-	910	RNA	RhoDep	693762.0	693840.0	-50.7	[['motif_0', 10, 0.00309]]	693612.0	693910.0	299.0	299.0	antisense_332_ss.jpg
+antisense_333	694594	-	684	RNA	RhoDep	693990.0	694068.0	-121.6	[['motif_0', 28, 0.0012], ['motif_1', 1, 1.32e-06]]	693840.0	694073.0	234.0	755.0	antisense_333_ss.jpg
+antisense_334	695085	-	491	RNA	NA	NA	NA	-67.7	NA	694626.0	694667.0	42.0	460.0	antisense_334_ss.jpg
+antisense_335	697505	-	910	RNA	RhoDep	696758.0	696836.0	-240.2	[['motif_1', 11, 2.39e-09], ['motif_2', 31, 2.65e-14]]	696608.0	697163.0	556.0	898.0	antisense_335_ss.jpg
+antisense_336	698666	-	910	RNA	NA	NA	NA	-138.9	[['motif_0', 29, 0.00206], ['motif_3', 4, 1.09e-12]]	697990.0	698666.0	677.0	677.0	antisense_336_ss.jpg
+antisense_337	703156	-	910	RNA	NA	NA	NA	-93.94	[['motif_0', 30, 0.000236]]	702426.0	702485.0	60.0	731.0	antisense_337_ss.jpg
+antisense_338	703520	-	364	RNA	NA	NA	NA	-29.1	NA	703365.0	703415.0	51.0	156.0	antisense_338_ss.jpg
+antisense_339	711215	-	910	RNA	RhoDep	710264.0	710342.0	-207.5	NA	710114.0	711214.0	1101.0	1102.0	antisense_339_ss.jpg
+antisense_351	729246	-	834	RNA	NA	NA	NA	-123.7	NA	728531.0	728584.0	54.0	716.0	antisense_351_ss.jpg
+antisense_352	729766	-	520	COD	RhoDep	729539.0	729617.0	NA	NA	729389.0	729764.0	376.0	378.0	
+antisense_353	730560	-	794	RNA	RhoDep	730072.0	730150.0	-94.7	[['motif_0', 6, 0.000206]]	729922.0	730560.0	639.0	639.0	antisense_353_ss.jpg
+antisense_354	732399	-	910	RNA	RhoDep	731707.0	731785.0	-141.7	[['motif_0', 30, 0.0012]]	731557.0	732322.0	766.0	843.0	antisense_354_ss.jpg
+antisense_355	733892	-	910	COD	RhoDep	733445.0	733523.0	NA	[['motif_1', 18, 3.41e-07]]	733295.0	733887.0	593.0	598.0	
+antisense_356	736451	-	910	RNA	NA	NA	NA	-139.9	NA	735542.0	736102.0	561.0	910.0	antisense_356_ss.jpg
+antisense_357	737940	-	910	RNA	Intrinsic	737169.0	737194.0	-107.0	[['motif_0', 29, 2.2e-06]]	737169.0	737939.0	771.0	772.0	antisense_357_ss.jpg
+antisense_358	740231	-	910	RNA	RhoDep	739313.0	739391.0	-159.0	[['motif_0', 31, 2.2e-06]]	739163.0	739774.0	612.0	1069.0	antisense_358_ss.jpg
+antisense_359	743245	-	788	RNA	NA	NA	NA	-108.3	[['motif_0', 11, 0.0012]]	742459.0	743240.0	782.0	787.0	antisense_359_ss.jpg
+antisense_360	743946	-	701	RNA	NA	NA	NA	-104.7	NA	743352.0	743396.0	45.0	595.0	antisense_360_ss.jpg
+antisense_361	744152	-	206	COD	NA	NA	NA	NA	[['motif_0', 31, 1.07e-05]]	743970.0	744101.0	132.0	183.0	
+antisense_362	744349	-	197	RNA	NA	NA	NA	-14.0	[['motif_0', 29, 0.000133]]	744203.0	744226.0	24.0	147.0	antisense_362_ss.jpg
+antisense_363	744420	-	71	RNA	NA	NA	NA	-1.8	[['motif_0', 30, 0.0034]]	744396.0	744410.0	15.0	25.0	antisense_363_ss.jpg
+antisense_364	745010	-	590	RNA	NA	NA	NA	-17.2	NA	744855.0	744878.0	24.0	156.0	antisense_364_ss.jpg
+antisense_365	745177	-	167	RNA	NA	NA	NA	-4.8	NA	745117.0	745128.0	12.0	61.0	antisense_365_ss.jpg
+antisense_366	745658	-	481	RNA	NA	NA	NA	-83.0	NA	745178.0	745455.0	278.0	481.0	antisense_366_ss.jpg
+antisense_370	758306	-	910	RNA	NA	NA	NA	-63.2	NA	757911.0	757934.0	24.0	396.0	antisense_370_ss.jpg
+antisense_371	765229	-	910	RNA	RhoDep	764361.0	764439.0	-157.21	[['motif_0', 30, 0.0034]]	764211.0	765068.0	858.0	1019.0	antisense_371_ss.jpg
+antisense_372	765815	-	586	RNA	NA	NA	NA	-19.7	NA	765664.0	765687.0	24.0	152.0	antisense_372_ss.jpg
+antisense_374	770558	-	910	RNA	NA	NA	NA	-98.5	[['motif_0', 29, 0.000206]]	770029.0	770103.0	75.0	530.0	antisense_374_ss.jpg
+antisense_375	772763	-	910	COD	NA	NA	NA	NA	NA	771963.0	772753.0	791.0	801.0	
+antisense_376	773392	-	629	RNA	NA	NA	NA	-53.54	NA	772863.0	772886.0	24.0	530.0	antisense_376_ss.jpg
+antisense_377	774952	-	910	RNA	RhoDep	774448.0	774526.0	-106.1	[['motif_0', 29, 0.00085]]	774298.0	774952.0	655.0	655.0	antisense_377_ss.jpg
+antisense_386	794647	-	910	RNA	RhoDep	793738.0	793816.0	-166.9	[['motif_0', 8, 0.000404]]	793588.0	794130.0	543.0	1060.0	antisense_386_ss.jpg
+antisense_397	811548	-	910	RNA	Intrinsic	810930.0	810942.0	-110.4	[['motif_0', 7, 0.0028]]	810930.0	811035.0	106.0	619.0	antisense_397_ss.jpg
+antisense_398	812080	-	532	RNA	NA	NA	NA	-79.1	NA	811595.0	811669.0	75.0	486.0	antisense_398_ss.jpg
+antisense_411	841010	-	170	COD	RhoDep	840862.0	840940.0	NA	[['motif_0', 25, 0.00107]]	840712.0	840998.0	287.0	299.0	
+antisense_412	841355	-	345	COD	RhoDep	841151.0	841229.0	NA	NA	841001.0	841355.0	355.0	355.0	
+antisense_415	847634	-	910	RNA	NA	NA	NA	-130.5	[['motif_0', 29, 0.000592]]	846922.0	847633.0	712.0	713.0	antisense_415_ss.jpg
+antisense_416	848119	-	485	RNA	NA	NA	NA	-54.2	NA	847826.0	848116.0	291.0	294.0	antisense_416_ss.jpg
+antisense_421	862691	-	910	RNA	NA	NA	NA	-139.4	[['motif_0', 30, 0.000206]]	861782.0	862586.0	805.0	910.0	antisense_421_ss.jpg
+antisense_422	872648	-	330	RNA	NA	NA	NA	-39.2	[['motif_1', 12, 1.39e-09]]	872373.0	872624.0	252.0	276.0	antisense_422_ss.jpg
+antisense_423	872976	-	328	RNA	RhoDep	872634.0	872712.0	-117.3	NA	872484.0	872786.0	303.0	493.0	antisense_423_ss.jpg
+antisense_429	883867	-	416	RNA	NA	NA	NA	-19.2	NA	883733.0	883759.0	27.0	135.0	antisense_429_ss.jpg
+antisense_430	883900	-	33	RNA	NA	NA	NA	0.0	[['motif_0', 29, 0.00186]]	883889.0	883897.0	9.0	12.0	antisense_430_ss.jpg
+antisense_431	886476	-	346	RNA	NA	NA	NA	-41.5	NA	886205.0	886222.0	18.0	272.0	antisense_431_ss.jpg
+antisense_436	901985	-	456	RNA	NA	NA	NA	-23.6	[['motif_0', 17, 0.0045]]	901746.0	901763.0	18.0	240.0	antisense_436_ss.jpg
+antisense_438	903048	-	910	RNA	NA	NA	NA	-101.5	[['motif_0', 32, 0.0015]]	902462.0	902536.0	75.0	587.0	antisense_438_ss.jpg
+antisense_439	903619	-	571	RNA	RhoDep	903156.0	903234.0	-140.1	[['motif_0', 30, 0.000236]]	903006.0	903619.0	614.0	614.0	antisense_439_ss.jpg
+antisense_440	903681	-	62	RNA	NA	NA	NA	-3.0	NA	903654.0	903680.0	27.0	28.0	antisense_440_ss.jpg
+antisense_441	904603	-	301	RNA	NA	NA	NA	-30.0	NA	904437.0	904472.0	36.0	167.0	antisense_441_ss.jpg
+antisense_442	905221	-	618	RNA	NA	NA	NA	-86.5	NA	904829.0	904873.0	45.0	393.0	antisense_442_ss.jpg
+antisense_443	905805	-	584	RNA	Intrinsic	905259.0	905271.0	-109.4	[['motif_0', 31, 0.00167]]	905259.0	905805.0	547.0	547.0	antisense_443_ss.jpg
+antisense_444	906034	-	229	RNA	NA	NA	NA	-45.3	[['motif_0', 28, 0.0034]]	905811.0	905843.0	33.0	224.0	antisense_444_ss.jpg
+antisense_445	908516	-	910	RNA	NA	NA	NA	-143.6	[['motif_0', 28, 0.00134], ['motif_1', 2, 2.34e-06]]	907781.0	908516.0	736.0	736.0	antisense_445_ss.jpg
+antisense_446	909027	-	511	RNA	NA	NA	NA	-98.5	NA	908542.0	908565.0	24.0	486.0	antisense_446_ss.jpg
+antisense_447	911678	-	910	RNA	NA	NA	NA	-167.4	NA	910769.0	911678.0	910.0	910.0	antisense_447_ss.jpg
+antisense_448	917189	-	721	RNA	RhoDep	916646.0	916724.0	-122.7	[['motif_0', 30, 0.00229]]	916496.0	917186.0	691.0	694.0	antisense_448_ss.jpg
+antisense_449	917685	-	496	RNA	NA	NA	NA	-23.5	[['motif_0', 30, 0.00206]]	917600.0	917644.0	45.0	86.0	antisense_449_ss.jpg
+antisense_450	917811	-	126	RNA	NA	NA	NA	-23.4	[['motif_0', 32, 0.0041]]	917728.0	917739.0	12.0	84.0	antisense_450_ss.jpg
+antisense_451	918106	-	295	RNA	NA	NA	NA	-30.4	NA	917923.0	917955.0	33.0	184.0	antisense_451_ss.jpg
+antisense_455	927887	-	735	RNA	Intrinsic	927548.0	927574.0	-61.2	NA	927548.0	927887.0	340.0	340.0	antisense_455_ss.jpg
+antisense_464	942312	-	730	COD	RhoDep	941671.0	941749.0	NA	NA	941521.0	942307.0	787.0	792.0	
+antisense_472	963870	-	450	RNA	RhoDep	963749.0	963827.0	-65.5	[['motif_0', 30, 0.000311]]	963599.0	963844.0	246.0	272.0	antisense_472_ss.jpg
+antisense_473	964165	-	295	RNA	NA	NA	NA	-16.2	[['motif_0', 29, 0.000404]]	964032.0	964067.0	36.0	134.0	antisense_473_ss.jpg
+antisense_483	999844	-	290	RNA	NA	NA	NA	-5.1	[['motif_0', 29, 1.34e-05]]	999793.0	999825.0	33.0	52.0	antisense_483_ss.jpg
+antisense_484	1001432	-	910	RNA	RhoDep	1000933.0	1001011.0	-123.8	[['motif_0', 19, 0.0028]]	1000783.0	1001432.0	650.0	650.0	antisense_484_ss.jpg
+antisense_485	1002850	-	910	RNA	Intrinsic	1002434.0	1002471.0	-77.6	[['motif_0', 9, 0.00167]]	1002434.0	1002848.0	415.0	417.0	antisense_485_ss.jpg
+antisense_486	1003144	-	294	RNA	NA	NA	NA	-19.1	[['motif_0', 17, 0.000669]]	1002950.0	1003072.0	123.0	195.0	antisense_486_ss.jpg
+antisense_488	1004708	-	910	RNA	NA	NA	NA	-145.6	[['motif_0', 29, 0.000154], ['motif_1', 8, 8e-06]]	1003841.0	1004707.0	867.0	868.0	antisense_488_ss.jpg
+antisense_491	1010176	-	603	RNA	NA	NA	NA	-64.6	[['motif_0', 31, 5.15e-05]]	1009850.0	1009909.0	60.0	327.0	antisense_491_ss.jpg
+antisense_492	1011008	-	832	RNA	RhoDep	1010492.0	1010570.0	-137.5	[['motif_0', 29, 0.000592]]	1010342.0	1011007.0	666.0	667.0	antisense_492_ss.jpg
+antisense_493	1011156	-	148	RNA	NA	NA	NA	-13.4	[['motif_0', 28, 0.00253]]	1011010.0	1011021.0	12.0	147.0	antisense_493_ss.jpg
+antisense_494	1012025	-	869	RNA	Intrinsic	1011208.0	1011227.0	-160.2	[['motif_0', 29, 1.07e-05]]	1011208.0	1012025.0	818.0	818.0	antisense_494_ss.jpg
+antisense_498	1028927	-	816	RNA	NA	NA	NA	-14.5	NA	1028808.0	1028834.0	27.0	120.0	antisense_498_ss.jpg
+antisense_499	1029200	-	273	RNA	Intrinsic	1029041.0	1029056.0	-23.3	NA	1029041.0	1029061.0	21.0	160.0	antisense_499_ss.jpg
+antisense_500	1032779	-	910	COD	RhoDep	1031931.0	1032009.0	NA	[['motif_0', 29, 0.000133]]	1031781.0	1032679.0	899.0	999.0	
+antisense_501	1033839	-	910	RNA	NA	NA	NA	-51.6	[['motif_0', 10, 0.000206]]	1033510.0	1033536.0	27.0	330.0	antisense_501_ss.jpg
+antisense_502	1034007	-	168	RNA	NA	NA	NA	-3.2	[['motif_0', 27, 0.00134]]	1033980.0	1034006.0	27.0	28.0	antisense_502_ss.jpg
+antisense_503	1034284	-	277	RNA	RhoDep	1034015.0	1034093.0	-80.7	[['motif_0', 30, 0.00134]]	1033865.0	1034121.0	257.0	420.0	antisense_503_ss.jpg
+antisense_504	1034336	-	52	RNA	NA	NA	NA	-0.8	[['motif_0', 17, 0.00253]]	1034314.0	1034331.0	18.0	23.0	antisense_504_ss.jpg
+antisense_505	1035555	-	910	RNA	RhoDep	1034665.0	1034743.0	-219.2	NA	1034515.0	1035554.0	1040.0	1041.0	antisense_505_ss.jpg
+antisense_506	1035767	-	212	RNA	NA	NA	NA	-29.6	NA	1035555.0	1035581.0	27.0	213.0	antisense_506_ss.jpg
+antisense_507	1037579	-	910	RNA	RhoDep	1036712.0	1036790.0	-173.1	[['motif_0', 29, 0.00186]]	1036562.0	1037578.0	1017.0	1018.0	antisense_507_ss.jpg
+antisense_508	1038042	-	463	RNA	NA	NA	NA	-72.1	[['motif_0', 29, 2.04e-05]]	1037629.0	1037670.0	42.0	414.0	antisense_508_ss.jpg
+antisense_509	1038549	-	507	RNA	NA	NA	NA	-85.8	[['motif_0', 7, 0.00186]]	1038043.0	1038547.0	505.0	507.0	antisense_509_ss.jpg
+antisense_510	1039410	-	861	RNA	RhoDep	1039132.0	1039210.0	-77.3	[['motif_0', 29, 0.000115]]	1038982.0	1039230.0	249.0	429.0	antisense_510_ss.jpg
+antisense_511	1039649	-	239	RNA	NA	NA	NA	-6.7	NA	1039592.0	1039618.0	27.0	58.0	antisense_511_ss.jpg
+antisense_512	1039837	-	188	RNA	NA	NA	NA	0.0	[['motif_0', 29, 0.000271]]	1039818.0	1039835.0	18.0	20.0	antisense_512_ss.jpg
+antisense_513	1041464	-	910	RNA	Intrinsic	1040734.0	1040744.0	-133.5	[['motif_0', 29, 0.00253]]	1040734.0	1041062.0	329.0	731.0	antisense_513_ss.jpg
+antisense_514	1041664	-	200	RNA	Intrinsic	1041460.0	1041501.0	-40.2	NA	1041460.0	1041611.0	152.0	205.0	antisense_514_ss.jpg
+antisense_515	1042279	-	615	RNA	NA	NA	NA	-78.6	[['motif_0', 29, 0.00206]]	1041804.0	1041884.0	81.0	476.0	antisense_515_ss.jpg
+antisense_516	1043049	-	770	RNA	RhoDep	1042639.0	1042717.0	-102.8	[['motif_0', 29, 5.15e-05]]	1042489.0	1043049.0	561.0	561.0	antisense_516_ss.jpg
+antisense_518	1046270	-	655	RNA	RhoDep	1046055.0	1046133.0	-76.2	[['motif_0', 29, 0.000592]]	1045905.0	1046262.0	358.0	366.0	antisense_518_ss.jpg
+antisense_519	1046345	-	75	COD	NA	NA	NA	NA	[['motif_0', 28, 0.000311]]	1046288.0	1046317.0	30.0	58.0	
+antisense_530	1067079	-	346	RNA	NA	NA	NA	-58.94	NA	1066747.0	1066764.0	18.0	333.0	antisense_530_ss.jpg
+antisense_531	1067269	-	190	RNA	NA	NA	NA	-20.0	NA	1067126.0	1067143.0	18.0	144.0	antisense_531_ss.jpg
+antisense_532	1069169	-	910	RNA	RhoDep	1068353.0	1068431.0	-158.7	[['motif_0', 19, 0.00309]]	1068203.0	1068505.0	303.0	967.0	antisense_532_ss.jpg
+antisense_533	1070998	-	910	RNA	NA	NA	NA	-120.7	[['motif_0', 29, 2.04e-05]]	1070138.0	1070164.0	27.0	861.0	antisense_533_ss.jpg
+antisense_537	1072864	-	461	RNA	NA	NA	NA	-55.8	[['motif_0', 30, 0.00206]]	1072466.0	1072489.0	24.0	399.0	antisense_537_ss.jpg
+antisense_535	1075026	-	496	RNA	RhoDep	1074836.0	1074914.0	-40.8	NA	1074686.0	1075025.0	340.0	341.0	antisense_535_ss.jpg
+antisense_534	1077155	-	910	RNA	RhoDep	1076739.0	1076817.0	-80.8	NA	1076589.0	1076862.0	274.0	567.0	antisense_534_ss.jpg
+antisense_540	1078622	-	910	RNA	Intrinsic	1077980.0	1078004.0	-98.2	NA	1077980.0	1078574.0	595.0	643.0	antisense_540_ss.jpg
+antisense_541	1081253	-	374	RNA	NA	NA	NA	-50.9	[['motif_0', 29, 0.0012]]	1080987.0	1081253.0	267.0	267.0	antisense_541_ss.jpg
+antisense_542	1081504	-	251	RNA	NA	NA	NA	-22.9	[['motif_0', 20, 0.00085]]	1081365.0	1081403.0	39.0	140.0	antisense_542_ss.jpg
+antisense_545	1090232	-	910	COD	Intrinsic	1089516.0	1089546.0	NA	[['motif_0', 29, 0.000592]]	1089516.0	1090179.0	664.0	717.0	
+antisense_546	1090757	-	525	RNA	NA	NA	NA	-82.6	[['motif_0', 29, 3.62e-05]]	1090285.0	1090344.0	60.0	473.0	antisense_546_ss.jpg
+antisense_547	1090820	-	63	RNA	NA	NA	NA	-3.7	NA	1090767.0	1090781.0	15.0	54.0	antisense_547_ss.jpg
+antisense_558	1120925	-	910	COD	RhoDep	1120019.0	1120097.0	NA	NA	1119869.0	1120917.0	1049.0	1057.0	
+antisense_560	1123680	-	910	COD	RhoDep	1123374.0	1123452.0	NA	NA	1123224.0	1123672.0	449.0	457.0	
+antisense_565	1140004	-	910	RNA	NA	NA	NA	-143.0	NA	1139095.0	1140003.0	909.0	910.0	antisense_565_ss.jpg
+antisense_566	1144173	-	382	RNA	NA	NA	NA	-36.4	[['motif_0', 29, 0.000669]]	1143931.0	1144020.0	90.0	243.0	antisense_566_ss.jpg
+antisense_570	1150072	-	811	RNA	RhoDep	1149300.0	1149378.0	-149.4	[['motif_0', 29, 0.000154]]	1149150.0	1149862.0	713.0	923.0	antisense_570_ss.jpg
+antisense_571	1153723	-	684	RNA	RhoDep	1153196.0	1153274.0	-120.6	[['motif_0', 30, 0.000133]]	1153046.0	1153723.0	678.0	678.0	antisense_571_ss.jpg
+antisense_573	1161668	-	910	RNA	NA	NA	NA	-104.4	[['motif_0', 1, 0.000311]]	1161157.0	1161198.0	42.0	512.0	antisense_573_ss.jpg
+antisense_574	1163283	-	910	RNA	RhoDep	1162648.0	1162726.0	-141.9	[['motif_0', 29, 0.00046]]	1162498.0	1163283.0	786.0	786.0	antisense_574_ss.jpg
+antisense_575	1164075	-	792	RNA	RhoDep	1163738.0	1163816.0	-100.3	NA	1163588.0	1164063.0	476.0	488.0	antisense_575_ss.jpg
+antisense_576	1171539	-	910	RNA	Intrinsic	1170772.0	1170792.0	-150.3	NA	1170772.0	1171414.0	643.0	768.0	antisense_576_ss.jpg
+antisense_577	1172201	-	662	RNA	RhoDep	1171656.0	1171734.0	-154.9	[['motif_0', 29, 0.00167]]	1171506.0	1171793.0	288.0	696.0	antisense_577_ss.jpg
+antisense_580	1179623	-	910	RNA	NA	NA	NA	-176.7	NA	1178732.0	1179623.0	892.0	892.0	antisense_580_ss.jpg
+antisense_581	1182488	-	910	RNA	NA	NA	NA	-129.7	[['motif_0', 30, 0.000178]]	1181846.0	1181884.0	39.0	643.0	antisense_581_ss.jpg
+antisense_582	1182725	-	237	RNA	NA	NA	NA	-29.8	[['motif_0', 9, 3.01e-05]]	1182532.0	1182660.0	129.0	194.0	antisense_582_ss.jpg
+antisense_583	1182873	-	148	RNA	NA	NA	NA	-26.6	[['motif_0', 29, 0.000236]]	1182753.0	1182827.0	75.0	121.0	antisense_583_ss.jpg
+antisense_584	1189446	-	910	RNA	NA	NA	NA	-197.5	NA	1188537.0	1189446.0	910.0	910.0	antisense_584_ss.jpg
+antisense_585	1192283	-	571	RNA	NA	NA	NA	-72.4	NA	1191853.0	1191885.0	33.0	431.0	antisense_585_ss.jpg
+antisense_586	1193280	-	910	RNA	RhoDep	1193146.0	1193224.0	-52.2	NA	1192996.0	1193274.0	279.0	285.0	antisense_586_ss.jpg
+antisense_591	1228114	-	910	RNA	NA	NA	NA	-96.4	NA	1227652.0	1227705.0	54.0	463.0	antisense_591_ss.jpg
+antisense_592	1229653	-	910	RNA	RhoDep	1228851.0	1228929.0	-178.6	NA	1228701.0	1229268.0	568.0	953.0	antisense_592_ss.jpg
+antisense_593	1229739	-	86	RNA	NA	NA	NA	-0.9	[['motif_0', 18, 0.0034]]	1229697.0	1229714.0	18.0	43.0	antisense_593_ss.jpg
+antisense_595	1237906	-	910	RNA	NA	NA	NA	-164.2	NA	1237083.0	1237906.0	824.0	824.0	antisense_595_ss.jpg
+antisense_596	1237946	-	40	COD	NA	NA	NA	NA	NA	1237915.0	1237944.0	30.0	32.0	
+antisense_598	1241392	-	470	RNA	NA	NA	NA	-16.1	[['motif_0', 28, 0.00085]]	1241262.0	1241294.0	33.0	131.0	antisense_598_ss.jpg
+antisense_600	1247509	-	910	RNA	NA	NA	NA	-162.51	[['motif_0', 30, 1.68e-07]]	1246600.0	1247509.0	910.0	910.0	antisense_600_ss.jpg
+antisense_601	1248148	-	639	RNA	RhoDep	1247527.0	1247605.0	-136.19	NA	1247377.0	1248148.0	772.0	772.0	antisense_601_ss.jpg
+antisense_602	1249096	-	910	RNA	NA	NA	NA	-158.8	NA	1248351.0	1248437.0	87.0	746.0	antisense_602_ss.jpg
+antisense_603	1249629	-	533	RNA	NA	NA	NA	-93.9	NA	1249121.0	1249198.0	78.0	509.0	antisense_603_ss.jpg
+antisense_604	1250712	-	910	RNA	NA	NA	NA	-207.1	[['motif_3', 12, 1.06e-10]]	1249830.0	1249901.0	72.0	883.0	antisense_604_ss.jpg
+antisense_605	1258638	-	910	RNA	RhoDep	1257713.0	1257791.0	-229.8	[['motif_0', 29, 0.00186]]	1257563.0	1258574.0	1012.0	1076.0	antisense_605_ss.jpg
+antisense_606	1260493	-	910	RNA	NA	NA	NA	-139.2	[['motif_0', 30, 2.97e-06]]	1259700.0	1260491.0	792.0	794.0	antisense_606_ss.jpg
+antisense_607	1261096	-	603	RNA	NA	NA	NA	-95.0	[['motif_0', 30, 0.0028]]	1260540.0	1260563.0	24.0	557.0	antisense_607_ss.jpg
+antisense_608	1261644	-	548	RNA	NA	NA	NA	-53.2	NA	1261330.0	1261341.0	12.0	315.0	antisense_608_ss.jpg
+antisense_609	1261977	-	333	RNA	RhoDep	1261577.0	1261655.0	-78.7	[['motif_0', 32, 3.01e-05]]	1261427.0	1261734.0	308.0	551.0	antisense_609_ss.jpg
+antisense_610	1262171	-	194	RNA	NA	NA	NA	-9.5	NA	1262078.0	1262125.0	48.0	94.0	antisense_610_ss.jpg
+antisense_611	1262421	-	250	RNA	NA	NA	NA	-33.0	[['motif_0', 30, 1.68e-07]]	1262219.0	1262284.0	66.0	203.0	antisense_611_ss.jpg
+antisense_612	1263012	-	591	RNA	RhoDep	1262755.0	1262833.0	-67.9	[['motif_0', 30, 0.0034]]	1262605.0	1262959.0	355.0	408.0	antisense_612_ss.jpg
+antisense_613	1264336	-	910	RNA	NA	NA	NA	-164.37	[['motif_0', 30, 1.68e-07]]	1263427.0	1264329.0	903.0	910.0	antisense_613_ss.jpg
+antisense_614	1264975	-	639	RNA	RhoDep	1264354.0	1264432.0	-136.19	NA	1264204.0	1264975.0	772.0	772.0	antisense_614_ss.jpg
+antisense_615	1265460	-	485	RNA	NA	NA	NA	-66.7	[['motif_0', 29, 0.000154]]	1264976.0	1265413.0	438.0	485.0	antisense_615_ss.jpg
+antisense_620	1284490	-	910	RNA	RhoDep	1283503.0	1283581.0	-210.2	[['motif_0', 28, 0.00134]]	1283353.0	1284483.0	1131.0	1138.0	antisense_620_ss.jpg
+antisense_621	1285862	-	910	RNA	RhoDep	1285011.0	1285089.0	-162.2	NA	1284861.0	1285187.0	327.0	1002.0	antisense_621_ss.jpg
+antisense_622	1286962	-	910	RNA	RhoDep	1286790.0	1286868.0	-53.4	[['motif_0', 29, 0.000355]]	1286640.0	1286962.0	323.0	323.0	antisense_622_ss.jpg
+antisense_623	1287118	-	156	COD	NA	NA	NA	NA	NA	1287007.0	1287096.0	90.0	112.0	
+antisense_624	1291275	-	279	RNA	NA	NA	NA	-12.2	NA	1291151.0	1291183.0	33.0	125.0	antisense_624_ss.jpg
+antisense_625	1291980	-	705	COD	RhoDep	1291777.0	1291855.0	NA	[['motif_0', 30, 0.000669]]	1291627.0	1291888.0	262.0	354.0	
+antisense_626	1292128	-	148	RNA	NA	NA	NA	-26.0	[['motif_0', 31, 0.00229]]	1291991.0	1292020.0	30.0	138.0	antisense_626_ss.jpg
+antisense_629	1305532	-	531	RNA	NA	NA	NA	-51.6	NA	1305255.0	1305317.0	63.0	278.0	antisense_629_ss.jpg
+antisense_630	1308554	-	910	RNA	NA	NA	NA	-15.3	[['motif_0', 28, 0.00046]]	1308461.0	1308538.0	78.0	94.0	antisense_630_ss.jpg
+antisense_631	1311261	-	910	RNA	NA	NA	NA	-166.3	[['motif_0', 30, 8.42e-05]]	1310355.0	1311261.0	907.0	907.0	antisense_631_ss.jpg
+antisense_632	1311541	-	280	RNA	NA	NA	NA	-29.0	[['motif_0', 30, 0.000669]]	1311346.0	1311486.0	141.0	196.0	antisense_632_ss.jpg
+antisense_633	1312898	-	474	RNA	NA	NA	NA	-18.4	[['motif_0', 30, 0.000154], ['motif_1', 7, 2.17e-07]]	1312832.0	1312894.0	63.0	67.0	antisense_633_ss.jpg
+antisense_634	1313059	-	161	RNA	RhoDep	1312871.0	1312949.0	-60.3	[['motif_0', 30, 0.00253]]	1312721.0	1313053.0	333.0	339.0	antisense_634_ss.jpg
+antisense_635	1313194	-	135	RNA	NA	NA	NA	-3.3	[['motif_0', 3, 0.00107]]	1313161.0	1313178.0	18.0	34.0	antisense_635_ss.jpg
+antisense_636	1319051	-	910	RNA	NA	NA	NA	-5.9	[['motif_0', 29, 0.0034]]	1319004.0	1319036.0	33.0	48.0	antisense_636_ss.jpg
+antisense_637	1320034	-	910	RNA	RhoDep	1319685.0	1319763.0	-87.6	[['motif_0', 29, 0.000178]]	1319535.0	1320033.0	499.0	500.0	antisense_637_ss.jpg
+antisense_639	1322851	-	457	COD	NA	NA	NA	NA	[['motif_0', 29, 0.000956]]	1322528.0	1322824.0	297.0	324.0	
+antisense_640	1323005	-	154	COD	RhoDep	1322776.0	1322854.0	NA	[['motif_0', 14, 0.000956]]	1322626.0	1322976.0	351.0	380.0	
+antisense_641	1324392	-	910	RNA	RhoDep	1323428.0	1323506.0	-215.8	NA	1323278.0	1323759.0	482.0	1115.0	antisense_641_ss.jpg
+antisense_643	1328481	-	910	COD	RhoDep	1327856.0	1327934.0	NA	NA	1327706.0	1328476.0	771.0	776.0	
+antisense_644	1329970	-	910	RNA	RhoDep	1329233.0	1329311.0	-201.0	[['motif_0', 29, 0.000355]]	1329083.0	1329970.0	888.0	888.0	antisense_644_ss.jpg
+antisense_645	1330499	-	529	COD	RhoDep	1330039.0	1330117.0	NA	NA	1329889.0	1330320.0	432.0	611.0	
+antisense_646	1331052	-	553	RNA	Intrinsic	1330770.0	1330788.0	-60.7	NA	1330770.0	1331052.0	283.0	283.0	antisense_646_ss.jpg
+antisense_647	1331399	-	347	RNA	NA	NA	NA	-62.1	[['motif_0', 30, 2.2e-06]]	1331068.0	1331124.0	57.0	332.0	antisense_647_ss.jpg
+antisense_675	1397673	-	910	RNA	NA	NA	NA	-166.5	[['motif_0', 31, 0.0028]]	1396766.0	1397668.0	903.0	908.0	antisense_675_ss.jpg
+antisense_676	1398675	-	910	RNA	NA	NA	NA	-137.0	[['motif_0', 29, 0.00134]]	1397985.0	1398032.0	48.0	691.0	antisense_676_ss.jpg
+antisense_677	1399770	-	910	RNA	NA	NA	NA	-196.7	[['motif_0', 30, 0.00134], ['motif_1', 1, 4.81e-06]]	1398865.0	1398915.0	51.0	906.0	antisense_677_ss.jpg
+antisense_678	1400183	-	413	RNA	NA	NA	NA	-19.1	[['motif_0', 28, 2.2e-06]]	1400078.0	1400107.0	30.0	106.0	antisense_678_ss.jpg
+antisense_679	1400940	-	757	COD	NA	NA	NA	NA	[['motif_0', 31, 7.18e-05]]	1400244.0	1400930.0	687.0	697.0	
+antisense_686	1434018	-	910	RNA	RhoDep	1433496.0	1433574.0	-121.82	NA	1433346.0	1433799.0	454.0	673.0	antisense_686_ss.jpg
+antisense_697	1452143	-	647	RNA	RhoDep	1452045.0	1452123.0	-53.9	NA	1451895.0	1452141.0	247.0	249.0	antisense_697_ss.jpg
+antisense_698	1454149	-	910	RNA	RhoDep	1453478.0	1453556.0	-156.2	[['motif_0', 19, 0.00309]]	1453328.0	1454140.0	813.0	822.0	antisense_698_ss.jpg
+antisense_699	1461108	-	910	RNA	NA	NA	NA	-161.0	[['motif_0', 1, 0.000355]]	1460201.0	1461107.0	907.0	908.0	antisense_699_ss.jpg
+antisense_700	1463407	-	890	RNA	RhoDep	1463202.0	1463280.0	-45.0	NA	1463052.0	1463406.0	355.0	356.0	antisense_700_ss.jpg
+antisense_705	1477578	-	343	RNA	NA	NA	NA	-28.3	[['motif_0', 29, 0.00186]]	1477436.0	1477492.0	57.0	143.0	antisense_705_ss.jpg
+antisense_709	1492313	-	390	RNA	NA	NA	NA	-52.5	NA	1492024.0	1492068.0	45.0	290.0	antisense_709_ss.jpg
+antisense_710	1492990	-	677	RNA	NA	NA	NA	-123.7	[['motif_0', 29, 0.000178]]	1492318.0	1492986.0	669.0	673.0	antisense_710_ss.jpg
+antisense_721	1521368	-	347	RNA	NA	NA	NA	-8.5	NA	1521293.0	1521304.0	12.0	76.0	antisense_721_ss.jpg
+antisense_722	1521648	-	280	RNA	NA	NA	NA	-13.7	NA	1521607.0	1521630.0	24.0	42.0	antisense_722_ss.jpg
+antisense_723	1525643	-	910	RNA	RhoDep	1524674.0	1524752.0	-227.35	[['motif_0', 14, 0.0012]]	1524524.0	1525263.0	740.0	1120.0	antisense_723_ss.jpg
+antisense_724	1526827	-	910	RNA	RhoDep	1525884.0	1525962.0	-226.4	[['motif_1', 24, 1.02e-05]]	1525734.0	1526825.0	1092.0	1094.0	antisense_724_ss.jpg
+antisense_725	1527555	-	728	COD	RhoDep	1526882.0	1526960.0	NA	[['motif_0', 29, 7.35e-10]]	1526732.0	1527536.0	805.0	824.0	
+antisense_726	1536066	-	910	COD	RhoDep	1535268.0	1535346.0	NA	NA	1535118.0	1535876.0	759.0	949.0	
+antisense_727	1536285	-	219	RNA	NA	NA	NA	-17.8	NA	1536192.0	1536209.0	18.0	94.0	antisense_727_ss.jpg
+antisense_728	1537857	-	910	RNA	RhoDep	1536945.0	1537023.0	-207.1	[['motif_0', 30, 0.000271]]	1536795.0	1537857.0	1063.0	1063.0	antisense_728_ss.jpg
+antisense_729	1539827	-	910	COD	RhoDep	1539123.0	1539201.0	NA	[['motif_0', 17, 0.00186]]	1538973.0	1539594.0	622.0	855.0	
+antisense_730	1541604	-	910	COD	RhoDep	1540906.0	1540984.0	NA	NA	1540756.0	1541435.0	680.0	849.0	
+antisense_731	1542457	-	853	RNA	RhoDep	1542026.0	1542104.0	-118.5	NA	1541876.0	1542139.0	264.0	582.0	antisense_731_ss.jpg
+antisense_732	1543686	-	910	COD	RhoDep	1542862.0	1542940.0	NA	NA	1542712.0	1543677.0	966.0	975.0	
+antisense_733	1545230	-	910	RNA	NA	NA	NA	-173.6	[['motif_0', 17, 0.0028]]	1544323.0	1545226.0	904.0	908.0	antisense_733_ss.jpg
+antisense_734	1545372	-	142	COD	NA	NA	NA	NA	[['motif_0', 29, 0.000154]]	1545251.0	1545358.0	108.0	122.0	
+antisense_735	1549329	-	569	RNA	NA	NA	NA	-80.1	NA	1548780.0	1549321.0	542.0	550.0	antisense_735_ss.jpg
+antisense_736	1550052	-	723	COD	Intrinsic	1549590.0	1549624.0	NA	[['motif_0', 29, 0.00253]]	1549590.0	1550026.0	437.0	463.0	
+antisense_737	1550115	-	63	RNA	NA	NA	NA	-8.2	NA	1550055.0	1550066.0	12.0	61.0	antisense_737_ss.jpg
+antisense_738	1550524	-	409	RNA	NA	NA	NA	-59.6	[['motif_1', 25, 4.04e-06]]	1550194.0	1550262.0	69.0	331.0	antisense_738_ss.jpg
+antisense_739	1556971	-	910	RNA	RhoDep	1556224.0	1556302.0	-171.6	[['motif_0', 30, 0.00085]]	1556074.0	1556971.0	898.0	898.0	antisense_739_ss.jpg
+antisense_740	1557155	-	184	RNA	NA	NA	NA	-12.8	NA	1557069.0	1557134.0	66.0	87.0	antisense_740_ss.jpg
+antisense_742	1557271	-	116	RNA	NA	NA	NA	-4.3	[['motif_0', 32, 0.000236]]	1557216.0	1557251.0	36.0	56.0	antisense_742_ss.jpg
+antisense_744	1559581	-	910	RNA	RhoDep	1558948.0	1559026.0	-145.0	[['motif_0', 30, 0.0034]]	1558798.0	1559263.0	466.0	784.0	antisense_744_ss.jpg
+antisense_745	1559631	-	50	RNA	NA	NA	NA	-1.6	[['motif_0', 20, 0.0041]]	1559588.0	1559596.0	9.0	44.0	antisense_745_ss.jpg
+antisense_748	1564087	-	910	RNA	RhoDep	1563110.0	1563188.0	-216.0	NA	1562960.0	1564087.0	1128.0	1128.0	antisense_748_ss.jpg
+antisense_749	1566319	-	910	RNA	RhoDep	1565385.0	1565463.0	-205.4	[['motif_0', 29, 0.00186]]	1565235.0	1566318.0	1084.0	1085.0	antisense_749_ss.jpg
+antisense_750	1566717	-	398	COD	RhoDep	1566436.0	1566514.0	NA	[['motif_0', 28, 0.000311]]	1566286.0	1566699.0	414.0	432.0	
+antisense_751	1569293	-	910	RNA	RhoDep	1568745.0	1568823.0	-144.1	NA	1568595.0	1569115.0	521.0	699.0	antisense_751_ss.jpg
+antisense_753	1580920	-	234	RNA	Intrinsic	1580669.0	1580704.0	-29.6	[['motif_0', 29, 7.18e-05]]	1580669.0	1580920.0	252.0	252.0	antisense_753_ss.jpg
+antisense_754	1582667	-	910	RNA	NA	NA	NA	-152.0	NA	1581810.0	1581830.0	21.0	858.0	antisense_754_ss.jpg
+antisense_755	1583175	-	508	RNA	NA	NA	NA	-101.4	[['motif_0', 30, 0.0034]]	1582669.0	1583175.0	507.0	507.0	antisense_755_ss.jpg
+antisense_761	1595991	-	910	COD	RhoDep	1595359.0	1595437.0	NA	[['motif_0', 30, 0.0028]]	1595209.0	1595991.0	783.0	783.0	
+antisense_762	1596827	-	836	RNA	RhoDep	1596605.0	1596683.0	-62.7	NA	1596455.0	1596819.0	365.0	373.0	antisense_762_ss.jpg
+antisense_764	1597427	-	600	RNA	NA	NA	NA	-35.2	[['motif_0', 28, 0.000236]]	1597267.0	1597332.0	66.0	161.0	antisense_764_ss.jpg
+antisense_765	1598448	-	910	RNA	RhoDep	1597782.0	1597860.0	-123.3	[['motif_1', 4, 2.13e-06], ['motif_4', 33, 1.15e-09]]	1597632.0	1598447.0	816.0	817.0	antisense_765_ss.jpg
+antisense_766	1598695	-	247	RNA	NA	NA	NA	-35.6	[['motif_0', 4, 0.00253]]	1598448.0	1598594.0	147.0	248.0	antisense_766_ss.jpg
+antisense_770	1610547	-	910	RNA	RhoDep	1609723.0	1609801.0	-157.0	NA	1609573.0	1609879.0	307.0	975.0	antisense_770_ss.jpg
+antisense_771	1610758	-	211	COD	NA	NA	NA	NA	[['motif_0', 30, 0.000115]]	1610604.0	1610690.0	87.0	155.0	
+antisense_774	1626843	-	474	RNA	RhoDep	1626463.0	1626541.0	-160.4	NA	1626313.0	1626843.0	531.0	531.0	antisense_774_ss.jpg
