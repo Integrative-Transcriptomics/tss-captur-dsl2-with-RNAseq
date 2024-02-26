@@ -18,8 +18,8 @@ export default function UploadPage() {
   // State to keep track of the report URL
   const [reportUrl, setReportUrl] = useState(null);
 
+  // Fetch file size limits from the API when the component mounts
   useEffect(() => {
-    // Fetch the file size limits from the API when the component mounts
     const fetchConfig = async () => {
       try {
         const response = await axios.get('/api/config');
@@ -34,15 +34,15 @@ export default function UploadPage() {
     fetchConfig();
   }, []);
 
+  // Start the analysis when jobHash changes and is not null
   useEffect(() => {
-    // Start the analysis when jobHash changes and is not null
     if (jobHash) {
       console.log(jobHash);
       handleAnalysisStart();
     }
   }, [jobHash]);
 
-  // Helper function to validate file sizes
+  // Validate file sizes against max limits
   const validateFileSizes = (fileInputs) => {
     let totalFileSize = 0;
     for (let input of fileInputs) {
@@ -61,7 +61,7 @@ export default function UploadPage() {
     return true;
   };
 
-  // Helper function to append files to FormData and generate SHA-256 hash for each file
+  // Append files to FormData and generate SHA-256 hash for each file
   const appendFilesAndHashes = async (fileInputs, formData) => {
     const fileHashes = {};
 
@@ -79,7 +79,7 @@ export default function UploadPage() {
     formData.append('motifNumber', motifNumber);
   };
 
-  // Helper function to handle the upload process
+  // Handle the upload process with progress tracking
   const uploadFiles = async (formData) => {
     const options = {
       headers: { "Content-Type": "multipart/form-data" },
@@ -108,7 +108,7 @@ export default function UploadPage() {
     }
   };
 
-  // Helper function to start upload
+  // Initiate the file upload process
   const handleUpload = async (event) => {
     try {
       event.preventDefault();
@@ -126,7 +126,7 @@ export default function UploadPage() {
     }
   };
 
-  // Helper function to start the analysis after a successful upload
+  // Start the analysis after a successful upload
   const handleAnalysisStart = async () => {
     try {
       const runResponse = await axios.post('/api/run', { jobHash: jobHash });
@@ -147,6 +147,7 @@ export default function UploadPage() {
     }
   };
 
+  // Render upload page
   return (
     <Layout>
       <div>

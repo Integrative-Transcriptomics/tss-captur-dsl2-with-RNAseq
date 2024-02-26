@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 
 export default function Example() {
+  // Render example data page with information and links
   return (
     <Layout>
       <div>

@@ -1,6 +1,7 @@
 import Layout from '../components/Layout';
 
 export default function About() {
+  // Render about page with information and links
   return (
     <Layout>
       <div>

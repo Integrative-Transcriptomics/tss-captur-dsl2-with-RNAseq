@@ -1,6 +1,8 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 
+// Custom Document component to modify applications <Head> tags
 class MyDocument extends Document {
+  // Render the structure of the document
   render() {
     return (
       <Html>
@@ -12,6 +14,7 @@ class MyDocument extends Document {
           <link href="/static/css/sb-admin-2.min.css" rel="stylesheet" />
         </Head>
         <body>
+          {/* Main content of the document */}
           <Main />
           <NextScript />
         </body>

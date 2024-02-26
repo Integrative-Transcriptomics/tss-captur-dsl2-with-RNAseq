@@ -1,15 +1,20 @@
 import fs from 'fs';
 import path from 'path';
 
+// Handler function to check the status of a job based on its hash
 export default async function handler(req, res) {
+  // Extract jobHash from the request query
   const { jobHash } = req.query;
+  // Define directories
   const paramsDir = path.join('./uploads', jobHash, 'params.json');
   const reportDir = path.join('./public/reports', jobHash);
   const overviewDir = path.join(reportDir, 'interface', 'overview.html');
   const errorDir = path.join(reportDir, 'error.log');
 
   try {
+    // Check if the job's params.json file exists
     if (fs.existsSync(paramsDir)) {
+      // Check if the overview.html exists to determine if the job is completed
       if (fs.existsSync(overviewDir)) {
         // If the overview.html file exists, the job is considered completed
         res.status(200).json({ status: 'completed' });
@@ -28,6 +33,6 @@ export default async function handler(req, res) {
     }
   } catch (error) {
     console.error(`Error checking status for job ${jobHash}:`, error);
-    res.status(500).json({ error: 'Internal server error' });
-  }
+    res.status(500).send('Internal Server Error');
+    }
 }

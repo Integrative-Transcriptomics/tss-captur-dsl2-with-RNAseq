@@ -18,6 +18,7 @@ export default async function uploadHandler(req, res) {
   let jobUploadDir;
   
   try {
+    // Check for POST request method
     if (req.method !== 'POST') {
       return res.status(405).end('Method Not Allowed');
     }
@@ -28,16 +29,19 @@ export default async function uploadHandler(req, res) {
       jobUploadDir = path.join(UPLOADS_DIR, jobHash);
     } while (fs.existsSync(jobUploadDir));
 
+    // Log the generated job hash
     console.log(jobHash);
+
     // Create job specific directories
     const genomeDir = path.join(jobUploadDir, 'genome');
     const gffDir = path.join(jobUploadDir, 'gff');
 
+    // Create directories for job files
     await fs.promises.mkdir(jobUploadDir, { recursive: true });
     await fs.promises.mkdir(genomeDir, { recursive: true });
     await fs.promises.mkdir(gffDir, { recursive: true });
 
-    // Form options
+    // Configure form for file upload
     const form = new IncomingForm({ hashAlgorithm: 'sha256' });
     form.uploadDir = jobUploadDir;
     form.keepExtensions = true;
@@ -49,11 +53,14 @@ export default async function uploadHandler(req, res) {
     let motifNumber;
     let clientHashes;
 
+    // Set upload timeout based on config
     const uploadTimeout = calculateUploadTimeout();
 
+    // Handle file upload and processing
     await new Promise((resolve, reject) => {
       const timer = setTimeout(() => reject(new Error('Upload timeout exceeded')), uploadTimeout);
 
+      // Handle form errors
       form.on('error', reject);
 
       // Rename & move files to appropriate destinations
@@ -68,14 +75,16 @@ export default async function uploadHandler(req, res) {
         file.filepath = newPath;
       });
 
-      // Resolves after getting motifNumber and comparing hashes
+      // Process form fields and files after upload
       form.parse(req, (err, fields, files) => {
         clearTimeout(timer);
         if (err) return reject(err);
 
+        // Parse and validate motif number and file hashes
         motifNumber = parseInt(fields.motifNumber, 10);
         clientHashes = JSON.parse(fields.fileHashes);
-        // Compare the hashes
+
+        // Ensure uploaded file hashes match client-provided hashes
         for (let field in files) {
           for (let file of files[field]) {
             const formHash = file.hash;
@@ -86,8 +95,9 @@ export default async function uploadHandler(req, res) {
         resolve();
       });
     });
+
+    // Create params.json for job processing
     console.log('Creating params');
-    // Create params.json after successful upload
     const jobReportDir = path.join(REPORT_DIR, jobHash);
     const tableDir = path.join(jobUploadDir, masterTableFile);
     const params = {
@@ -102,8 +112,10 @@ export default async function uploadHandler(req, res) {
     // Respond with jobHash after successful upload
     res.status(200).send({ message: 'Files uploaded successfully.', jobHash });
   } catch (err) {
+    // Log and handle errors during file upload
     console.error('Error during file upload:', err);
-    // Remove erroneous job from uploads
+
+    // Remove erroneous job data if upload fails
     if (jobHash) {
       if (fs.existsSync(jobUploadDir)) {
         fs.rmSync(jobUploadDir, { recursive: true });

@@ -4,9 +4,11 @@ import Link from 'next/link';
 import Script from 'next/script';
 import SidebarLinks from './SidebarLinks';
 
+// Main layout component
 const Layout = ({ children }) => {
   return (
     <>
+      {/* Head element for metadata */}
       <Head>
         <title>TSS-Captur</title>
         <meta charSet="utf-8" />
@@ -16,32 +18,34 @@ const Layout = ({ children }) => {
         <meta name="author" content="" />
      </Head>
        <div id="wrapper">
-        {/* Sidebar */}
+        {/* Sidebar navigation */}
         <ul className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-          {/* Sidebar - Brand */}
+          {/* Brand logo and name */}
           <Link className="sidebar-brand d-flex align-items-center justify-content-center" href="/">
               <div className="sidebar-brand-icon rotate-n-15">
                 <i className="fas fa-dna"></i>
               </div>
               <div className="sidebar-brand-text mx-3">TSS-Captur</div>
           </Link>
+          {/* Sidebar links component */}
           <SidebarLinks />
-          {/* Divider */}
+          {/* Dividers for separating sections */}
           <hr className="sidebar-divider my-0" />
           <hr className="sidebar-divider" />
+          {/* Sidebar toggle button for mobile view */}
           <div className="text-center d-none d-md-inline">
               <button className="rounded-circle border-0" id="sidebarToggle"></button>
           </div>
         </ul>
-        {/* Content Wrapper */}
+        {/* Main content area */}
         <div id="content-wrapper" className="d-flex flex-column">
-          {/* Main Content */}
+          {/* Container for child components */}
           <div id="content" style={{maxWidth: '75%', marginTop: '20px' }}>
             <div className="container-fluid d-flex flex-column">
               {children}
             </div>
           </div>
-          {/* Footer */}
+          {/* Footer*/}
           <footer className="sticky-footer bg-white">
             <div className="container my-auto">
               <div className="copyright text-center my-auto">
@@ -51,7 +55,7 @@ const Layout = ({ children }) => {
           </footer>
         </div>
       </div>
-      {/* Custom scripts for all pages*/}
+      {/* Scripts for functionality and interactivity */}
       <Script src="/static/vendor/jquery/jquery.min.js" strategy="beforeInteractive"></Script>
       <Script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js" strategy="beforeInteractive"></Script>
       <Script src="/static/vendor/jquery-easing/jquery.easing.min.js" strategy="beforeInteractive"></Script>
