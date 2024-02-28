@@ -33,8 +33,8 @@ export default async function uploadHandler(req, res) {
     console.log(jobHash);
 
     // Create job specific directories
-    const genomeDir = path.join(jobUploadDir, 'genome');
-    const gffDir = path.join(jobUploadDir, 'gff');
+    const genomeDir = path.join(jobUploadDir, 'genome/');
+    const gffDir = path.join(jobUploadDir, 'gff/');
 
     // Create directories for job files
     await fs.promises.mkdir(jobUploadDir, { recursive: true });
