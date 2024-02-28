@@ -52,7 +52,7 @@ const statusPage = () => {
           // Handle fetched report status based on the response
           if (data.status === 'completed') {
             // Redirect to the report interface if the job is completed
-            window.location.href = `/reports/${jobHash}/interface/overview.html`;
+            window.location.href = `/reports/${jobHash}/Interface/overview.html`;
           } else if (data.status === 'failed') {
             // Update state to 'failed' and sets the error message
             setStatus('failed');

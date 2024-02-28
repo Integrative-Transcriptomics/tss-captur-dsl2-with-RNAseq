@@ -8,7 +8,7 @@ export default async function handler(req, res) {
   // Define directories
   const paramsDir = path.join('./uploads', jobHash, 'params.json');
   const reportDir = path.join('./public/reports', jobHash);
-  const overviewDir = path.join(reportDir, 'interface', 'overview.html');
+  const overviewDir = path.join(reportDir, 'Interface', 'overview.html');
   const errorDir = path.join(reportDir, 'error.log');
 
   try {
