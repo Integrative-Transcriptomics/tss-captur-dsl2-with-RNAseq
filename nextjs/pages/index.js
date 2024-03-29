@@ -6,6 +6,7 @@ import Layout from '../components/Layout';
 export default function UploadPage() {
   // State to keep track of the motifNumber
   const [motifNumber, setMotifNumber] = useState(5);
+  const [cnitModel, setCnitModel] = useState('pl');
   // State to keep track of the max file size and total file size
   const [maxFileSize, setMaxFileSize] = useState(null);
   const [maxTotalFileSize, setMaxTotalFileSize] = useState(null);
@@ -77,6 +78,7 @@ export default function UploadPage() {
     };
     formData.append('fileHashes', JSON.stringify(fileHashes));
     formData.append('motifNumber', motifNumber);
+    formData.append('cnitModel', cnitModel);
   };
 
   // Handle the upload process with progress tracking
@@ -178,6 +180,13 @@ export default function UploadPage() {
           <div className="form-group d-flex flex-column" style={{ width: '300px' }}>
             <label htmlFor="motifNumber" className="mb-0 mr-2">Max motif numbers: {motifNumber}</label>
             <input type="range" id="motifNumber" name="motifNumber" min="1" max="20" value={motifNumber} onChange={e => setMotifNumber(e.target.value)} required />
+          </div>
+          <div className="form-group d-flex flex-column" style={{ width: '300px' }}>
+            <label htmlFor="cnitModel" className="mb-0 mr-2">Model for CNIT: {cnitModel === "pl" ? "Plant" : "Animal"}</label>
+            <select id="cnitModel" name="cnitModel" value={cnitModel} size="2" onChange={e => setCnitModel(e.target.value)} required>
+              <option value="pl">Plant</option>
+              <option value="ve">Animal</option>
+            </select>
           </div>
           <button type="submit" className="btn btn-primary" disabled={startedUpload}>Start Upload</button>
         </form>

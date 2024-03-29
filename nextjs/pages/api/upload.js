@@ -16,7 +16,7 @@ const REPORT_DIR = path.resolve('./public/reports')
 export default async function uploadHandler(req, res) {
   let jobHash;
   let jobUploadDir;
-  
+
   try {
     // Check for POST request method
     if (req.method !== 'POST') {
@@ -51,6 +51,7 @@ export default async function uploadHandler(req, res) {
 
     let masterTableFile;
     let motifNumber;
+    let cnitModel;
     let clientHashes;
 
     // Set upload timeout based on config
@@ -64,7 +65,7 @@ export default async function uploadHandler(req, res) {
       form.on('error', reject);
 
       // Rename & move files to appropriate destinations
-      form.on('fileBegin', async function(field, file) {
+      form.on('fileBegin', async function (field, file) {
         let newPath;
         if (field === 'masterTable') {
           newPath = path.join(jobUploadDir, file.originalFilename);
@@ -79,9 +80,11 @@ export default async function uploadHandler(req, res) {
       form.parse(req, (err, fields, files) => {
         clearTimeout(timer);
         if (err) return reject(err);
+        console.log(fields);
 
         // Parse and validate motif number and file hashes
         motifNumber = parseInt(fields.motifNumber, 10);
+        cnitModel = String(fields.cnitModel[0]);
         clientHashes = JSON.parse(fields.fileHashes);
 
         // Ensure uploaded file hashes match client-provided hashes
@@ -105,6 +108,7 @@ export default async function uploadHandler(req, res) {
       inputGenomes: genomeDir,
       inputGFFs: gffDir,
       motifNumber: motifNumber,
+      cnitModel: cnitModel,
       outputDir: jobReportDir,
     };
     await fs.promises.writeFile(path.join(jobUploadDir, 'params.json'), JSON.stringify(params));

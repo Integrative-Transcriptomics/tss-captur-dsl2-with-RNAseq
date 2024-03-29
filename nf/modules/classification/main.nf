@@ -12,7 +12,7 @@ process CNIT {
 
     script:
     """
-        python2 $params.cnit -f $query -o ${query.baseName} -m "pl"
+        python2 $params.cnit -f $query -o ${query.baseName} -m $params.cnitModel
         mv ${query.baseName}/${query.baseName}.index .
     """
 }
