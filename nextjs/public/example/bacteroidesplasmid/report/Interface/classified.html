@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>TSS-Captur</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    
+</head>
+
+<body id="page-top">
+    <!-- Bootstrap core JavaScript-->
+    <script src="static/vendor/jquery/jquery.min.js "></script>
+    <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js "></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  
+    <!-- Page level plugins -->
+    <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="static/js/datatablessorting.js"></script>
+
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-dna"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">TSS-captur </div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item active">
+                <a class="nav-link" href="overview.html">
+                    <i class="fas fa-fw fa-globe"></i>
+                    <span>Overview</span></a>
+                <a class="nav-link" href="classified.html">
+                    <i class="fas fa-fw fa-sitemap" aria-hidden="true"></i>
+                    <span>Classification</span></a>
+                <a class="nav-link" href="terminators.html">
+                    <i class="fas fa-fw fa-hand-paper"></i>
+                    <span>Terminator allocation</span></a>
+                <a class="nav-link link-to-motif" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-fw  fa-external-link-alt"></i>
+                    <span>MEME results</span></a>
+                <a class="nav-link"  href="avoided.html">
+                    <i class="fas fa-fw  fa-times-circle"></i>
+                    <span>Ignored TSS positions</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+         
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+            
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <select id="selectGenome" class="form-control bg-light border-0 small" aria-label="SelectGenome" aria-describedby="basic-addon2">
+                                <option value="" disabled selected>Select your genome</option>
+                            </select>
+                        </div>
+                    </form>
+                
+
+                </nav>
+                <script>
+                    let genomes = ['NC_004703']
+                    let indexSelected, genome_selected
+                    let classified = {'NC_004703': [['antisense_0', 981, '-', 'NA', 'OTH Found', 'CNIT', -0.415, -0.118, 'RNA', 493, 644, 981, 754], ['orphan_2', 2720, '-', 'CP081915.1 (4619-5343)', 'True', 'QRNA', 9.932, 1.466, 'RNA', 1996, 1996, 2720, 2720], ['orphan_4', 4242, '-', 'NA', 'OTH Found', 'CNIT', -0.594, 1.342, 'RNA', 3787, 4033, 4242, 4062], ['orphan_5', 4252, '+', 'NA', 'OTH Found', 'CNIT', -0.368, -0.507, 'RNA', 4252, 4306, 4536, 4383], ['antisense_1', 11991, '-', 'NA', 'OTH Found', 'CNIT', -0.307, -1.001, 'RNA', 11266, 11280, 11991, 11660], ['antisense_2', 12120, '-', 'NA', 'OTH Found', 'CNIT', -0.511, 0.668, 'RNA', 11991, 12080, 12120, 12115], ['antisense_3', 16854, '-', 'NA', 'OTH Found', 'CNIT', -0.294, -1.108, 'RNA', 16129, 16136, 16854, 16591], ['antisense_4', 20011, '+', 'NA', 'OTH Found', 'CNIT', -0.417, -0.1, 'RNA', 20011, 20316, 20736, 20420], ['orphan_8', 21681, '+', 'KJ830769.1 (3750-3796)', 'False', 'QRNA', -0.212, -0.368, 'COD', 21681, 21706, 21727, 21723], ['orphan_9', 21734, '+', 'NA', 'OTH Found', 'CNIT', -0.482, 0.428, 'RNA', 21734, 21740, 21919, 21775], ['antisense_5', 25303, '-', 'NA', 'OTH Found', 'CNIT', -0.365, -0.534, 'RNA', 24578, 24646, 25303, 24777], ['antisense_6', 30894, '-', 'CP103167.1 (11079-10612)', 'False', 'QRNA', 1.558, 0.707, 'COD', 30427, 30445, 30894, 30654], ['antisense_7', 32225, '-', 'NA', 'OTH Found', 'CNIT', -0.391, -0.318, 'RNA', 31500, 32026, 32225, 32166]]};
+                    let overviewData = {'NC_004703': [['orphan_5', 4252, '+', 284, 'RNA', 'NA', 'NA', 'NA', -30.1, [['motif_0', 39, 0.000499], ['motif_2', 24, 7.92e-05]], 4306.0, 4383.0, 78.0, 132.0, 'orphan_5_ss.jpg'], ['orphan_8', 21681, '+', 53, 'COD', 'NA', 'NA', 'NA', -5.5, [['motif_0', 4, 0.000197]], 21706.0, 21723.0, 18.0, 43.0, 'orphan_8_ss.jpg'], ['orphan_9', 21734, '+', 185, 'RNA', 'NA', 'NA', 'NA', -7.2, [['motif_0', 18, 0.000665]], 21740.0, 21775.0, 36.0, 42.0, 'orphan_9_ss.jpg'], ['orphan_2', 2720, '-', 725, 'RNA', 'RhoDep', 2092.0, 2170.0, -253.8, [['motif_2', 28, 0.000156]], 1942.0, 2720.0, 779.0, 779.0, 'orphan_2_ss.jpg'], ['orphan_4', 4242, '-', 455, 'RNA', 'NA', 'NA', 'NA', -30.3, 'NA', 4033.0, 4062.0, 30.0, 210.0, 'orphan_4_ss.jpg'], ['antisense_4', 20011, '+', 725, 'RNA', 'RhoDep', 20642.0, 20720.0, -236.4, [['motif_0', 38, 0.00174], ['motif_1', 7, 4.23e-07]], 20316.0, 20870.0, 555.0, 860.0, 'antisense_4_ss.jpg'], ['antisense_0', 981, '-', 488, 'RNA', 'RhoDep', 427.0, 505.0, -218.8, [['motif_0', 38, 0.000747]], 277.0, 754.0, 478.0, 705.0, 'antisense_0_ss.jpg'], ['antisense_1', 11991, '-', 725, 'RNA', 'RhoDep', 11190.0, 11268.0, -278.3, [['motif_0', 39, 3.53e-05], ['motif_1', 14, 9.86e-09]], 11040.0, 11660.0, 621.0, 952.0, 'antisense_1_ss.jpg'], ['antisense_2', 12120, '-', 129, 'RNA', 'RhoDep', 11940.0, 12018.0, -99.3, [['motif_0', 15, 0.000134]], 11790.0, 12115.0, 326.0, 331.0, 'antisense_2_ss.jpg'], ['antisense_3', 16854, '-', 725, 'RNA', 'RhoDep', 16205.0, 16283.0, -238.4, [['motif_0', 9, 0.000351], ['motif_1', 36, 6.86e-08]], 16055.0, 16591.0, 537.0, 800.0, 'antisense_3_ss.jpg'], ['antisense_5', 25303, '-', 725, 'RNA', 'RhoDep', 24604.0, 24682.0, -243.4, [['motif_0', 12, 0.000395], ['motif_2', 27, 7.92e-05]], 24454.0, 24777.0, 324.0, 850.0, 'antisense_5_ss.jpg'], ['antisense_6', 30894, '-', 468, 'COD', 'NA', 'NA', 'NA', -96.2, [['motif_0', 14, 0.000109]], 30445.0, 30654.0, 210.0, 450.0, 'antisense_6_ss.jpg'], ['antisense_7', 32225, '-', 725, 'RNA', 'RhoDep', 31831.0, 31909.0, -137.9, [['motif_0', 39, 2.36e-05], ['motif_1', 1, 1.78e-08]], 31681.0, 32166.0, 486.0, 545.0, 'antisense_7_ss.jpg']]};
+                    let terminators= {'NC_004703': [['antisense_0', '-', 'RNA', 644, 981, 'RhoDep', 'T47', 0.767, 427.0, 505.0, 1.0, 'NA', 277.0, 981.0], ['orphan_2', '-', 'RNA', 1996, 2720, 'RhoDep', 'T50', 0.68, 2092.0, 2170.0, 1.0, 'NA', 1942.0, 2720.0], ['orphan_4', '-', 'RNA', 4033, 4242, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 4033.0, 4242.0], ['orphan_5', '+', 'RNA', 4252, 4383, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 4252.0, 4383.0], ['antisense_1', '-', 'RNA', 11280, 11991, 'RhoDep', 'T78', 0.892, 11190.0, 11268.0, 1.0, 'NA', 11040.0, 11991.0], ['antisense_2', '-', 'RNA', 12080, 12120, 'RhoDep', 'T81', 0.525, 11940.0, 12018.0, 1.0, 'NA', 11790.0, 12120.0], ['antisense_3', '-', 'RNA', 16136, 16854, 'RhoDep', 'T94', 0.719, 16205.0, 16283.0, 1.0, 'NA', 16055.0, 16854.0], ['antisense_4', '+', 'RNA', 20011, 20420, 'RhoDep', 'T24', 0.518, 20642.0, 20720.0, 1.0, 'NA', 20011.0, 20870.0], ['orphan_8', '+', 'COD', 21681, 21723, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 21681.0, 21723.0], ['orphan_9', '+', 'RNA', 21734, 21775, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 21734.0, 21775.0], ['antisense_5', '-', 'RNA', 24646, 25303, 'RhoDep', 'T118', 0.941, 24604.0, 24682.0, 1.0, 'NA', 24454.0, 25303.0], ['antisense_6', '-', 'COD', 30445, 30894, 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 'NA', 30445.0, 30894.0], ['antisense_7', '-', 'RNA', 32026, 32225, 'RhoDep', 'T137', 0.656, 31831.0, 31909.0, 1.0, 'NA', 31681.0, 32225.0]]};
+                    let avoidedTSS = {'NC_004703': []};
+                    let summaryMotifs = {'NC_004703': [['motif_0', 'CSTTKTAT', 1.7, 11], ['motif_1', 'CCGGTTAAAGATMVMG', 14.0, 4], ['motif_2', 'CGGAAS', 60.0, 3]]};
+                    let shortDescription = {'NC_004703': {'antisense': {'COD': 1, 'RNA': 7}, 'orphan': {'COD': 1, 'RNA': 4}, 'Ignored': 0}}
+
+                </script>
+                <script src="static/js/update_interface.js?random=<?php echo uniqid(); ?> "></script>
+
+                   
+
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Classification</h1>
+</div>
+<p class="mb-4">
+    The following interface serves as a visualization of the results produced by TSS-CAPTUR. The possibility exists between an <a href="overview.html">overview</a>> of all results or the detailed results of the <a href="classified.html">classification</a> or the <a href="terminators.html">terminator allocation</a> steps of TSS-CAPTUR. The possibility of some TSS being ignored by TSS-CAPTUR due to their short lenght exists. They are found <a href="avoided.html">here</a> . </p>
+    <p class="mb-4">The current page presents a detailed view on the results on the transcript classification. TSS-CAPTUR uses two programs (CNIT and QRNA) to classify the transcripts in either coding (COD) or non-coding (RNA) transcripts. 
+        The following table allows the access to the final classification and some intermediate steps before it, such as which organism was used for the pairwiese alignment for QRNA. 
+        Since both programs used different scoring functions, a normalized z-score is given. If both programs agree on the predicion, the subcoordinates of the program with the highest z-score are used. 
+        If the predictions differ, TSS-CAPTUR labels the transcipt as a coding sequence. </p>
+<!-- Content Row -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Detailed view on the classification</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTableClass" width="100%" cellspacing="0">
+                
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<script type='text/javascript'>
+    index = localStorage.getItem("genome") ? localStorage.getItem("genome") : 0;
+    genome_selected =genomes[index];
+    let dataClass = classified[genome_selected];
+
+    $(document).ready(function () {
+        $("#dataTableClass").DataTable({
+            "scrollX": true,
+            "scrollY":$(window).height()*0.8,
+            "scrollCollapse": true,
+            columnDefs: [{ type: "natural", targets: 0 },  
+            { render: function ( data, type, row ) {
+        return typeof(data) == "number" ? data.toFixed(3) : data ;
+            },
+    targets: [ 6,7 ] }],
+            order: [[0, "asc"]],
+            data: dataClass,
+            columns: [
+            { title: "Transcript ID" },
+            { title: "Position" },
+            { title: "Strand" },
+            { title: "Aligned to" },
+            { title: "Same Prediction?" },
+            { title: "Source" },
+            { title: "Score of program" },
+            { title: "Normalized score" },
+            { title: "Final Class" },
+            { title: "Start of Transcript" },
+            { title: "Predicted Gene Start" },
+            { title: "End of Transcript " },
+            { title: "Predicted Gene End" },
+            ],
+        });
+    });
+    
+    
+</script>
+
+                        
+
+
+                   
+
+                    
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <script>
+                updateSummary(genome_selected);
+
+            </script>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; TSS-CAPTUR 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <style>
+        .tooltip-arrow,
+        .wide-tooltip + .tooltip > .large.tooltip-inner {max-width: "500px !important"; width: "500px!important"}
+        /* .tooltip-inner  */
+        .tooltip {display: "block ruby",}
+        </style>
+  <!-- Custom scripts for all pages-->
+  <script src="static/js/sb-admin-2.min.js "></script>
+</body>
+
+</html>

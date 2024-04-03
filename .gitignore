@@ -22,3 +22,5 @@ RNAz-2.1
 **/.pnp.*
 **/uploads/**
 **/reports/**
+**/nextjs/public/example/scoelicolor/report/**
+**/nextjs/public/example/bacteroides/report/**

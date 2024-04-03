@@ -1,0 +1,42 @@
+##gff-version 3
+##source-version nocoRNAc v1.23
+##date 3 Apr 2024 07:37:05 GMT
+NC_004703.1	input	ncRNA_region	1	33038	.	.	.	ID=NC_004703.1; Class_String=XTXX
+NC_004703.1	transterm	terminator	1014	1043	78	+	.	ID=TERM23
+NC_004703.1	transterm	terminator	2541	2586	100	+	.	ID=TERM67
+NC_004703.1	transterm	terminator	2549	2578	83	-	.	ID=TERM68
+NC_004703.1	transterm	terminator	2549	2578	91	+	.	ID=TERM69
+NC_004703.1	transterm	terminator	4698	4711	79	-	.	ID=TERM107
+NC_004703.1	transterm	terminator	5345	5363	88	-	.	ID=TERM116
+NC_004703.1	transterm	terminator	7786	7815	76	-	.	ID=TERM158
+NC_004703.1	transterm	terminator	8891	8909	91	+	.	ID=TERM177
+NC_004703.1	transterm	terminator	10583	10596	86	-	.	ID=TERM207
+NC_004703.1	transterm	terminator	15915	15929	85	-	.	ID=TERM284
+NC_004703.1	transterm	terminator	18602	18633	80	+	.	ID=TERM324
+NC_004703.1	transterm	terminator	18607	18630	100	+	.	ID=TERM325
+NC_004703.1	transterm	terminator	18895	18922	76	-	.	ID=TERM328
+NC_004703.1	transterm	terminator	18928	18981	81	+	.	ID=TERM332
+NC_004703.1	transterm	terminator	18929	18980	81	+	.	ID=TERM333
+NC_004703.1	transterm	terminator	18934	18976	100	-	.	ID=TERM335
+NC_004703.1	transterm	terminator	18935	18975	100	-	.	ID=TERM336
+NC_004703.1	transterm	terminator	19450	19499	100	+	.	ID=TERM341
+NC_004703.1	transterm	terminator	19454	19495	91	-	.	ID=TERM342
+NC_004703.1	transterm	terminator	19454	19495	100	+	.	ID=TERM343
+NC_004703.1	transterm	terminator	20070	20087	91	-	.	ID=TERM355
+NC_004703.1	transterm	terminator	20123	20138	77	-	.	ID=TERM356
+NC_004703.1	transterm	terminator	20240	20266	100	-	.	ID=TERM364
+NC_004703.1	transterm	terminator	20254	20264	77	-	.	ID=TERM365
+NC_004703.1	transterm	terminator	21399	21422	100	-	.	ID=TERM386
+NC_004703.1	transterm	terminator	21576	21596	83	-	.	ID=TERM390
+NC_004703.1	transterm	terminator	21578	21594	78	-	.	ID=TERM391
+NC_004703.1	transterm	terminator	21624	21635	91	+	.	ID=TERM393
+NC_004703.1	transterm	terminator	23709	23734	81	-	.	ID=TERM433
+NC_004703.1	transterm	terminator	25510	25554	100	+	.	ID=TERM472
+NC_004703.1	transterm	terminator	26759	26772	80	+	.	ID=TERM485
+NC_004703.1	transterm	terminator	27747	27769	79	+	.	ID=TERM504
+NC_004703.1	transterm	terminator	28447	28465	76	+	.	ID=TERM515
+NC_004703.1	transterm	terminator	31415	31440	75	+	.	ID=TERM579
+NC_004703.1	transterm	terminator	32873	32913	75	+	.	ID=TERM610
+NC_004703.1	transterm	terminator	32877	32910	76	+	.	ID=TERM612
+NC_004703.1	transterm	terminator	32878	32909	78	-	.	ID=TERM613
+NC_004703.1	transterm	terminator	32880	32906	85	+	.	ID=TERM614
