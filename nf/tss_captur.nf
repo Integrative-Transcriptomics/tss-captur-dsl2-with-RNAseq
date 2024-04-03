@@ -20,7 +20,7 @@ include { CREATEREPORT } from './modules/report'
 include { CLEANWORKDIR } from './modules/cleaner'
 
 workflow {
-    genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.inputGenomes}*.${it}" })
+    genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.genomesPath}*.${it}" })
 
     DATAPREPARATION(params.masterTable, params.genomesPath, params.gffPath, params.outputPath)
     MEME(DATAPREPARATION.out.promoters, params.outputPath)

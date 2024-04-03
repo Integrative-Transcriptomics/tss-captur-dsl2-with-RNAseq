@@ -46,12 +46,21 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    if args.conditions and (not os.path.isfile(args.genome_path) or not os.path.isfile(args.gff_path)):
-        parser.error(
-            "If conditions are been tested, you need to upload only one genome or gff file")
-    if not args.conditions and (not os.path.isdir(args.genome_path) or not os.path.isdir(args.gff_path)):
-        parser.error(
-            "If strains are been tested, you need to upload only a directory for genomes or gff files")
+    # print(args)
+    # print(args.conditions)
+    # print(args.genome_path)
+    # print(args.gff_path)
+
+    # if args.conditions and (not os.path.isfile(args.genome_path) or not os.path.isfile(args.gff_path)):
+    #     parser.error(
+    #         "If conditions are been tested, you need to upload only one genome or gff file")
+    # # If strains, then check that the paths are directories
+    # print(args.conditions)
+    # print(os.path.isdir(str(args.genome_path)))
+    # print(os.path.isdir(str(args.gff_path)))
+    # if (not args.conditions) and ((not os.path.isdir(str(args.genome_path))) or (not os.path.isdir(str(args.gff_path)))):
+    #     parser.error(
+    #         "If strains are been tested, you need to upload only a directory for genomes or gff files")
 
     genome_wrapper_list = parse_table("\t", args)
 
