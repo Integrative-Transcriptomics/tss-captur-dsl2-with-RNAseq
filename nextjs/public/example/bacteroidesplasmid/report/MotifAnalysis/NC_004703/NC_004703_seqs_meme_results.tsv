@@ -1,0 +1,19 @@
+transcript_id	position	strand	Motif ID	Motif Name	Motif Start	Motif Length	p-value
+antisense_7	32225	-	motif_0	CSTTKTAT	39	8	2.36e-05
+antisense_1	11991	-	motif_0	CSTTKTAT	39	8	3.53e-05
+antisense_6	30894	-	motif_0	CSTTKTAT	14	8	0.000109
+antisense_2	12120	-	motif_0	CSTTKTAT	15	8	0.000134
+orphan_8	21681	+	motif_0	CSTTKTAT	4	8	0.000197
+antisense_3	16854	-	motif_0	CSTTKTAT	9	8	0.000351
+antisense_5	25303	-	motif_0	CSTTKTAT	12	8	0.000395
+orphan_5	4252	+	motif_0	CSTTKTAT	39	8	0.000499
+orphan_9	21734	+	motif_0	CSTTKTAT	18	8	0.000665
+antisense_0	981	-	motif_0	CSTTKTAT	38	8	0.000747
+antisense_4	20011	+	motif_0	CSTTKTAT	38	8	0.00174
+antisense_1	11991	-	motif_1	CCGGTTAAAGATMVMG	14	16	9.86e-09
+antisense_7	32225	-	motif_1	CCGGTTAAAGATMVMG	1	16	1.78e-08
+antisense_3	16854	-	motif_1	CCGGTTAAAGATMVMG	36	16	6.86e-08
+antisense_4	20011	+	motif_1	CCGGTTAAAGATMVMG	7	16	4.23e-07
+orphan_5	4252	+	motif_2	CGGAAS	24	6	7.92e-05
+antisense_5	25303	-	motif_2	CGGAAS	27	6	7.92e-05
+orphan_2	2720	-	motif_2	CGGAAS	28	6	0.000156
