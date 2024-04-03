@@ -20,7 +20,7 @@
     <!-- Custom styles for this template-->
     <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="static/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-    
+
 </head>
 
 <body id="page-top">
@@ -31,7 +31,7 @@
     <!-- Core plugin JavaScript-->
     <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
-  
+
     <!-- Page level plugins -->
     <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
@@ -69,7 +69,7 @@
                 <a class="nav-link link-to-motif" target="_blank" rel="noopener noreferrer">
                     <i class="fas fa-fw  fa-external-link-alt"></i>
                     <span>MEME results</span></a>
-                <a class="nav-link"  href="avoided.html">
+                <a class="nav-link" href="avoided.html">
                     <i class="fas fa-fw  fa-times-circle"></i>
                     <span>Ignored TSS positions</span></a>
             </li>
@@ -77,14 +77,14 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-         
+
 
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
-            
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -106,28 +106,29 @@
                     <form
                         class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <select id="selectGenome" class="form-control bg-light border-0 small" aria-label="SelectGenome" aria-describedby="basic-addon2">
+                            <select id="selectGenome" class="form-control bg-light border-0 small"
+                                aria-label="SelectGenome" aria-describedby="basic-addon2">
                                 <option value="" disabled selected>Select your genome</option>
                             </select>
                         </div>
                     </form>
-                
+
 
                 </nav>
                 <script>
-                    let genomes = {{genomes | safe}}
+                    let genomes = {{ genomes | safe}}
                     let indexSelected, genome_selected
-                    let classified = {{classified | safe}};
-                    let overviewData = {{overviewData | safe}};
-                    let terminators= {{terminators | safe}};
-                    let avoidedTSS = {{avoidedTSS | safe}};
-                    let summaryMotifs = {{summaryMotifs | safe}};
-                    let shortDescription = {{short_description | safe}}
+                    let classified = {{ classified | safe}};
+                    let overviewData = {{ overviewData | safe}};
+                    let terminators = {{ terminators | safe}};
+                    let avoidedTSS = {{ avoidedTSS | safe}};
+                    let summaryMotifs = {{ summaryMotifs | safe}};
+                    let shortDescription = {{ short_description | safe}}
 
                 </script>
                 <script src="static/js/update_interface.js?random=<?php echo uniqid(); ?> "></script>
 
-                   
+
 
                 <!-- End of Topbar -->
 
@@ -136,12 +137,12 @@
 
                     {% block content %}
                     {% endblock %}
-                        
 
 
-                   
 
-                    
+
+
+
 
                 </div>
                 <!-- /.container-fluid -->
@@ -157,7 +158,11 @@
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; TSS-CAPTUR 2021</span>
+                        <span>University of Tübingen – <a
+                                href="https://uni-tuebingen.de/fakultaeten/mathematisch-naturwissenschaftliche-fakultaet/fachbereiche/informatik/lehrstuehle/integrative-transkriptomik/home/">Integrative
+                                Transcriptomics <i className="fas fa-external-link-alt"></i></a> –TSS-CAPTUR 2024</span>
+
+
                     </div>
                 </div>
             </footer>
@@ -175,12 +180,18 @@
     </a>
     <style>
         .tooltip-arrow,
-        .wide-tooltip + .tooltip > .large.tooltip-inner {max-width: "500px !important"; width: "500px!important"}
+        .wide-tooltip+.tooltip>.large.tooltip-inner {
+            max-width: "500px !important";
+            width: "500px!important"
+        }
+
         /* .tooltip-inner  */
-        .tooltip {display: "block ruby",}
-        </style>
-  <!-- Custom scripts for all pages-->
-  <script src="static/js/sb-admin-2.min.js "></script>
+        .tooltip {
+            display: "block ruby",
+        }
+    </style>
+    <!-- Custom scripts for all pages-->
+    <script src="static/js/sb-admin-2.min.js "></script>
 </body>
 
 </html>

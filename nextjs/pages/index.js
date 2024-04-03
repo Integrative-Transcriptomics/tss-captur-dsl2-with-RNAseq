@@ -155,6 +155,9 @@ export default function UploadPage() {
       <div>
         <h1 className="h3 mb-3 text-gray-800">Upload Files for TSS-CAPTUR</h1>
         <div className="d-flex flex-column mb-4" style={{ width: '300px' }}>
+          <p>Intended for desktop usage</p>
+        </div>
+        <div className="d-flex flex-column mb-4" style={{ width: '300px' }}>
           <p>Maximum size per file: {maxFileSize ? (maxFileSize / 1024 / 1024).toFixed(2) : 'Loading...'} MB</p>
           <p>Maximum total file size: {maxTotalFileSize ? (maxTotalFileSize / 1024 / 1024).toFixed(2) : 'Loading...'} MB</p>
         </div>
