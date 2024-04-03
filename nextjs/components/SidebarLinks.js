@@ -29,7 +29,7 @@ const SidebarLinks = () => {
         {/* Link to the GitHub page */}
         <li className="nav-item">
           <Link className="nav-link" href="https://github.com/Integrative-Transcriptomics/tss-captur-dsl2">
-            <i className="fa fa-github-square"></i>
+            <i className="fas fa-external-link-alt"></i>
             <span>GitHub</span>
           </Link>
         </li>
