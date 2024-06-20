@@ -99,7 +99,7 @@ process BLASTFASTA {
 
     script: 
     """
-        blastn -query $query -db nt -out ${query.baseName - "_queries"}.blastn -outfmt "6 qseqid qstart qend qseq sseqid sstart send sseq evalue bitscore pident frames qcovhsp" -task dc-megablast -taxidlist $taxIDList
+        blastn -query $query -db nt_prok -out ${query.baseName - "_queries"}.blastn -outfmt "6 qseqid qstart qend qseq sseqid sstart send sseq evalue bitscore pident frames qcovhsp" -task dc-megablast -taxidlist $taxIDList
     """
 }
 

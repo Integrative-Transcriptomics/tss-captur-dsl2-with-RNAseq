@@ -8,6 +8,7 @@ log.info """\
  MasterTable : ${params.masterTable}
  Genomes path: ${params.genomesPath}
  GFFs path   : ${params.gffPath}
+ Wiggles path: ${params.wigglePath}
  Output path : ${params.outputPath}
  """
  
@@ -19,6 +20,8 @@ include { RNAFOLD } from './modules/rnafold'
 include { CREATEREPORT } from './modules/report'
 include { CLEANWORKDIR } from './modules/cleaner'
 
+include { WIGGLEANALYSIS } from './subworkflows/WiggleAnalysis.nf'
+ 
 workflow {
     genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.genomesPath}*.${it}" })
 
@@ -31,6 +34,8 @@ workflow {
                         DATAPREPARATION.out.summaryTranscripts, 
                         params.outputPath)
     RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
+
+    WIGGLEANALYSIS(params.wigglePath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.allocation, params.masterTable)
     CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
 }
 

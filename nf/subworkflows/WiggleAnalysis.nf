@@ -14,7 +14,7 @@ workflow WIGGLEANALYSIS{
         WIGGLESTOBWS(wigglePath, fastaPath, projectDir)
 
         //score bigwigs using terminators from rhotermpred and trasntermhp, output scoring to file
-        WIGGLESCORETERMINATORS(WIGGLESTOBWS.out.bwFile, annotationPath, terminatorsAllocation,  MasterTable)
+        WIGGLESCORETERMINATORS(WIGGLESTOBWS.out.bwFile, annotationPath, terminatorsAllocation, MasterTable)
 
     emit:
         //emit output file with terminators and scoring here
