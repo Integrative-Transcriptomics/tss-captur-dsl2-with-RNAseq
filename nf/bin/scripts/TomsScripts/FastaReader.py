@@ -1,7 +1,16 @@
 
+import glob
+
 def get_fasta_seq_length(fastaPath):
     sequence_length = 0
-    f = open(fastaPath, 'r')
+    extensions = ["fa", "fna", "fasta", "frn", "faa", "ffn"]
+
+    files = []
+    for ex in extensions:
+        files.extend(glob.glob(f'{fastaPath}/*.{ex}'))
+
+    f = open(files[0], 'r')
+    
     for line in f:
         if line.startswith('>'):
             continue  # Skip header lines

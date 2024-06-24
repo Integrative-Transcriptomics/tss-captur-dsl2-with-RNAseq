@@ -20,7 +20,7 @@ include { RNAFOLD } from './modules/rnafold'
 include { CREATEREPORT } from './modules/report'
 include { CLEANWORKDIR } from './modules/cleaner'
 
-include { WIGGLEANALYSIS } from './subworkflows/WiggleAnalysis.nf'
+include { WIGGLEANALYSIS } from './subworkflows/WiggleAnalysis'
  
 workflow {
     genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.genomesPath}*.${it}" })

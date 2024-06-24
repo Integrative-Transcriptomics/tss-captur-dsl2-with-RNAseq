@@ -1,17 +1,25 @@
+import glob
 import sys
 import FastaReader
 
-def CreateSizesFile(fastaPath):
+def CreateSizesFile(fastaPath, outputSizesPath):
     chromosomeName = 'No chromosome found'
 
-    f = open(fastaPath, 'r')
+    extensions = ["fa", "fna", "fasta", "frn", "faa", "ffn"]
+
+    files = []
+    for ex in extensions:
+        files.extend(glob.glob(f'{fastaPath}/*.{ex}'))
+
+    f = open(files[0], 'r')
+
     for line in f:
         if line.startswith('>'):
             chromosomeName = line.split()[0][1:]
     
     length = FastaReader.get_fasta_seq_length(fastaPath=fastaPath)
 
-    sizesFile = open(f'{chromosomeName}.sizes', 'w')
+    sizesFile = open(f'{outputSizesPath}/autoSizeFile.sizes', 'w')
 
     sizesFile.write(f'{chromosomeName} {length}\n')
 
@@ -20,4 +28,5 @@ def CreateSizesFile(fastaPath):
 
 if __name__ == "__main__":
     fastaPath = sys.argv[1]
-    CreateSizesFile(fastaPath=fastaPath)
+    outpath = sys.argv[2]
+    CreateSizesFile(fastaPath=fastaPath, outputSizesPath=outpath)

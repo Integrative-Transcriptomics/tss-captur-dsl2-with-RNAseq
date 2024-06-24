@@ -6,8 +6,8 @@ process WIGGLESCORETERMINATORS
     path TerminatorAlloc
     path MasterTable
 
-    output
-    path ScoredTermGFF, emit RescoredTerminators
+    output:
+    path "test", emit: RescoredTerminators
 
     script:
     """
@@ -25,10 +25,12 @@ process WIGGLESTOBWS
     output:
     path bwPath, emit: bwFile
 
+
+
     script:
     """
-        sizes_file = $(python $params.pySizesFileFromFasta $fastaPath)
-        bg_file = $(python $params.pyManualWigToBedGraph $wigglePath $sizes_file CapturNextflow)
-        $params.bedGraphToBigWig $bg_file $sizes_file $bigWigOutputPath
+        python3 $params.pySizesFileFromFasta $fastaPath $bigWigOutputPath
+        python3 $params.pyManualWigToBedGraph $wigglePath $bigWigOutputPath/autoSizeFile.sizes CapturNextflow
+        $params.bedGraphToBigWig CapturNextflow.bedGraph $bigWigOutputPath/autoSizeFile.sizes $bigWigOutputPath
     """
 }

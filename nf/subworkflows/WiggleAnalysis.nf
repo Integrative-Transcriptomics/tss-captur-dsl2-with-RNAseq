@@ -1,6 +1,6 @@
 include { WIGGLESCORETERMINATORS; WIGGLESTOBWS;} from '../modules/wiggleanalysis'
 
-workflow WIGGLEANALYSIS{
+workflow WIGGLEANALYSIS {
     take:
         wigglePath
         annotationPath
@@ -19,4 +19,5 @@ workflow WIGGLEANALYSIS{
 
     emit:
         //emit output file with terminators and scoring here
+        wiggleTerms = WIGGLESCORETERMINATORS.out.RescoredTerminators
 }
