@@ -5,14 +5,14 @@ import FastaReader
 import sys
 import MergeWigs
 
-def WigToBedGraph(Wigglepath, chromSizesFilePath, outputFileName):
+def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
 
     #bedfile = open("/testenv/TestWigs/ManualBED.bed", "x")
     #correctWalker = wigg.fill(wigg.walk(open(path), filler = 0))
     #correctWalker = wigg.fill(wigg.walk(open(Wigglepath)), regions = None, filler = 0, only_edges= False)
     correctWalker = MergeWigs.merge_wigs(Wigglepath)
     #wigg.write(inter.coverage(correctWalker), name='My example')
-    BedGraphFile = open(f"{outputFileName}.bedGraph", "w")
+    BedGraphFile = open(f'{outputPath}/autoBG.bedGraph', 'w')
 
     sizes = open(chromSizesFilePath, 'r')
 

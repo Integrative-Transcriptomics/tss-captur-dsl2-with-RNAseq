@@ -19,4 +19,6 @@ workflow TERMINATORPREDICTION {
     
     emit:
         allocation = FINDTERMINATORS.out.terminatorsAllocation
+        gffRhoterm = RHOTERMPREDICT.out.gffRhoterm
+        gffNocornac = NOCORNAC.out.gffNocornac
 }

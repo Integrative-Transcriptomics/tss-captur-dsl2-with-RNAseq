@@ -1,3 +1,4 @@
+import glob
 import itertools
 import gff3_parser
 import pyBigWig as bigwig
@@ -6,10 +7,13 @@ import numpy as np
 def CalcBackgroundNoise(annotationPath, bigWigPath):
 
     bw = bigwig.open(bigWigPath)
-    annot = gff3_parser.parse_gff3(annotationPath, verbose = False, parse_attributes = False)
+    annotFile = glob.glob(f'{annotationPath}/*gff')
+    
+    annot = gff3_parser.parse_gff3(annotFile[0], verbose = False, parse_attributes = False)
     chromosome = annot.loc[1, "Seqid"]
 
-    inverse = GetInverseOfGFF(annotationPath, bw.chroms(chromosome))
+
+    inverse = GetInverseOfGFF(annotFile[0], bw.chroms(chromosome))
 
     #print(np.quantile(valueCopy, 1))
     #print(nonTranscr)

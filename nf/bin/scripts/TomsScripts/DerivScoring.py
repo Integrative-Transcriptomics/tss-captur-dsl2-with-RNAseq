@@ -9,7 +9,7 @@ from scipy.signal import savgol_filter
 import numpy.polynomial.polynomial as poly
 import sys
 
-def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
+def DerivScroring(bigWigPath, annotationPath, terminatorGFFs, MasterTablePath):
 
     # def deriv(bigwigValues, degree):
 
@@ -34,8 +34,6 @@ def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
 
     bw = bigwig.open(bigWigPath)
     noiseLVL = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, bigWigPath)
-
-
 
     TSSTermPairings = AvgScoring.AvgScoreTerminators(terminatorGFF, bigWigPath, MasterTablePath, annotationPath)
 
