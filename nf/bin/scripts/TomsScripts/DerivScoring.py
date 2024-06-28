@@ -1,4 +1,5 @@
 import math
+import re
 import pyBigWig as bigwig
 import numpy as np
 import AvgScoring
@@ -9,7 +10,7 @@ from scipy.signal import savgol_filter
 import numpy.polynomial.polynomial as poly
 import sys
 
-def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
+def DerivScroring(bigWigPath, annotationPath, gffRhoterm, gffNocornac, MasterTablePath):
 
     # def deriv(bigwigValues, degree):
 
@@ -35,12 +36,17 @@ def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
     bw = bigwig.open(bigWigPath)
     noiseLVL = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, bigWigPath)
 
-    TSSTermPairings = AvgScoring.AvgScoreTerminators(terminatorGFF, bigWigPath, MasterTablePath, annotationPath)
+    TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm, gffNocornac, bigWigPath, MasterTablePath, annotationPath)
 
-    chromo = "NC_004703.1"
+    print(TSSTermPairings)
+    chromo = re.match('^[^\.]+', TSSTermPairings[0].seqid).group(0)
+    for chrom in bw.chroms():
+        prefix = re.match('^[^\.]+', chrom).group(0)
+        if(prefix == chromo):
+            chromo = chrom
+            break
 
     inverseGFF = CalcbackgroundNoise.GetInverseOfGFF(annotationPath, bw.chroms(chromo))
-
 
     SearchWindow = 75
     Wendepunkte = []
@@ -114,7 +120,8 @@ def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
 if __name__ == "__main__":
     bw = sys.argv[1]
     annot = sys.argv[2]
-    termGFF = sys.argv[3]
-    masterTable = sys.argv[4]
-    DerivScroring(bw, annot, termGFF, masterTable)
+    gffRhoterm = sys.argv[3]
+    gffNocornac= sys.argv[4]
+    masterTable = sys.argv[5]
+    DerivScroring(bw, annot, gffRhoterm, gffNocornac, masterTable)
 
