@@ -6,7 +6,8 @@ workflow WIGGLEANALYSIS {
         annotationPath
         fastaPath
         projectDir
-        terminatorsAllocation
+        gffNocornac
+        gffRhoterm
         MasterTable
 
     main:
@@ -17,7 +18,7 @@ workflow WIGGLEANALYSIS {
         BEDGRAPHTOBIGWIG(WIGTOBEDGRAPH.out.bgFile, SIZESFROMFASTA.out.sizesFile)
 
         //score bigwigs using terminators from rhotermpred and trasntermhp, output scoring to file
-        WIGGLESCORETERMINATORS(BEDGRAPHTOBIGWIG.out.bwFile, annotationPath, terminatorsAllocation, MasterTable)
+        WIGGLESCORETERMINATORS(BEDGRAPHTOBIGWIG.out.bwFile, annotationPath, gffNocornac, gffRhoterm, MasterTable)
 
     emit:
         //emit output file with terminators and scoring here

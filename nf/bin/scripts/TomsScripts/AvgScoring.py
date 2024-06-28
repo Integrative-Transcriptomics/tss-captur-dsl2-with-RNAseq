@@ -11,6 +11,9 @@ class ScoredTerm:
     initialScore = 0
     AvgScore = 0
     DerivScore = 0
+    seqid = 'Region here'
+    strand = 'NA'
+    type = 'terminator type here'
     start = -1
     end = -1
 
@@ -21,6 +24,14 @@ def FindFirstUpstreamTSS(position, tssList):
             return lastPos
         lastPos = tss
     return lastPos
+
+
+def ScoreArea(WindowOffsetFromEnd, WindowSize, scoredTerm, bwFile, noiseLvL):
+    windStart = scoredTerm.end + WindowOffsetFromEnd
+    windEnd = min(windStart + WindowSize, bwFile.chroms(scoredTerm.seqid))
+    postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
+
+    return 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 
 def AvgScoreTerminators(termGff, bigwigpath, MasterTable, annotgff):
@@ -36,13 +47,13 @@ def AvgScoreTerminators(termGff, bigwigpath, MasterTable, annotgff):
 
     chromosome = rhotermdata.loc[1, "Seqid"] + ".1"
     print(chromosome)
-    rhoTermintervalls = zip(rhotermdata.loc[:, "Start"].astype(int), rhotermdata.loc[:, "End"].astype(int), rhotermdata.loc[:, "Score"])
+    rhoTermintervalls = zip(rhotermdata.loc[:, "Start"].astype(int), rhotermdata.loc[:, "End"].astype(int), rhotermdata.loc[:, "Score"], rhotermdata.loc[: "Type"],rhotermdata.loc[: "Strand"])
 
     noiseLvL = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, bigwigpath)
 
     TSSTermPairing = {}
 
-    for start, end, score in rhoTermintervalls:
+    for start, end, score, type, strand in rhoTermintervalls:
         myTss =  FindFirstUpstreamTSS(start, tssStarts)
         estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
 
@@ -58,10 +69,16 @@ def AvgScoreTerminators(termGff, bigwigpath, MasterTable, annotgff):
 
         scored = ScoredTerm()
         #The way we score here is important, no idea whats best
-        scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
         scored.start = start
         scored.end = end
+        scored.seqid = chromosome
+        scored.strand = strand
         scored.initialScore = score
+        scored.type = type
+        #Use specific scoring windows depending on Rho dependent or intrinsic terminator
+        scored.AvgScore = ScoreArea(WindowOffsetFromEnd=WindowOffsetFromEnd, WindowSize=WindowSize, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+
+        #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
         if(myTss in TSSTermPairing):
             TSSTermPairing[myTss].append(scored)

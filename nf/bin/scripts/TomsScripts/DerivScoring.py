@@ -9,7 +9,7 @@ from scipy.signal import savgol_filter
 import numpy.polynomial.polynomial as poly
 import sys
 
-def DerivScroring(bigWigPath, annotationPath, terminatorGFFs, MasterTablePath):
+def DerivScroring(bigWigPath, annotationPath, terminatorGFF, MasterTablePath):
 
     # def deriv(bigwigValues, degree):
 

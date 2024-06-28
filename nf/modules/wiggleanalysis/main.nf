@@ -5,7 +5,8 @@ process WIGGLESCORETERMINATORS
     input:
     path bigWigFile
     path annotationPath
-    path TerminatorAlloc
+    path gffNocornac
+    path gffRhoterm
     path MasterTable
 
     output:
@@ -13,7 +14,7 @@ process WIGGLESCORETERMINATORS
 
     script:
     """
-    python $params.pyDerivScoring $bigWigFile $annotationPath $TerminatorAlloc $MasterTable
+    python $params.pyDerivScoring $bigWigFile $annotationPath $gffNocornac $gffRhoterm $MasterTable
     """
 }
 
