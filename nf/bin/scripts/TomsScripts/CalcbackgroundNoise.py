@@ -7,13 +7,18 @@ import numpy as np
 def CalcBackgroundNoise(annotationPath, bigWigPath):
 
     bw = bigwig.open(bigWigPath)
-    annotFile = glob.glob(f'{annotationPath}/*gff')
-    
-    annot = gff3_parser.parse_gff3(annotFile[0], verbose = False, parse_attributes = False)
+
+
+    files = glob.glob(f"{annotationPath}/*.gff")
+    print(f"annnot path bg: {annotationPath}")
+    print(f"anoot globs bg: {files}")
+    annot = gff3_parser.parse_gff3(files[0], verbose = False, parse_attributes = False)
+
+
     chromosome = annot.loc[1, "Seqid"]
 
 
-    inverse = GetInverseOfGFF(annotFile[0], bw.chroms(chromosome))
+    inverse = GetInverseOfGFF(annotationPath, bw.chroms(chromosome))
 
     #print(np.quantile(valueCopy, 1))
     #print(nonTranscr)
@@ -28,7 +33,11 @@ def CalcBackgroundNoise(annotationPath, bigWigPath):
 
 def GetInverseOfGFF(annotationPath, chromSize):
 
-    annot = gff3_parser.parse_gff3(annotationPath, verbose = False, parse_attributes = False)    
+
+    files = glob.glob(f"{annotationPath}/*.gff")
+    print(f"annnot path inverse: {annotationPath}")
+    print(f"anoot globs inverse: {files}")
+    annot = gff3_parser.parse_gff3(files[0], verbose = False, parse_attributes = False)  
 
     acceptedtypes = ["CDS", "gene"]
 

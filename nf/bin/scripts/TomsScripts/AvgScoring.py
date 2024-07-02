@@ -1,5 +1,6 @@
 from collections import OrderedDict
 from dataclasses import dataclass
+import glob
 import re
 import CalcbackgroundNoise
 import pyBigWig as bigwig
@@ -10,8 +11,8 @@ import pandas as pd
 @dataclass
 class ScoredTerm:
     initialScore = 0
-    AvgScore = 0
-    DerivScore = 0
+    avgScore = 0
+    derivScore = 0
     seqid = 'Region here'
     strand = 'NA'
     type = 'terminator type here'
@@ -61,17 +62,18 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
 
     rhoTermintervalls = zip(rhotermdata.loc[:, "Start"].astype(int), rhotermdata.loc[:, "End"].astype(int), rhotermdata.loc[:, "Score"], rhotermdata.loc[:, "Type"],rhotermdata.loc[: "Strand"])
 
+    print(f"FROM AVGSCORING: {annotgff}")
+
     noiseLvL = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, bigwigpath)
 
     TSSTermPairing = {}
 
     for start, end, score, type, strand in rhoTermintervalls:
         if(type != 'terminator' and type != 'RhoTerminator'):
-            print(type)
             continue
 
         myTss =  FindFirstUpstreamTSS(start, tssStarts)
-        print(f"Intervalls: {myTss} {end} {tssStarts}")
+        #print(f"Intervalls: {myTss} {end} {tssStarts}")
         estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
 
 
@@ -99,10 +101,10 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
 
         #intrinsic terminator
         if(type == "terminator"):
-            scored.AvgScore = ScoreArea(WindowOffsetFromEnd=WindowOffsetFromEnd, WindowSize=WindowSize, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+            scored.avgScore = ScoreArea(WindowOffsetFromEnd=WindowOffsetFromEnd, WindowSize=WindowSize, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
         #Rho dep. terminator
         else:
-             scored.AvgScore = ScoreArea(WindowOffsetFromEnd=WindowOffsetFromEnd, WindowSize=WindowSize, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+             scored.avgScore = ScoreArea(WindowOffsetFromEnd=WindowOffsetFromEnd, WindowSize=WindowSize, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
