@@ -49,7 +49,6 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         The score for the analyzed terminator wrt. to the current transcript
     """
 
-
     if row["strand"] == "+":
         transcript_start = start
         transcript_end = end
@@ -64,7 +63,25 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
     # This distance expects the transcript to be close to the close to the end of the transcript
     distance_predicted_end = 1 - \
         (abs(terminator_start - transcript_end)/l_searchspace)
-    score = row["binned_score"]/2 + \
+    
+    isolated_score = row["binned_score"]
+
+    if 'avgScore' in row.index.tolist():
+        avg_score = row["avgScore"]
+        deriv_score = row["derivScore"]
+
+        if(avg_score == 'NA' and deriv_score == 'NA'):
+            wigScoring = 0
+        if(avg_score == 'NA' and deriv_score != 'NA'):
+            wigScoring = deriv_score
+        if(avg_score != 'NA' and deriv_score == 'NA'):
+            wigScoring = avg_score
+        if(avg_score != 'NA' and deriv_score != 'NA'):
+            wigScoring = np.mean([avg_score, deriv_score])
+
+        isolated_score += wigScoring
+
+    score = isolated_score + \
         distance_predicted_end/4 + distance_to_start/4
 
     return score
@@ -88,6 +105,7 @@ def find_terminators(row_transcript, df, max_distance):
         A modified row_transcript version including the information of the allocated terminator
     """
     row_id, start, end, strand, typeTranscript, utr_end = row_transcript.values
+
     start, end = int(start), int(end)
     # Depending of the strand, the end or the start of the terminator is taken into account
     is_plus = strand == "+"
@@ -205,13 +223,20 @@ if __name__ == "__main__":
     parser.add_argument("--rhoterm", nargs="+")
     parser.add_argument("--nocornac", nargs="+")
     parser.add_argument("--tssAnalyzed")
+    parser.add_argument("--wiggleAnalysis", nargs='?', default= 'NoWig', const= 'NoWig')
 
     args = parser.parse_args()
     args.crd.sort()
     args.rhoterm.sort()
     args.nocornac.sort()
+
     max_distance = get_distances(args.tssAnalyzed)
     compare_list = zip(args.crd, args.rhoterm, args.nocornac)
+
+    if(len(args.crd) > 1):
+        args.wiggleAnalysis = 'NoWig'
+        #Error message here, can't use wiggle analysis with multiple genomes yet
+
     for crd, rhoterm, nocornac in compare_list:
         genome_name = re.split("/", re.split(".crd", crd)[0])[-1]
         rhoterm_df = pd.read_csv(rhoterm, sep="\t", header=None)
@@ -223,6 +248,12 @@ if __name__ == "__main__":
             [rhoterm_df, nocornac_df], ignore_index=True)
         terminators_all.columns = ["seqname", "source", "feature", "start",
                                    "end", "score", "strand", "frame", "attributes", "binned_score"]
+
+        if(args.wiggleAnalysis != 'NoWig'):
+            wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
+            print(wiggle_analysis_df)
+            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
+    
         crd_df = pd.read_csv(crd, sep="\t", header=None)
         crd_df.columns = ["transcript_id", "start",
                           "end", "strand", "type", "5UTRend"]

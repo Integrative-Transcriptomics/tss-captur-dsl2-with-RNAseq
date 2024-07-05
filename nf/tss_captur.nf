@@ -19,7 +19,7 @@ include { TERMINATORPREDICTION } from './subworkflows/terminatorpred'
 include { RNAFOLD } from './modules/rnafold'
 include { CREATEREPORT } from './modules/report'
 include { CLEANWORKDIR } from './modules/cleaner'
-
+include { TERMINATORALLOC } from './subworkflows/terminatoralloc.nf'
 include { WIGGLEANALYSIS } from './subworkflows/WiggleAnalysis'
  
 workflow {
@@ -29,13 +29,28 @@ workflow {
     //MEME(DATAPREPARATION.out.promoters, params.outputPath)
     CLASSIFICATION(DATAPREPARATION.out.queries, DATAPREPARATION.out.blastFiltered.collect(), params.outputPath)
     TERMINATORPREDICTION(genomesExt,
-                        projectDir, 
-                        CLASSIFICATION.out.crdFiles, 
-                        DATAPREPARATION.out.summaryTranscripts, 
+                        projectDir,  
                         params.outputPath)
     //RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
-
-    WIGGLEANALYSIS(params.wigglePath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.gffNocornac, TERMINATORPREDICTION.out.gffRhoterm, params.masterTable)
+    if(!(params.inputWiggles == "Gar nix" || params.inputWiggles == ""))
+    {
+         WIGGLEANALYSIS(params.wigglePath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.gffNocornac, TERMINATORPREDICTION.out.gffRhoterm, params.masterTable)
+         TERMINATORALLOC(TERMINATORPREDICTION.out.gffNocornac.collect(),
+                    TERMINATORPREDICTION.out.gffRhoterm.collect(),
+                    CLASSIFICATION.out.crdFiles, 
+                    DATAPREPARATION.out.summaryTranscripts,
+                    WIGGLEANALYSIS.out.wiggleTerms,
+                    params.outputPath)
+    }
+    else
+    {
+         TERMINATORALLOC(TERMINATORPREDICTION.out.gffNocornac.collect(),
+                    TERMINATORPREDICTION.out.gffRhoterm.collect(),
+                    CLASSIFICATION.out.crdFiles, 
+                    DATAPREPARATION.out.summaryTranscripts,
+                    params.nofile,
+                    params.outputPath)
+    }
     
     //CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
 }

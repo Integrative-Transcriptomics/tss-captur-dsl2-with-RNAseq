@@ -10,7 +10,7 @@ process WIGGLESCORETERMINATORS
     path MasterTable
 
     output:
-    path "test", emit: RescoredTerminators
+    path "*.tsv", emit: RescoredTerminators
 
     script:
     """

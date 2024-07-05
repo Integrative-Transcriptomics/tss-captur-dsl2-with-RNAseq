@@ -56,13 +56,15 @@ process FINDTERMINATORS {
     path rhoterm
     path crd
     path tsv
+    path wigsAnalysed
     val outputPath
 
     output:
     path "*.tsv", emit: terminatorsAllocation 
 
     script:
+    def w = wigsAnalysed.name != 'NO_FILE' ? "--w $wigsAnalysed" : ""
     """
-        python3 $params.pyAllocateTerminators --nocornac $nocornac --rhoterm $rhoterm --crd $crd --tssAnalyzed $tsv
+        python3 $params.pyAllocateTerminators --nocornac $nocornac --rhoterm $rhoterm --crd $crd --tssAnalyzed $tsv --wiggleAnalysis $w
     """
 }
