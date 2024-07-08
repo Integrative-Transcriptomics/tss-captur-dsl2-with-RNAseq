@@ -3,7 +3,8 @@ process WIGGLESCORETERMINATORS
     container 'testdocker'
 
     input:
-    path bigWigFile
+    path forwardBigWig
+    path reverseBigWig
     path annotationPath
     path gffNocornac
     path gffRhoterm
@@ -14,7 +15,7 @@ process WIGGLESCORETERMINATORS
 
     script:
     """
-    python $params.pyDerivScoring $bigWigFile $annotationPath $gffNocornac $gffRhoterm $MasterTable
+    python $params.pyDerivScoring $forwardBigWig $reverseBigWig $annotationPath $gffNocornac $gffRhoterm $MasterTable
     """
 }
 
@@ -62,13 +63,14 @@ process WIGTOBEDGRAPH
     input:
     path wigglePath
     path sizesFile
+    val fileName
 
     output: 
-    path "*.bedGraph", emit: bgFile
+    path "${fileName}.bedGraph", emit: bgFile
 
     script:
     """
-        python3 $params.pyManualWigToBedGraph $wigglePath $sizesFile \$PWD
+        python3 $params.pyManualWigToBedGraph $wigglePath $sizesFile $fileName
     """
 
 }
@@ -80,12 +82,13 @@ process BEDGRAPHTOBIGWIG
     input:
     file bgFile
     file sizesFile
+    val fileName
 
     output: 
-    path "*.bw", emit: bwFile
+    path "${fileName}.bw", emit: bwFile
 
     script:
     """
-        $params.bedGraphToBigWig $bgFile $sizesFile \$PWD/autoBW.bw
+        $params.bedGraphToBigWig $bgFile $sizesFile ${fileName}.bw
     """
 }

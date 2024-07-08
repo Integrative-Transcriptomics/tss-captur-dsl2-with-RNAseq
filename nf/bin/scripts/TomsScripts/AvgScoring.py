@@ -54,7 +54,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
     return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 
-def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotgff):
+def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, MasterTable, annotgff):
     #Params
     window_size = 25
     scoring_window_offset_rho = 10
@@ -72,7 +72,9 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
     print(f"shape of concated: {nocornacdata.shape}" )
     #throw = TSSTermPairing[99999999999]
 
-    bw = bigwig.open(bigwigpath)
+    fwbw = bigwig.open(forward_bigwig_path)
+    rvbw = bigwig.open(reverse_bigwig_path)
+
     MasterTable = pd.read_csv(MasterTable, sep="\t")
 
     positive_tss = sorted(MasterTable[MasterTable['SuperStrand'] == '+']['SuperPos'].tolist())
@@ -80,7 +82,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
 
     chromosome = re.match('^[^\.]+', rhotermdata.loc[1, "Seqid"]).group(0)
 
-    for chrom in bw.chroms():
+    for chrom in fwbw.chroms():
         prefix = re.match('^[^\.]+', chrom).group(0)
         if(prefix == chromosome):
             chromosome = chrom
@@ -91,10 +93,10 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
 
     print(f"FROM AVGSCORING: {annotgff}")
 
-    noiseLvL = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, bigwigpath)
-
+    forward_noise_lvl = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, forward_bigwig_path)
+    reverse_noise_lvl = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, reverse_bigwig_path)
     TSSTermPairing = {}
-    print(f"noiseLVL avg: {noiseLvL}")
+    print(f"noiseLVL avg: {forward_noise_lvl}")
     x = 0
     for start, end, score, type, strand in all_terms_intervalls:
         x += 1
@@ -102,9 +104,13 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, bigwigpath, MasterTable, annotg
             continue
         
         if(strand == '+'):
+            bw = fwbw
+            noiseLvL = forward_noise_lvl
             myTss =  FindFirstUpstreamTSS(start, positive_tss, '+')
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
         else:
+            bw = rvbw
+            noiseLvL = reverse_noise_lvl
             myTss =  FindFirstUpstreamTSS(end, negative_TSS, '-')
             #print(f"Start: {start} End: {end} tss: {myTss}")
             estGeneExprMed = np.quantile(bw.values(chromosome, start, myTss), 0.5)

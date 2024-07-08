@@ -16,11 +16,11 @@ import csv
 def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL):
     if(scoredTerm.strand == '-'):
         WindowSize *= -1
-        WindowOffsetFromEnd *= 1
-        windStart = startOfArea + WindowOffsetFromEnd
+        WindowOffsetFromEnd *= -1
+        windStart = max(startOfArea + WindowOffsetFromEnd, 1)
         windEnd = max(windStart + WindowSize, 1)
     else:
-        windStart = startOfArea + WindowOffsetFromEnd
+        windStart = min(startOfArea + WindowOffsetFromEnd, bwFile.chroms(scoredTerm.seqid))
         windEnd = min(windStart + WindowSize, bwFile.chroms(scoredTerm.seqid))
     
     if(windStart > windEnd):
@@ -32,28 +32,28 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
-def DerivScroring(bigWigPath, annotationPath, gffRhoterm, gffNocornac, MasterTablePath):    
+def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffRhoterm, gffNocornac, MasterTablePath):    
     #PARAMS
     SearchWindow = 75
     scoring_window_offset_rho = 150
     scoring_window_offset_intrinsic = 20
 
     scoring_window_size = 25    
-    bw = bigwig.open(bigWigPath)
+    fwbw = bigwig.open(forward_bigwig_path)
+    rvbw = bigwig.open(reverse_bigwig_path)
 
-    noiseLVL = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, bigWigPath)
-    TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm, gffNocornac, bigWigPath, MasterTablePath, annotationPath)
+    forward_noise = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, forward_bigwig_path)
+    reverse_noise = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, reverse_bigwig_path)
+
+    TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm,
+                                                     gffNocornac, forward_bigwig_path=forward_bigwig_path, reverse_bigwig_path=reverse_bigwig_path, MasterTable=MasterTablePath, annotgff=annotationPath)
 
     chromo = re.match('^[^\.]+', TSSTermPairings[list(TSSTermPairings.keys())[0]][0].seqid).group(0)
-    for chrom in bw.chroms():
+    for chrom in fwbw.chroms():
         prefix = re.match('^[^\.]+', chrom).group(0)
         if(prefix == chromo):
             chromo = chrom
             break
-    
-    inverseGFF = CalcbackgroundNoise.GetInverseOfGFF(annotationPath, bw.chroms(chromo))
-
-
 
     #testf = np.polynomial.Polynomial.fit(range(1,200,1), bw.values(chromo, 1, 200), deg = 10)
 
@@ -65,40 +65,45 @@ def DerivScroring(bigWigPath, annotationPath, gffRhoterm, gffNocornac, MasterTab
     # print(real_roots)
     #plt.figure()
     fig, ax = plt.subplots()
-
     data =[]
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
 
-    ax.boxplot(bw.values(chromo, 1, bw.chroms(chromo)), showfliers= False)
-    ax.axhline(y =  noiseLVL, color= "r", linewidth = 1)
+    ax.boxplot(fwbw.values(chromo, 1, fwbw.chroms(chromo)), showfliers= False)
+    ax.axhline(y = forward_noise, color= "r", linewidth = 1)
+    #ax.axhline(y =  reverse_noise, color= "r", linewidth = 1)
 
     plt.savefig("Boxplot.svg", format = 'svg', dpi=300)
     plt.figure()
 
-    plt.plot(bw.values(chromo, 1 , bw.chroms(chromo)), color = '#DD9837')
+    plt.plot(fwbw.values(chromo, 1 , fwbw.chroms(chromo)), color = '#DD9837')
+    plt.plot(rvbw.values(chromo, 1 , fwbw.chroms(chromo)), color = '#2267c8')
 
-    print(f"noiseLVL deriv: {noiseLVL}")
-    for start, end in inverseGFF:
-        x = np.linspace(start, end, 100)
-        #plt.plot(x, -10 * np.ones_like(x) )
+    print(f"noiseLVL deriv: {forward_noise}")
 
     for tss, scoredterms in TSSTermPairings.items():
         plt.plot(tss, 0 , marker = 'o', color = 'black')
         for scoredterm in scoredterms:            
             
             if(scoredterm.strand == '+'):
-                estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, tss, end), 0.5)
+                bw = fwbw
+                noiseLVL = forward_noise
+                estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, tss, scoredterm.end), 0.5)
+
+                fit_window_start = scoredterm.start - SearchWindow
+                fit_window_end = scoredterm.end + SearchWindow
             else:
+                bw = rvbw
+                noiseLVL = reverse_noise
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, scoredterm.start, tss), 0.5)
+
+                fit_window_start = scoredterm.start - SearchWindow
+                fit_window_end = scoredterm.end + SearchWindow
             
             #if gene is not expressed, we cannot judge its terminators
             if(estGeneExprMed <= noiseLVL):
                 scoredterm.derivScore = "NA"
                 data.append([f"{scoredterm.seqid}", f"{tss}", scoredterm.type, scoredterm.strand, scoredterm.start, scoredterm.end, scoredterm.initialScore, scoredterm.avgScore, scoredterm.derivScore])
-                continue
-
-            fit_window_start = scoredterm.start - SearchWindow
-            fit_window_end = scoredterm.end + SearchWindow
+                continue          
 
             Wendepunkte = []
             rawValues = np.polynomial.polynomial.Polynomial.fit(range(fit_window_start, fit_window_end), bw.values(chromo, fit_window_start, fit_window_end), deg=5, domain = [])
@@ -161,10 +166,11 @@ def DerivScroring(bigWigPath, annotationPath, gffRhoterm, gffNocornac, MasterTab
     plt.show()
 
 if __name__ == "__main__":
-    bw = sys.argv[1]
-    annot = sys.argv[2]
-    gffRhoterm = sys.argv[3]
-    gffNocornac= sys.argv[4]
-    masterTable = sys.argv[5]
-    DerivScroring(bw, annot, gffRhoterm, gffNocornac, masterTable)
+    fwbw = sys.argv[1]
+    rvbw = sys.argv[2]
+    annot = sys.argv[3]
+    gffRhoterm = sys.argv[4]
+    gffNocornac= sys.argv[5]
+    masterTable = sys.argv[6]
+    DerivScroring(forward_bigwig_path=fwbw, reverse_bigwig_path=rvbw, annotationPath=annot, gffRhoterm=gffRhoterm, gffNocornac=gffNocornac, MasterTablePath=masterTable)
 

@@ -8,7 +8,7 @@ log.info """\
  MasterTable : ${params.masterTable}
  Genomes path: ${params.genomesPath}
  GFFs path   : ${params.gffPath}
- Wiggles path: ${params.wigglePath}
+ Forward/reverse Wiggle paths: "forward: ${params.forwardWigglesPath}  reverse: ${params.reverseWigglesPath}"
  Output path : ${params.outputPath}
  """
  
@@ -32,9 +32,9 @@ workflow {
                         projectDir,  
                         params.outputPath)
     //RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
-    if(!(params.inputWiggles == "Gar nix" || params.inputWiggles == ""))
+    if(!(params.forwardWigglesPath == "Gar nix" || params.forwardWigglesPath == "" || params.reverseWigglesPath == "Gar nix" || params.reverseWigglesPath == ""))
     {
-         WIGGLEANALYSIS(params.wigglePath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.gffNocornac, TERMINATORPREDICTION.out.gffRhoterm, params.masterTable)
+         WIGGLEANALYSIS(params.forwardWigglesPath, params.reverseWigglesPath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.gffNocornac, TERMINATORPREDICTION.out.gffRhoterm, params.masterTable)
          TERMINATORALLOC(TERMINATORPREDICTION.out.gffNocornac.collect(),
                     TERMINATORPREDICTION.out.gffRhoterm.collect(),
                     CLASSIFICATION.out.crdFiles, 

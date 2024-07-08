@@ -79,7 +79,8 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         if(avg_score != 'NA' and deriv_score != 'NA'):
             wigScoring = np.mean([avg_score, deriv_score])
 
-        isolated_score += wigScoring
+        print(f"scored! {avg_score} {deriv_score} term at start: {terminator_start}")
+        isolated_score += wigScoring    
 
     score = isolated_score + \
         distance_predicted_end/4 + distance_to_start/4

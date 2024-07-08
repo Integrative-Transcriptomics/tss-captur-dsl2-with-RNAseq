@@ -1,3 +1,4 @@
+import os
 import wiggelen as wigg
 import wiggelen.intervals as inter
 import wiggelen.merge
@@ -12,7 +13,11 @@ def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
     #correctWalker = wigg.fill(wigg.walk(open(Wigglepath)), regions = None, filler = 0, only_edges= False)
     correctWalker = MergeWigs.merge_wigs(Wigglepath)
     #wigg.write(inter.coverage(correctWalker), name='My example')
-    BedGraphFile = open(f'{outputPath}/autoBG.bedGraph', 'w')
+
+    print(outputPath)
+    # if not os.path.exists(outputPath):
+    #     os.makedirs(outputPath)
+    BedGraphFile = open(f'{outputPath}.bedGraph', 'w')
 
     sizes = open(chromSizesFilePath, 'r')
 
@@ -31,6 +36,8 @@ def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
 
     trueCurrRegLength = 0
     for reg, pos, val in correctWalker:
+        #handle minus of reverse wigs
+        val = abs(val)
         if(first):
             lastPos = pos
             lastReg = reg
