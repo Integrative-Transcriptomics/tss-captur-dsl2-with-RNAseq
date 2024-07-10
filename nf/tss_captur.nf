@@ -31,7 +31,7 @@ workflow {
     TERMINATORPREDICTION(genomesExt,
                         projectDir,  
                         params.outputPath)
-    //RNAFOLD(TERMINATORPREDICTION.out.allocation, params.genomesPath, params.outputPath)
+    
     if(!(params.forwardWigglesPath == "Gar nix" || params.forwardWigglesPath == "" || params.reverseWigglesPath == "Gar nix" || params.reverseWigglesPath == ""))
     {
          WIGGLEANALYSIS(params.forwardWigglesPath, params.reverseWigglesPath, params.gffPath, params.genomesPath, projectDir, TERMINATORPREDICTION.out.gffNocornac, TERMINATORPREDICTION.out.gffRhoterm, params.masterTable)
@@ -52,6 +52,8 @@ workflow {
                     params.outputPath)
     }
     
+    //RNAFOLD(TERMINATORALLOC.out.allocation, params.genomesPath, params.outputPath)
+
     //CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
 }
 

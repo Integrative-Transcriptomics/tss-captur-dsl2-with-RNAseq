@@ -22,6 +22,7 @@ The following functions are found in this script:
     
 """
 
+import math
 import re
 import pandas as pd
 import numpy as np
@@ -64,23 +65,23 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
     distance_predicted_end = 1 - \
         (abs(terminator_start - transcript_end)/l_searchspace)
     
-    isolated_score = row["binned_score"]
+    isolated_score = row["binned_score"]/2
 
     if 'avgScore' in row.index.tolist():
         avg_score = row["avgScore"]
         deriv_score = row["derivScore"]
 
-        if(avg_score == 'NA' and deriv_score == 'NA'):
+        if(math.isnan(avg_score) and math.isnan(deriv_score)):
             wigScoring = 0
-        if(avg_score == 'NA' and deriv_score != 'NA'):
+        if(math.isnan(avg_score) and not math.isnan(deriv_score)):
             wigScoring = deriv_score
-        if(avg_score != 'NA' and deriv_score == 'NA'):
+        if(not math.isnan(avg_score ) and math.isnan(deriv_score)):
             wigScoring = avg_score
-        if(avg_score != 'NA' and deriv_score != 'NA'):
+        if(not math.isnan(avg_score) and not math.isnan(deriv_score)):
             wigScoring = np.mean([avg_score, deriv_score])
 
-        print(f"scored! {avg_score} {deriv_score} term at start: {terminator_start}")
         isolated_score += wigScoring    
+        print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
 
     score = isolated_score + \
         distance_predicted_end/4 + distance_to_start/4
@@ -256,11 +257,13 @@ if __name__ == "__main__":
             terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)
+
         crd_df.columns = ["transcript_id", "start",
                           "end", "strand", "type", "5UTRend"]
         crd_df = crd_df.apply(
             lambda row: find_terminators(row, terminators_all, max_distance[genome_name]), axis=1, result_type="expand")
         allocated_terminators = crd_df.term_id.unique()
+
         for term_id in allocated_terminators[pd.notnull(allocated_terminators)]:
             filter_mask = crd_df.term_id == term_id
             filtered_df = crd_df[filter_mask]
@@ -281,5 +284,22 @@ if __name__ == "__main__":
         crd_df["term_id"] = crd_df["term_id"].str.replace(r'ID=', r'')
         crd_df["additional_term"] = crd_df["additional_term"].str.replace(
             r'ID=', r'')
+
+        # crd_df['term_start'] = crd_df['term_start'].astype(int)
+        # crd_df['term_end'] = crd_df['term_end'].astype(int)
+        # wiggle_analysis_df['start'] = wiggle_analysis_df['start'].astype(int)
+        # wiggle_analysis_df['end'] = wiggle_analysis_df['end'].astype(int)
+
+        # Merge crd_df with wiggle_analysis_df
+        crd_df = crd_df.merge(
+        wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']],
+        right_on=['strand', 'start', 'end'],
+        left_on=['strand', 'term_start', 'term_end'],
+        how='left', indicator= False
+        )
+
+        crd_df.drop(columns=['start_y', 'end_y'], inplace = True)
+        crd_df = crd_df.rename(columns={"start_x" : "start", "end_x" : "end"})
+
         crd_df.to_csv("%s_allocated_terminators.tsv" %
                       genome_name, sep="\t", index=False)

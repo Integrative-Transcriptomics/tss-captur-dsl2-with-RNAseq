@@ -35,7 +35,10 @@ if __name__ == "__main__":
     # terminator_df = terminator_df.loc[terminator_df['type'] == "RNA"]
     terminator_df = terminator_df.loc[terminator_df['type'].isin(["RNA", "COD"])]
 
-    terminator_df.iloc[:, 12:] = terminator_df.iloc[:, 12:].astype(int)
+    #cols_to_convert = [col for col in terminator_df.columns[12:] if col not in ["derivScore", "avgScore"]]
+    #terminator_df.iloc[:, cols_to_convert] = terminator_df.iloc[:, cols_to_convert].astype(int)
+
+    terminator_df.iloc[:, 12:14] = terminator_df.iloc[:, 12:14].astype(int)
     transcript_list = []
     for index_tss, row in terminator_df.iterrows():
         t_id, start, end, strand = row[["transcript_id", "start_with_terminator",

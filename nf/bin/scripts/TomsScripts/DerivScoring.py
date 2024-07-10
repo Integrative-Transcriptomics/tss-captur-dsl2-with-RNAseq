@@ -42,19 +42,31 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     fwbw = bigwig.open(forward_bigwig_path)
     rvbw = bigwig.open(reverse_bigwig_path)
 
-    forward_noise = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, forward_bigwig_path)
-    reverse_noise = CalcbackgroundNoise.CalcBackgroundNoise(annotationPath, reverse_bigwig_path)
+    forward_noise = CalcbackgroundNoise.GetUnannotedRegionNoise(annotationPath, forward_bigwig_path, MasterTablePath)
+    reverse_noise = CalcbackgroundNoise.GetUnannotedRegionNoise(annotationPath, reverse_bigwig_path, MasterTablePath)
 
-    TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm,
-                                                     gffNocornac, forward_bigwig_path=forward_bigwig_path, reverse_bigwig_path=reverse_bigwig_path, MasterTable=MasterTablePath, annotgff=annotationPath)
+    TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm=gffRhoterm,
+                                                    gffNocornac= gffNocornac,
+                                                    forward_bigwig_path=forward_bigwig_path,
+                                                    reverse_bigwig_path=reverse_bigwig_path,
+                                                    master_table_path=MasterTablePath,
+                                                    annotgff=annotationPath)
 
-    chromo = re.match('^[^\.]+', TSSTermPairings[list(TSSTermPairings.keys())[0]][0].seqid).group(0)
+    
+    forward_chromo = re.match('^[^\.]+', TSSTermPairings[list(TSSTermPairings.keys())[0]][0].seqid).group(0)
     for chrom in fwbw.chroms():
         prefix = re.match('^[^\.]+', chrom).group(0)
-        if(prefix == chromo):
-            chromo = chrom
+        if(prefix == forward_chromo):
+            forward_chromo = chrom
             break
 
+    reverse_chromo = re.match('^[^\.]+', TSSTermPairings[list(TSSTermPairings.keys())[0]][0].seqid).group(0)
+    for chrom in rvbw.chroms():
+        prefix = re.match('^[^\.]+', chrom).group(0)
+        if(prefix == reverse_chromo):
+            reverse_chromo = chrom
+            break
+    
     #testf = np.polynomial.Polynomial.fit(range(1,200,1), bw.values(chromo, 1, 200), deg = 10)
 
     # x = range(1,200,1)
@@ -68,15 +80,15 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     data =[]
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
 
-    ax.boxplot(fwbw.values(chromo, 1, fwbw.chroms(chromo)), showfliers= False)
+    ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
     #ax.axhline(y =  reverse_noise, color= "r", linewidth = 1)
 
     plt.savefig("Boxplot.svg", format = 'svg', dpi=300)
     plt.figure()
 
-    plt.plot(fwbw.values(chromo, 1 , fwbw.chroms(chromo)), color = '#DD9837')
-    plt.plot(rvbw.values(chromo, 1 , fwbw.chroms(chromo)), color = '#2267c8')
+    plt.plot(fwbw.values(forward_chromo, 1 , fwbw.chroms(forward_chromo)), color = '#DD9837')
+    plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
 
     print(f"noiseLVL deriv: {forward_noise}")
 
@@ -86,6 +98,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             
             if(scoredterm.strand == '+'):
                 bw = fwbw
+                chromo = forward_chromo
                 noiseLVL = forward_noise
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, tss, scoredterm.end), 0.5)
 
@@ -93,6 +106,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 fit_window_end = scoredterm.end + SearchWindow
             else:
                 bw = rvbw
+                chromo = reverse_chromo
                 noiseLVL = reverse_noise
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, scoredterm.start, tss), 0.5)
 

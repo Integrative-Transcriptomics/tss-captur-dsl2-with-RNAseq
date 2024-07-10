@@ -38,10 +38,10 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
     if(scoredTerm.strand == '-'):
         WindowOffsetFromEnd *= -1
         WindowSize *=-1
-        windStart = startOfArea + WindowOffsetFromEnd
+        windStart = max(startOfArea + WindowOffsetFromEnd,1)
         windEnd = max(windStart + WindowSize, 1)
     else:
-        windStart = startOfArea + WindowOffsetFromEnd
+        windStart = min(startOfArea + WindowOffsetFromEnd, bwFile.chroms(scoredTerm.seqid))
         windEnd = min(windStart + WindowSize, bwFile.chroms(scoredTerm.seqid))
     
     if(windStart > windEnd):
@@ -54,7 +54,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
     return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 
-def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, MasterTable, annotgff):
+def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, master_table_path, annotgff):
     #Params
     window_size = 25
     scoring_window_offset_rho = 10
@@ -75,82 +75,85 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
     fwbw = bigwig.open(forward_bigwig_path)
     rvbw = bigwig.open(reverse_bigwig_path)
 
-    MasterTable = pd.read_csv(MasterTable, sep="\t")
+    MasterTable = pd.read_csv(master_table_path, sep="\t")
 
     positive_tss = sorted(MasterTable[MasterTable['SuperStrand'] == '+']['SuperPos'].tolist())
     negative_TSS = sorted(MasterTable[MasterTable["SuperStrand"] == '-']['SuperPos'].tolist())
 
-    chromosome = re.match('^[^\.]+', rhotermdata.loc[1, "Seqid"]).group(0)
+    forward_chromosome = re.match('^[^\.]+', rhotermdata.loc[1, "Seqid"]).group(0)
 
     for chrom in fwbw.chroms():
         prefix = re.match('^[^\.]+', chrom).group(0)
-        if(prefix == chromosome):
-            chromosome = chrom
+        if(prefix == forward_chromosome):
+            forward_chromosome = chrom
             break
-    print(chromosome)
+
+    reverse_chromosome = re.match('^[^\.]+', rhotermdata.loc[1, "Seqid"]).group(0)
+
+    for chrom in rvbw.chroms():
+        prefix = re.match('^[^\.]+', chrom).group(0)
+        if(prefix == reverse_chromosome):
+            reverse_chromosome = chrom
+            break
+
+    print(forward_chromosome, reverse_chromosome)
     
     all_terms_intervalls = zip(all_term_data.loc[:, "Start"].astype(int), all_term_data.loc[:, "End"].astype(int), all_term_data.loc[:, "Score"], all_term_data.loc[:, "Type"], all_term_data.loc[: ,"Strand"])
 
     print(f"FROM AVGSCORING: {annotgff}")
 
-    forward_noise_lvl = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, forward_bigwig_path)
-    reverse_noise_lvl = CalcbackgroundNoise.CalcBackgroundNoise(annotgff, reverse_bigwig_path)
+    forward_noise_lvl = CalcbackgroundNoise.GetUnannotedRegionNoise(annotgff, forward_bigwig_path, master_table_path)
+    reverse_noise_lvl = CalcbackgroundNoise.GetUnannotedRegionNoise(annotgff, reverse_bigwig_path, master_table_path)
     TSSTermPairing = {}
     print(f"noiseLVL avg: {forward_noise_lvl}")
-    x = 0
     for start, end, score, type, strand in all_terms_intervalls:
-        x += 1
         if(type != 'terminator' and type != 'RhoTerminator'):
             continue
-        
+
+        scored = ScoredTerm()
+        scored.start = start
+        scored.end = end        
+        scored.strand = strand
+        scored.initialScore = score
+        scored.type = type
+
         if(strand == '+'):
             bw = fwbw
+            chromosome = forward_chromosome
             noiseLvL = forward_noise_lvl
+            scoreStartArea = scored.end
             myTss =  FindFirstUpstreamTSS(start, positive_tss, '+')
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
         else:
             bw = rvbw
+            reverse_chromosome = reverse_chromosome
             noiseLvL = reverse_noise_lvl
+            scoreStartArea = scored.start
             myTss =  FindFirstUpstreamTSS(end, negative_TSS, '-')
             #print(f"Start: {start} End: {end} tss: {myTss}")
             estGeneExprMed = np.quantile(bw.values(chromosome, start, myTss), 0.5)
         #print(f"Intervalls: {myTss} {end} {tssStarts}")
 
-        scored = ScoredTerm()
+        scored.seqid = chromosome
+
         #if gene is not expressed, we cannot judge its terminators
         if(estGeneExprMed <= noiseLvL):
-            scored = ScoredTerm()
-            
-            scored.start = start
-            scored.end = end
-            scored.seqid = chromosome
-            scored.strand = strand
-            scored.initialScore = score
-            scored.type = type
             scored.avgScore = "NA"
+
             if(myTss in TSSTermPairing):
                 TSSTermPairing[myTss].append(scored)
             else:
                 TSSTermPairing[myTss] = [scored]
-
             continue
-        else:
-            #The way we score here is important, no idea whats best
-            scored.start = start
-            scored.end = end
-            scored.seqid = chromosome
-            scored.strand = strand
-            scored.initialScore = score
-            scored.type = type
 
         #Use specific scoring windows depending on Rho dependent or intrinsic terminator
 
         #intrinsic terminator
         if(type == "terminator"):
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_intrinsic, WindowSize=window_size, startOfArea= scored.end, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_intrinsic, WindowSize=window_size, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
         #Rho dep. terminator
         else:
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scored.end ,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
@@ -158,8 +161,5 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             TSSTermPairing[myTss].append(scored)
         else:
             TSSTermPairing[myTss] = [scored]
-    
-    
-    print(f"Length of all term intervalls: {x}")
 
     return TSSTermPairing

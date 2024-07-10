@@ -3,6 +3,8 @@ import itertools
 import gff3_parser
 import pyBigWig as bigwig
 import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
 
 def CalcBackgroundNoise(annotationPath, bigWigPath):
 
@@ -90,3 +92,88 @@ def GetInverseOfGFF(annotationPath, chromSize):
         inverse.append((fused_transcr[-1][1], chromSize))
     
     return inverse
+
+def GetUnannotedRegionNoise(annot_path, bigwig_path, masterTable_path):
+    chunksize = 10**6
+    print(masterTable_path)
+    master_table_chunks = pd.read_csv(masterTable_path, delimiter='\t', chunksize=chunksize)
+
+    allMasterTableLocusTags = {}
+    for chunk in master_table_chunks:
+        locus_tags = list(map(str.strip, chunk['Locus_tag'].astype(str).tolist()))
+        super_strands = list(map(str.strip, chunk['SuperStrand'].astype(str).tolist()))
+        for locus_tag, strand in zip(locus_tags, super_strands):
+            allMasterTableLocusTags[locus_tag] = strand
+
+    # for locustag in allMasterTableLocusTags:
+    #     print(locustag)
+
+    print(len(allMasterTableLocusTags))
+
+    files = glob.glob(f"{annot_path}/*.gff")
+    print(f"annnot path inverse: {annot_path}")
+    print(f"anoot globs inverse: {files}")
+    annot = gff3_parser.parse_gff3(files[0], verbose = False, parse_attributes = True) 
+    chromosome = annot.loc[1, "Seqid"]
+
+    accepted_types = ['gene']
+    unexpressedCDS = []
+
+    allnames = []
+    for start, end, feature, strand, name in zip(
+            annot.loc[:, "Start"].astype(int),
+            annot.loc[:, "End"].astype(int),
+            annot.loc[:, "Type"],
+            annot.loc[:, "Strand"],
+            annot.loc[:, "Name"].astype(str)):
+        if (feature in accepted_types): #and strand == '+':
+            allnames.append(name)
+            #print(name)
+            if allMasterTableLocusTags.get(name, None) == strand:
+                unexpressedCDS.append((start, end))
+
+    print(len(allnames))
+    # print(len(allMasterTableLocusTags.intersection(allnames)))
+    #print(len(allMasterTableLocusTags - set(allnames)))
+
+        # if feature not in accepted_types or name in allMasterTableLocusTags:
+        #     continue
+        # else:
+        #     unexpressedCDS.append((start,end))
+
+    current_start, current_end = unexpressedCDS[0]
+    fused_unexpressed_CDS = []
+
+    # for start, end in unexpressedCDS[1:]:
+    #     if start <= current_end:
+    #         current_end = max(current_end, end)
+    #     else:
+    #         fused_unexpressed_CDS.append((current_start, current_end))
+    #         current_start, current_end = start, end
+
+    # Add the last interval
+    #fused_unexpressed_CDS.append((current_start, current_end))
+
+    fused_unexpressed_CDS = unexpressedCDS
+
+    print(len(unexpressedCDS))
+
+    all_expr_vals = []
+
+    with bigwig.open(bigwig_path) as bw:
+        for start, end in fused_unexpressed_CDS:
+            vals = bw.values(chromosome, start, end)
+            #print(vals)
+            all_expr_vals.extend(vals)
+
+    all_expr_vals = np.array(all_expr_vals)
+    uniques, counts = np.unique(all_expr_vals, return_counts=True)
+    print(len(all_expr_vals))
+
+    plt.bar(uniques, counts, width=1)
+    plt.figure()
+    fig, ax = plt.subplots()
+    ax.boxplot(all_expr_vals, showfliers=False)
+    ax.axhline(y = np.quantile(all_expr_vals, 0.5), color= "r", linewidth = 1)
+    plt.show()
+    return np.quantile(all_expr_vals, 0.5)
