@@ -34,7 +34,7 @@ def FindFirstUpstreamTSS(position, tssList, strand):
     return -1
 
 
-def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL):
+def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL, iqr):
     if(scoredTerm.strand == '-'):
         WindowOffsetFromEnd *= -1
         WindowSize *=-1
@@ -51,7 +51,17 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
+    upper_bound = iqr * 2
+
+    if(postTermExprQ <= noiseLvL):
+        return 1
+    elif(postTermExprQ >= upper_bound):
+        return 0
+    else:
+        return (1 - (postTermExprQ - noiseLvL) / (noiseLvL - upper_bound))
+
+
+    #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 
 def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, master_table_path, annotgff):
@@ -102,8 +112,10 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
 
     print(f"FROM AVGSCORING: {annotgff}")
 
-    forward_noise_lvl = CalcbackgroundNoise.GetUnannotedRegionNoise(annotgff, forward_bigwig_path, master_table_path)
-    reverse_noise_lvl = CalcbackgroundNoise.GetUnannotedRegionNoise(annotgff, reverse_bigwig_path, master_table_path)
+    forward_noise_lvl, forward_IQR = CalcbackgroundNoise.InverseOfMasterTableNoise(annotgff, forward_bigwig_path, master_table_path)
+    reverse_noise_lvl, reverse_IQR = CalcbackgroundNoise.InverseOfMasterTableNoise(annotgff, reverse_bigwig_path, master_table_path)
+
+
     TSSTermPairing = {}
     print(f"noiseLVL avg: {forward_noise_lvl}")
     for start, end, score, type, strand in all_terms_intervalls:
@@ -121,6 +133,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             bw = fwbw
             chromosome = forward_chromosome
             noiseLvL = forward_noise_lvl
+            iqr = forward_IQR
             scoreStartArea = scored.end
             myTss =  FindFirstUpstreamTSS(start, positive_tss, '+')
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
@@ -128,6 +141,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             bw = rvbw
             reverse_chromosome = reverse_chromosome
             noiseLvL = reverse_noise_lvl
+            iqr = reverse_IQR
             scoreStartArea = scored.start
             myTss =  FindFirstUpstreamTSS(end, negative_TSS, '-')
             #print(f"Start: {start} End: {end} tss: {myTss}")
@@ -150,10 +164,10 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
 
         #intrinsic terminator
         if(type == "terminator"):
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_intrinsic, WindowSize=window_size, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_intrinsic, WindowSize=window_size, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
         #Rho dep. terminator
         else:
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL)
+            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 

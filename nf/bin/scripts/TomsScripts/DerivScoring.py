@@ -13,7 +13,7 @@ import sys
 import csv
 
 
-def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL):
+def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL, iqr):
     if(scoredTerm.strand == '-'):
         WindowSize *= -1
         WindowOffsetFromEnd *= -1
@@ -30,7 +30,16 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
+    upper_bound = iqr * 2
+
+    if(postTermExprQ <= noiseLvL):
+        return 1
+    elif(postTermExprQ >= upper_bound):
+        return 0
+    else:
+        return (1 - (postTermExprQ - noiseLvL) / (noiseLvL - upper_bound))
+
+    #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffRhoterm, gffNocornac, MasterTablePath):    
     #PARAMS
@@ -42,8 +51,8 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     fwbw = bigwig.open(forward_bigwig_path)
     rvbw = bigwig.open(reverse_bigwig_path)
 
-    forward_noise = CalcbackgroundNoise.GetUnannotedRegionNoise(annotationPath, forward_bigwig_path, MasterTablePath)
-    reverse_noise = CalcbackgroundNoise.GetUnannotedRegionNoise(annotationPath, reverse_bigwig_path, MasterTablePath)
+    forward_noise, forward_iqr = CalcbackgroundNoise.InverseOfMasterTableNoise(annotationPath, forward_bigwig_path, MasterTablePath)
+    reverse_noise, reverse_iqr = CalcbackgroundNoise.InverseOfMasterTableNoise(annotationPath, reverse_bigwig_path, MasterTablePath)
 
     TSSTermPairings = AvgScoring.AvgScoreTerminators(gffRhoterm=gffRhoterm,
                                                     gffNocornac= gffNocornac,
@@ -100,6 +109,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 bw = fwbw
                 chromo = forward_chromo
                 noiseLVL = forward_noise
+                iqr = forward_iqr
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, tss, scoredterm.end), 0.5)
 
                 fit_window_start = scoredterm.start - SearchWindow
@@ -108,6 +118,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 bw = rvbw
                 chromo = reverse_chromo
                 noiseLVL = reverse_noise
+                iqr = reverse_iqr
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, scoredterm.start, tss), 0.5)
 
                 fit_window_start = scoredterm.start - SearchWindow
@@ -159,9 +170,9 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             for wp in Wendepunkte:
                 wp = round(wp)
                 if(scoredterm.type == "terminator"):
-                    score = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL)
+                    score = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
                 else:
-                    score = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL)
+                    score = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
 
                 if(score > bestScore):
                     bestScore = score
