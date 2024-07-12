@@ -36,8 +36,8 @@ def FindFirstUpstreamTSS(position, tssList, strand):
 
 def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL, iqr):
     if(scoredTerm.strand == '-'):
-        WindowOffsetFromEnd *= -1
         WindowSize *=-1
+        WindowOffsetFromEnd *= -1
         windStart = max(startOfArea + WindowOffsetFromEnd,1)
         windEnd = max(windStart + WindowSize, 1)
     else:
@@ -51,14 +51,14 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    upper_bound = iqr * 2
+    upper_bound = noiseLvL + iqr * 2
 
     if(postTermExprQ <= noiseLvL):
         return 1
     elif(postTermExprQ >= upper_bound):
         return 0
     else:
-        return (1 - (postTermExprQ - noiseLvL) / (noiseLvL - upper_bound))
+         return (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
 
 
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
@@ -170,10 +170,17 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
-
         if(myTss in TSSTermPairing):
             TSSTermPairing[myTss].append(scored)
         else:
             TSSTermPairing[myTss] = [scored]
+
+    onlynas= 0
+    for key in TSSTermPairing:
+        if(all(term.avgScore == 'NA' for term in TSSTermPairing[key])):
+            print(key)
+            onlynas += 1
+
+    print(f"Total TSS: {len(TSSTermPairing.keys())} tss with only NA: {onlynas}" )
 
     return TSSTermPairing

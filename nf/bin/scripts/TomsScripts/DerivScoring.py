@@ -30,14 +30,15 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    upper_bound = iqr * 2
+    print(iqr)
+    upper_bound = noiseLvL + iqr * 2
 
     if(postTermExprQ <= noiseLvL):
         return 1
     elif(postTermExprQ >= upper_bound):
         return 0
     else:
-        return (1 - (postTermExprQ - noiseLvL) / (noiseLvL - upper_bound))
+        return (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
 
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
@@ -165,7 +166,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
 
             if(len(Wendepunkte) <= 0):
                 print(f"Alarm, keine wendepunkte: {tss}" )
-                #scoredterm.derivScore = "NA"
+                scoredterm.derivScore = "NA"
 
             for wp in Wendepunkte:
                 wp = round(wp)
