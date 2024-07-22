@@ -37,7 +37,7 @@ if __name__ == "__main__":
                 ["motif_%i" % index, motif.name, motif.evalue, motif.length, motif.num_occurrences])
         for ins in motif.instances:
             sequence_id = re.findall(
-                ".*((?:orphan_|antisense_).*)\|Start:(.*)\|Strand:((?:\+|-))", ins.sequence_name)[0]
+                ".*((?:orphan_|antisense_|internal_).*)\|Start:(.*)\|Strand:((?:\+|-))", ins.sequence_name)[0]
             with open('%s_seqs_meme_results.tsv' % args.genome, 'a') as out_file:
                 tsv_writer = csv.writer(out_file, delimiter='\t')
                 tsv_writer.writerow(

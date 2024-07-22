@@ -17,7 +17,7 @@ toFillNA = "NA"
 def createRows(row):
     row_id_all = row[0]
     row["transcript_id"] = re.findall(
-        "\|((?:orphan_|antisense_)\d+)\|", row_id_all)[0]
+        "\|((?:orphan_|antisense_|internal_)\d+)\|", row_id_all)[0]
     row["position"] = int(re.findall("\|Start:(\d+)\|", row_id_all)[0])
     row["strand"] = re.findall("\|Strand:(\+|\-)", row_id_all)[0]
     row["transcript_length"] = row[1]
@@ -78,6 +78,11 @@ def createOverviewData(pathToData, genome):
     motifs["summary"] = motifs.apply(lambda x: [list(a) for a in zip(
         x["Motif ID"], x["Motif Start"], x["p-value"])], axis=1)
     motifs.drop(["Motif ID", "Motif Start", "p-value"], axis=1, inplace=True)
+    
+    print(classification.index.is_unique)
+    print(terminators.index.is_unique)
+    print(mfe)
+
     all_dfs = pd.concat(
         [tss_analyzed, classification, terminators, mfe, motifs], join="outer", axis=1)
     all_dfs["GeneStart"] = all_dfs.start_with_terminator.where(

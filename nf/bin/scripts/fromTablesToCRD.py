@@ -73,7 +73,6 @@ def table_to_crd(gff, t=0):
 
 
 def normalize_score(df):
-
     agg_df = df.groupby("winner").agg(mean_score=(
         "score", "mean"), std_score=("score", "std")).to_dict()
     df = df.apply(lambda row: normalize_helper(row, agg_df), axis=1)
@@ -84,7 +83,10 @@ def normalize_helper(row, dict):
     row_winner = row["winner"]
     col_mean = abs(dict["mean_score"][row_winner])
     col_std = dict["std_score"][row_winner]
-    row["z_score"] = (abs(row.score) - col_mean) / col_std
+    if col_std == 0:
+        row["z_score"] = 0
+    else:
+        row["z_score"] = (abs(row.score) - col_mean) / col_std
     return row
 
 

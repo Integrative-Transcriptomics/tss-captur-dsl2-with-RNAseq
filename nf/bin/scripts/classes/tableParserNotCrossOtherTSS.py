@@ -104,14 +104,46 @@ class GenomeWrapper(object):
             self.antisense = separate_table(all_antisense)
         else:
             self.antisense = [pd.DataFrame(), pd.DataFrame()]
+        #self.list_positions()
+
+        #seperate all internals
+        is_internal = table["Internal"] == 1
+        if(is_internal.any()):
+            not_table = table[~ (is_antisense | is_orphan | is_internal)]
+
+            index_not_table =(
+                not_table[["Pos", "Strand"]].to_records(index=False))
+            
+            all_internals = table[is_internal]
+
+                        # Filtering out repetitive TSS
+            # A TSS can be associated with many genes, hence an AS might have been already labelled as P/S/I
+            # This need to be removed
+
+            filter_repeated = [not x in index_not_table for x in all_internals[[
+                "Pos", "Strand"]].to_records(index=False)]
+                
+            all_internals = all_internals[filter_repeated]
+
+            # An AS TSS can also be categorized wrt. many genes, hence the duplicates need to be removed
+            all_internals = all_internals.drop_duplicates(
+                ["Pos", "Strand"]).reset_index()
+            
+            all_internals = all_internals[important_columns]
+            all_internals["type"] = "internal"
+
+            self.internals = separate_table(all_antisense)
+        else:
+            self.internals = [pd.DataFrame(), pd.DataFrame()]
         self.list_positions()
+
 
     def list_positions(self):
         """
         Creates a list of all TSS-positions that were labelled as sole AS or orphans
         """
         positions_as_vectors = []
-        for x in self.antisense + self.orphans:
+        for x in self.antisense + self.orphans + self.internals:
             if len(x) > 0:
                 vectors = [(v["Pos"], v["Strand"])
                            for v in x.to_dict("records")]
@@ -126,7 +158,9 @@ class GenomeWrapper(object):
         antisense_records, antisense_promoters = self.helper_create_queries(
             self.antisense, "antisense")
 
-        promoter_regions = antisense_promoters + orphan_promoters
+        internal_records, internal_promoters = self.helper_create_queries(self.internals, "internal")
+
+        promoter_regions = antisense_promoters + orphan_promoters + internal_promoters
 
         if (len(promoter_regions) > 0):  # Create file only if there is a sequence to save in
             if (len(promoter_regions) > 1000):
@@ -134,13 +168,13 @@ class GenomeWrapper(object):
                 promoter_regions = random.sample(promoter_regions, 1000)
             with open("%s_%s.fasta" % (self.genome_name, "promoter_regions"), "w") as output_handle:
                 SeqIO.write(promoter_regions, output_handle, "fasta")
-        records = orphan_records + antisense_records
+        records = orphan_records + antisense_records + internal_records
 
         ids_of_records = [[item.id, len(item.seq)]
                           for sublist in records for item in sublist]
 
         filenames = ["orphan_plus", "orphan_minus",
-                     "antisense_plus", "antisense_minus"]
+                     "antisense_plus", "antisense_minus", "internal_plus", "internal_minus"]
         for name, seqs in zip(filenames, records):
             if (len(seqs) > 0):  # Create file only if there is a sequence to save in
                 with open("%s_%s_queries.fasta" % (self.genome_name, name), "w") as output_handle:
