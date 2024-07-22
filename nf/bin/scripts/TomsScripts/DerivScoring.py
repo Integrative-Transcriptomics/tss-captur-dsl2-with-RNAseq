@@ -33,13 +33,16 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
     print(iqr)
     upper_bound = noiseLvL + iqr * 2
 
-    if(postTermExprQ <= noiseLvL):
-        return 1
-    elif(postTermExprQ >= upper_bound):
-        return 0
-    else:
-        return (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
+    score = 0
 
+    if(postTermExprQ <= noiseLvL):
+        score = 1
+    elif(postTermExprQ >= upper_bound):
+        score = 0
+    else:
+        score = (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
+    
+    return score, windStart, windEnd
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffRhoterm, gffNocornac, MasterTablePath):    
@@ -89,6 +92,9 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     fig, ax = plt.subplots()
     data =[]
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
+
+    info_data = []
+    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "bgNoise", "scoreWindowStart", "scoreWindowEnd"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
@@ -168,21 +174,46 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 print(f"Alarm, keine wendepunkte: {tss}" )
                 scoredterm.derivScore = "NA"
 
+            INFO_wind_start = -1
+            INFO_wind_end = -1
+
             for wp in Wendepunkte:
                 wp = round(wp)
                 if(scoredterm.type == "terminator"):
-                    score = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    score, INFO_wind_start, INFO_wind_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
                 else:
-                    score = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    score, INFO_wind_start, INFO_wind_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
 
                 if(score > bestScore):
                     bestScore = score
             
+            plt.xlim(INFO_wind_start, INFO_wind_end)
+            plt.legend()
+            plt.xlabel('Position')
+            plt.ylabel('Value')
+            plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
+            plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
+            plt.close()
+
             scoredterm.derivScore = bestScore
 
-            data.append([f"{scoredterm.seqid}", f"{tss}", scoredterm.type, scoredterm.strand, scoredterm.start, scoredterm.end, scoredterm.initialScore, scoredterm.avgScore, scoredterm.derivScore])
+            data.append([f"{scoredterm.seqid}", 
+                         f"{tss}", scoredterm.type, 
+                         scoredterm.strand, scoredterm.start, 
+                         scoredterm.end, scoredterm.initialScore, 
+                         scoredterm.avgScore, 
+                         scoredterm.derivScore])
+            
+            info_data.append([f"{scoredterm.seqid}", 
+                         f"{tss}", scoredterm.type, 
+                         scoredterm.strand, scoredterm.start, 
+                         scoredterm.end, scoredterm.initialScore, 
+                         scoredterm.avgScore, 
+                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end])
 
-
+    with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
+        writer = csv.writer(file, delimiter=',')
+        writer.writerows(info_data)
 
     with open("AllTermScoring.tsv", 'w', newline='') as file:
         writer = csv.writer(file, delimiter='\t')

@@ -192,7 +192,7 @@ def separate_ids(row):
     row["genome"] = re.findall(
         "(\w*_\w*)\S*\|", string)[0]
     row["transcript_id"] = re.findall(
-        "\|((?:orphan_|antisense_)\d+)\|", string)[0]
+        "\|((?:orphan_|antisense_|internal_)\d+)\|", string)[0]
     return row
 
 
@@ -291,15 +291,16 @@ if __name__ == "__main__":
         # wiggle_analysis_df['end'] = wiggle_analysis_df['end'].astype(int)
 
         # Merge crd_df with wiggle_analysis_df
-        crd_df = crd_df.merge(
-        wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']],
-        right_on=['strand', 'start', 'end'],
-        left_on=['strand', 'term_start', 'term_end'],
-        how='left', indicator= False
-        )
+        if(args.wiggleAnalysis != 'NoWig'):
+            crd_df = crd_df.merge(
+            wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']],
+            right_on=['strand', 'start', 'end'],
+            left_on=['strand', 'term_start', 'term_end'],
+            how='left', indicator= False
+            )
 
-        crd_df.drop(columns=['start_y', 'end_y'], inplace = True)
-        crd_df = crd_df.rename(columns={"start_x" : "start", "end_x" : "end"})
+            crd_df.drop(columns=['start_y', 'end_y'], inplace = True)
+            crd_df = crd_df.rename(columns={"start_x" : "start", "end_x" : "end"})
 
         crd_df.to_csv("%s_allocated_terminators.tsv" %
                       genome_name, sep="\t", index=False)

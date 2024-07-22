@@ -61,7 +61,7 @@ def process_blast_results(df):
         """
         row_id_all = row[0]
         row["transcript_id"] = re.findall(
-            "\|((?:orphan_|antisense_)\d+)\|", row_id_all)[0]
+            "\|((?:orphan_|antisense_|internal_)\d+)\|", row_id_all)[0]
         row["position"] = int(re.findall("\|Start:(\d+)\|", row_id_all)[0])
         row["strand"] = re.findall("\|Strand:(\+|\-)", row_id_all)[0]
         row["start_query"] = row[1]
@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser.add_argument("--filteredBlast_list", nargs="+",)
     args = parser.parse_args()
     genomes = np.unique(
-        [re.split("/", re.split("_antisense|_orphan", x)[0])[-1]for x in args.qrna_list])
+        [re.split("/", re.split("_antisense|_orphan|internal_", x)[0])[-1]for x in args.qrna_list])
     for g in genomes:
         qrna_joint_genome = pd.DataFrame()
         filt_genome = filter(lambda x: g in x, args.qrna_list)

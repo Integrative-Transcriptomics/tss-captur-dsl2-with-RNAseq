@@ -19,7 +19,7 @@ def create_columns(row):
     row["index"] = "COD" if row["index"] == "coding" else "RNA"
     # Separate the important information
     row["transcript_id"] = re.findall(
-        "\|((?:orphan_|antisense_)\d+)\|", row_id_all)[0]
+        "\|((?:orphan_|antisense_|internal_)\d+)\|", row_id_all)[0]
     row["position"] = int(re.findall("\|Start:(\d+)\|", row_id_all)[0])
     row["strand"] = re.findall("\|Strand:(\+|\-)", row_id_all)[0]
     # compute the posible coordinates depending on the strand
