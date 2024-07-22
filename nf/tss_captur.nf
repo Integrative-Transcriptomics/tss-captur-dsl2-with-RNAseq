@@ -26,7 +26,7 @@ workflow {
     genomesExt = Channel.fromPath(["fa", "fna", "fasta", "frn", "faa", "ffn"].collect{ "${params.genomesPath}*.${it}" })
 
     DATAPREPARATION(params.masterTable, params.genomesPath, params.gffPath, params.outputPath)
-    //MEME(DATAPREPARATION.out.promoters, params.outputPath)
+    MEME(DATAPREPARATION.out.promoters, params.outputPath)
     CLASSIFICATION(DATAPREPARATION.out.queries, DATAPREPARATION.out.blastFiltered.collect(), params.outputPath)
     TERMINATORPREDICTION(genomesExt,
                         projectDir,  
@@ -52,9 +52,9 @@ workflow {
                     params.outputPath)
     }
     
-    //RNAFOLD(TERMINATORALLOC.out.allocation, params.genomesPath, params.outputPath)
+    RNAFOLD(TERMINATORALLOC.out.allocation, params.genomesPath, params.outputPath)
 
-    //CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
+    CREATEREPORT(RNAFOLD.out.outputFigures.collect(), MEME.out.motifResult.collect(), params.outputPath) | collect | CLEANWORKDIR
 }
 
 workflow.onComplete = {

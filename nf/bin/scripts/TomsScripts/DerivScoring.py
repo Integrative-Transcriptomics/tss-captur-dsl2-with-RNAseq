@@ -94,7 +94,8 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
 
     info_data = []
-    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "bgNoise", "scoreWindowStart", "scoreWindowEnd"])
+    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
+                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
@@ -138,10 +139,10 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 continue          
 
             Wendepunkte = []
-            rawValues = np.polynomial.polynomial.Polynomial.fit(range(fit_window_start, fit_window_end), bw.values(chromo, fit_window_start, fit_window_end), deg=5, domain = [])
+            fitValues = np.polynomial.polynomial.Polynomial.fit(range(fit_window_start, fit_window_end), bw.values(chromo, fit_window_start, fit_window_end), deg=5, domain = [])
             #print("Range:" , range(fit_window_start, fit_window_end))
             #print(" normal poly: ",(rawValues.coef))
-            firstDeriv = rawValues.deriv()
+            firstDeriv = fitValues.deriv()
             secondDeriv = firstDeriv.deriv()
             thirdDeriv = secondDeriv.deriv()
             x = np.linspace(fit_window_start, fit_window_end, 100)
@@ -150,8 +151,8 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             # plt.plot(x, firstDeriv(x))
             # plt.plot(x, secondDeriv(x))
             # plt.plot(x, thirdDeriv(x))
-            plt.plot(scoredterm.start, rawValues(scoredterm.start) ,'o', label= "Term start", color = '#49257B')
-            plt.plot(scoredterm.end, rawValues(scoredterm.end) ,'o' , label= "Term End", color = '#49257B')
+            plt.plot(scoredterm.start, fitValues(scoredterm.start) ,'o', label= "Term start", color = '#49257B')
+            plt.plot(scoredterm.end, fitValues(scoredterm.end) ,'o' , label= "Term End", color = '#49257B')
 
             roots = poly.polyroots(secondDeriv.coef)
             secondDeriv_real_roots = roots
@@ -165,7 +166,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                     #print("drew", root)
                     #print(secondDeriv(root))
                 Wendepunkte.append(root)
-                plt.plot(root, rawValues(root), marker = "o", color ='yellow')
+                plt.plot(root, fitValues(root), marker = "o", color ='yellow')
             
             bestScore = -1
             score = -1
@@ -174,20 +175,30 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 print(f"Alarm, keine wendepunkte: {tss}" )
                 scoredterm.derivScore = "NA"
 
-            INFO_wind_start = -1
-            INFO_wind_end = -1
+            INFO_wind_start = 0
+            INFO_wind_end = 0
 
             for wp in Wendepunkte:
                 wp = round(wp)
                 if(scoredterm.type == "terminator"):
-                    score, INFO_wind_start, INFO_wind_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
                 else:
-                    score, INFO_wind_start, INFO_wind_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
 
                 if(score > bestScore):
                     bestScore = score
+                    INFO_wind_start = tmp_start
+                    INFO_wind_end = tmp_end
             
-            plt.xlim(INFO_wind_start, INFO_wind_end)
+            plt.xlim(tss, INFO_wind_end + 50)
+            if len(Wendepunkte) > 0:
+                plt.ylim(-5,  np.quantile(bw.values(chromo, INFO_wind_start, INFO_wind_end), 1) * 1.2)
+            else:
+                if(scoredterm.strand == '+'):
+                    plt.ylim(-5,  np.quantile(bw.values(chromo, tss, scoredterm.end), 1) * 1.2)
+                else:
+                    plt.ylim(-5,  np.quantile(bw.values(chromo, scoredterm.start, tss), 1) * 1.2)
+            plt.plot(x, fitValues(x))
             plt.legend()
             plt.xlabel('Position')
             plt.ylabel('Value')
@@ -209,7 +220,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end])
+                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd])
 
     with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
         writer = csv.writer(file, delimiter=',')

@@ -18,6 +18,8 @@ class ScoredTerm:
     type = 'terminator type here'
     start = -1
     end = -1
+    avgScoreStart = -1,
+    avgScoreEnd = -1
 
 def FindFirstUpstreamTSS(position, tssList, strand):
     lastPos = -1
@@ -53,22 +55,25 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     upper_bound = noiseLvL + iqr * 2
 
-    if(postTermExprQ <= noiseLvL):
-        return 1
-    elif(postTermExprQ >= upper_bound):
-        return 0
-    else:
-         return (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
+    score = 0
 
+    if(postTermExprQ <= noiseLvL):
+        score = 1
+    elif(postTermExprQ >= upper_bound):
+        score = 0
+    else:
+         score = (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
+
+    return score, windStart, windEnd
 
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
 
 def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, master_table_path, annotgff):
     #Params
-    window_size = 25
-    scoring_window_offset_rho = 10
-    scoring_window_offset_intrinsic = 10
+    WINDOW_SIZE = 25
+    SCORING_WINDOW_OFFSET_RHO = 10
+    SCORING_WINDOW_OFFSET_INTRINSIC = 10
 
 
     rhotermdata = gff3_parser.parse_gff3(gffRhoterm, verbose = False, parse_attributes = False)
@@ -164,10 +169,10 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
 
         #intrinsic terminator
         if(type == "terminator"):
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_intrinsic, WindowSize=window_size, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=SCORING_WINDOW_OFFSET_INTRINSIC, WindowSize=WINDOW_SIZE, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
         #Rho dep. terminator
         else:
-            scored.avgScore = ScoreArea(WindowOffsetFromEnd=scoring_window_offset_rho, WindowSize=window_size, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=SCORING_WINDOW_OFFSET_RHO, WindowSize=WINDOW_SIZE, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
         if(myTss in TSSTermPairing):
