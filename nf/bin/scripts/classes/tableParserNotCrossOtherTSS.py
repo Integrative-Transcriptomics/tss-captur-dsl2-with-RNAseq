@@ -274,9 +274,10 @@ class GenomeWrapper(object):
         else:
             filelist = os.listdir(path)
             fasta_ext = "(fa|fna|fasta|faa|frn|ffn)"
-            gff_ext = "gff"
+            gff_ext = "(gff|gff3)"
+            print("isgff: ", is_gff, path, filelist)            
             regex = re.compile(
-                "%s.*\.%s$" % (self.genome_name, gff_ext if is_gff else fasta_ext))
+                r".*\.(%s)$" % (gff_ext if is_gff else fasta_ext))
             match = list(filter(regex.match, filelist))[0]
             return os.path.join(path, match)
 

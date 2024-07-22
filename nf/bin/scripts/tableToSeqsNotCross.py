@@ -13,6 +13,8 @@ def parse_table(separator, args):
     is_detected_enriched = parsedtable["enriched"] == 1
     parsedtable = parsedtable[is_detected_enriched]
     wrapper_list = []
+
+    print("has diff cons:", args.conditions)
     if has_diff_conditions:
         wrapper = GenomeWrapper(args.allow_tss_intersection,
                                 args.allow_annotated_tss_intersection, args.allow_gene_intersection)
