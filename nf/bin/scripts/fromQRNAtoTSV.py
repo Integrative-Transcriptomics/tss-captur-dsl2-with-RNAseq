@@ -79,7 +79,7 @@ if __name__ == "__main__":
     parser.add_argument("--filteredBlast_list", nargs="+",)
     args = parser.parse_args()
     genomes = np.unique(
-        [re.split("/", re.split("_antisense|_orphan|internal_", x)[0])[-1]for x in args.qrna_list])
+        [re.split("/", re.split("_antisense|_orphan|_internal", x)[0])[-1]for x in args.qrna_list])
     for g in genomes:
         qrna_joint_genome = pd.DataFrame()
         filt_genome = filter(lambda x: g in x, args.qrna_list)
@@ -91,6 +91,7 @@ if __name__ == "__main__":
             read_blast_results).sort_values("position")
         for qrna_genome in filt_genome:
             qrna_result = QRNAparser(qrna_genome).to_dataframe()
+            print("qrna result:", qrna_result)
             qrna_joint_genome = pd.concat(
                 [qrna_joint_genome, qrna_result])
         qrna_joint_genome.position = qrna_joint_genome.position.astype(
@@ -98,5 +99,6 @@ if __name__ == "__main__":
         qrna_joint_genome.sort_values("position", inplace=True)
         qrna_joint_genome = correct_gaps(
             qrna_joint_genome, processed_blast_results)
+        print("joint genome: ", qrna_joint_genome)
         qrna_joint_genome.to_csv("%s_evaluated_qrna.tsv" % g, sep="\t",
                                  index=False)

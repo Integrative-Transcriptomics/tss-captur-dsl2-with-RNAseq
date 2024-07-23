@@ -125,6 +125,7 @@ if __name__ == "__main__":
     args.cnit.sort()
     args.qrna.sort()
     compare_list = zip(args.cnit, args.qrna)
+    print(list(zip(args.cnit, args.qrna)))
     for cnit, qrna in compare_list:
         cnit = re.sub(r",|\[|\]", "", cnit)
         qrna = re.sub(r",|\[|\]", "", qrna)
@@ -132,17 +133,34 @@ if __name__ == "__main__":
             "/", re.split("_evaluated_cnit", cnit)[0])[-1]
         cnit_df = pd.read_csv(cnit, sep="\t", usecols=[
                               0, 1, 2, 4, 5, 9, 10, 11, 12])
+        print("cnit df: ", cnit_df)
         cnit_df = normalize_score(cnit_df)
         qrna_df = pd.read_csv(qrna, sep="\t", usecols=[
                               0, 1, 2, 5, 6, 9, 10, 11, 12, 19, 20, 21])
+        print("QRNA df: ", qrna_df)
         qrna_df["score"] = np.where(
             qrna_df.winner == "RNA", qrna_df.sig_rna, (np.where(
                 qrna_df.winner == "COD", qrna_df.sig_cod, qrna_df.sig_oth)))
+        
         qrna_df = normalize_score(qrna_df)
+
+        if cnit_df.duplicated(subset=["transcript_id", "position", "strand"]).any():
+            print("Duplicates found in cnit_df")
+        if qrna_df.duplicated(subset=["transcript_id", "position", "strand"]).any():
+            print("Duplicates found in qrna_df")
+
         merged_df = cnit_df.merge(
             qrna_df,  how="left", on=["transcript_id", "position", "strand"], suffixes=["_cnit", "_qrna"])
+
+        if merged_df.duplicated(subset=["transcript_id", "position", "strand"]).any():
+            print("Duplicates found in merged_df")
+
+
+        print("merged df: ",merged_df)
+
         summarize_df = merged_df.apply(classification_helper, axis=1).rename(columns={
             "PredictionStartCorrected": "PredictionStart", "PredictionEndCorrected": "PredictionEnd"})
+        
 
         summarize_df["score"] = summarize_df.score.round(3)
         summarize_df["z_score"] = summarize_df.z_score.round(3)

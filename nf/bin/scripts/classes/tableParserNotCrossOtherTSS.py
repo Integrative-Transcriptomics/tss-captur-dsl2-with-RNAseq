@@ -120,19 +120,24 @@ class GenomeWrapper(object):
             # A TSS can be associated with many genes, hence an AS might have been already labelled as P/S/I
             # This need to be removed
 
-            filter_repeated = [not x in index_not_table for x in all_internals[[
+            filter_repeated_internals = [not x in index_not_table for x in all_internals[[
                 "Pos", "Strand"]].to_records(index=False)]
                 
-            all_internals = all_internals[filter_repeated]
+            all_internals = all_internals[filter_repeated_internals]
+
+            # Remove internals that overlap with antisense
+            internals_not_antisense = all_internals[~ (all_internals[["Pos", "Strand"]].apply(tuple, axis=1).isin(
+            set(self.antisense[0][["Pos", "Strand"]].apply(tuple, axis=1).tolist() +
+                self.antisense[1][["Pos", "Strand"]].apply(tuple, axis=1).tolist())))]
 
             # An AS TSS can also be categorized wrt. many genes, hence the duplicates need to be removed
-            all_internals = all_internals.drop_duplicates(
+            internals_not_antisense = internals_not_antisense.drop_duplicates(
                 ["Pos", "Strand"]).reset_index()
             
-            all_internals = all_internals[important_columns]
-            all_internals["type"] = "internal"
+            internals_not_antisense = internals_not_antisense[important_columns]
+            internals_not_antisense["type"] = "internal"
 
-            self.internals = separate_table(all_antisense)
+            self.internals = separate_table(internals_not_antisense)
         else:
             self.internals = [pd.DataFrame(), pd.DataFrame()]
         self.list_positions()
