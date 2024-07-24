@@ -111,6 +111,7 @@ def InverseOfMasterTableNoise(annot_path, bigwig_path, masterTable_path):
     print(len(allMasterTableLocusTags))
 
     files = glob.glob(f"{annot_path}/*.gff")
+    files = files.extend(glob.glob(f"{annot_path}/*.gff3"))
     print(f"annnot path inverse: {annot_path}")
     print(f"anoot globs inverse: {files}")
     annot = gff3_parser.parse_gff3(files[0], verbose = False, parse_attributes = True) 
