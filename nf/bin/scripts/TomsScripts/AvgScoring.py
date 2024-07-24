@@ -144,7 +144,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
         else:
             bw = rvbw
-            reverse_chromosome = reverse_chromosome
+            chromosome = reverse_chromosome
             noiseLvL = reverse_noise_lvl
             iqr = reverse_IQR
             scoreStartArea = scored.start
