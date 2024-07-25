@@ -41,7 +41,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
         score = 0
     else:
         score = (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
-    
+
     return score, windStart, windEnd
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
@@ -96,7 +96,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     info_data = []
     info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
                       "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
-                        "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd"])
+                        "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd", "minExprDrop"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
@@ -175,21 +175,23 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             if(len(Wendepunkte) <= 0):
                 print(f"Alarm, keine wendepunkte: {tss}" )
                 scoredterm.derivScore = "NA"
+            else:
+                INFO_wind_start = 0
+                INFO_wind_end = 0
 
-            INFO_wind_start = 0
-            INFO_wind_end = 0
+                for wp in Wendepunkte:
+                    wp = round(wp)
+                    if(scoredterm.type == "terminator"):
+                        score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    else:
+                        score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
 
-            for wp in Wendepunkte:
-                wp = round(wp)
-                if(scoredterm.type == "terminator"):
-                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
-                else:
-                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    if(score > bestScore):
+                        bestScore = score
+                        INFO_wind_start = tmp_start
+                        INFO_wind_end = tmp_end
 
-                if(score > bestScore):
-                    bestScore = score
-                    INFO_wind_start = tmp_start
-                    INFO_wind_end = tmp_end
+                scoredterm.derivScore = bestScore
             
             plt.xlim(tss, INFO_wind_end + 50)
             if len(Wendepunkte) > 0:
@@ -207,7 +209,6 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
             plt.close()
 
-            scoredterm.derivScore = bestScore
 
             data.append([f"{scoredterm.seqid}", 
                          f"{tss}", scoredterm.type, 
@@ -222,7 +223,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
                          scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd,
-                         scoredterm.dropScorePreTermStart, scoredterm.dropScorePreTermEnd, scoredterm.dropScorePostTermStart, scoredterm.dropScorePostTermEnd])
+                         scoredterm.dropScorePreTermStart, scoredterm.dropScorePreTermEnd, scoredterm.dropScorePostTermStart, scoredterm.dropScorePostTermEnd, scoredterm.minExprDrop])
 
     with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
         writer = csv.writer(file, delimiter=',')

@@ -65,6 +65,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
     distance_predicted_end = 1 - \
         (abs(terminator_start - transcript_end)/l_searchspace)
     
+    #add the "normalized" initial score here
     isolated_score = row["binned_score"]/2
 
     if 'avgScore' in row.index.tolist():
@@ -72,20 +73,26 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         deriv_score = row["derivScore"]
         drop_score = row["dropScore"]
 
-        if(math.isnan(avg_score) and math.isnan(deriv_score)):
+        non_na = [score for score in [avg_score, deriv_score, drop_score] if not math.isnan(score)]
+
+        if len(non_na):
             wigScoring = 0
-        if(math.isnan(avg_score) and not math.isnan(deriv_score)):
-            wigScoring = deriv_score
-        if(not math.isnan(avg_score ) and math.isnan(deriv_score)):
-            wigScoring = avg_score
-        if(not math.isnan(avg_score) and not math.isnan(deriv_score)):
-            wigScoring = np.mean([avg_score, deriv_score])
+        else:
+            wigScoring = np.mean(non_na)
+
+        # if(math.isnan(avg_score) and math.isnan(deriv_score)):
+        #     wigScoring = 0
+        # if(math.isnan(avg_score) and not math.isnan(deriv_score)):
+        #     wigScoring = deriv_score
+        # if(not math.isnan(avg_score ) and math.isnan(deriv_score)):
+        #     wigScoring = avg_score
+        # if(not math.isnan(avg_score) and not math.isnan(deriv_score)):
+        #     wigScoring = np.mean([avg_score, deriv_score])
 
         isolated_score += wigScoring    
-        print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
+        print(f"{isolated_score} scored! {avg_score} {deriv_score} {drop_score} {wigScoring} term at start: {terminator_start}")
 
-    score = isolated_score + \
-        distance_predicted_end/4 + distance_to_start/4
+    score = isolated_score + (distance_predicted_end/4 + distance_to_start/4)
 
     return score
 
