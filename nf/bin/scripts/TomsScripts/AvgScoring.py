@@ -13,27 +13,65 @@ class ScoredTerm:
     initialScore = -1
     avgScore = -1
     derivScore = -1
+    dropScore = -1
     seqid = 'Region here'
     strand = 'NA'
     type = 'terminator type here'
     start = -1
     end = -1
-    avgScoreStart = -1,
+    avgScoreStart = -1
     avgScoreEnd = -1
+    dropScorePreTermStart = -1
+    dropScorePreTermEnd = -1
+    dropScorePostTermStart = -1
+    dropScorePostTermEnd = -1
 
-def FindFirstUpstreamTSS(position, tssList, strand):
+def FindFirstUpstreamTSS(position, minimum_gene_length, tssList, strand):
     lastPos = -1
     if strand == '+':
         for tss in tssList:
             if(tss >= position):
                 return lastPos
-            lastPos = tss
+            
+            if(tss <= position - minimum_gene_length):
+                lastPos = tss
         return lastPos
     else:
         for tss in tssList:
-            if(tss > position):
+            if(tss > position + minimum_gene_length):
                 return tss
     return -1
+
+
+def DropScoreArea(window_gene_ratio, post_term_window_offset, post_term_window_size, scoredTerm, myTss, bwFile, noiseLvl):
+
+    chrom = scoredTerm.seqid
+
+    if(scoredTerm.strand == '+'):
+        score_pre_term_start = int(scoredTerm.start - ((scoredTerm.start - myTss) * window_gene_ratio))
+        score_pre_term_end = scoredTerm.start
+
+        score_post_term_start = min(scoredTerm.end + post_term_window_offset, bwFile.chroms(chrom) -1)
+        score_post_term_end = min(score_post_term_start + post_term_window_size, bwFile.chroms(chrom))
+
+    else:
+        score_pre_term_start = scoredTerm.end
+        score_pre_term_end = int(scoredTerm.end + ((myTss - scoredTerm.end) * window_gene_ratio))
+
+        score_post_term_end = max(scoredTerm.start - post_term_window_offset, 2)
+        score_post_term_start = max(score_post_term_end - post_term_window_size, 1)
+
+    print("bounds: ", score_pre_term_start, score_pre_term_end, bwFile.chroms(chrom), scoredTerm.strand, scoredTerm.start, myTss, scoredTerm.end)
+    pre_term_expr = np.quantile(bwFile.values(chrom, score_pre_term_start, score_pre_term_end), 0.5)
+
+    post_term_expr = np.quantile(bwFile.values(chrom, score_post_term_start, score_post_term_end), 0.5)
+
+    expression_ratio = post_term_expr / pre_term_expr
+    
+    score = 1 if expression_ratio < 0.25 else 0
+
+    return score, score_pre_term_start, score_pre_term_end, score_post_term_start, score_post_term_end
+
 
 
 def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, noiseLvL, iqr):
@@ -70,12 +108,21 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
 
 def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bigwig_path, master_table_path, annotgff):
-    #Params
-    WINDOW_SIZE = 25
-    SCORING_WINDOW_OFFSET_RHO = 10
-    SCORING_WINDOW_OFFSET_INTRINSIC = 10
+
+    #Params avg scoring
+    AVG_WINDOW_SIZE = 25
+    AVGSCORING_WINDOW_OFFSET_RHO = 10
+    AVGSCORING_WINDOW_OFFSET_INTRINSIC = 10
+
+    #Params 
+    DROPSCORING_PRE_TERM_WINDOW_RATIO = 0.5
+    DROPSCORING_POST_TERM_WINDOW_SIZE = 50
+
+    DROPSCORING_POST_TERM_OFFSET_RHO = 10
+    DROPSCORING_POST_TERM_OFFSET_INTRINSIC = 10
 
 
+    MINIMUM_GENE_LENGTH = 15
     rhotermdata = gff3_parser.parse_gff3(gffRhoterm, verbose = False, parse_attributes = False)
     nocornacdata = gff3_parser.parse_gff3(gffNocornac, verbose = False, parse_attributes = False)
 
@@ -113,7 +160,8 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
 
     print(forward_chromosome, reverse_chromosome)
     
-    all_terms_intervalls = zip(all_term_data.loc[:, "Start"].astype(int), all_term_data.loc[:, "End"].astype(int), all_term_data.loc[:, "Score"], all_term_data.loc[:, "Type"], all_term_data.loc[: ,"Strand"])
+    all_terms_intervalls = zip(all_term_data.loc[:, "Start"].astype(int), all_term_data.loc[:, "End"].astype(int), all_term_data.loc[:, "Score"],
+                                all_term_data.loc[:, "Type"], all_term_data.loc[: ,"Strand"])
 
     print(f"FROM AVGSCORING: {annotgff}")
 
@@ -139,18 +187,24 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             chromosome = forward_chromosome
             noiseLvL = forward_noise_lvl
             iqr = forward_IQR
-            scoreStartArea = scored.end
-            myTss =  FindFirstUpstreamTSS(start, positive_tss, '+')
+            avgScoreStartArea = scored.end
+            myTss = FindFirstUpstreamTSS(start, MINIMUM_GENE_LENGTH, positive_tss, '+')
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
         else:
             bw = rvbw
-            reverse_chromosome = reverse_chromosome
+            chromosome = reverse_chromosome
             noiseLvL = reverse_noise_lvl
             iqr = reverse_IQR
-            scoreStartArea = scored.start
-            myTss =  FindFirstUpstreamTSS(end, negative_TSS, '-')
+            avgScoreStartArea = scored.start
+            myTss = FindFirstUpstreamTSS(end, MINIMUM_GENE_LENGTH, negative_TSS, '-')
             #print(f"Start: {start} End: {end} tss: {myTss}")
             estGeneExprMed = np.quantile(bw.values(chromosome, start, myTss), 0.5)
+
+        #No TSS found, no gene here, we assume
+        if(myTss <= -1):
+            continue
+        
+
         #print(f"Intervalls: {myTss} {end} {tssStarts}")
 
         scored.seqid = chromosome
@@ -158,6 +212,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
         #if gene is not expressed, we cannot judge its terminators
         if(estGeneExprMed <= noiseLvL):
             scored.avgScore = "NA"
+            scored.dropScore = "NA"
 
             if(myTss in TSSTermPairing):
                 TSSTermPairing[myTss].append(scored)
@@ -169,23 +224,26 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
 
         #intrinsic terminator
         if(type == "terminator"):
-            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=SCORING_WINDOW_OFFSET_INTRINSIC, WindowSize=WINDOW_SIZE, startOfArea= scoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=AVGSCORING_WINDOW_OFFSET_INTRINSIC, WindowSize=AVG_WINDOW_SIZE, startOfArea= avgScoreStartArea, scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+
+            scored.dropScore, scored.dropScorePreTermStart, scored.dropScorePreTermEnd, scored.dropScorePostTermStart, scored.dropScorePostTermEnd = DropScoreArea(
+                window_gene_ratio=DROPSCORING_PRE_TERM_WINDOW_RATIO, post_term_window_size= DROPSCORING_POST_TERM_WINDOW_SIZE, post_term_window_offset=DROPSCORING_POST_TERM_OFFSET_INTRINSIC,
+                scoredTerm=scored, myTss=myTss, bwFile=bw, noiseLvl=noiseLvL
+            )
         #Rho dep. terminator
         else:
-            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=SCORING_WINDOW_OFFSET_RHO, WindowSize=WINDOW_SIZE, startOfArea= scoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+            scored.avgScore, scored.avgScoreStart, scored.avgScoreEnd = ScoreArea(WindowOffsetFromEnd=AVGSCORING_WINDOW_OFFSET_RHO, WindowSize=AVG_WINDOW_SIZE, startOfArea= avgScoreStartArea,scoredTerm=scored, bwFile=bw, noiseLvL=noiseLvL, iqr=iqr)
+
+            scored.dropScore, scored.dropScorePreTermStart, scored.dropScorePreTermEnd, scored.dropScorePostTermStart, scored.dropScorePostTermEnd = DropScoreArea(
+                window_gene_ratio=DROPSCORING_PRE_TERM_WINDOW_RATIO, post_term_window_size= DROPSCORING_POST_TERM_WINDOW_SIZE, post_term_window_offset=DROPSCORING_POST_TERM_OFFSET_RHO,
+                scoredTerm=scored, myTss=myTss, bwFile=bw, noiseLvl=noiseLvL
+            )
+
 
         #scored.AvgScore = 15*noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
         if(myTss in TSSTermPairing):
             TSSTermPairing[myTss].append(scored)
         else:
             TSSTermPairing[myTss] = [scored]
-
-    onlynas= 0
-    for key in TSSTermPairing:
-        if(all(term.avgScore == 'NA' for term in TSSTermPairing[key])):
-            print(key)
-            onlynas += 1
-
-    print(f"Total TSS: {len(TSSTermPairing.keys())} tss with only NA: {onlynas}" )
 
     return TSSTermPairing
