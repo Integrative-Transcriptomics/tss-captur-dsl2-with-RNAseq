@@ -189,6 +189,9 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             iqr = forward_IQR
             avgScoreStartArea = scored.end
             myTss = FindFirstUpstreamTSS(start, MINIMUM_GENE_LENGTH, positive_tss, '+')
+            #No TSS found, no gene here, we assume
+            if(myTss <= -1):
+                continue
             estGeneExprMed = np.quantile(bw.values(chromosome, myTss, end), 0.5)
         else:
             bw = rvbw
@@ -198,11 +201,11 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             avgScoreStartArea = scored.start
             myTss = FindFirstUpstreamTSS(end, MINIMUM_GENE_LENGTH, negative_TSS, '-')
             #print(f"Start: {start} End: {end} tss: {myTss}")
+            #No TSS found, no gene here, we assume
+            if(myTss <= -1):
+                continue
             estGeneExprMed = np.quantile(bw.values(chromosome, start, myTss), 0.5)
 
-        #No TSS found, no gene here, we assume
-        if(myTss <= -1):
-            continue
         
 
         #print(f"Intervalls: {myTss} {end} {tssStarts}")
