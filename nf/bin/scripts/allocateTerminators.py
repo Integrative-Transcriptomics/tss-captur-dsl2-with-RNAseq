@@ -70,6 +70,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
     if 'avgScore' in row.index.tolist():
         avg_score = row["avgScore"]
         deriv_score = row["derivScore"]
+        drop_score = row["dropScore"]
 
         if(math.isnan(avg_score) and math.isnan(deriv_score)):
             wigScoring = 0
@@ -254,7 +255,7 @@ if __name__ == "__main__":
         if(args.wiggleAnalysis != 'NoWig'):
             wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
             print(wiggle_analysis_df)
-            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
+            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore', 'dropScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)
 
@@ -293,7 +294,7 @@ if __name__ == "__main__":
         # Merge crd_df with wiggle_analysis_df
         if(args.wiggleAnalysis != 'NoWig'):
             crd_df = crd_df.merge(
-            wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']],
+            wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore', 'dropScore']],
             right_on=['strand', 'start', 'end'],
             left_on=['strand', 'term_start', 'term_end'],
             how='left', indicator= False

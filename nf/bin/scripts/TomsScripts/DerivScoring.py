@@ -91,11 +91,12 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     #plt.figure()
     fig, ax = plt.subplots()
     data =[]
-    data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
+    data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "dropScore"])
 
     info_data = []
     info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
-                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd"])
+                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
+                        "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
@@ -213,14 +214,15 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore])
+                         scoredterm.derivScore, scoredterm.dropScore])
             
             info_data.append([f"{scoredterm.seqid}", 
                          f"{tss}", scoredterm.type, 
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd])
+                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd,
+                         scoredterm.dropScorePreTermStart, scoredterm.dropScorePreTermEnd, scoredterm.dropScorePostTermStart, scoredterm.dropScorePostTermEnd])
 
     with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
         writer = csv.writer(file, delimiter=',')

@@ -122,7 +122,7 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
     DROPSCORING_POST_TERM_OFFSET_INTRINSIC = 10
 
 
-    MINIMUM_GENE_LENGTH = 15
+    MINIMUM_GENE_LENGTH = 30
     rhotermdata = gff3_parser.parse_gff3(gffRhoterm, verbose = False, parse_attributes = False)
     nocornacdata = gff3_parser.parse_gff3(gffNocornac, verbose = False, parse_attributes = False)
 
