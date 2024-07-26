@@ -23,6 +23,7 @@ The following functions are found in this script:
 """
 
 import math
+import os
 import re
 import pandas as pd
 import numpy as np
@@ -240,7 +241,8 @@ if __name__ == "__main__":
         #Error message here, can't use wiggle analysis with multiple genomes yet
 
     for crd, rhoterm, nocornac in compare_list:
-        genome_name = re.split("/", re.split(".crd", crd)[0])[-1]
+        #genome_name = re.split("/", re.split(".crd", crd)[0])[-1]
+        genome_name = os.path.splitext(os.path.basename(crd))[0]
         rhoterm_df = pd.read_csv(rhoterm, sep="\t", header=None)
         rhoterm_df["binned_score"] = bin_column(rhoterm_df[5])
         nocornac_df = pd.read_csv(nocornac, sep="\t", skiprows=4, header=None)
@@ -253,13 +255,15 @@ if __name__ == "__main__":
 
         if(args.wiggleAnalysis != 'NoWig'):
             wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
-            print(wiggle_analysis_df)
+            #print(wiggle_analysis_df)
             terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)
-
+    
         crd_df.columns = ["transcript_id", "start",
-                          "end", "strand", "type", "5UTRend"]
+                          "end", "strand", "type", "5UTRend"]        
+        print("crd dataframe: \n", crd_df)
+        print("max distance dataframe: \n", max_distance)
         crd_df = crd_df.apply(
             lambda row: find_terminators(row, terminators_all, max_distance[genome_name]), axis=1, result_type="expand")
         allocated_terminators = crd_df.term_id.unique()
