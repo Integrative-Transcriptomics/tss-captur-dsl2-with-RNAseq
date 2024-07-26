@@ -120,8 +120,9 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 iqr = forward_iqr
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, tss, scoredterm.end), 0.5)
 
-                fit_window_start = scoredterm.start - SearchWindow
-                fit_window_end = scoredterm.end + SearchWindow
+                fit_window_start = max(scoredterm.start - SearchWindow, 1)
+                fit_window_end = min(scoredterm.end + SearchWindow, bw.chroms(chromo) -1)
+
             else:
                 bw = rvbw
                 chromo = reverse_chromo
@@ -129,8 +130,8 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                 iqr = reverse_iqr
                 estGeneExprMed = np.quantile(bw.values(scoredterm.seqid, scoredterm.start, tss), 0.5)
 
-                fit_window_start = scoredterm.start - SearchWindow
-                fit_window_end = scoredterm.end + SearchWindow
+                fit_window_start = max(scoredterm.start - SearchWindow, 1)
+                fit_window_end = min(scoredterm.end + SearchWindow, bw.chroms(chromo) -1)
             
             #if gene is not expressed, we cannot judge its terminators
             if(estGeneExprMed <= noiseLVL):
