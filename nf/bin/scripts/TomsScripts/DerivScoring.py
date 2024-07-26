@@ -151,7 +151,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             # plt.plot(x, firstDeriv(x))
             # plt.plot(x, secondDeriv(x))
             # plt.plot(x, thirdDeriv(x))
-            plt.plot(scoredterm.start, fitValues(scoredterm.start) ,'o', label= "Term start", color = '#49257B')
+            plt.plot(scoredterm.start, fitValues(scoredterm.start) ,'o', label= "Term start", color = "yellow")
             plt.plot(scoredterm.end, fitValues(scoredterm.end) ,'o' , label= "Term End", color = '#49257B')
 
             roots = poly.polyroots(secondDeriv.coef)
@@ -166,7 +166,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                     #print("drew", root)
                     #print(secondDeriv(root))
                 Wendepunkte.append(root)
-                plt.plot(root, fitValues(root), marker = "o", color ='yellow')
+                #plt.plot(root, fitValues(root), marker = "o", color ='yellow')
             
             bestScore = -1
             score = -1
@@ -192,13 +192,19 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             
             plt.xlim(tss, INFO_wind_end + 50)
             if len(Wendepunkte) > 0:
-                plt.ylim(-5,  np.quantile(bw.values(chromo, INFO_wind_start, INFO_wind_end), 1) * 1.2)
+                plt.ylim(-5,  np.quantile(bw.values(chromo, INFO_wind_start, INFO_wind_end), 1) + 10 * 2)
             else:
                 if(scoredterm.strand == '+'):
-                    plt.ylim(-5,  np.quantile(bw.values(chromo, tss, scoredterm.end), 1) * 1.2)
+                    plt.ylim(-5,  np.quantile(bw.values(chromo, tss, scoredterm.end), 1) + 10 * 2)
                 else:
-                    plt.ylim(-5,  np.quantile(bw.values(chromo, scoredterm.start, tss), 1) * 1.2)
+                    plt.ylim(-5,  np.quantile(bw.values(chromo, scoredterm.start, tss), 1) + 10 * 2)
             plt.plot(x, fitValues(x))
+            
+            if scoredterm.strand == '+':
+                plt.plot(fwbw.values(forward_chromo, 1 , fwbw.chroms(forward_chromo)), color = '#DD9837')
+            else:
+                plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
+                
             plt.legend()
             plt.xlabel('Position')
             plt.ylabel('Value')
