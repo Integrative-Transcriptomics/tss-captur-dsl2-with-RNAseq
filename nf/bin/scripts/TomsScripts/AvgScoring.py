@@ -66,8 +66,9 @@ def DropScoreArea(window_gene_ratio, post_term_window_offset, post_term_window_s
 
     post_term_expr = np.quantile(bwFile.values(chrom, score_post_term_start, score_post_term_end), 0.5)
 
-    expression_ratio = post_term_expr / pre_term_expr
-    
+        
+    expression_ratio = post_term_expr / max(pre_term_expr, 0.0001)
+
     score = 1 if expression_ratio < 0.25 else 0
 
     return score, score_pre_term_start, score_pre_term_end, score_post_term_start, score_post_term_end

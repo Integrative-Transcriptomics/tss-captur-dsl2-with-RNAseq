@@ -206,12 +206,12 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             else:
                 plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
                 
-            plt.legend()
-            plt.xlabel('Position')
-            plt.ylabel('Value')
-            plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
-            plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
-            plt.close()
+            # plt.legend()
+            # plt.xlabel('Position')
+            # plt.ylabel('Value')
+            # plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
+            # plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
+            # plt.close()
 
             scoredterm.derivScore = bestScore
 
