@@ -82,7 +82,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
             wigScoring = np.mean([avg_score, deriv_score])
 
         isolated_score += wigScoring    
-        print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
+        #print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
 
     score = isolated_score + \
         distance_predicted_end/4 + distance_to_start/4
@@ -279,7 +279,7 @@ if __name__ == "__main__":
         crd_df["end_with_terminator"] = np.where(
             ((crd_df.strand == "+") & filter_first_rank),  np.where(crd_df.feature == "RhoTerminator", crd_df["term_end"]+150, crd_df["term_end"]), crd_df["end"])
         # crd_df = crd_df.iloc[:, [6, 9, 7, 8, 0, 1, 2, 5, 10, 3, 4, 11, 12]]
-        print(crd_df.columns)
+        #print(crd_df.columns)
         crd_df = crd_df.loc[:, ["transcript_id", "strand", "type", "start", "end", "feature", "term_id", "score_term", "term_start",
                                 "term_end", "rank_term_score", "additional_term", "start_with_terminator", "end_with_terminator"]]
         crd_df["feature"] = crd_df["feature"].replace(

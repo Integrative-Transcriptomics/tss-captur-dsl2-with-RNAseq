@@ -1,4 +1,4 @@
-from collections import OrderedDict
+[from collections import OrderedDict
 from dataclasses import dataclass
 import glob
 import re
@@ -61,7 +61,7 @@ def DropScoreArea(window_gene_ratio, post_term_window_offset, post_term_window_s
         score_post_term_end = max(scoredTerm.start - post_term_window_offset, 2)
         score_post_term_start = max(score_post_term_end - post_term_window_size, 1)
 
-    print("bounds: ", score_pre_term_start, score_pre_term_end, bwFile.chroms(chrom), scoredTerm.strand, scoredTerm.start, myTss, scoredTerm.end)
+    #print("bounds: ", score_pre_term_start, score_pre_term_end, bwFile.chroms(chrom), scoredTerm.strand, scoredTerm.start, myTss, scoredTerm.end)
     pre_term_expr = np.quantile(bwFile.values(chrom, score_pre_term_start, score_pre_term_end), 0.5)
 
     post_term_expr = np.quantile(bwFile.values(chrom, score_post_term_start, score_post_term_end), 0.5)
@@ -130,9 +130,9 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
     all_term_data = pd.concat([rhotermdata, nocornacdata], ignore_index = True)
 
 
-    print(f"shape of concated: {all_term_data.shape}" )
-    print(f"shape of concated: {rhotermdata.shape}" )
-    print(f"shape of concated: {nocornacdata.shape}" )
+    #print(f"shape of concated: {all_term_data.shape}" )
+    #print(f"shape of concated: {rhotermdata.shape}" )
+    #print(f"shape of concated: {nocornacdata.shape}" )
     #throw = TSSTermPairing[99999999999]
 
     fwbw = bigwig.open(forward_bigwig_path)
@@ -159,19 +159,19 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
             reverse_chromosome = chrom
             break
 
-    print(forward_chromosome, reverse_chromosome)
+    #print(forward_chromosome, reverse_chromosome)
     
     all_terms_intervalls = zip(all_term_data.loc[:, "Start"].astype(int), all_term_data.loc[:, "End"].astype(int), all_term_data.loc[:, "Score"],
                                 all_term_data.loc[:, "Type"], all_term_data.loc[: ,"Strand"])
 
-    print(f"FROM AVGSCORING: {annotgff}")
+    #print(f"FROM AVGSCORING: {annotgff}")
 
     forward_noise_lvl, forward_IQR = CalcbackgroundNoise.InverseOfMasterTableNoise(annotgff, forward_bigwig_path, master_table_path)
     reverse_noise_lvl, reverse_IQR = CalcbackgroundNoise.InverseOfMasterTableNoise(annotgff, reverse_bigwig_path, master_table_path)
 
 
     TSSTermPairing = {}
-    print(f"noiseLVL avg: {forward_noise_lvl}")
+    #print(f"noiseLVL avg: {forward_noise_lvl}")
     for start, end, score, type, strand in all_terms_intervalls:
         if(type != 'terminator' and type != 'RhoTerminator'):
             continue
@@ -250,4 +250,4 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
         else:
             TSSTermPairing[myTss] = [scored]
 
-    return TSSTermPairing
+    return TSSTermPairing]
