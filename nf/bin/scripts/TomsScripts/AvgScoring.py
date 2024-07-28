@@ -250,4 +250,4 @@ def AvgScoreTerminators(gffRhoterm, gffNocornac, forward_bigwig_path, reverse_bi
         else:
             TSSTermPairing[myTss] = [scored]
 
-    return TSSTermPairing]
+    return TSSTermPairing
