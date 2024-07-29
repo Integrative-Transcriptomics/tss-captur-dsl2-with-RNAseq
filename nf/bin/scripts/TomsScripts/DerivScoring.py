@@ -94,8 +94,8 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
 
     info_data = []
-    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
-                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd"])
+    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore",
+                          "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
