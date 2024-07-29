@@ -30,7 +30,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    print(iqr)
+    #print(iqr)
     upper_bound = noiseLvL + iqr * 2
 
     score = 0
@@ -108,7 +108,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     plt.plot(fwbw.values(forward_chromo, 1 , fwbw.chroms(forward_chromo)), color = '#DD9837')
     plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
 
-    print(f"noiseLVL deriv: {forward_noise}")
+    #print(f"noiseLVL deriv: {forward_noise}")
 
     for tss, scoredterms in TSSTermPairings.items():
         plt.plot(tss, 0 , marker = 'o', color = 'black')
@@ -174,7 +174,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             score = -1
 
             if(len(Wendepunkte) <= 0):
-                print(f"Alarm, keine wendepunkte: {tss}" )
+                #print(f"Alarm, keine wendepunkte: {tss}" )
                 scoredterm.derivScore = "NA"
             else:
                 INFO_wind_start = 0
@@ -209,12 +209,12 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             else:
                 plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
                 
-            plt.legend()
-            plt.xlabel('Position')
-            plt.ylabel('Value')
-            plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
-            plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
-            plt.close()
+            # plt.legend()
+            # plt.xlabel('Position')
+            # plt.ylabel('Value')
+            # plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
+            # plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
+            # plt.close()
 
 
             data.append([f"{scoredterm.seqid}", 

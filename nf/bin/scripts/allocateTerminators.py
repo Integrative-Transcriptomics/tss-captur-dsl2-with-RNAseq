@@ -23,6 +23,7 @@ The following functions are found in this script:
 """
 
 import math
+import os
 import re
 import pandas as pd
 import numpy as np
@@ -90,7 +91,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         #     wigScoring = np.mean([avg_score, deriv_score])
 
         isolated_score += wigScoring    
-        print(f"{isolated_score} scored! {avg_score} {deriv_score} {drop_score} {wigScoring} term at start: {terminator_start}")
+        #print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
 
     score = isolated_score + (distance_predicted_end/4 + distance_to_start/4)
 
@@ -248,7 +249,8 @@ if __name__ == "__main__":
         #Error message here, can't use wiggle analysis with multiple genomes yet
 
     for crd, rhoterm, nocornac in compare_list:
-        genome_name = re.split("/", re.split(".crd", crd)[0])[-1]
+        #genome_name = re.split("/", re.split(".crd", crd)[0])[-1]
+        genome_name = os.path.splitext(os.path.basename(crd))[0]
         rhoterm_df = pd.read_csv(rhoterm, sep="\t", header=None)
         rhoterm_df["binned_score"] = bin_column(rhoterm_df[5])
         nocornac_df = pd.read_csv(nocornac, sep="\t", skiprows=4, header=None)
@@ -261,13 +263,15 @@ if __name__ == "__main__":
 
         if(args.wiggleAnalysis != 'NoWig'):
             wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
-            print(wiggle_analysis_df)
-            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore', 'dropScore']], on=['strand', 'start', 'end'], how='left')
+            #print(wiggle_analysis_df)
+            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)
-
+    
         crd_df.columns = ["transcript_id", "start",
-                          "end", "strand", "type", "5UTRend"]
+                          "end", "strand", "type", "5UTRend"]        
+        print("crd dataframe: \n", crd_df)
+        print("max distance dataframe: \n", max_distance)
         crd_df = crd_df.apply(
             lambda row: find_terminators(row, terminators_all, max_distance[genome_name]), axis=1, result_type="expand")
         allocated_terminators = crd_df.term_id.unique()
@@ -283,7 +287,7 @@ if __name__ == "__main__":
         crd_df["end_with_terminator"] = np.where(
             ((crd_df.strand == "+") & filter_first_rank),  np.where(crd_df.feature == "RhoTerminator", crd_df["term_end"]+150, crd_df["term_end"]), crd_df["end"])
         # crd_df = crd_df.iloc[:, [6, 9, 7, 8, 0, 1, 2, 5, 10, 3, 4, 11, 12]]
-        print(crd_df.columns)
+        #print(crd_df.columns)
         crd_df = crd_df.loc[:, ["transcript_id", "strand", "type", "start", "end", "feature", "term_id", "score_term", "term_start",
                                 "term_end", "rank_term_score", "additional_term", "start_with_terminator", "end_with_terminator"]]
         crd_df["feature"] = crd_df["feature"].replace(
