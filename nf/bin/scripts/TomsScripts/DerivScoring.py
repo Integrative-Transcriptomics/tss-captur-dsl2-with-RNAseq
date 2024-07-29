@@ -30,7 +30,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
 
     postTermExprQ = np.quantile(bwFile.values(scoredTerm.seqid, windStart, windEnd), 1)
 
-    print(iqr)
+    #print(iqr)
     upper_bound = noiseLvL + iqr * 2
 
     score = 0
@@ -41,7 +41,7 @@ def ScoreArea(WindowOffsetFromEnd, WindowSize, startOfArea, scoredTerm, bwFile, 
         score = 0
     else:
         score = (1 - ((postTermExprQ - noiseLvL) / (upper_bound - noiseLvL)))
-    
+
     return score, windStart, windEnd
     #return noiseLvL / max(noiseLvL, postTermExprQ, 0.00001)
 
@@ -91,11 +91,12 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     #plt.figure()
     fig, ax = plt.subplots()
     data =[]
-    data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore"])
+    data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "dropScore"])
 
     info_data = []
-    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore",
-                          "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd"])
+    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
+                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
+                        "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd", "minExprDrop"])
 
     ax.boxplot(fwbw.values(forward_chromo, 1, fwbw.chroms(forward_chromo)), showfliers= False)
     ax.axhline(y = forward_noise, color= "r", linewidth = 1)
@@ -107,7 +108,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     plt.plot(fwbw.values(forward_chromo, 1 , fwbw.chroms(forward_chromo)), color = '#DD9837')
     plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
 
-    print(f"noiseLVL deriv: {forward_noise}")
+    #print(f"noiseLVL deriv: {forward_noise}")
 
     for tss, scoredterms in TSSTermPairings.items():
         plt.plot(tss, 0 , marker = 'o', color = 'black')
@@ -173,23 +174,25 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             score = -1
 
             if(len(Wendepunkte) <= 0):
-                print(f"Alarm, keine wendepunkte: {tss}" )
+                #print(f"Alarm, keine wendepunkte: {tss}" )
                 scoredterm.derivScore = "NA"
+            else:
+                INFO_wind_start = 0
+                INFO_wind_end = 0
 
-            INFO_wind_start = 0
-            INFO_wind_end = 0
+                for wp in Wendepunkte:
+                    wp = round(wp)
+                    if(scoredterm.type == "terminator"):
+                        score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    else:
+                        score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
 
-            for wp in Wendepunkte:
-                wp = round(wp)
-                if(scoredterm.type == "terminator"):
-                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_intrinsic, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
-                else:
-                    score, tmp_start, tmp_end = ScoreArea(scoring_window_offset_rho, scoring_window_size, wp, scoredterm, bw, noiseLVL, iqr)
+                    if(score > bestScore):
+                        bestScore = score
+                        INFO_wind_start = tmp_start
+                        INFO_wind_end = tmp_end
 
-                if(score > bestScore):
-                    bestScore = score
-                    INFO_wind_start = tmp_start
-                    INFO_wind_end = tmp_end
+                scoredterm.derivScore = bestScore
             
             plt.xlim(tss, INFO_wind_end + 50)
             if len(Wendepunkte) > 0:
@@ -206,28 +209,28 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
             else:
                 plt.plot(rvbw.values(reverse_chromo, 1 , rvbw.chroms(reverse_chromo)), color = '#2267c8')
                 
-            plt.legend()
-            plt.xlabel('Position')
-            plt.ylabel('Value')
-            plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
-            plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
-            plt.close()
+            # plt.legend()
+            # plt.xlabel('Position')
+            # plt.ylabel('Value')
+            # plt.title(f'Plot for Terminator {scoredterm.start} {scoredterm.end}')
+            # plt.savefig(f'plot_TSS_{tss}.png')  # Save the plot as a PNG file
+            # plt.close()
 
-            scoredterm.derivScore = bestScore
 
             data.append([f"{scoredterm.seqid}", 
                          f"{tss}", scoredterm.type, 
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore])
+                         scoredterm.derivScore, scoredterm.dropScore])
             
             info_data.append([f"{scoredterm.seqid}", 
                          f"{tss}", scoredterm.type, 
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd])
+                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd,
+                         scoredterm.dropScorePreTermStart, scoredterm.dropScorePreTermEnd, scoredterm.dropScorePostTermStart, scoredterm.dropScorePostTermEnd, scoredterm.minExprDrop])
 
     with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
         writer = csv.writer(file, delimiter=',')
