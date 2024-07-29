@@ -93,7 +93,7 @@ def GetInverseOfGFF(annotationPath, chromSize):
     
     return inverse
 
-def InverseOfMasterTableNoise(annot_path, bigwig_path, masterTable_path):
+def InverseOfMasterTableNoise(annot_path, bw, masterTable_path):
     chunksize = 10**6
     print(masterTable_path)
     master_table_chunks = pd.read_csv(masterTable_path, delimiter='\t', chunksize=chunksize)
@@ -161,12 +161,12 @@ def InverseOfMasterTableNoise(annot_path, bigwig_path, masterTable_path):
 
     all_expr_vals = []
 
-    with bigwig.open(bigwig_path) as bw:
-        IQR = np.quantile(bw.values(chromosome, 1, bw.chroms(chromosome)), 0.75) - np.quantile(bw.values(chromosome, 1, bw.chroms(chromosome)), 0.25)
-        for start, end in fused_unexpressed_CDS:
-            vals = bw.values(chromosome, start, end)
-            #print(vals)
-            all_expr_vals.extend(vals)
+    iqr = np.quantile(bw.values(chromosome, 1, bw.chroms(chromosome)), 0.75) - np.quantile(bw.values(chromosome, 1, bw.chroms(chromosome)), 0.25)
+    
+    for start, end in fused_unexpressed_CDS:
+        vals = bw.values(chromosome, start, end)
+        #print(vals)
+        all_expr_vals.extend(vals)
 
     all_expr_vals = np.array(all_expr_vals)
     uniques, counts = np.unique(all_expr_vals, return_counts=True)
@@ -180,4 +180,4 @@ def InverseOfMasterTableNoise(annot_path, bigwig_path, masterTable_path):
     plt.show()
 
     
-    return np.quantile(all_expr_vals, 0.5), IQR
+    return np.quantile(all_expr_vals, 0.5), iqr

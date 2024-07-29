@@ -94,7 +94,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
     data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "dropScore"])
 
     info_data = []
-    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", 
+    info_data.append(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore",
                       "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
                         "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd", "minExprDrop"])
 
@@ -229,7 +229,7 @@ def DerivScroring(forward_bigwig_path, reverse_bigwig_path, annotationPath, gffR
                          scoredterm.strand, scoredterm.start, 
                          scoredterm.end, scoredterm.initialScore, 
                          scoredterm.avgScore, 
-                         scoredterm.derivScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd,
+                         scoredterm.derivScore, scoredterm.dropScore, noiseLVL ,INFO_wind_start, INFO_wind_end, scoredterm.avgScoreStart, scoredterm.avgScoreEnd,
                          scoredterm.dropScorePreTermStart, scoredterm.dropScorePreTermEnd, scoredterm.dropScorePostTermStart, scoredterm.dropScorePostTermEnd, scoredterm.minExprDrop])
 
     with open("AllTermScoringPlusInfo.csv", 'w', newline='') as file:
