@@ -198,8 +198,10 @@ def separate_ids(row):
         A modified row with the adapted identifiers
     """
     string = row[0]
-    row["genome"] = re.findall(r"([\w\._]+)\|", string)[0]
-    row["transcript_id"] = re.findall(r"\|((?:orphan_|antisense_|internal_)\d+)\|", string)[0]
+    row["genome"] = re.findall(
+        r"([\w_]+)\.", string)[0]
+    row["transcript_id"] = re.findall(
+        r"\|((?:orphan_|antisense_|internal_)\d+)\|", string)[0]
     return row
 
 
