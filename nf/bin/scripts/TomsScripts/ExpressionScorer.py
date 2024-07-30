@@ -114,11 +114,11 @@ def deriv_score_area(term_start, term_end, fit_window_size, scoring_window_size,
         for wp in Wendepunkte:
             wp = round(wp)
             if(strand == "+"):
-                score_end = wp + scoring_window_size + scoring_window_offset
-                score_start = wp + scoring_window_offset
+                score_end = min(wp + scoring_window_size + scoring_window_offset,  bwFile.chroms(chromosome) -1)
+                score_start = min(wp + scoring_window_offset, bwFile.chroms(chromosome) -2)
             else:
-                score_end = wp - scoring_window_size - scoring_window_offset
-                score_start = wp - scoring_window_offset
+                score_start = max(wp - scoring_window_size - scoring_window_offset, 1)
+                score_end = max(wp - scoring_window_offset, 2)
 
 
             score = score_area(score_start, score_end, bwFile, chromosome, noiseLvL, iqr)
@@ -309,7 +309,7 @@ def score_genome_region(forward_bigwig_path,
 
             toWrite.extend([noiseLvL, deriv_start, deriv_end, avg_start, avg_end, drop_pre_start, drop_pre_end, drop_post_start, drop_post_end, drop_min_drop])
 
-            termWriter.writerow(toWrite)
+            infoWriter.writerow(toWrite)
 
 
 if __name__ == "__main__":

@@ -15,7 +15,7 @@ process WIGGLESCORETERMINATORS
 
     script:
     """
-    python $params.pyDerivScoring $forwardBigWig $reverseBigWig $annotationPath $gffNocornac $gffRhoterm $MasterTable
+    python $params.pyExpressionScorer $forwardBigWig $reverseBigWig $annotationPath $gffNocornac $gffRhoterm $MasterTable
     """
 }
 

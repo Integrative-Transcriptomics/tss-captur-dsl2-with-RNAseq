@@ -198,10 +198,8 @@ def separate_ids(row):
         A modified row with the adapted identifiers
     """
     string = row[0]
-    row["genome"] = re.findall(
-        "(\w*_\w*)\S*\|", string)[0]
-    row["transcript_id"] = re.findall(
-        "\|((?:orphan_|antisense_|internal_)\d+)\|", string)[0]
+    row["genome"] = re.findall(r"([\w\._]+)\|", string)[0]
+    row["transcript_id"] = re.findall(r"\|((?:orphan_|antisense_|internal_)\d+)\|", string)[0]
     return row
 
 
@@ -264,7 +262,7 @@ if __name__ == "__main__":
         if(args.wiggleAnalysis != 'NoWig'):
             wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
             #print(wiggle_analysis_df)
-            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore']], on=['strand', 'start', 'end'], how='left')
+            terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore', 'dropScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)
     
