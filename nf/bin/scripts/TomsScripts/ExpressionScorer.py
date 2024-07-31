@@ -242,9 +242,8 @@ def score_genome_region(forward_bigwig_path,
 
         termWriter.writerow(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore", "derivScore", "dropScore"])
         infoWriter.writerow(["seqid", "myTSS", "type", "strand", "start", "end", "initalScore", "avgScore",
-                      "derivScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
+                      "derivScore", "dropScore", "bgNoise", "derivScoreWindowStart", "derivScoreWindowEnd", "avgScoreWindowStart", "avgScoreWindowEnd",
                         "dropScorePreTermStart", "dropScorePreTermEnd", "dropScorePostTermStart","dropScorePostTermEnd", "minExprDrop"])
-
         for start, end, inital_score, region, strand in all_terms_intervalls:
             if(region != 'terminator' and region != 'RhoTerminator'):
                 continue

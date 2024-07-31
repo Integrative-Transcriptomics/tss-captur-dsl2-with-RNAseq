@@ -45,7 +45,7 @@ if __name__ == "__main__":
     parser.add_argument("--cnit_list", nargs="+",)
     args = parser.parse_args()
     genomes = np.unique(
-        [re.split("/", re.split("_antisense|_orphan", x)[0])[-1]for x in args.cnit_list])
+        [re.split("/", re.split("_antisense|_orphan|_internal", x)[0])[-1]for x in args.cnit_list])
     print(args.cnit_list)
     for g in genomes:
         # Return one file per genome, i.e. join every file into one
