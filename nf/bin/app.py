@@ -81,7 +81,8 @@ def createOverviewData(pathToData, genome):
     
     print(classification.index.is_unique)
     print(terminators.index.is_unique)
-    print(mfe)
+    print(mfe.index.is_unique)
+    print(motifs.index.is_unique)
 
     all_dfs = pd.concat(
         [tss_analyzed, classification, terminators, mfe, motifs], join="outer", axis=1)

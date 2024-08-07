@@ -133,9 +133,7 @@ def deriv_score_area(term_start, term_end, fit_window_size, scoring_window_size,
     return bestScore if bestScore != -1 else "NA", INFO_wind_start, INFO_wind_end
 
 
-def drop_score_area(term_start, term_end, window_gene_ratio, post_term_window_offset, post_term_window_size, tss, bwFile, chromosome, strand):
-
-    minimum_expr_drop_ratio = 0.25
+def drop_score_area(term_start, term_end, window_gene_ratio, post_term_window_offset, post_term_window_size, min_expr_drop, tss, bwFile, chromosome, strand):
 
     if(strand == '+'):
         score_pre_term_start = int(term_start - ((term_start - tss) * window_gene_ratio))
@@ -158,9 +156,9 @@ def drop_score_area(term_start, term_end, window_gene_ratio, post_term_window_of
 
     expression_ratio = post_term_expr / max(pre_term_expr, 0.00001)
     
-    score = 1 if expression_ratio < minimum_expr_drop_ratio else 0
+    score = 1 if expression_ratio < min_expr_drop else 0
 
-    return score, score_pre_term_start, score_pre_term_end, score_post_term_start, score_post_term_end, (pre_term_expr * minimum_expr_drop_ratio)
+    return score, score_pre_term_start, score_pre_term_end, score_post_term_start, score_post_term_end, (pre_term_expr * min_expr_drop)
 
 
 def score_genome_region(forward_bigwig_path, 
@@ -299,7 +297,7 @@ def score_genome_region(forward_bigwig_path,
             #get drop score
             drop_score, drop_pre_start, drop_pre_end, drop_post_start, drop_post_end, drop_min_drop = drop_score_area(
                 term_start=start, term_end=end, window_gene_ratio= PRE_TERM_WINDOW_LENGTH_RATIO, post_term_window_offset= drop_post_offset,
-                post_term_window_size=POST_TERM_WINDOW_SIZE, tss=myTss, bwFile=bw, chromosome=chromosome, strand=strand)
+                post_term_window_size=POST_TERM_WINDOW_SIZE, min_expr_drop=MIN_EXPRESSION_RATIO, tss=myTss, bwFile=bw, chromosome=chromosome, strand=strand)
 
             #write to info and non info tsv
             toWrite = [chromosome, myTss, region, strand, start, end, inital_score, avg_score, deriv_score, drop_score]

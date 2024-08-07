@@ -100,5 +100,7 @@ if __name__ == "__main__":
         qrna_joint_genome = correct_gaps(
             qrna_joint_genome, processed_blast_results)
         print("joint genome: ", qrna_joint_genome)
+
+        qrna_joint_genome = qrna_joint_genome.drop_duplicates()
         qrna_joint_genome.to_csv("%s_evaluated_qrna.tsv" % g, sep="\t",
                                  index=False)

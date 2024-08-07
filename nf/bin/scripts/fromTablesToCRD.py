@@ -152,7 +152,7 @@ if __name__ == "__main__":
         merged_df = cnit_df.merge(
             qrna_df,  how="left", on=["transcript_id", "position", "strand"], suffixes=["_cnit", "_qrna"])
 
-        if merged_df.duplicated(subset=["transcript_id", "position", "strand"]).any():
+        if merged_df.duplicated(subset=["transcript_id"]).any():
             print("Duplicates found in merged_df")
 
 
