@@ -163,7 +163,8 @@ class GenomeWrapper(object):
         antisense_records, antisense_promoters = self.helper_create_queries(
             self.antisense, "antisense")
 
-        internal_records, internal_promoters = self.helper_create_queries(self.internals, "internal")
+        internal_records, internal_promoters = self.helper_create_queries(
+            self.internals, "internal")
 
         promoter_regions = antisense_promoters + orphan_promoters + internal_promoters
 
