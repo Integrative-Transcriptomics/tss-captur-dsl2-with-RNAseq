@@ -67,7 +67,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         (abs(terminator_start - transcript_end)/l_searchspace)
     
     #add the "normalized" initial score here
-    isolated_score = row["binned_score"]/2
+    isolated_score = row["binned_score"]/2 + (distance_predicted_end/4 + distance_to_start/4)
 
     if 'avgScore' in row.index.tolist():
         avg_score = row["avgScore"]
@@ -94,7 +94,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
         #isolated_score += wigScoring    
         #print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
 
-    score = isolated_score + (distance_predicted_end/4 + distance_to_start/4)
+    score = isolated_score
 
     return score
 
