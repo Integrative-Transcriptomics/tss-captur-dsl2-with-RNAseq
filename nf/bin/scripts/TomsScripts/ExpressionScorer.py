@@ -263,11 +263,15 @@ def score_genome_region(forward_bigwig_path,
                 noiseLvL = reverse_noise
                 iqr = reverse_iqr
                 myTss = FindFirstUpstreamTSS(end, MINIMUM_GENE_LENGTH, negative_TSS, '-')
-                #print(f"Start: {start} End: {end} tss: {myTss}")
+                print(f"Start: {start} End: {end} tss: {myTss}")
                 #No TSS found, no gene here, we assume
                 if(myTss <= -1):
                     continue
-                estGeneExprMed = np.quantile(bw.values(chromosome, start, myTss), 0.5)
+                print("chromosome: ", chromosome)
+                print("length: ", bw.chroms(chromosome))
+
+                values = bw.values(chromosome, start, myTss)
+                estGeneExprMed = np.quantile(values, 0.5)
 
             #If gene is not expressed, don't score at all
             if(estGeneExprMed <= noiseLvL):
