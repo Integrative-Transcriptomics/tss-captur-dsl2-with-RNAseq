@@ -21,7 +21,7 @@ updateSummary = function (genome) {
   let valuesSummary = [];
   let data = shortDescription[genome];
   let naValues = [];
-  for (let i of ["antisense", "orphan"]) {
+  for (let i of ["antisense", "orphan", "internal"]) {
     let subdata = data[i] || {};
     for (let j of ["RNA", "COD"]) {
       valuesSummary.push(subdata[j] || 0);
@@ -33,19 +33,23 @@ updateSummary = function (genome) {
   valuesSummary.push(sum(valuesSummary));
   valuesSummary.push(sum(valuesSummary.slice(0, 2)));
   valuesSummary.push(sum(valuesSummary.slice(2, 4)));
-  let ids = ["ncATSS", "CodingATSS", "ncOTSS", "CodingOTSS", "iTSS", "allTSS", "ATSS", "OTSS"];
+  valuesSummary.push(sum(valuesSummary.slice(4, 6)));
+  let ids = ["ncATSS", "CodingATSS", "ncOTSS", "CodingOTSS", "ncINTTSS", "CodingINTTSS", "iTSS", "allTSS", "ATSS", "OTSS", "INTTSS"];
   valuesSummary.forEach(function (value, i) {
     $(`#${ids[i]}`).text(value);
   });
   if (sum(naValues) > 0) {
     $("#noclassAS").text(naValues[0]);
-    $("#ATSS").text(valuesSummary[6] + naValues[0]);
+    $("#ATSS").text(valuesSummary[8] + naValues[0]);
     $("#noclassOR").text(naValues[1]);
-    $("#OTSS").text(valuesSummary[7] + naValues[1]);
-    $("#allTSS").text(valuesSummary[5] + sum(naValues));
+    $("#OTSS").text(valuesSummary[9] + naValues[1]);
+    $("#noclassINT").text(naValues[2]);
+    $("#INTTSS").text(valuesSummary[10] + naValues[2]);
+    $("#allTSS").text(valuesSummary[7] + sum(naValues));
   } else {
     $("#not-classified-or").remove();
     $("#not-classified-as").remove();
+    $("#not-classified-int").remove();
   }
 };
 createOption = function (text, value) {
