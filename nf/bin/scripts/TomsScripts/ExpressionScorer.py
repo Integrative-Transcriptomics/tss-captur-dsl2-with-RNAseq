@@ -1,3 +1,14 @@
+"""Converter from .wig to .bedGraph file format
+
+This script merges all wiggle files and then converts them into a bedGraph file. 
+It calculates the full length of the genome in the wiggle file by using the appropriate fasta file.
+
+This script requires `gff3_parser` `numpy` `pyBigWig` to be installed. 
+"""
+
+
+
+
 import csv
 import re
 import sys
@@ -6,8 +17,6 @@ import pyBigWig as bigwig
 import gff3_parser
 import pandas as pd
 import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
 import numpy.polynomial.polynomial as poly
 
 def FindFirstUpstreamTSS(position, minimum_gene_length, tssList, strand):
@@ -26,6 +35,7 @@ def FindFirstUpstreamTSS(position, minimum_gene_length, tssList, strand):
                 return tss
     return -1
 
+#Returns a score based on the expression between start and end, compared to the noise level and IQR provided
 def score_area(start, end, bwFile, chromosome, noiseLvL, iqr):
 
     postTermExprQ = np.quantile(bwFile.values(chromosome, start, end), 1)
@@ -77,27 +87,13 @@ def deriv_score_area(term_start, term_end, fit_window_size, scoring_window_size,
     fit_values = np.polynomial.polynomial.Polynomial.fit(range(fit_window_start, fit_window_end), bwFile.values(chromosome, fit_window_start, fit_window_end), deg=5, domain = [])
     firstDeriv = fit_values.deriv()
     secondDeriv = firstDeriv.deriv()
-    thirdDeriv = secondDeriv.deriv()
-    x = np.linspace(fit_window_start, fit_window_end, 100)
-    #y = [np.polyval(rawValues.coef[::-1], i) for i in x]
-    # plt.plot(x, rawValues(x))
-    # plt.plot(x, firstDeriv(x))
-    # plt.plot(x, secondDeriv(x))
-    # plt.plot(x, thirdDeriv(x))
-    plt.plot(term_start, fit_values(term_start) ,'o', label= "Term start", color = "yellow")
-    plt.plot(term_end, fit_values(term_end) ,'o' , label= "Term End", color = '#49257B')
 
     roots = poly.polyroots(secondDeriv.coef)
     secondDeriv_real_roots = roots
     secondDeriv_real_roots = roots.real[abs(roots.imag) < 1e-5]
     secondDeriv_real_roots = list(filter(lambda r: r >= fit_window_start and r <= fit_window_end, secondDeriv_real_roots))
-    #print("2nd Deriv roots: ", secondDeriv_real_roots)
 
-    #print(poly.polyroots(secondDeriv.coef[::-1]))
     for root in secondDeriv_real_roots:
-        #if abs(thirdDeriv(root) > 1e-5):
-            #print("drew", root)
-            #print(secondDeriv(root))
         Wendepunkte.append(root)
 
 
@@ -105,7 +101,6 @@ def deriv_score_area(term_start, term_end, fit_window_size, scoring_window_size,
     score = -1
 
     if(len(Wendepunkte) <= 0):
-        #print(f"Alarm, keine wendepunkte: {tss}" )
         return "NA", -1, -1
     else:
         INFO_wind_start = 0
@@ -149,7 +144,6 @@ def drop_score_area(term_start, term_end, window_gene_ratio, post_term_window_of
         score_post_term_end = max(term_start - post_term_window_offset, 2)
         score_post_term_start = max(score_post_term_end - post_term_window_size, 1)
 
-    #print("bounds: ", score_pre_term_start, score_pre_term_end, bwFile.chroms(chrom), scoredTerm.strand, scoredTerm.start, myTss, scoredTerm.end)
     pre_term_expr = np.quantile(bwFile.values(chromosome, score_pre_term_start, score_pre_term_end), 0.5)
 
     post_term_expr = np.quantile(bwFile.values(chromosome, score_post_term_start, score_post_term_end), 0.5)
@@ -194,10 +188,11 @@ def score_genome_region(forward_bigwig_path,
     fwbw = bigwig.open(forward_bigwig_path)
     rvbw = bigwig.open(reverse_bigwig_path)
 
+    #Calculate background noise and IQR for each strand
     forward_noise, forward_iqr = CalcbackgroundNoise.InverseOfMasterTableNoise(annotation_path, fwbw, master_table_path)
     reverse_noise, reverse_iqr = CalcbackgroundNoise.InverseOfMasterTableNoise(annotation_path, rvbw, master_table_path)
 
-
+    #Gather all poredicted terminators
     rhotermdata = gff3_parser.parse_gff3(gffRhoterm, verbose = False, parse_attributes = False)
     nocornacdata = gff3_parser.parse_gff3(gffNocornac, verbose = False, parse_attributes = False)
 
@@ -210,6 +205,7 @@ def score_genome_region(forward_bigwig_path,
     del rhotermdata
     del nocornacdata
 
+    #extract chromosome name
     for chrom in fwbw.chroms():
         prefix = re.match(r'^[^\.]+', chrom).group(0)
         if(prefix == forward_chromosome):

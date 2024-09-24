@@ -1,3 +1,11 @@
+"""Merger for .wig files
+
+This script merges .wig files located at the specified directory. 
+
+This script requires `wiggelen` to be installed. 
+"""
+
+
 import glob
 import wiggelen
 import wiggelen.merge
@@ -9,15 +17,9 @@ def merge_wigs(wigsPath):
     for wigPath in glob.glob(f'{wigsPath}/*.wig'):
         walkers.append(wiggelen.fill(wiggelen.walk(open(wigPath)), regions = None, filler = 0, only_edges= False))
     
-    #merged = walkers[0]
     merged = wiggelen.merge.merge(*walkers, merger = wiggelen.merge.mergers['mean'])
-    #for i in range(1, len(walkers)):
-       # merged = wiggelen.merge.merge(merged, walkers[i], merger= wiggelen.merge.mergers['sum'])
 
     return merged
-    # mergedWigFile = open("MergedWigs.wig", "w")
-    # for line in wiggelen.walk(merged):
-    #     mergedWigFile.write(line)
 
 
 if __name__ == "__main__":

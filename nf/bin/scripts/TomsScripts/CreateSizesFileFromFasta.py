@@ -1,3 +1,7 @@
+"""Helper script for getting size of a genome in a fasta file
+"""
+
+
 import glob
 import sys
 import FastaReader

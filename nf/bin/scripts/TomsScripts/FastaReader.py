@@ -1,3 +1,8 @@
+"""Helper script for getting the full length of a fasta file
+
+Used for determining the true length of genomes, contained within .wig files.
+"""
+
 
 import glob
 

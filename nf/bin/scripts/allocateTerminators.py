@@ -69,6 +69,7 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
     #add the "normalized" initial score here
     isolated_score = row["binned_score"]/2 + (distance_predicted_end/4 + distance_to_start/4)
 
+    #if expression based scoring happened
     if 'avgScore' in row.index.tolist():
         avg_score = row["avgScore"]
         deriv_score = row["derivScore"]
@@ -78,21 +79,6 @@ def evaluate_terminator(row, start, end, length_transcript, l_searchspace):
 
         if len(non_na) > 0:
             isolated_score = np.mean(non_na)
-            #wigScoring = 0
-        #else:
-            #wigScoring = np.mean(non_na)
-
-        # if(math.isnan(avg_score) and math.isnan(deriv_score)):
-        #     wigScoring = 0
-        # if(math.isnan(avg_score) and not math.isnan(deriv_score)):
-        #     wigScoring = deriv_score
-        # if(not math.isnan(avg_score ) and math.isnan(deriv_score)):
-        #     wigScoring = avg_score
-        # if(not math.isnan(avg_score) and not math.isnan(deriv_score)):
-        #     wigScoring = np.mean([avg_score, deriv_score])
-
-        #isolated_score += wigScoring    
-        #print(f"{isolated_score} scored! {avg_score} {deriv_score} {wigScoring} term at start: {terminator_start}")
 
     score = isolated_score
 
@@ -264,7 +250,6 @@ if __name__ == "__main__":
 
         if(args.wiggleAnalysis != 'NoWig'):
             wiggle_analysis_df = pd.read_csv(args.wiggleAnalysis, sep="\t")
-            #print(wiggle_analysis_df)
             terminators_all = terminators_all.merge(wiggle_analysis_df[['strand', 'start', 'end', 'avgScore', 'derivScore', 'dropScore']], on=['strand', 'start', 'end'], how='left')
     
         crd_df = pd.read_csv(crd, sep="\t", header=None)

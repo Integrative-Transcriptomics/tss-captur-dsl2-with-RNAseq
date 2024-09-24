@@ -1,22 +1,16 @@
-import os
-import wiggelen as wigg
-import wiggelen.intervals as inter
-import wiggelen.merge
-import FastaReader
+"""Converter from .wig to .bedGraph file format
+
+This script merges all wiggle files and then converts them into a bedGraph file. 
+It calculates the full length of the genome in the wiggle file by using the appropriate fasta file.
+"""
+
 import sys
 import MergeWigs
 
 def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
 
-    #bedfile = open("/testenv/TestWigs/ManualBED.bed", "x")
-    #correctWalker = wigg.fill(wigg.walk(open(path), filler = 0))
-    #correctWalker = wigg.fill(wigg.walk(open(Wigglepath)), regions = None, filler = 0, only_edges= False)
     correctWalker = MergeWigs.merge_wigs(Wigglepath)
-    #wigg.write(inter.coverage(correctWalker), name='My example')
 
-    print(outputPath)
-    # if not os.path.exists(outputPath):
-    #     os.makedirs(outputPath)
     BedGraphFile = open(f'{outputPath}.bedGraph', 'w')
 
     sizes = open(chromSizesFilePath, 'r')
@@ -46,7 +40,6 @@ def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
             first = False
             if(pos != 1):
                 BedGraphFile.write(f'{lastReg}\t1\t{pos}\t0\n')
-            #trueCurrRegLength = FastaReader.get_fasta_seq_length(f"/home/GitRepos/Bachelorarbeit/.venv/dataset/{reg}.fna")
             trueCurrRegLength = sizeDict[reg]
 
         #If we are entering a new region
@@ -66,7 +59,6 @@ def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
             lastVal = val
             lastReg = reg
             start = pos
-            #trueCurrRegLength = FastaReader.get_fasta_seq_length(f"/home/GitRepos/Bachelorarbeit/.venv/dataset/{reg}.fna")
             trueCurrRegLength = sizeDict[reg]
             
         #if we still are in the same region
@@ -89,10 +81,8 @@ def WigToBedGraph(Wigglepath, chromSizesFilePath, outputPath):
     if(trueCurrRegLength > lastPos):
         BedGraphFile.write(f'{lastReg}\t{lastPos}\t{trueCurrRegLength}\t0\n')
 
-    #print(pow(totalsum, 1))
     print(BedGraphFile)
     return BedGraphFile
-    # BedGraphFile.close()
 
 
 if __name__ == '__main__':
